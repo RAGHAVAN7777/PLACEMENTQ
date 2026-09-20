@@ -1,0 +1,155 @@
+/* ─── Assessment Page ────────────────────────────────────────────────────── */
+.assessment-page {
+  min-height: 100vh;
+  background: var(--color-canvas);
+  padding: var(--space-6) 0;
+}
+
+.assessment-container {
+  max-width: 720px;
+  margin: 0 auto;
+  padding: 0 var(--space-6);
+}
+
+.assessment-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: var(--space-8);
+}
+
+.assessment-header-right {
+  display: flex;
+  align-items: center;
+  gap: var(--space-3);
+}
+
+.assessment-title {
+  font-size: 1.75rem;
+  font-weight: 600;
+  letter-spacing: -0.02em;
+  margin-bottom: var(--space-2);
+}
+
+.assessment-subtitle {
+  font-size: 0.9375rem;
+  margin-bottom: var(--space-6);
+}
+
+.stepper-step-wrap {
+  display: contents;
+}
+
+.stepper-label {
+  display: none;
+}
+
+@media (min-width: 640px) {
+  .stepper-label {
+    display: inline;
+  }
+}
+
+.assessment-form {
+  background: var(--color-white);
+  border: 1px solid var(--color-border-light);
+  border-radius: var(--radius-lg);
+  padding: var(--space-8);
+  margin-bottom: var(--space-6);
+}
+
+.assessment-step-title {
+  font-size: 1.25rem;
+  font-weight: 600;
+  margin-bottom: var(--space-6);
+  padding-bottom: var(--space-4);
+  border-bottom: 1px solid var(--color-border-light);
+}
+
+.assessment-fields-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  gap: var(--space-6) var(--space-8);
+}
+
+.assessment-field {
+  gap: var(--space-1);
+}
+
+.form-optional {
+  font-weight: 400;
+  color: var(--color-text-tertiary);
+  font-size: 0.75rem;
+  margin-left: 4px;
+}
+
+/* Review */
+.review-sections {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-6);
+}
+
+.review-section {
+  border-bottom: 1px solid var(--color-border-light);
+  padding-bottom: var(--space-5);
+}
+
+.review-section:last-of-type {
+  border-bottom: none;
+}
+
+.review-section-title {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  font-size: 0.875rem;
+  font-weight: 600;
+  text-transform: capitalize;
+  margin-bottom: var(--space-3);
+  color: var(--color-text-secondary);
+}
+
+.review-fields {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+  gap: var(--space-3);
+}
+
+.review-field {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: var(--space-2) 0;
+}
+
+.review-field-label {
+  font-size: 0.8125rem;
+  color: var(--color-text-secondary);
+}
+
+.review-field-value {
+  font-size: 0.875rem;
+  font-weight: 500;
+}
+
+/* Navigation */
+.assessment-nav {
+  display: flex;
+  align-items: center;
+  gap: var(--space-3);
+}
+
+@media (max-width: 640px) {
+  .assessment-form {
+    padding: var(--space-5);
+  }
+
+  .assessment-fields-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .review-fields {
+    grid-template-columns: 1fr;
+  }
+}

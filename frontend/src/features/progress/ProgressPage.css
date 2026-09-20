@@ -1,0 +1,76 @@
+.progress-page {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-6);
+}
+
+.progress-comparison-score {
+  display: flex;
+  justify-content: center;
+  padding: var(--space-5) 0;
+  margin-bottom: var(--space-4);
+  border-bottom: 1px solid var(--color-border-light);
+}
+
+.progress-delta {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--space-1);
+}
+
+.progress-delta-label {
+  font-size: 0.6875rem;
+  color: var(--color-text-tertiary);
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+}
+
+.progress-delta-value {
+  font-size: 3rem;
+  line-height: 1;
+}
+
+.progress-diffs-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+  gap: var(--space-3);
+}
+
+.progress-diff-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: var(--space-2) var(--space-3);
+  border: 1px solid var(--color-border-light);
+  border-radius: var(--radius-sm);
+}
+
+.progress-diff-label {
+  font-size: 0.8125rem;
+  font-weight: 500;
+}
+
+.progress-diff-values {
+  display: flex;
+  gap: var(--space-2);
+  font-size: 0.8125rem;
+  align-items: center;
+}
+
+.plan-completion {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-2);
+}
+
+.plan-completion-bar {
+  width: 100%;
+}
+
+.plan-completion-stats {
+  display: flex;
+  justify-content: space-between;
+  font-size: 0.75rem;
+  color: var(--color-text-secondary);
+}

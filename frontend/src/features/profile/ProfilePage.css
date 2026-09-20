@@ -1,0 +1,38 @@
+.profile-page {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-6);
+  max-width: 640px;
+}
+
+.profile-name-form {
+  display: flex;
+  gap: var(--space-2);
+  align-items: center;
+}
+
+.profile-storage-stats {
+  display: flex;
+  gap: var(--space-6);
+}
+
+.profile-storage-stat {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.profile-storage-stat .font-mono {
+  font-size: 1.25rem;
+  font-weight: 600;
+}
+
+.profile-storage-stat .text-tertiary {
+  font-size: 0.75rem;
+}
+
+.profile-actions {
+  display: flex;
+  gap: var(--space-3);
+  flex-wrap: wrap;
+}

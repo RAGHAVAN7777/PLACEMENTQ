@@ -1,0 +1,214 @@
+/* ─── Model Lab ──────────────────────────────────────────────────────────── */
+.model-lab {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-6);
+  max-width: 960px;
+}
+
+.model-lab-intro {
+  font-size: 0.9375rem;
+  line-height: 1.6;
+}
+
+.ml-section {
+  background: var(--color-white);
+  border: 1px solid var(--color-border-light);
+  border-radius: var(--radius-lg);
+  padding: var(--space-6);
+}
+
+.ml-section-title {
+  display: flex;
+  align-items: center;
+  gap: var(--space-2);
+  font-size: 1.0625rem;
+  font-weight: 600;
+  margin-bottom: var(--space-5);
+  padding-bottom: var(--space-3);
+  border-bottom: 1px solid var(--color-border-light);
+}
+
+.ml-section-title svg {
+  color: var(--color-primary);
+}
+
+/* Meta grid */
+.ml-meta-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+  gap: var(--space-3);
+}
+
+.ml-meta-item {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  padding: var(--space-3);
+  background: var(--color-canvas);
+  border-radius: var(--radius-sm);
+}
+
+.ml-meta-label {
+  font-size: 0.6875rem;
+  color: var(--color-text-tertiary);
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+}
+
+.ml-meta-value {
+  font-size: 0.875rem;
+  font-weight: 500;
+}
+
+/* Target distribution */
+.target-dist-bar {
+  display: flex;
+  height: 32px;
+  border-radius: var(--radius-sm);
+  overflow: hidden;
+  border: 1px solid var(--color-border-light);
+}
+
+.target-dist-placed {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: var(--color-success-light);
+  color: var(--color-success);
+  font-size: 0.75rem;
+  font-weight: 600;
+  font-family: var(--font-mono);
+}
+
+.target-dist-not {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: var(--color-error-light);
+  color: var(--color-error);
+  font-size: 0.75rem;
+  font-weight: 600;
+  font-family: var(--font-mono);
+  flex: 1;
+}
+
+/* Excluded */
+.ml-excluded {
+  display: flex;
+  gap: var(--space-2);
+  flex-wrap: wrap;
+}
+
+/* Preprocessing */
+.ml-preprocess {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-4);
+}
+
+.ml-preprocess-step {
+  display: flex;
+  gap: var(--space-4);
+  align-items: flex-start;
+}
+
+.ml-step-num {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 28px;
+  height: 28px;
+  border: 1.5px solid var(--color-border);
+  border-radius: 50%;
+  font-size: 0.75rem;
+  font-weight: 600;
+  color: var(--color-text-secondary);
+  flex-shrink: 0;
+}
+
+.ml-preprocess-step p {
+  font-size: 0.8125rem;
+  margin-top: 2px;
+  line-height: 1.5;
+}
+
+/* Notes */
+.ml-notes {
+  margin-top: var(--space-5);
+  padding-top: var(--space-4);
+  border-top: 1px solid var(--color-border-light);
+}
+
+.ml-notes ul {
+  list-style: none;
+  padding: 0;
+}
+
+.ml-notes li {
+  font-size: 0.8125rem;
+  line-height: 1.6;
+  padding-left: 16px;
+  position: relative;
+  margin-bottom: var(--space-2);
+}
+
+.ml-notes li::before {
+  content: '·';
+  position: absolute;
+  left: 0;
+  color: var(--color-text-tertiary);
+  font-weight: 700;
+}
+
+/* Awaiting cards */
+.ml-awaiting-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+  gap: var(--space-4);
+}
+
+.ml-awaiting-card {
+  border: 1px solid var(--color-border-light);
+  border-radius: var(--radius-md);
+  overflow: hidden;
+}
+
+.ml-awaiting-card h4 {
+  font-size: 0.8125rem;
+  font-weight: 600;
+  padding: var(--space-3) var(--space-4);
+  background: var(--color-canvas);
+  border-bottom: 1px solid var(--color-border-light);
+}
+
+.ml-awaiting-placeholder {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: var(--space-10);
+  background: var(--color-canvas);
+}
+
+/* Limitations */
+.ml-limitations {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-4);
+}
+
+.ml-limitations-list {
+  list-style: none;
+  padding: 0;
+}
+
+.ml-limitations-list li {
+  font-size: 0.8125rem;
+  line-height: 1.7;
+  padding: var(--space-3) 0;
+  border-bottom: 1px solid var(--color-border-light);
+}
+
+.ml-limitations-list li:last-child {
+  border-bottom: none;
+}
