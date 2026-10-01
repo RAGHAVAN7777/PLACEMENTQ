@@ -182,9 +182,9 @@ function WhiteStructures({ count, pixelRatio }: { count: number, pixelRatio: num
 
     for (let i = 0; i < count; i++) {
       const cluster = Math.floor(rng() * 4);
-      let cx = 0, cy = 0, cz = 0;
-
-      cx = [-5.9, -4.1, 4.1, 5.9][cluster];
+      let cy = 0, cz = 0;
+      // Shift clusters to right half to avoid overlapping headline text
+      const cx = [1.8, 3.6, 5.4, 7.2][cluster];
       const edge = Math.floor(rng() * 4);
       const along = rng() - 0.5;
       pos[i * 3] = cx + (edge < 2 ? (edge === 0 ? -0.45 : 0.45) : along * 0.9);

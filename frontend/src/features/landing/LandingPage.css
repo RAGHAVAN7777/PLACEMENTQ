@@ -478,35 +478,45 @@
 }
 
 .landing .hero-label {
-  font-size: 10px;
-  letter-spacing: .16em;
+  font-size: 11px;
+  letter-spacing: 0.12em;
   color: #a6abb5;
   margin-bottom: 20px;
+  font-weight: 600;
 }
 
 .landing .hero-headline {
-  font-family: Arial, Helvetica, sans-serif;
-  font-size: clamp(44px, 4.7vw, 88px);
-  line-height: 1.07;
-  font-weight: 400;
-  letter-spacing: -.055em;
+  font-family: var(--font-sans);
+  font-size: clamp(38px, 4.5vw, 76px);
+  line-height: 1.1;
+  font-weight: 600;
+  letter-spacing: -0.02em;
   margin: 0;
+  color: #F4F4F0;
+  text-rendering: optimizeLegibility;
+  text-shadow: 0 4px 24px rgba(0, 0, 0, 0.85);
 }
 
 .landing .piq-hero-caption {
   position: absolute;
   right: 4.5%;
   bottom: 5%;
-  width: 330px;
+  width: 360px;
   pointer-events: auto;
-  background: linear-gradient(125deg, transparent, rgba(3, 4, 7, .85));
+  background: rgba(3, 4, 7, 0.8);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border: 1px solid rgba(244, 244, 240, 0.12);
+  border-radius: var(--radius-lg);
+  padding: 24px;
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.5);
 }
 
 .landing .hero-description {
-  color: #c7cad0;
+  color: #d1d5db;
   font-size: 15px;
-  line-height: 1.6;
-  margin: 0 0 24px;
+  line-height: 1.65;
+  margin: 0 0 20px;
 }
 
 .landing .hero-actions {

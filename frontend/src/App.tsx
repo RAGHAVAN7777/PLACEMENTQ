@@ -1,4 +1,4 @@
-import { Routes, Route } from 'react-router-dom';
+import { Routes, Route, Navigate } from 'react-router-dom';
 import { lazy, Suspense } from 'react';
 import AppLayout from './components/layout/AppLayout';
 
@@ -31,6 +31,7 @@ export default function App() {
       <Suspense fallback={<PageLoader />}>
         <Routes>
           <Route path="/" element={<Landing />} />
+          <Route path="/model-lab" element={<Navigate to="/app/model-lab" replace />} />
           <Route path="/assessment" element={<Assessment />} />
           <Route path="/app" element={<AppLayout />}>
             <Route path="overview" element={<Overview />} />

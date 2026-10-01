@@ -5,6 +5,7 @@ import { SCENARIO_EDITABLE_FIELDS, FEATURE_DEFINITIONS, ROUTES } from '../../con
 import EmptyWorkspace from '../../components/ui/EmptyWorkspace';
 import type { StudentProfile, EvaluationResult } from '../../types';
 import { RotateCcw, Save, ListChecks, ArrowRight, AlertTriangle } from 'lucide-react';
+import CounterfactualOptimizer from './CounterfactualOptimizer';
 import './ScenariosPage.css';
 
 export default function ScenariosPage() {
@@ -111,6 +112,13 @@ export default function ScenariosPage() {
           Changes here do not modify your saved assessment.
         </span>
       </div>
+
+      {/* Prescriptive Counterfactual Optimizer */}
+      <CounterfactualOptimizer
+        baseProfile={baseProfile}
+        currentScore={baseResult.illustrativeReadinessScore}
+        onApplyToSimulator={(hyp) => setHypothetical(hyp)}
+      />
 
       <div className="scenario-workspace">
         {/* Current */}

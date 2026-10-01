@@ -4,7 +4,7 @@ import { ROUTES } from '../../config';
 import { useStore } from '../../services/store';
 import {
   LayoutDashboard, BarChart3, FlaskConical, ListChecks,
-  TrendingUp, Microscope, User, Menu, X, ChevronRight
+  TrendingUp, Microscope, User, Menu, X, ChevronRight, Home
 } from 'lucide-react';
 import './AppLayout.css';
 
@@ -95,13 +95,21 @@ export default function AppLayout() {
 
         <div className="sidebar-footer">
           <NavLink
+            to="/"
+            className="nav-item"
+            style={{ marginBottom: 4 }}
+          >
+            <Home size={16} />
+            <span>Landing Page</span>
+          </NavLink>
+          <NavLink
             to={ROUTES.profile}
             className={({ isActive }) =>
               `nav-item ${isActive ? 'active' : ''}`
             }
           >
             <User size={16} />
-            <span>Profile & Settings</span>
+            <span>Profile &amp; Settings</span>
           </NavLink>
         </div>
       </aside>
@@ -140,8 +148,17 @@ export default function AppLayout() {
             )}
           </div>
 
-          <div className="topbar-right">
-            <span className="preview-indicator">Frontend preview</span>
+          <div className="topbar-right" style={{ display: 'flex', alignItems: 'center', gap: '12px' }}>
+            <NavLink
+              to="/"
+              className="btn btn-ghost btn-sm"
+              style={{ display: 'inline-flex', alignItems: 'center', gap: '6px', fontSize: '0.8125rem' }}
+              title="Return to Landing Page"
+            >
+              <Home size={15} />
+              <span>Landing Page</span>
+            </NavLink>
+            <span className="preview-indicator">Course Project</span>
           </div>
         </header>
 

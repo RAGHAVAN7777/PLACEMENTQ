@@ -1,10 +1,13 @@
-import { useMemo } from 'react';
+import { useState, useMemo } from 'react';
 import { Link } from 'react-router-dom';
 import { useStore } from '../../services/store';
 import { ROUTES, READINESS_THRESHOLDS, FEATURE_DEFINITIONS } from '../../config';
 import { computeSkillGaps } from '../../services/prediction';
+import { generateCounterfactualPaths } from '../../services/counterfactual';
+import type { PolicyMode } from '../../types';
 import EmptyWorkspace from '../../components/ui/EmptyWorkspace';
-import { BarChart3, FlaskConical, ListChecks, ArrowRight, Info } from 'lucide-react';
+import PolicySwitcher from '../../components/ui/PolicySwitcher';
+import { BarChart3, FlaskConical, ListChecks, ArrowRight, Info, Compass, Sparkles, CheckCircle2 } from 'lucide-react';
 import './OverviewPage.css';
 
 function getBandStyle(band: string) {
@@ -17,6 +20,7 @@ function getBandStyle(band: string) {
 
 export default function OverviewPage() {
   const latestAssessment = useStore((s) => s.getLatestAssessment());
+  const [activePolicy, setActivePolicy] = useState<PolicyMode>('standard');
 
   const gaps = useMemo(() => {
     if (!latestAssessment) return [];
@@ -38,6 +42,14 @@ export default function OverviewPage() {
     });
   }, [latestAssessment]);
 
+  // Generate top counterfactual quick win path for the overview teaser
+  const quickWinPath = useMemo(() => {
+    if (!latestAssessment) return null;
+    const target = latestAssessment.evaluation.illustrativeReadinessScore < 75 ? 80 : 88;
+    const paths = generateCounterfactualPaths(latestAssessment.profile, target);
+    return paths[0]; // Quick wins path
+  }, [latestAssessment]);
+
   if (!latestAssessment) {
     return <EmptyWorkspace />;
   }
@@ -47,6 +59,13 @@ export default function OverviewPage() {
 
   return (
     <div className="overview">
+      {/* Policy Switcher Banner */}
+      <PolicySwitcher
+        currentScore={evaluation.illustrativeReadinessScore}
+        activePolicy={activePolicy}
+        onPolicyChange={setActivePolicy}
+      />
+
       {/* Summary row */}
       <div className="overview-summary">
         <div className="overview-score-panel">
@@ -149,6 +168,52 @@ export default function OverviewPage() {
           </div>
         </div>
       </div>
+
+      {/* Prescriptive Counterfactual Teaser */}
+      {quickWinPath && (
+        <div className="overview-section">
+          <div className="card" style={{ borderLeft: '4px solid var(--color-primary)' }}>
+            <div className="card-header">
+              <div style={{ display: 'flex', alignItems: 'center', gap: 8 }}>
+                <Compass size={18} className="text-primary" />
+                <h3 className="card-title">Easiest Path to Placement (Counterfactual Optimizer)</h3>
+              </div>
+              <Link to={ROUTES.scenarios} className="btn btn-primary btn-sm">
+                Explore in Scenario Lab <ArrowRight size={14} />
+              </Link>
+            </div>
+            <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', flexWrap: 'wrap', gap: 12, marginBottom: 12 }}>
+              <div>
+                <p className="text-secondary" style={{ fontSize: '0.875rem', margin: 0 }}>
+                  <strong>{quickWinPath.name}</strong>: {quickWinPath.tagline}
+                </p>
+                <div style={{ display: 'flex', gap: 12, marginTop: 6, fontSize: '0.75rem' }} className="font-mono text-tertiary">
+                  <span>Turnaround: {quickWinPath.estimatedWeeks}</span>
+                  <span>·</span>
+                  <span>Effort: {quickWinPath.effortTier.toUpperCase()}</span>
+                </div>
+              </div>
+              <div style={{ display: 'flex', alignItems: 'center', gap: 8, background: 'var(--color-canvas)', padding: '6px 14px', borderRadius: 6, border: '1px solid var(--color-border)' }}>
+                <span className="font-mono" style={{ fontSize: '0.75rem' }}>Current {evaluation.illustrativeReadinessScore}</span>
+                <ArrowRight size={14} />
+                <span className="font-mono font-bold text-success" style={{ fontSize: '1.1rem' }}>Projected {quickWinPath.projectedScore}</span>
+                <span className="badge badge-success font-mono">+{quickWinPath.scoreDelta} pts</span>
+              </div>
+            </div>
+
+            <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(200px, 1fr))', gap: 8, marginTop: 8 }}>
+              {quickWinPath.changes.slice(0, 3).map((ch) => (
+                <div key={ch.feature} style={{ background: 'var(--color-canvas)', padding: '8px 10px', borderRadius: 6, border: '1px solid var(--color-border-light)', fontSize: '0.75rem' }}>
+                  <div style={{ fontWeight: 600, color: 'var(--color-text)' }}>{ch.label}</div>
+                  <div className="font-mono text-secondary" style={{ marginTop: 2 }}>
+                    {ch.currentValue} → <strong className="text-primary">{ch.recommendedValue}</strong> ({ch.feature === 'backlogs' ? `-${ch.delta}` : `+${ch.delta}`} {ch.unit})
+                  </div>
+                </div>
+              ))}
+            </div>
+          </div>
+        </div>
+      )}
 
       {/* Priority actions */}
       <div className="overview-section">

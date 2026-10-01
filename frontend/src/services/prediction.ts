@@ -48,7 +48,7 @@ function classifyBand(score: number): ReadinessBand {
 }
 
 // ─── Compute Readiness Score ────────────────────────────────────────────────
-function computeReadinessScore(profile: StudentProfile): {
+export function computeReadinessScore(profile: StudentProfile): {
   score: number;
   contributions: FeatureContribution[];
 } {

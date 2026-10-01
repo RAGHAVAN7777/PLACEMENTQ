@@ -1,0 +1,23 @@
+{
+  "default_cutoff": {
+    "threshold": 0.5,
+    "accuracy": 85.66,
+    "recall": 88.24,
+    "precision": 86.04,
+    "f1": 87.12
+  },
+  "best_f1_cutoff": {
+    "threshold": 0.44,
+    "accuracy": 85.47,
+    "recall": 90.36,
+    "precision": 84.33,
+    "f1": 87.24
+  },
+  "high_recall_cutoff": {
+    "threshold": 0.39,
+    "accuracy": 85.19,
+    "recall": 92.04,
+    "precision": 82.91,
+    "f1": 87.23
+  }
+}

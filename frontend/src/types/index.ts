@@ -210,3 +210,46 @@ export interface AppData {
   preferences: UserPreferences;
   sampleProfileLoaded?: boolean;
 }
+
+// ─── Counterfactual Optimization Types ─────────────────────────────────────
+export interface CounterfactualChange {
+  feature: keyof StudentProfile;
+  label: string;
+  currentValue: number;
+  recommendedValue: number;
+  delta: number;
+  unit: string;
+  roiScore: number; // Return on investment: score boost / effort
+  rationale: string;
+}
+
+export interface CounterfactualPath {
+  id: string;
+  name: string;
+  tagline: string;
+  targetScore: number;
+  projectedScore: number;
+  scoreDelta: number;
+  effortTier: 'low' | 'medium' | 'high';
+  estimatedWeeks: string;
+  changes: CounterfactualChange[];
+  summary: string;
+  hypotheticalProfile: Partial<StudentProfile>;
+}
+
+// ─── Assessment Policy Types ───────────────────────────────────────────────
+export type PolicyMode = 'standard' | 'high-recall';
+
+export interface PolicyDefinition {
+  mode: PolicyMode;
+  name: string;
+  shortName: string;
+  cutoff: number;
+  description: string;
+  recall: number;
+  precision: number;
+  accuracy: number;
+  rescuedCount: number;
+  tagline: string;
+}
+
