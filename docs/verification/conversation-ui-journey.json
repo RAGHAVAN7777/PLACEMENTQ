@@ -1,0 +1,923 @@
+{
+  "fixture": "Fictional development student. All eight answers entered through the actual UI; these are not the user’s scores.",
+  "sessionId": "session_ad0039ec-3889-42c0-85cd-56e340289dd3",
+  "reportId": "report_0793e12e-19de-4d15-a57e-c7b80e6d4005",
+  "completedAt": "2026-10-04T07:53:33.888Z",
+  "status": "completed",
+  "model": "qwen3:4b-instruct",
+  "metrics": {
+    "profileExtraction": {
+      "wallMs": 11876,
+      "totalDurationNs": 11829433000,
+      "loadDurationNs": 9016000,
+      "evalDurationNs": 11293653000,
+      "evalCount": 125,
+      "promptEvalCount": 139,
+      "contextSize": 4096
+    },
+    "questionPlanning": {
+      "wallMs": 24861,
+      "totalDurationNs": 24836935800,
+      "loadDurationNs": 11606900,
+      "evalDurationNs": 24098798000,
+      "evalCount": 255,
+      "promptEvalCount": 512,
+      "contextSize": 4096
+    },
+    "grading_answer_4b06b02e-53f9-4e10-89f1-ce0da88ba92a": {
+      "wallMs": 25908,
+      "totalDurationNs": 25871717300,
+      "loadDurationNs": 30053200,
+      "evalDurationNs": 25116087000,
+      "evalCount": 262,
+      "promptEvalCount": 876,
+      "contextSize": 4096
+    },
+    "grading_answer_6ce48273-61da-4b39-94e6-ced2ee17d3ee": {
+      "wallMs": 34053,
+      "totalDurationNs": 34008071900,
+      "loadDurationNs": 7642800,
+      "evalDurationNs": 32906606000,
+      "evalCount": 277,
+      "promptEvalCount": 955,
+      "contextSize": 4096
+    },
+    "grading_answer_3d14ab82-b4bb-4c1c-9762-9fb6a8d71cfa": {
+      "wallMs": 40630,
+      "totalDurationNs": 40595622900,
+      "loadDurationNs": 11372400,
+      "evalDurationNs": 39284614000,
+      "evalCount": 321,
+      "promptEvalCount": 1134,
+      "contextSize": 4096
+    },
+    "grading_answer_41427647-dd69-4d39-b4cb-d933d095e30b": {
+      "wallMs": 35640,
+      "totalDurationNs": 35616062500,
+      "loadDurationNs": 7558300,
+      "evalDurationNs": 34345302000,
+      "evalCount": 314,
+      "promptEvalCount": 1164,
+      "contextSize": 4096
+    },
+    "grading_answer_8771c9e7-9021-4df8-8509-725903e08849": {
+      "wallMs": 38831,
+      "totalDurationNs": 38812115000,
+      "loadDurationNs": 7642100,
+      "evalDurationNs": 37455672000,
+      "evalCount": 354,
+      "promptEvalCount": 1159,
+      "contextSize": 4096
+    },
+    "grading_answer_a8a1317c-eaf6-4386-a338-5635e554be57": {
+      "wallMs": 37221,
+      "totalDurationNs": 37202972000,
+      "loadDurationNs": 6399100,
+      "evalDurationNs": 35863365000,
+      "evalCount": 355,
+      "promptEvalCount": 1123,
+      "contextSize": 4096
+    },
+    "grading_answer_4db62891-c25c-4b8c-8ad3-98d6bf94fe64": {
+      "wallMs": 31327,
+      "totalDurationNs": 31299157000,
+      "loadDurationNs": 6390500,
+      "evalDurationNs": 30047275000,
+      "evalCount": 246,
+      "promptEvalCount": 1062,
+      "contextSize": 4096
+    },
+    "grading_answer_3b37c72f-d94d-49a0-969c-3c0fecf071e5": {
+      "wallMs": 34143,
+      "totalDurationNs": 34097490500,
+      "loadDurationNs": 9286800,
+      "evalDurationNs": 32574979000,
+      "evalCount": 281,
+      "promptEvalCount": 1082,
+      "contextSize": 4096
+    }
+  },
+  "assessment": {
+    "score": 100,
+    "totalPoints": 26,
+    "maxPoints": 26,
+    "skills": [
+      {
+        "skill": "Python",
+        "points": 8,
+        "maxPoints": 8,
+        "questions": 2,
+        "assessedAnswers": 2,
+        "reviewNeeded": false,
+        "score": 100,
+        "result": "assessed"
+      },
+      {
+        "skill": "Project explanation",
+        "points": 10,
+        "maxPoints": 10,
+        "questions": 2,
+        "assessedAnswers": 2,
+        "reviewNeeded": false,
+        "score": 100,
+        "result": "assessed"
+      },
+      {
+        "skill": "SQL",
+        "points": 8,
+        "maxPoints": 8,
+        "questions": 2,
+        "assessedAnswers": 2,
+        "reviewNeeded": false,
+        "score": 100,
+        "result": "assessed"
+      }
+    ],
+    "scoredQuestions": 6,
+    "recordedAttempts": 8
+  },
+  "conversation": [
+    {
+      "id": "turn_306e5e83-a971-4547-99a9-d24a171517e9",
+      "role": "assistant",
+      "text": "Explain the difference between mutable and immutable Python objects. Give one bug that shared mutable state can cause.",
+      "kind": "question",
+      "questionId": "question_95a6211b-534e-4a59-b10e-89883fa1ba79",
+      "createdAt": "2026-10-04T07:37:47.901Z"
+    },
+    {
+      "id": "answer_4b06b02e-53f9-4e10-89f1-ce0da88ba92a",
+      "role": "student",
+      "text": "Lists and dictionaries are mutable; their contents can change in place. Strings and integers are immutable. Two names can refer to the same list, so appending through one name changes what the other sees. A mutable default list is reused across function calls and leaks old items. Use None as the default and create a fresh list inside each call.",
+      "questionId": "question_95a6211b-534e-4a59-b10e-89883fa1ba79",
+      "kind": "answer",
+      "createdAt": "2026-10-04T07:41:54.089Z"
+    },
+    {
+      "id": "turn_439ddd1d-7cdc-4293-b281-5b5a9b2d7f36",
+      "role": "assistant",
+      "text": "Good explanation of mutable vs immutable objects and a real shared-state bug. How would you modify a function to avoid reusing a mutable default argument?",
+      "reaction": "Good explanation of mutable vs immutable objects and a real shared-state bug.",
+      "questionId": "question_4d6f0a61-c309-4847-952d-2428ddd730e8",
+      "question": "How would you modify a function to avoid reusing a mutable default argument?",
+      "kind": "clarify",
+      "model": "qwen3:4b-instruct",
+      "answerAnchor": "Two names can refer to the same list, so appending through one name changes what the other sees.",
+      "createdAt": "2026-10-04T07:41:54.090Z"
+    },
+    {
+      "id": "answer_6ce48273-61da-4b39-94e6-ced2ee17d3ee",
+      "role": "student",
+      "text": "Use def add(value, items=None), then if items is None create items = [], append value and return items. Each call without items gets a fresh list. The old default list was one mutable object shared across calls; rebinding immutable objects such as strings cannot mutate that list.",
+      "questionId": "question_4d6f0a61-c309-4847-952d-2428ddd730e8",
+      "kind": "answer",
+      "createdAt": "2026-10-04T07:43:55.583Z"
+    },
+    {
+      "id": "turn_daf774e3-e69e-4ca5-a401-4af2595f785c",
+      "role": "assistant",
+      "text": "Good point about shared state—how does this differ from reassigning an immutable object like a string? How would you design error handling for a function that reads and validates a user-supplied file without hiding programming defects?",
+      "reaction": "Good point about shared state—how does this differ from reassigning an immutable object like a string?",
+      "questionId": "question_fd67f79d-af20-4572-8d4f-1abf18dee090",
+      "question": "How would you design error handling for a function that reads and validates a user-supplied file without hiding programming defects?",
+      "kind": "clarify",
+      "model": "qwen3:4b-instruct",
+      "answerAnchor": "Use def add(value, items=None), then if items is None create items = [], append value and return items.",
+      "createdAt": "2026-10-04T07:43:55.584Z"
+    },
+    {
+      "id": "answer_3d14ab82-b4bb-4c1c-9762-9fb6a8d71cfa",
+      "role": "student",
+      "text": "I validate the allowed content type and size before parsing a user-supplied file. I open it with a context manager so the resource closes on failure. I catch expected PermissionError, FileNotFoundError and documented parser errors, then return an actionable message. Unexpected programming defects propagate to the error boundary with a traceback; I never blanket-catch every exception and return success.",
+      "questionId": "question_fd67f79d-af20-4572-8d4f-1abf18dee090",
+      "kind": "answer",
+      "createdAt": "2026-10-04T07:45:42.057Z"
+    },
+    {
+      "id": "turn_7a56d2a7-b8a2-48bd-96d9-cb8420313c18",
+      "role": "assistant",
+      "text": "You correctly identify specific exception handling and input validation—well done on avoiding blanket catches. Your resume mentions: \"Built a local placement tracker with Python and SQLite.\". Choose one project decision you made. Explain the constraint, alternatives you considered, why you chose it, and how you verified the result.",
+      "reaction": "You correctly identify specific exception handling and input validation—well done on avoiding blanket catches.",
+      "questionId": "question_8212c217-cccf-406f-8ac6-cf5aca38d781",
+      "question": "Your resume mentions: \"Built a local placement tracker with Python and SQLite.\". Choose one project decision you made. Explain the constraint, alternatives you considered, why you chose it, and how you verified the result.",
+      "kind": "confirm",
+      "model": "qwen3:4b-instruct",
+      "answerAnchor": "I catch expected PermissionError, FileNotFoundError and documented parser errors, then return an actionable message.",
+      "createdAt": "2026-10-04T07:45:42.061Z"
+    },
+    {
+      "id": "answer_41427647-dd69-4d39-b4cb-d933d095e30b",
+      "role": "student",
+      "text": "I chose SQLite for an offline single-user placement tracker. The constraint was no internet and no server administration budget. PostgreSQL was an alternative for concurrent users, but required a server. SQLite offered one local file and simple installation; its trade-off is limited concurrent writes. I verified persistence by saving and reopening applications, checked rollback after failed updates, and measured list-query latency with 10,000 fixture rows.",
+      "questionId": "question_8212c217-cccf-406f-8ac6-cf5aca38d781",
+      "kind": "answer",
+      "createdAt": "2026-10-04T07:48:02.424Z"
+    },
+    {
+      "id": "turn_b3f81e5f-74d4-4f78-8aae-6a143a374675",
+      "role": "assistant",
+      "text": "You correctly identified SQLite's trade-off and verified it with measurable tests—strong work on validation. Your resume mentions: \"Built a local placement tracker with Python and SQLite.\". Describe a difficult defect in one of your projects. How did you isolate the cause, what evidence changed your hypothesis, and what prevented regression?",
+      "reaction": "You correctly identified SQLite's trade-off and verified it with measurable tests—strong work on validation.",
+      "questionId": "question_3d6a04fa-17a7-400c-980a-887a03def196",
+      "question": "Your resume mentions: \"Built a local placement tracker with Python and SQLite.\". Describe a difficult defect in one of your projects. How did you isolate the cause, what evidence changed your hypothesis, and what prevented regression?",
+      "kind": "confirm",
+      "model": "qwen3:4b-instruct",
+      "answerAnchor": "I verified persistence by saving and reopening applications, checked rollback after failed updates, and measured list-query latency with 10,000",
+      "createdAt": "2026-10-04T07:48:02.425Z"
+    },
+    {
+      "id": "answer_8771c9e7-9021-4df8-8509-725903e08849",
+      "role": "student",
+      "text": "My tracker sometimes duplicated an application after reopening it. I reproduced the defect with one record, saved the SQL trace and found two INSERT statements. I first suspected loading the database twice, but the trace showed that two click handlers ran for one Save click. I removed the duplicate event binding, used a unique application key, and added a regression test asserting that one click creates exactly one row and that reopening keeps the same count.",
+      "questionId": "question_3d6a04fa-17a7-400c-980a-887a03def196",
+      "kind": "answer",
+      "createdAt": "2026-10-04T07:49:13.065Z"
+    },
+    {
+      "id": "turn_a9c6b7b1-deda-4da2-ae2b-a217604ffda2",
+      "role": "assistant",
+      "text": "You correctly identified the root cause through trace evidence—strong reasoning on defect isolation. What observation falsified the hypothesis that the database was loaded twice?",
+      "reaction": "You correctly identified the root cause through trace evidence—strong reasoning on defect isolation.",
+      "questionId": "question_d077443c-62ea-4764-a162-d650a3fbb6ac",
+      "question": "What observation falsified the hypothesis that the database was loaded twice?",
+      "kind": "clarify",
+      "model": "qwen3:4b-instruct",
+      "answerAnchor": "I first suspected loading the database twice, but the trace showed that two click handlers ran for one Save click.",
+      "createdAt": "2026-10-04T07:49:13.066Z"
+    },
+    {
+      "id": "answer_a8a1317c-eaf6-4386-a338-5635e554be57",
+      "role": "student",
+      "text": "The startup log showed only one database connection and one SELECT during reopening, so loading twice did not fit the evidence. For a single Save click, tracing instead showed two handler entries and two INSERTs. Removing one duplicate binding eliminated the reproduction. I kept a regression test that dispatches one Save click and checks exactly one inserted row, then reopens the database and checks that the count stays one.",
+      "questionId": "question_d077443c-62ea-4764-a162-d650a3fbb6ac",
+      "kind": "answer",
+      "createdAt": "2026-10-04T07:50:29.709Z"
+    },
+    {
+      "id": "turn_11d6fd95-0dd0-41d6-b825-060b39fa2587",
+      "role": "assistant",
+      "text": "You correctly identified the root cause through trace evidence and implemented a regression test—strong reasoning on defect isolation. Compare INNER JOIN and LEFT JOIN. When can a LEFT JOIN unexpectedly reduce to inner-join behaviour?",
+      "reaction": "You correctly identified the root cause through trace evidence and implemented a regression test—strong reasoning on defect isolation.",
+      "questionId": "question_597044e5-6804-4b93-9012-435df57528aa",
+      "question": "Compare INNER JOIN and LEFT JOIN. When can a LEFT JOIN unexpectedly reduce to inner-join behaviour?",
+      "kind": "confirm",
+      "model": "qwen3:4b-instruct",
+      "answerAnchor": "Removing one duplicate binding eliminated the reproduction.",
+      "createdAt": "2026-10-04T07:50:29.711Z"
+    },
+    {
+      "id": "answer_4db62891-c25c-4b8c-8ad3-98d6bf94fe64",
+      "role": "student",
+      "text": "INNER JOIN returns only matching rows from both tables. LEFT JOIN retains every left row and fills unmatched right columns with NULL. A WHERE predicate on a right-side column, such as r.status = active, rejects NULL extended rows and effectively removes unmatched records. Put that right-side filter in the ON clause when all left rows must survive.",
+      "questionId": "question_597044e5-6804-4b93-9012-435df57528aa",
+      "kind": "answer",
+      "createdAt": "2026-10-04T07:52:18.060Z"
+    },
+    {
+      "id": "turn_59ad00c4-2c0e-40b7-9d0f-9abfbb4d665b",
+      "role": "assistant",
+      "text": "You correctly explain both joins and the filtering effect on unmatched rows. A query filtering by user_id and sorting by created_at is slow. How would you investigate and choose an index?",
+      "reaction": "You correctly explain both joins and the filtering effect on unmatched rows.",
+      "questionId": "question_7354e7d4-5784-408e-b626-31d867a2283b",
+      "question": "A query filtering by user_id and sorting by created_at is slow. How would you investigate and choose an index?",
+      "kind": "confirm",
+      "model": "qwen3:4b-instruct",
+      "answerAnchor": "A WHERE predicate on a right-side column, such as r.",
+      "createdAt": "2026-10-04T07:52:18.061Z"
+    },
+    {
+      "id": "answer_3b37c72f-d94d-49a0-969c-3c0fecf071e5",
+      "role": "student",
+      "text": "I first measure the slow query on representative data and inspect EXPLAIN QUERY PLAN to see scans and temporary sorting. For WHERE user_id = ? ORDER BY created_at, I would test a composite index on (user_id, created_at): equality narrows the prefix and the next column supplies sort order. I check selectivity and existing indexes, compare latency and the new plan, and account for extra disk space and slower inserts or updates. I would not add an index without measuring.",
+      "questionId": "question_7354e7d4-5784-408e-b626-31d867a2283b",
+      "kind": "answer",
+      "createdAt": "2026-10-04T07:53:33.853Z"
+    },
+    {
+      "id": "turn_ed83f0f2-da81-4f2d-a114-f37fd84db63b",
+      "role": "assistant",
+      "text": "You correctly identify the execution plan and propose a composite index with proper column order and trade-offs.",
+      "reaction": "You correctly identify the execution plan and propose a composite index with proper column order and trade-offs.",
+      "questionId": null,
+      "question": null,
+      "kind": "confirm",
+      "model": "qwen3:4b-instruct",
+      "answerAnchor": "I check selectivity and existing indexes, compare latency and the new plan, and account for extra disk space and slower inserts or updates.",
+      "createdAt": "2026-10-04T07:53:33.855Z"
+    }
+  ],
+  "questions": [
+    {
+      "id": "answer_4b06b02e-53f9-4e10-89f1-ce0da88ba92a",
+      "questionId": "question_95a6211b-534e-4a59-b10e-89883fa1ba79",
+      "questionGroupId": "question_95a6211b-534e-4a59-b10e-89883fa1ba79",
+      "bankId": "python_mutability_01",
+      "skill": "Python",
+      "question": "Explain the difference between mutable and immutable Python objects. Give one bug that shared mutable state can cause.",
+      "context": null,
+      "answer": "Lists and dictionaries are mutable; their contents can change in place. Strings and integers are immutable. Two names can refer to the same list, so appending through one name changes what the other sees. A mutable default list is reused across function calls and leaks old items. Use None as the default and create a fresh list inside each call.",
+      "skipped": false,
+      "hintUsed": false,
+      "submittedAt": "2026-10-04T07:41:54.089Z",
+      "grade": {
+        "method": "ollama-rubric-estimate",
+        "evidenceValidationFailed": false,
+        "reviewNeeded": false,
+        "evidenceStatus": "assessed",
+        "uncertainty": "low",
+        "criteria": [
+          {
+            "criterionId": "definition",
+            "label": "Distinguishes mutation from rebinding",
+            "points": 1,
+            "maxPoints": 1,
+            "evidenceExcerpt": "Lists and dictionaries are mutable;",
+            "explanation": "Correctly distinguishes mutable objects via in-place modification."
+          },
+          {
+            "criterionId": "examples",
+            "label": "Gives valid mutable and immutable examples",
+            "points": 1,
+            "maxPoints": 1,
+            "evidenceExcerpt": "Strings and integers are immutable.",
+            "explanation": "Valid examples of immutable objects provided."
+          },
+          {
+            "criterionId": "bug",
+            "label": "Explains a shared-state bug",
+            "points": 2,
+            "maxPoints": 2,
+            "evidenceExcerpt": "Two names can refer to the same list, so appending through one name changes what the other sees.",
+            "explanation": "Clear shared-state bug with correct cause and consequence."
+          }
+        ],
+        "missingConcepts": [],
+        "explanation": "All criteria met with precise, correct examples and a clear shared-state bug.",
+        "rawPoints": 4,
+        "awardedPoints": 4,
+        "maxPoints": 4
+      },
+      "model": "qwen3:4b-instruct",
+      "acknowledgement": "Good explanation of mutable vs immutable objects and a real shared-state bug.",
+      "adaptation": {
+        "proposed": "follow_up",
+        "followUpQuestion": "How would you modify a function to avoid reusing a mutable default argument?"
+      },
+      "promptVersion": "1.4.0",
+      "rubricVersion": "1.2.0",
+      "reply": {
+        "id": "turn_439ddd1d-7cdc-4293-b281-5b5a9b2d7f36",
+        "role": "assistant",
+        "text": "Good explanation of mutable vs immutable objects and a real shared-state bug. How would you modify a function to avoid reusing a mutable default argument?",
+        "reaction": "Good explanation of mutable vs immutable objects and a real shared-state bug.",
+        "questionId": "question_4d6f0a61-c309-4847-952d-2428ddd730e8",
+        "question": "How would you modify a function to avoid reusing a mutable default argument?",
+        "kind": "clarify",
+        "model": "qwen3:4b-instruct",
+        "answerAnchor": "Two names can refer to the same list, so appending through one name changes what the other sees.",
+        "createdAt": "2026-10-04T07:41:54.090Z"
+      }
+    },
+    {
+      "id": "answer_6ce48273-61da-4b39-94e6-ced2ee17d3ee",
+      "questionId": "question_4d6f0a61-c309-4847-952d-2428ddd730e8",
+      "questionGroupId": "question_95a6211b-534e-4a59-b10e-89883fa1ba79",
+      "bankId": "python_mutability_01",
+      "skill": "Python",
+      "question": "How would you modify a function to avoid reusing a mutable default argument?",
+      "context": null,
+      "answer": "Use def add(value, items=None), then if items is None create items = [], append value and return items. Each call without items gets a fresh list. The old default list was one mutable object shared across calls; rebinding immutable objects such as strings cannot mutate that list.",
+      "skipped": false,
+      "hintUsed": false,
+      "submittedAt": "2026-10-04T07:43:55.583Z",
+      "grade": {
+        "method": "ollama-rubric-estimate",
+        "evidenceValidationFailed": false,
+        "reviewNeeded": false,
+        "evidenceStatus": "assessed",
+        "uncertainty": "low",
+        "criteria": [
+          {
+            "criterionId": "definition",
+            "label": "Distinguishes mutation from rebinding",
+            "points": 1,
+            "maxPoints": 1,
+            "evidenceExcerpt": "Use def add(value, items=None), then if items is None create items = [], append value and return items.",
+            "explanation": "Correctly distinguishes mutation from rebinding by noting immutable objects can't be mutated."
+          },
+          {
+            "criterionId": "examples",
+            "label": "Gives valid mutable and immutable examples",
+            "points": 1,
+            "maxPoints": 1,
+            "evidenceExcerpt": "Use def add(value, items=None), then if items is None create items = [], append value and return items.",
+            "explanation": "Provides valid example of mutable default (list) and correct handling via None check."
+          },
+          {
+            "criterionId": "bug",
+            "label": "Explains a shared-state bug",
+            "points": 2,
+            "maxPoints": 2,
+            "evidenceExcerpt": "The old default list was one mutable object shared across calls;",
+            "explanation": "Explicitly explains shared-state bug: one mutable object reused across function calls."
+          }
+        ],
+        "missingConcepts": [],
+        "explanation": "All key concepts addressed with correct examples and bug explanation; no misconceptions present.",
+        "rawPoints": 4,
+        "awardedPoints": 4,
+        "maxPoints": 4
+      },
+      "model": "qwen3:4b-instruct",
+      "acknowledgement": "Good point about shared state—how does this differ from reassigning an immutable object like a string?",
+      "adaptation": {
+        "proposed": "advance",
+        "followUpQuestion": null
+      },
+      "promptVersion": "1.4.0",
+      "rubricVersion": "1.2.0",
+      "reply": {
+        "id": "turn_daf774e3-e69e-4ca5-a401-4af2595f785c",
+        "role": "assistant",
+        "text": "Good point about shared state—how does this differ from reassigning an immutable object like a string? How would you design error handling for a function that reads and validates a user-supplied file without hiding programming defects?",
+        "reaction": "Good point about shared state—how does this differ from reassigning an immutable object like a string?",
+        "questionId": "question_fd67f79d-af20-4572-8d4f-1abf18dee090",
+        "question": "How would you design error handling for a function that reads and validates a user-supplied file without hiding programming defects?",
+        "kind": "clarify",
+        "model": "qwen3:4b-instruct",
+        "answerAnchor": "Use def add(value, items=None), then if items is None create items = [], append value and return items.",
+        "createdAt": "2026-10-04T07:43:55.584Z"
+      }
+    },
+    {
+      "id": "answer_3d14ab82-b4bb-4c1c-9762-9fb6a8d71cfa",
+      "questionId": "question_fd67f79d-af20-4572-8d4f-1abf18dee090",
+      "questionGroupId": "question_fd67f79d-af20-4572-8d4f-1abf18dee090",
+      "bankId": "python_errors_02",
+      "skill": "Python",
+      "question": "How would you design error handling for a function that reads and validates a user-supplied file without hiding programming defects?",
+      "context": null,
+      "answer": "I validate the allowed content type and size before parsing a user-supplied file. I open it with a context manager so the resource closes on failure. I catch expected PermissionError, FileNotFoundError and documented parser errors, then return an actionable message. Unexpected programming defects propagate to the error boundary with a traceback; I never blanket-catch every exception and return success.",
+      "skipped": false,
+      "hintUsed": false,
+      "submittedAt": "2026-10-04T07:45:42.057Z",
+      "grade": {
+        "method": "ollama-rubric-estimate",
+        "evidenceValidationFailed": false,
+        "reviewNeeded": false,
+        "evidenceStatus": "assessed",
+        "uncertainty": "low",
+        "criteria": [
+          {
+            "criterionId": "specific",
+            "label": "Catches expected, specific exceptions",
+            "points": 1,
+            "maxPoints": 1,
+            "evidenceExcerpt": "I catch expected PermissionError, FileNotFoundError and documented parser errors, then return an actionable message.",
+            "explanation": "Specific exceptions like PermissionError and FileNotFoundError are caught, matching the rubric."
+          },
+          {
+            "criterionId": "validation",
+            "label": "Validates untrusted input",
+            "points": 1,
+            "maxPoints": 1,
+            "evidenceExcerpt": "I validate the allowed content type and size before parsing a user-supplied file.",
+            "explanation": "Input validation is explicitly stated before parsing, satisfying the validation criterion."
+          },
+          {
+            "criterionId": "resources",
+            "label": "Manages file resources safely",
+            "points": 1,
+            "maxPoints": 1,
+            "evidenceExcerpt": "I open it with a context manager so the resource closes on failure.",
+            "explanation": "Context manager use ensures safe resource management on failure."
+          },
+          {
+            "criterionId": "unexpected",
+            "label": "Does not suppress unexpected defects",
+            "points": 1,
+            "maxPoints": 1,
+            "evidenceExcerpt": "Unexpected programming defects propagate to the error boundary with a traceback;",
+            "explanation": "Unexpected defects are allowed to propagate, avoiding suppression as required."
+          }
+        ],
+        "missingConcepts": [],
+        "explanation": "All four criteria are fully addressed with clear, correct examples from the answer.",
+        "rawPoints": 4,
+        "awardedPoints": 4,
+        "maxPoints": 4
+      },
+      "model": "qwen3:4b-instruct",
+      "acknowledgement": "You correctly identify specific exception handling and input validation—well done on avoiding blanket catches.",
+      "adaptation": {
+        "proposed": "advance",
+        "followUpQuestion": null
+      },
+      "promptVersion": "1.4.0",
+      "rubricVersion": "1.2.0",
+      "reply": {
+        "id": "turn_7a56d2a7-b8a2-48bd-96d9-cb8420313c18",
+        "role": "assistant",
+        "text": "You correctly identify specific exception handling and input validation—well done on avoiding blanket catches. Your resume mentions: \"Built a local placement tracker with Python and SQLite.\". Choose one project decision you made. Explain the constraint, alternatives you considered, why you chose it, and how you verified the result.",
+        "reaction": "You correctly identify specific exception handling and input validation—well done on avoiding blanket catches.",
+        "questionId": "question_8212c217-cccf-406f-8ac6-cf5aca38d781",
+        "question": "Your resume mentions: \"Built a local placement tracker with Python and SQLite.\". Choose one project decision you made. Explain the constraint, alternatives you considered, why you chose it, and how you verified the result.",
+        "kind": "confirm",
+        "model": "qwen3:4b-instruct",
+        "answerAnchor": "I catch expected PermissionError, FileNotFoundError and documented parser errors, then return an actionable message.",
+        "createdAt": "2026-10-04T07:45:42.061Z"
+      }
+    },
+    {
+      "id": "answer_41427647-dd69-4d39-b4cb-d933d095e30b",
+      "questionId": "question_8212c217-cccf-406f-8ac6-cf5aca38d781",
+      "questionGroupId": "question_8212c217-cccf-406f-8ac6-cf5aca38d781",
+      "bankId": "project_decisions_01",
+      "skill": "Project explanation",
+      "question": "Your resume mentions: \"Built a local placement tracker with Python and SQLite.\". Choose one project decision you made. Explain the constraint, alternatives you considered, why you chose it, and how you verified the result.",
+      "context": {
+        "type": "resume",
+        "label": "Resume project claim",
+        "passage": "Built a local placement tracker with Python and SQLite."
+      },
+      "answer": "I chose SQLite for an offline single-user placement tracker. The constraint was no internet and no server administration budget. PostgreSQL was an alternative for concurrent users, but required a server. SQLite offered one local file and simple installation; its trade-off is limited concurrent writes. I verified persistence by saving and reopening applications, checked rollback after failed updates, and measured list-query latency with 10,000 fixture rows.",
+      "skipped": false,
+      "hintUsed": false,
+      "submittedAt": "2026-10-04T07:48:02.424Z",
+      "grade": {
+        "method": "ollama-rubric-estimate",
+        "evidenceValidationFailed": false,
+        "reviewNeeded": false,
+        "evidenceStatus": "assessed",
+        "uncertainty": "low",
+        "criteria": [
+          {
+            "criterionId": "decision",
+            "label": "Names a concrete technical decision and constraint",
+            "points": 1,
+            "maxPoints": 1,
+            "evidenceExcerpt": "I chose SQLite for an offline single-user placement tracker.",
+            "explanation": "Names a concrete technical decision tied to a real constraint."
+          },
+          {
+            "criterionId": "alternative",
+            "label": "Compares an alternative",
+            "points": 1,
+            "maxPoints": 1,
+            "evidenceExcerpt": "PostgreSQL was an alternative for concurrent users, but required a server.",
+            "explanation": "Compares a valid alternative with a clear limitation."
+          },
+          {
+            "criterionId": "tradeoff",
+            "label": "Explains the trade-off",
+            "points": 1,
+            "maxPoints": 1,
+            "evidenceExcerpt": "its trade-off is limited concurrent writes.",
+            "explanation": "Explains a trade-off related to the decision."
+          },
+          {
+            "criterionId": "verification",
+            "label": "Provides verification evidence",
+            "points": 2,
+            "maxPoints": 2,
+            "evidenceExcerpt": "I verified persistence by saving and reopening applications, checked rollback after failed updates, and measured list-query latency with 10,000",
+            "explanation": "Provides specific verification evidence including persistence, rollback, and latency measurement."
+          }
+        ],
+        "missingConcepts": [],
+        "explanation": "All rubric criteria are satisfied with clear, concise evidence from the answer.",
+        "rawPoints": 5,
+        "awardedPoints": 5,
+        "maxPoints": 5
+      },
+      "model": "qwen3:4b-instruct",
+      "acknowledgement": "You correctly identified SQLite's trade-off and verified it with measurable tests—strong work on validation.",
+      "adaptation": {
+        "proposed": "advance",
+        "followUpQuestion": null
+      },
+      "promptVersion": "1.4.0",
+      "rubricVersion": "1.2.0",
+      "reply": {
+        "id": "turn_b3f81e5f-74d4-4f78-8aae-6a143a374675",
+        "role": "assistant",
+        "text": "You correctly identified SQLite's trade-off and verified it with measurable tests—strong work on validation. Your resume mentions: \"Built a local placement tracker with Python and SQLite.\". Describe a difficult defect in one of your projects. How did you isolate the cause, what evidence changed your hypothesis, and what prevented regression?",
+        "reaction": "You correctly identified SQLite's trade-off and verified it with measurable tests—strong work on validation.",
+        "questionId": "question_3d6a04fa-17a7-400c-980a-887a03def196",
+        "question": "Your resume mentions: \"Built a local placement tracker with Python and SQLite.\". Describe a difficult defect in one of your projects. How did you isolate the cause, what evidence changed your hypothesis, and what prevented regression?",
+        "kind": "confirm",
+        "model": "qwen3:4b-instruct",
+        "answerAnchor": "I verified persistence by saving and reopening applications, checked rollback after failed updates, and measured list-query latency with 10,000",
+        "createdAt": "2026-10-04T07:48:02.425Z"
+      }
+    },
+    {
+      "id": "answer_8771c9e7-9021-4df8-8509-725903e08849",
+      "questionId": "question_3d6a04fa-17a7-400c-980a-887a03def196",
+      "questionGroupId": "question_3d6a04fa-17a7-400c-980a-887a03def196",
+      "bankId": "project_debugging_02",
+      "skill": "Project explanation",
+      "question": "Your resume mentions: \"Built a local placement tracker with Python and SQLite.\". Describe a difficult defect in one of your projects. How did you isolate the cause, what evidence changed your hypothesis, and what prevented regression?",
+      "context": {
+        "type": "resume",
+        "label": "Resume project claim",
+        "passage": "Built a local placement tracker with Python and SQLite."
+      },
+      "answer": "My tracker sometimes duplicated an application after reopening it. I reproduced the defect with one record, saved the SQL trace and found two INSERT statements. I first suspected loading the database twice, but the trace showed that two click handlers ran for one Save click. I removed the duplicate event binding, used a unique application key, and added a regression test asserting that one click creates exactly one row and that reopening keeps the same count.",
+      "skipped": false,
+      "hintUsed": false,
+      "submittedAt": "2026-10-04T07:49:13.065Z",
+      "grade": {
+        "method": "ollama-rubric-estimate",
+        "evidenceValidationFailed": false,
+        "reviewNeeded": false,
+        "evidenceStatus": "assessed",
+        "uncertainty": "low",
+        "criteria": [
+          {
+            "criterionId": "symptom",
+            "label": "States a reproducible symptom",
+            "points": 1,
+            "maxPoints": 1,
+            "evidenceExcerpt": "My tracker sometimes duplicated an application after reopening it.",
+            "explanation": "States a reproducible symptom: duplication after reopening."
+          },
+          {
+            "criterionId": "isolation",
+            "label": "Uses evidence to isolate the cause",
+            "points": 2,
+            "maxPoints": 2,
+            "evidenceExcerpt": "I reproduced the defect with one record, saved the SQL trace and found two INSERT statements.",
+            "explanation": "Uses evidence (SQL trace) to isolate cause: two INSERTs indicate duplicated execution."
+          },
+          {
+            "criterionId": "root",
+            "label": "Distinguishes root cause from symptom",
+            "points": 1,
+            "maxPoints": 1,
+            "evidenceExcerpt": "I first suspected loading the database twice, but the trace showed that two click handlers ran for one Save click.",
+            "explanation": "Distinguishes root cause (duplicate handlers) from symptom (duplicated records)."
+          },
+          {
+            "criterionId": "regression",
+            "label": "Prevents recurrence",
+            "points": 1,
+            "maxPoints": 1,
+            "evidenceExcerpt": "I removed the duplicate event binding, used a unique application key, and added a regression test asserting that one click creates exactly one row and",
+            "explanation": "Adds regression test to prevent recurrence."
+          }
+        ],
+        "missingConcepts": [],
+        "explanation": "All criteria met with clear, evidence-backed reasoning; no misconceptions detected.",
+        "rawPoints": 5,
+        "awardedPoints": 5,
+        "maxPoints": 5
+      },
+      "model": "qwen3:4b-instruct",
+      "acknowledgement": "You correctly identified the root cause through trace evidence—strong reasoning on defect isolation.",
+      "adaptation": {
+        "proposed": "follow_up",
+        "followUpQuestion": "What observation falsified the hypothesis that the database was loaded twice?"
+      },
+      "promptVersion": "1.4.0",
+      "rubricVersion": "1.2.0",
+      "reply": {
+        "id": "turn_a9c6b7b1-deda-4da2-ae2b-a217604ffda2",
+        "role": "assistant",
+        "text": "You correctly identified the root cause through trace evidence—strong reasoning on defect isolation. What observation falsified the hypothesis that the database was loaded twice?",
+        "reaction": "You correctly identified the root cause through trace evidence—strong reasoning on defect isolation.",
+        "questionId": "question_d077443c-62ea-4764-a162-d650a3fbb6ac",
+        "question": "What observation falsified the hypothesis that the database was loaded twice?",
+        "kind": "clarify",
+        "model": "qwen3:4b-instruct",
+        "answerAnchor": "I first suspected loading the database twice, but the trace showed that two click handlers ran for one Save click.",
+        "createdAt": "2026-10-04T07:49:13.066Z"
+      }
+    },
+    {
+      "id": "answer_a8a1317c-eaf6-4386-a338-5635e554be57",
+      "questionId": "question_d077443c-62ea-4764-a162-d650a3fbb6ac",
+      "questionGroupId": "question_3d6a04fa-17a7-400c-980a-887a03def196",
+      "bankId": "project_debugging_02",
+      "skill": "Project explanation",
+      "question": "What observation falsified the hypothesis that the database was loaded twice?",
+      "context": {
+        "type": "resume",
+        "label": "Resume project claim",
+        "passage": "Built a local placement tracker with Python and SQLite."
+      },
+      "answer": "The startup log showed only one database connection and one SELECT during reopening, so loading twice did not fit the evidence. For a single Save click, tracing instead showed two handler entries and two INSERTs. Removing one duplicate binding eliminated the reproduction. I kept a regression test that dispatches one Save click and checks exactly one inserted row, then reopens the database and checks that the count stays one.",
+      "skipped": false,
+      "hintUsed": false,
+      "submittedAt": "2026-10-04T07:50:29.709Z",
+      "grade": {
+        "method": "ollama-rubric-estimate",
+        "evidenceValidationFailed": false,
+        "reviewNeeded": false,
+        "evidenceStatus": "assessed",
+        "uncertainty": "low",
+        "criteria": [
+          {
+            "criterionId": "symptom",
+            "label": "States a reproducible symptom",
+            "points": 1,
+            "maxPoints": 1,
+            "evidenceExcerpt": "The startup log showed only one database connection and one SELECT during reopening, so loading twice did not fit the evidence.",
+            "explanation": "States a reproducible symptom from startup logs."
+          },
+          {
+            "criterionId": "isolation",
+            "label": "Uses evidence to isolate the cause",
+            "points": 2,
+            "maxPoints": 2,
+            "evidenceExcerpt": "For a single Save click, tracing instead showed two handler entries and two INSERTs.",
+            "explanation": "Uses trace evidence to isolate cause via handler and INSERT duplication."
+          },
+          {
+            "criterionId": "root",
+            "label": "Distinguishes root cause from symptom",
+            "points": 1,
+            "maxPoints": 1,
+            "evidenceExcerpt": "Removing one duplicate binding eliminated the reproduction.",
+            "explanation": "Distinguishes root cause (duplicate binding) from symptom (duplicated insert)."
+          },
+          {
+            "criterionId": "regression",
+            "label": "Prevents recurrence",
+            "points": 1,
+            "maxPoints": 1,
+            "evidenceExcerpt": "I kept a regression test that dispatches one Save click and checks exactly one inserted row, then reopens the database and checks that the count stays",
+            "explanation": "Prevents recurrence with a regression test verifying one insert and one row."
+          }
+        ],
+        "missingConcepts": [],
+        "explanation": "All criteria met with direct evidence; no misconceptions. Full credit for reproducible symptom, isolation, root cause, and regression test.",
+        "rawPoints": 5,
+        "awardedPoints": 5,
+        "maxPoints": 5
+      },
+      "model": "qwen3:4b-instruct",
+      "acknowledgement": "You correctly identified the root cause through trace evidence and implemented a regression test—strong reasoning on defect isolation.",
+      "adaptation": {
+        "proposed": "advance",
+        "followUpQuestion": null
+      },
+      "promptVersion": "1.4.0",
+      "rubricVersion": "1.2.0",
+      "reply": {
+        "id": "turn_11d6fd95-0dd0-41d6-b825-060b39fa2587",
+        "role": "assistant",
+        "text": "You correctly identified the root cause through trace evidence and implemented a regression test—strong reasoning on defect isolation. Compare INNER JOIN and LEFT JOIN. When can a LEFT JOIN unexpectedly reduce to inner-join behaviour?",
+        "reaction": "You correctly identified the root cause through trace evidence and implemented a regression test—strong reasoning on defect isolation.",
+        "questionId": "question_597044e5-6804-4b93-9012-435df57528aa",
+        "question": "Compare INNER JOIN and LEFT JOIN. When can a LEFT JOIN unexpectedly reduce to inner-join behaviour?",
+        "kind": "confirm",
+        "model": "qwen3:4b-instruct",
+        "answerAnchor": "Removing one duplicate binding eliminated the reproduction.",
+        "createdAt": "2026-10-04T07:50:29.711Z"
+      }
+    },
+    {
+      "id": "answer_4db62891-c25c-4b8c-8ad3-98d6bf94fe64",
+      "questionId": "question_597044e5-6804-4b93-9012-435df57528aa",
+      "questionGroupId": "question_597044e5-6804-4b93-9012-435df57528aa",
+      "bankId": "sql_joins_01",
+      "skill": "SQL",
+      "question": "Compare INNER JOIN and LEFT JOIN. When can a LEFT JOIN unexpectedly reduce to inner-join behaviour?",
+      "context": null,
+      "answer": "INNER JOIN returns only matching rows from both tables. LEFT JOIN retains every left row and fills unmatched right columns with NULL. A WHERE predicate on a right-side column, such as r.status = active, rejects NULL extended rows and effectively removes unmatched records. Put that right-side filter in the ON clause when all left rows must survive.",
+      "skipped": false,
+      "hintUsed": false,
+      "submittedAt": "2026-10-04T07:52:18.060Z",
+      "grade": {
+        "method": "ollama-rubric-estimate",
+        "evidenceValidationFailed": false,
+        "reviewNeeded": false,
+        "evidenceStatus": "assessed",
+        "uncertainty": "low",
+        "criteria": [
+          {
+            "criterionId": "inner",
+            "label": "Explains INNER JOIN",
+            "points": 1,
+            "maxPoints": 1,
+            "evidenceExcerpt": "INNER JOIN returns only matching rows from both tables.",
+            "explanation": "Correctly identifies INNER JOIN behavior."
+          },
+          {
+            "criterionId": "left",
+            "label": "Explains LEFT JOIN and NULL extension",
+            "points": 1,
+            "maxPoints": 1,
+            "evidenceExcerpt": "LEFT JOIN retains every left row and fills unmatched right columns with NULL.",
+            "explanation": "Accurately explains LEFT JOIN and NULL extension."
+          },
+          {
+            "criterionId": "filter",
+            "label": "Identifies WHERE-on-right filtering",
+            "points": 2,
+            "maxPoints": 2,
+            "evidenceExcerpt": "A WHERE predicate on a right-side column, such as r.",
+            "explanation": "Correctly identifies WHERE filtering on right-side columns as the cause of unexpected reduction."
+          }
+        ],
+        "missingConcepts": [],
+        "explanation": "All key concepts addressed with precise, correct reasoning. No misconceptions present.",
+        "rawPoints": 4,
+        "awardedPoints": 4,
+        "maxPoints": 4
+      },
+      "model": "qwen3:4b-instruct",
+      "acknowledgement": "You correctly explain both joins and the filtering effect on unmatched rows.",
+      "adaptation": {
+        "proposed": "advance",
+        "followUpQuestion": null
+      },
+      "promptVersion": "1.4.0",
+      "rubricVersion": "1.2.0",
+      "reply": {
+        "id": "turn_59ad00c4-2c0e-40b7-9d0f-9abfbb4d665b",
+        "role": "assistant",
+        "text": "You correctly explain both joins and the filtering effect on unmatched rows. A query filtering by user_id and sorting by created_at is slow. How would you investigate and choose an index?",
+        "reaction": "You correctly explain both joins and the filtering effect on unmatched rows.",
+        "questionId": "question_7354e7d4-5784-408e-b626-31d867a2283b",
+        "question": "A query filtering by user_id and sorting by created_at is slow. How would you investigate and choose an index?",
+        "kind": "confirm",
+        "model": "qwen3:4b-instruct",
+        "answerAnchor": "A WHERE predicate on a right-side column, such as r.",
+        "createdAt": "2026-10-04T07:52:18.061Z"
+      }
+    },
+    {
+      "id": "answer_3b37c72f-d94d-49a0-969c-3c0fecf071e5",
+      "questionId": "question_7354e7d4-5784-408e-b626-31d867a2283b",
+      "questionGroupId": "question_7354e7d4-5784-408e-b626-31d867a2283b",
+      "bankId": "sql_index_02",
+      "skill": "SQL",
+      "question": "A query filtering by user_id and sorting by created_at is slow. How would you investigate and choose an index?",
+      "context": null,
+      "answer": "I first measure the slow query on representative data and inspect EXPLAIN QUERY PLAN to see scans and temporary sorting. For WHERE user_id = ? ORDER BY created_at, I would test a composite index on (user_id, created_at): equality narrows the prefix and the next column supplies sort order. I check selectivity and existing indexes, compare latency and the new plan, and account for extra disk space and slower inserts or updates. I would not add an index without measuring.",
+      "skipped": false,
+      "hintUsed": false,
+      "submittedAt": "2026-10-04T07:53:33.853Z",
+      "grade": {
+        "method": "ollama-rubric-estimate",
+        "evidenceValidationFailed": false,
+        "reviewNeeded": false,
+        "evidenceStatus": "assessed",
+        "uncertainty": "low",
+        "criteria": [
+          {
+            "criterionId": "plan",
+            "label": "Uses an execution plan",
+            "points": 1,
+            "maxPoints": 1,
+            "evidenceExcerpt": "I first measure the slow query on representative data and inspect EXPLAIN QUERY PLAN to see scans and temporary sorting.",
+            "explanation": "Correctly identifies inspecting execution plan as first step."
+          },
+          {
+            "criterionId": "composite",
+            "label": "Proposes an ordered composite index",
+            "points": 2,
+            "maxPoints": 2,
+            "evidenceExcerpt": "ORDER BY created_at, I would test a composite index on (user_id, created_at): equality narrows the prefix and the next column supplies sort order.",
+            "explanation": "Clearly proposes ordered composite index matching query pattern."
+          },
+          {
+            "criterionId": "tradeoff",
+            "label": "States index trade-offs",
+            "points": 1,
+            "maxPoints": 1,
+            "evidenceExcerpt": "I check selectivity and existing indexes, compare latency and the new plan, and account for extra disk space and slower inserts or updates.",
+            "explanation": "Mentions storage cost and write performance trade-offs."
+          }
+        ],
+        "missingConcepts": [],
+        "explanation": "",
+        "rawPoints": 4,
+        "awardedPoints": 4,
+        "maxPoints": 4
+      },
+      "model": "qwen3:4b-instruct",
+      "acknowledgement": "You correctly identify the execution plan and propose a composite index with proper column order and trade-offs.",
+      "adaptation": {
+        "proposed": "advance",
+        "followUpQuestion": null
+      },
+      "promptVersion": "1.4.0",
+      "rubricVersion": "1.2.0",
+      "reply": {
+        "id": "turn_ed83f0f2-da81-4f2d-a114-f37fd84db63b",
+        "role": "assistant",
+        "text": "You correctly identify the execution plan and propose a composite index with proper column order and trade-offs.",
+        "reaction": "You correctly identify the execution plan and propose a composite index with proper column order and trade-offs.",
+        "questionId": null,
+        "question": null,
+        "kind": "confirm",
+        "model": "qwen3:4b-instruct",
+        "answerAnchor": "I check selectivity and existing indexes, compare latency and the new plan, and account for extra disk space and slower inserts or updates.",
+        "createdAt": "2026-10-04T07:53:33.855Z"
+      }
+    }
+  ]
+}

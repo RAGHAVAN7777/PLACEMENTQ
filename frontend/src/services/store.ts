@@ -19,7 +19,9 @@ function loadFromStorage(): AppData | null {
     if (!raw) return null;
     const data = JSON.parse(raw) as AppData;
     if (data.version !== STORAGE_VERSION) return null;
-    return data;
+    // Old demo snapshots must never masquerade as a completed student assessment.
+    const assessments = (data.assessments || []).filter((item) => !item.id.startsWith('sample-') && item.label !== 'Sample Profile');
+    return { ...data, assessments, sampleProfileLoaded: false };
   } catch {
     return null;
   }
@@ -151,9 +153,7 @@ export const useStore = create<AppStore>((set, get) => {
 
     getLatestAssessment: () => {
       const state = get();
-      return state.assessments.length > 0
-        ? state.assessments[state.assessments.length - 1]
-        : undefined;
+      return [...state.assessments].reverse().find((item) => !item.id.startsWith('sample-') && item.label !== 'Sample Profile');
     },
 
     // ── Sample Profile ────────────────────────────────────────────────────
@@ -265,7 +265,7 @@ export const useStore = create<AppStore>((set, get) => {
 
     clearAllData: () => {
       localStorage.removeItem(STORAGE_KEY);
-      set({ ...DEFAULT_DATA });
+      set({ ...DEFAULT_DATA, draft: undefined, sampleProfileLoaded: undefined });
     },
 
     // ── Persistence ───────────────────────────────────────────────────────

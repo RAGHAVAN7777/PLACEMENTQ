@@ -4,15 +4,19 @@ import { ROUTES } from '../../config';
 import { useStore } from '../../services/store';
 import {
   LayoutDashboard, BarChart3, FlaskConical, ListChecks,
-  TrendingUp, Microscope, User, Menu, X, ChevronRight, Home
+  TrendingUp, Microscope, User, Menu, X, Home, Bot, ClipboardList, GraduationCap
 } from 'lucide-react';
 import './AppLayout.css';
+import { InterviewWorkspaceProvider, useInterviewWorkspace } from '../../services/InterviewWorkspace';
+import './WorkspaceTheme.css';
+import '../../features/overview/InterviewOverview.css';
 
 const NAV_GROUPS = [
   {
     label: 'Workspace',
     items: [
       { to: ROUTES.overview, label: 'Overview', icon: LayoutDashboard },
+      { to: '/app/readiness', label: 'Integrated Readiness', icon: ClipboardList },
       { to: ROUTES.skills, label: 'Skill Analysis', icon: BarChart3 },
       { to: ROUTES.scenarios, label: 'Scenario Lab', icon: FlaskConical },
     ],
@@ -20,6 +24,7 @@ const NAV_GROUPS = [
   {
     label: 'Preparation',
     items: [
+      { to: ROUTES.interviewReports, label: 'Interview Reports', icon: Bot },
       { to: ROUTES.plan, label: 'Action Plan', icon: ListChecks },
       { to: ROUTES.progress, label: 'Progress', icon: TrendingUp },
     ],
@@ -27,25 +32,35 @@ const NAV_GROUPS = [
   {
     label: 'Research',
     items: [
+      { to: ROUTES.placementAssessment, label: 'Placement Predictor', icon: ClipboardList },
       { to: ROUTES.modelLab, label: 'Model Lab', icon: Microscope },
+      { to: ROUTES.faculty, label: 'Faculty Evidence', icon: GraduationCap },
     ],
   },
 ];
 
 const PAGE_TITLES: Record<string, string> = {
+  '/app/readiness': 'Integrated Readiness',
   [ROUTES.overview]: 'Overview',
   [ROUTES.skills]: 'Skill Analysis',
   [ROUTES.scenarios]: 'Scenario Lab',
   [ROUTES.plan]: 'Action Plan',
   [ROUTES.progress]: 'Progress',
+  [ROUTES.interviewReports]: 'Interview Reports',
+  [ROUTES.faculty]: 'Faculty Evidence View',
   [ROUTES.modelLab]: 'Model Lab',
   [ROUTES.profile]: 'Profile & Settings',
 };
 
 export default function AppLayout() {
+  return <InterviewWorkspaceProvider><WorkspaceLayout /></InterviewWorkspaceProvider>;
+}
+
+function WorkspaceLayout() {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const location = useLocation();
   const latestAssessment = useStore((s) => s.getLatestAssessment());
+  const { report, loading } = useInterviewWorkspace();
   const pageTitle = PAGE_TITLES[location.pathname] ?? 'PlacementIQ';
 
   useEffect(() => {
@@ -62,7 +77,7 @@ export default function AppLayout() {
       <aside className={`app-sidebar ${mobileMenuOpen ? 'open' : ''}`} aria-label="Main navigation">
         <div className="sidebar-header">
           <NavLink to="/" className="sidebar-wordmark">
-            <span className="wordmark-accent">Placement</span>IQ
+            <span className="workspace-logo" aria-hidden="true">pi</span>PlacementIQ
           </NavLink>
           <button
             className="sidebar-close btn btn-ghost btn-sm"
@@ -136,7 +151,7 @@ export default function AppLayout() {
 
           <div className="topbar-left">
             <h1 className="topbar-title">{pageTitle}</h1>
-            {latestAssessment && (
+            {(location.pathname === "/app/readiness" || (location.pathname === ROUTES.overview && !location.search)) ? <span className="topbar-context">Baseline + interview</span> : report ? <span className="topbar-context">Interview · {new Date(report.createdAt).toLocaleDateString()}<span className="workspace-record-tag">SAVED RESULT</span></span> : !loading && latestAssessment && (
               <span className="topbar-context font-mono">
                 Assessment: {new Date(latestAssessment.timestamp).toLocaleDateString()}
                 {latestAssessment.label && (

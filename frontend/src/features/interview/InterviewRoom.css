@@ -1,0 +1,1492 @@
+/* The interview continues the existing landing page's charcoal / warm orange palette. */
+.interview-page {
+    --room-bg: #08090b;
+    --room-panel-solid: #111214;
+    --room-line: #ffffff18;
+    --room-text: #f4f4f0;
+    --room-muted: #a09f9c;
+    --room-cyan: #ff9b55;
+    --room-blue: #e88b48;
+    --room-violet: #be9d7b;
+    --color-primary: #ff7a20;
+    background: var(--room-bg);
+    color: var(--room-text);
+    overflow-x: clip;
+    font-size: 14px
+}
+
+.interview-page :focus-visible {
+    outline: 2px solid #ff9b55;
+    outline-offset: 4px
+}
+
+.interview-page button {
+    cursor: pointer
+}
+
+.interview-page button:disabled {
+    cursor: not-allowed
+}
+
+.interview-topbar {
+    position: relative;
+    inset: auto;
+    height: 76px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 24px;
+    padding: 0 4%;
+    background: #08090b;
+    border-bottom: 1px solid #ffffff13;
+    backdrop-filter: none
+}
+
+.interview-wordmark {
+    gap: 9px;
+    font-size: 17px;
+    letter-spacing: -.6px;
+    color: #f4f4f0
+}
+
+.interview-wordmark span {
+    color: inherit
+}
+
+.wordmark-symbol {
+    width: 28px;
+    height: 28px;
+    border: 1px solid #ff7a2040;
+    color: #ff9b55 !important;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 21px;
+    border-radius: 7px;
+    line-height: 1;
+    letter-spacing: -3px;
+    padding-right: 3px
+}
+
+.wordmark-symbol>span {
+    font-size: 18px
+}
+
+.wordmark-divider {
+    margin: 0 7px 0 13px;
+    width: 1px;
+    height: 20px;
+    background: #ffffff20
+}
+
+.interview-wordmark small {
+    font: 8px var(--font-mono);
+    letter-spacing: 1.3px;
+    color: #969794
+}
+
+.interview-history-link {
+    gap: 12px;
+    font-size: 11px;
+    color: #adada8
+}
+
+.interview-steps {
+    gap: 22px
+}
+
+.interview-steps>div {
+    font-size: 9px;
+    text-transform: none;
+    color: #81827e;
+    letter-spacing: 0
+}
+
+.interview-steps i {
+    width: 20px;
+    height: 20px;
+    border-color: #ffffff1e;
+    font-size: 8px
+}
+
+.interview-steps .active i {
+    border-color: #ff7a2055;
+    background: #ff7a2010;
+    box-shadow: none;
+    color: #ff9b55
+}
+
+.interview-steps .done i {
+    background: transparent;
+    border-color: #b5c8a740;
+    color: #b5c8a7
+}
+
+.interview-room {
+    display: block;
+    max-width: 1600px;
+    min-height: 0;
+    margin: 0 auto;
+    padding: 0 32px 25px;
+    position: relative
+}
+
+.presenter-stage {
+    height: 490px;
+    position: relative;
+    isolation: isolate
+}
+
+.presenter-stage::before {
+    content: '';
+    position: absolute;
+    inset: 0 10% -25px;
+    z-index: -1;
+    background: radial-gradient(ellipse at 50% 50%, #ff7a200c, transparent 58%);
+    pointer-events: none
+}
+
+.stage-grain {
+    position: absolute;
+    inset: 0;
+    opacity: .10;
+    pointer-events: none;
+    background-image: radial-gradient(#b8b8b8 .6px, transparent .6px);
+    background-size: 7px 7px;
+    mask-image: radial-gradient(ellipse at center, #000 5%, transparent 67%)
+}
+
+.presenter-canvas {
+    position: absolute;
+    left: 50%;
+    top: -8px;
+    transform: translateX(-50%);
+    height: 505px;
+    width: min(670px, 56vw)
+}
+
+.aria-avatar {
+    height: 100%;
+    width: 100%;
+    position: relative;
+    z-index: 2;
+}
+
+.avatar-suit {
+    position: absolute;
+    bottom: -35px;
+    left: 50%;
+    transform: translateX(-47%);
+    width: 500px;
+    mix-blend-mode: screen;
+    pointer-events: none;
+    z-index: 3;
+}
+
+.aria-avatar canvas {
+    display: block;
+    outline: none
+}
+
+.avatar-loading,
+.avatar-unavailable {
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    text-align: center;
+    color: #baab97;
+    font: 10px/1.8 var(--font-mono);
+    letter-spacing: 1px
+}
+
+.avatar-loading span {
+    width: 26px;
+    height: 26px;
+    border: 1px solid #806044;
+    border-top-color: #edb480;
+    border-radius: 50%;
+    margin-top: 20px;
+    animation: spin 1s linear infinite
+}
+
+.stage-editorial {
+    position: absolute;
+    left: 3%;
+    top: 90px;
+    width: 27%;
+    pointer-events: none;
+    z-index: 2
+}
+
+.interview-page .eyebrow {
+    font: 9px/1.5 var(--font-mono);
+    letter-spacing: 1.35px;
+    color: #a6a39e
+}
+
+.stage-editorial .eyebrow {
+    display: flex;
+    align-items: center;
+    gap: 9px;
+    white-space: nowrap;
+    font-size: 8px
+}
+
+.stage-editorial .eyebrow i {
+    width: 5px;
+    height: 5px;
+    border-radius: 50%;
+    background: #ff7a20;
+    box-shadow: 0 0 14px #ff7a2055
+}
+
+.stage-editorial h1 {
+    font-size: clamp(29px, 3vw, 45px);
+    line-height: 1.15;
+    font-weight: 450;
+    letter-spacing: -1.6px;
+    margin: 23px 0 20px
+}
+
+.stage-editorial h1 em {
+    font: italic 1.15em/1.05 var(--font-serif);
+    color: #cfb59c;
+    letter-spacing: -.8px
+}
+
+.stage-editorial p {
+    font-size: 11px;
+    line-height: 1.8;
+    color: #94948f
+}
+
+.stage-session-note {
+    display: block;
+    margin-top: 43px;
+    color: #70716e;
+    font: 8px var(--font-mono);
+    letter-spacing: 1.4px
+}
+
+.stage-session-details {
+    position: absolute;
+    top: 107px;
+    right: 3%;
+    width: 20%;
+    max-width: 230px;
+    z-index: 2
+}
+
+.stage-session-details>.eyebrow {
+    margin-bottom: 23px;
+    font-size: 8px
+}
+
+.stage-session-details>div {
+    display: flex;
+    gap: 14px;
+    padding: 12px 0;
+    border-bottom: 1px solid #ffffff0e
+}
+
+.stage-session-details>div>span {
+    color: #777975;
+    font: 9px/1.8 var(--font-mono)
+}
+
+.stage-session-details p {
+    color: #d4d3cd;
+    font-size: 11px;
+    line-height: 1.5
+}
+
+.stage-session-details small {
+    display: block;
+    color: #91928b;
+    font-size: 9px;
+    margin-top: 4px
+}
+
+.stage-privacy {
+    display: flex;
+    align-items: center;
+    gap: 7px;
+    color: #93958a;
+    font-size: 9px;
+    margin-top: 25px
+}
+
+.stage-privacy svg {
+    flex-shrink: 0;
+    color: #a69c8d
+}
+
+.presenter-identity {
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+    bottom: -90px;
+    display: flex;
+    align-items: center;
+    gap: 9px;
+    white-space: nowrap;
+    font-size: 10px;
+    color: #94958e;
+    z-index: 10;
+    background: #08090b;
+    padding: 8px 16px;
+    border-radius: 20px;
+    border: 1px solid #ffffff1a;
+    box-shadow: 0 4px 20px rgba(0,0,0,0.5);
+}
+
+.presenter-identity strong {
+    font-size: 13px;
+    color: #eeeee7;
+    font-weight: 600
+}
+
+.presenter-identity>i {
+    width: 1px;
+    height: 11px;
+    background: #ffffff20;
+    margin: 0 2px
+}
+
+.presenter-identity small {
+    font-size: 9px;
+    color: #beb9ab
+}
+
+.presence-dot,
+.footer-dot {
+    display: inline-block;
+    height: 5px;
+    width: 5px;
+    border-radius: 50%;
+    background: #b5c8a7;
+    box-shadow: 0 0 8px #b5c8a722
+}
+
+.presence-dot.is-speaking {
+    background: #ff9b55
+}
+
+.stage-coordinate {
+    position: absolute;
+    left: 3%;
+    bottom: 9px;
+    font: 7px var(--font-mono);
+    letter-spacing: 1.4px;
+    color: #70736c
+}
+
+.conversation-bar {
+    max-width: 780px;
+    margin: 20px auto 0;
+    display: flex;
+    align-items: center;
+    gap: 17px;
+    min-height: 68px;
+    padding: 17px 20px;
+    border: 1px solid #ffffff13;
+    border-radius: 10px;
+    background: linear-gradient(110deg, #18181788, #111211bb)
+}
+
+.conversation-bar p {
+    flex: 1;
+    font-size: 12px;
+    line-height: 1.8;
+    color: #c6c5be;
+    margin: 0
+}
+
+.speech-wave {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 3px;
+    width: 23px;
+    height: 26px;
+    flex-shrink: 0
+}
+
+.speech-wave i {
+    height: 5px;
+    width: 2px;
+    border-radius: 2px;
+    background: #cc9b70
+}
+
+.speech-wave i:nth-child(2n) {
+    height: 11px
+}
+
+.speech-wave i:nth-child(3) {
+    height: 18px
+}
+
+.speech-wave.is-speaking i {
+    animation: voice-wave .4s alternate infinite ease-in-out
+}
+
+.speech-controls {
+    display: flex;
+    gap: 3px
+}
+
+.speech-controls button {
+    width: 31px;
+    height: 31px;
+    border-radius: 50%;
+    border: 1px solid #ffffff13;
+    background: #ffffff03;
+    color: #b2b1a9;
+    display: grid;
+    place-items: center
+}
+
+.speech-controls button:hover {
+    color: #fff;
+    border-color: #ffffff40
+}
+
+.interview-console {
+    display: block;
+    width: min(780px, 100%);
+    min-height: 0;
+    margin: 27px auto 0;
+    padding: 0;
+    position: relative;
+    background: none
+}
+
+.console-panel {
+    width: 100%;
+    max-width: none;
+    animation: panel-enter .5s ease both
+}
+
+.console-panel>h1 {
+    font-family: var(--font-sans);
+    font-size: 29px;
+    font-weight: 500;
+    letter-spacing: -1px;
+    line-height: 1.2;
+    margin: 8px 0 14px
+}
+
+.panel-heading {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 20px
+}
+
+.panel-heading h1 {
+    font-size: 26px;
+    font-weight: 500;
+    letter-spacing: -1px;
+    margin: 7px 0
+}
+
+.panel-heading .eyebrow {
+    font-size: 8px;
+    color: #a38e78
+}
+
+.panel-step {
+    font: 8px var(--font-mono);
+    color: #858880;
+    letter-spacing: 1.2px;
+    white-space: nowrap
+}
+
+.console-lede {
+    color: #a3a59e;
+    font-size: 12px;
+    line-height: 1.8;
+    margin: 0 0 22px;
+    max-width: 690px
+}
+
+.resume-dropzone {
+    min-height: 100px;
+    padding: 23px 25px;
+    border: 1px dashed #ffffff32;
+    border-radius: 9px;
+    background: #ffffff02;
+    gap: 18px
+}
+
+.resume-dropzone:hover,
+.resume-dropzone.drag-over {
+    background: #ff7a2006;
+    border-color: #c38956
+}
+
+.resume-dropzone.has-file {
+    border-style: solid;
+    border-color: #937457
+}
+
+.resume-dropzone:focus-within {
+    outline: 2px solid #ff9b55;
+    outline-offset: 4px
+}
+
+.resume-dropzone>svg {
+    box-sizing: content-box;
+    padding: 12px;
+    color: #b7a893;
+    background: #ffffff05;
+    border: 1px solid #ffffff0d;
+    border-radius: 10px;
+    width: 22px;
+    height: 22px;
+    flex-shrink: 0
+}
+
+.resume-dropzone>div {
+    flex: 1;
+    min-width: 0
+}
+
+.resume-dropzone strong {
+    color: #d7d8d0;
+    font-size: 13px;
+    font-weight: 500;
+    overflow-wrap: anywhere
+}
+
+.resume-dropzone span {
+    font-size: 10px;
+    color: #92958d
+}
+
+.resume-dropzone b,
+.resume-dropzone button {
+    font-size: 10px;
+    color: #c3b9ab;
+    font-weight: 500;
+    border: 1px solid #ffffff24;
+    background: #ffffff03;
+    padding: 8px 14px;
+    border-radius: 5px
+}
+
+.resume-footer {
+    display: flex;
+    justify-content: space-between;
+    gap: 15px;
+    align-items: center;
+    margin-top: 12px
+}
+
+.paste-toggle {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    padding: 0;
+    margin: 0;
+    color: #adae9f;
+    border: 0;
+    background: transparent;
+    font-size: 10px
+}
+
+.resume-footer>span {
+    display: flex;
+    align-items: center;
+    gap: 5px;
+    font-size: 9px;
+    color: #93968a
+}
+
+.resume-continue {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 20px;
+    margin-top: 24px
+}
+
+.resume-continue>span {
+    font-size: 10px;
+    line-height: 1.7;
+    color: #969a8e
+}
+
+.resume-continue strong {
+    color: #b3b5ab;
+    font-weight: 500
+}
+
+.resume-paste {
+    margin-top: 16px
+}
+
+.interview-primary {
+    background: #f58c45;
+    color: #221305;
+    border: 1px solid #f58c45;
+    box-shadow: 0 3px 18px #ff7a200c;
+    border-radius: 6px;
+    padding: 12px 19px;
+    font-size: 11px;
+    font-weight: 600
+}
+
+.interview-primary:hover:not(:disabled) {
+    background: #ffa766;
+    border-color: #ffa766
+}
+
+.interview-primary:disabled {
+    background: #493121;
+    border-color: #63452d;
+    color: #b89c80;
+    opacity: .7
+}
+
+.interview-secondary {
+    background: transparent;
+    border: 1px solid #ffffff24;
+    color: #c4c7ba;
+    border-radius: 6px;
+    padding: 12px 19px;
+    font-size: 11px
+}
+
+.interview-secondary:hover:not(:disabled) {
+    background: #ffffff06
+}
+
+.interview-page textarea {
+    color: #e3e4dc;
+    background: #111311;
+    border-color: #ffffff24;
+    font-size: 12px;
+    line-height: 1.8
+}
+
+.interview-page textarea::placeholder,
+.interview-page input::placeholder {
+    color: #93998a
+}
+
+.interview-error {
+    position: relative;
+    inset: auto;
+    max-width: none;
+    width: 100%;
+    margin: 0 0 20px;
+    background: #3c201740;
+    border-color: #c67c6855;
+    color: #e1b3a4
+}
+
+.connection-recovery {
+    text-align: center;
+    padding: 35px 0
+}
+
+.connection-recovery h2 {
+    font-weight: 500
+}
+
+.connection-recovery p {
+    color: #9da393;
+    margin: 15px 0 20px;
+    font-size: 12px
+}
+
+.console-loading {
+    padding: 30px;
+    display: flex;
+    justify-content: center;
+    gap: 14px;
+    color: #a6ac9d;
+    font-size: 12px
+}
+
+.room-footer {
+    margin: 34px auto 0;
+    padding-top: 20px;
+    max-width: 1160px;
+    border-top: 1px solid #ffffff0d;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 16px;
+    color: #95998d
+}
+
+.room-footer>span {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    font: 8px var(--font-mono);
+    letter-spacing: 1px
+}
+
+.room-footer button {
+    display: flex;
+    align-items: center;
+    gap: 7px;
+    font-size: 10px;
+    color: #a3aa98;
+    border: 0;
+    background: none
+}
+
+.footer-dot {
+    width: 4px;
+    height: 4px
+}
+
+.practice-notice {
+    text-align: center;
+    color: #a0a494;
+    font-size: 10px;
+    margin: 15px auto 0;
+    max-width: 760px
+}
+
+.connection-panel {
+    max-width: 780px;
+    margin: 25px auto 0;
+    padding: 24px;
+    border: 1px solid #ffffff1d;
+    border-radius: 9px;
+    background: #11130f
+}
+
+.connection-panel>div {
+    display: flex;
+    justify-content: space-between
+}
+
+.connection-panel h2 {
+    font-size: 17px
+}
+
+.connection-panel>div button {
+    background: transparent;
+    color: #b2baaa;
+    border: 0
+}
+
+.connection-panel p {
+    color: #a7af9e;
+    font-size: 12px;
+    margin: 14px 0
+}
+
+.connection-panel dl {
+    display: grid;
+    grid-template-columns: 100px 1fr;
+    gap: 7px;
+    color: #bbc4b1;
+    font-size: 11px
+}
+
+.connection-panel dt {
+    color: #9ca990
+}
+
+.connection-panel dd {
+    overflow-wrap: anywhere
+}
+
+.connection-panel>code {
+    display: block;
+    padding: 12px;
+    background: #050803;
+    color: #d1bc9e;
+    font-size: 11px;
+    margin-bottom: 16px
+}
+
+.connection-panel>small {
+    display: block;
+    margin-top: 20px;
+    font-size: 10px;
+    color: #a1ad95
+}
+
+.voice-notice {
+    max-width: 780px;
+    margin: 8px auto;
+    font-size: 11px;
+    color: #d1b699
+}
+
+.profile-groups {
+    max-height: none;
+    overflow: visible;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 20px
+}
+
+.profile-group {
+    min-width: 0
+}
+
+.claim-card {
+    background: #ffffff02;
+    border-color: #ffffff19
+}
+
+.claim-edit input {
+    background: transparent;
+    color: #dfdfd5;
+    border-color: #ffffff20
+}
+
+.confirm-all-claims {
+    color: #d5d9c9;
+    background: #ffffff04;
+    border-color: #ffffff24
+}
+
+.claim-card input[type=checkbox] {
+    accent-color: #f58c45
+}
+
+.claim-card blockquote {
+    color: #a6a79b
+}
+
+.claim-card label {
+    color: #b3bb9f
+}
+
+.github-input {
+    background: #ffffff03;
+    border-color: #ffffff25
+}
+
+.github-input button {
+    background: #2c2920;
+    color: #dfc7a4;
+    border-color: #61513a
+}
+
+.repo-picker>button.selected {
+    background: #ff7a2006
+}
+
+.selected .repo-check {
+    border-color: #c39465;
+    background: #725136
+}
+
+.domain-grid button.selected {
+    background: #bb702d0c;
+    border-color: #cd98677f;
+    box-shadow: none
+}
+
+.domain-grid button>i {
+    background: #25241f;
+    color: #c0b9a8
+}
+
+.domain-grid p {
+    color: #a1a296
+}
+
+.evidence-legend {
+    color: #9eaa86
+}
+
+.inspected-evidence {
+    font-size: 11px;
+    color: #afb99b;
+    padding: 15px;
+    background: #ffffff03;
+    margin-bottom: 22px;
+    border: 1px solid #ffffff10;
+    border-radius: 5px
+}
+
+.inspected-evidence summary {
+    cursor: pointer
+}
+
+.inspected-evidence p {
+    margin-top: 8px;
+    overflow-wrap: anywhere;
+    font-size: 10px
+}
+
+.question-panel h1.question-text {
+    font-family: var(--font-sans);
+    font-size: clamp(23px, 2.3vw, 32px) !important;
+    line-height: 1.35 !important;
+    font-weight: 500
+}
+
+.question-meta span:first-child {
+    color: #d4ae83;
+    border-color: #bc8a5244
+}
+
+.question-source {
+    border-left-color: #7a6d4c;
+    background: #ffffff03
+}
+
+.question-source span {
+    color: #c5ac7e
+}
+
+.question-source p {
+    color: #a6ae94
+}
+
+.answer-composer {
+    background: #ffffff02;
+    border-color: #ffffff25
+}
+
+.answer-composer textarea {
+    background: transparent
+}
+
+.composer-footer {
+    border-color: #ffffff14
+}
+
+.composer-footer span {
+    color: #9baa85
+}
+
+.voice-button {
+    color: #b1bea0
+}
+
+.send-answer {
+    background: #ef954f;
+    color: #281609;
+    border-color: #ef954f
+}
+
+.question-actions button {
+    color: #a6b592
+}
+
+.dictation-note {
+    font-size: 9px;
+    color: #9ba98b;
+    margin-top: 10px
+}
+
+.completed-panel {
+    padding: 20px 0
+}
+
+@keyframes voice-wave {
+    to {
+        height: 4px
+    }
+}
+
+@keyframes panel-enter {
+    from {
+        opacity: 0;
+        transform: translateY(8px)
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0)
+    }
+}
+
+@media(min-width:1000px) and (max-height:850px) {
+    .presenter-stage {
+        height: 397px
+    }
+
+    .presenter-canvas {
+        height: 415px;
+        top: -15px
+    }
+
+    .stage-editorial {
+        top: 56px
+    }
+
+    .stage-editorial h1 {
+        font-size: 37px
+    }
+
+    .stage-session-note {
+        margin-top: 24px
+    }
+
+    .stage-session-details {
+        top: 62px
+    }
+
+    .presenter-identity {
+        bottom: 6px
+    }
+
+    .conversation-bar {
+        margin-top: 14px
+    }
+
+    .interview-topbar {
+        height: 68px
+    }
+}
+
+@media(min-width:1700px) {
+    .presenter-canvas {
+        width: 710px;
+        height: 550px
+    }
+
+    .presenter-stage {
+        height: 540px
+    }
+
+    .stage-editorial {
+        top: 112px
+    }
+}
+
+@media(max-width:1200px) {
+
+    .wordmark-divider,
+    .interview-wordmark small {
+        display: none
+    }
+
+    .interview-steps {
+        gap: 15px
+    }
+
+    .stage-editorial {
+        left: 0
+    }
+
+    .stage-editorial h1 {
+        font-size: 34px
+    }
+
+    .stage-session-details {
+        right: 0
+    }
+
+    .stage-coordinate {
+        left: 0
+    }
+
+    .stage-privacy {
+        font-size: 8px
+    }
+}
+
+@media(max-width:950px) {
+    .interview-topbar {
+        padding: 0 25px;
+        height: 70px
+    }
+
+    .interview-steps {
+        gap: 11px
+    }
+
+    .interview-steps i {
+        width: 17px;
+        height: 17px;
+        font-size: 8px
+    }
+
+    .interview-steps>div {
+        gap: 5px;
+        font-size: 9px
+    }
+
+    .stage-editorial h1 {
+        font-size: 27px
+    }
+
+    .stage-editorial .eyebrow {
+        font-size: 7px;
+        letter-spacing: 1px
+    }
+
+    .stage-editorial p {
+        font-size: 10px
+    }
+
+    .stage-session-details {
+        width: 20%
+    }
+
+    .stage-session-details p {
+        font-size: 10px
+    }
+
+    .stage-session-details small {
+        font-size: 8px
+    }
+
+    .stage-session-details>div {
+        gap: 8px
+    }
+
+    .stage-privacy {
+        line-height: 1.7
+    }
+
+    .stage-coordinate {
+        display: none
+    }
+
+    .presenter-canvas {
+        width: 58vw
+    }
+
+    .interview-room {
+        padding-inline: 25px
+    }
+}
+
+@media(max-width:720px) {
+    .interview-topbar {
+        height: 62px;
+        padding: 0 20px
+    }
+
+    .interview-wordmark {
+        font-size: 15px
+    }
+
+    .interview-history-link {
+        font-size: 10px
+    }
+
+    .interview-steps {
+        display: flex;
+        position: absolute;
+        top: 76px;
+        left: 50%;
+        transform: translateX(-50%);
+        white-space: nowrap;
+        z-index: 5
+    }
+
+    .interview-room {
+        padding: 0 20px 22px
+    }
+
+    .presenter-stage {
+        height: 458px
+    }
+
+    .stage-editorial {
+        top: 66px;
+        left: 0;
+        width: 100%;
+        text-align: center
+    }
+
+    .stage-editorial .eyebrow,
+    .stage-editorial p,
+    .stage-session-note,
+    .stage-session-details {
+        display: none
+    }
+
+    .stage-editorial h1 {
+        font: 400 27px var(--font-serif);
+        letter-spacing: -.2px;
+        margin: 0
+    }
+
+    .stage-editorial h1 br {
+        display: none
+    }
+
+    .stage-editorial h1 em {
+        display: block;
+        margin-top: 2px;
+        font-size: 1.06em
+    }
+
+    .presenter-canvas {
+        width: min(600px, 110vw);
+        height: 370px;
+        top: 91px
+    }
+
+    .presenter-identity {
+        bottom: -2px;
+        font-size: 9px;
+        gap: 7px
+    }
+
+    .presenter-identity small {
+        font-size: 8px
+    }
+
+    .presenter-identity>span:not(.presence-dot) {
+        display: none
+    }
+
+    .conversation-bar {
+        margin-top: 24px;
+        gap: 12px;
+        padding: 14px
+    }
+
+    .conversation-bar p {
+        font-size: 11px
+    }
+
+    .speech-controls {
+        flex-direction: column
+    }
+
+    .speech-controls button {
+        width: 26px;
+        height: 26px
+    }
+
+    .interview-console {
+        margin-top: 26px;
+        padding: 0;
+        min-height: 0
+    }
+
+    .panel-heading h1 {
+        font-size: 24px
+    }
+
+    .panel-step {
+        display: none
+    }
+
+    .resume-dropzone {
+        padding: 20px 15px;
+        gap: 12px
+    }
+
+    .resume-dropzone>svg {
+        padding: 10px;
+        width: 18px;
+        height: 18px
+    }
+
+    .resume-dropzone strong {
+        font-size: 11px
+    }
+
+    .resume-dropzone b {
+        font-size: 9px;
+        padding: 7px 10px
+    }
+
+    .resume-footer>span {
+        display: none
+    }
+
+    .profile-groups {
+        grid-template-columns: 1fr
+    }
+
+    .room-footer {
+        flex-wrap: wrap;
+        gap: 16px
+    }
+
+    .room-footer>span:last-child {
+        display: none
+    }
+
+    .practice-notice {
+        font-size: 9px;
+        line-height: 1.8
+    }
+
+    .domain-grid {
+        grid-template-columns: 1fr
+    }
+
+    .github-actions {
+        flex-wrap: wrap
+    }
+
+    .github-input {
+        display: flex;
+        flex-wrap: wrap
+    }
+
+    .github-input input {
+        flex-basis: 65%;
+        flex-grow: 1
+    }
+
+    .github-input button {
+        margin-left: auto
+    }
+
+    .connection-panel dl {
+        grid-template-columns: 72px 1fr
+    }
+}
+
+@media(max-width:430px) {
+    .interview-room {
+        padding-inline: 16px
+    }
+
+    .interview-steps {
+        gap: 9px
+    }
+
+    .interview-steps>div {
+        font-size: 8px
+    }
+
+    .interview-steps i {
+        display: none
+    }
+
+    .interview-steps .active {
+        border-bottom: 1px solid #df9b5d;
+        padding-bottom: 4px
+    }
+
+    .presenter-stage {
+        height: 430px
+    }
+
+    .stage-editorial {
+        top: 59px
+    }
+
+    .presenter-canvas {
+        top: 83px;
+        height: 345px
+    }
+
+    .resume-dropzone b {
+        display: none
+    }
+
+    .resume-continue>span {
+        font-size: 9px
+    }
+
+    .interview-primary {
+        padding: 11px 14px;
+        font-size: 10px;
+        gap: 8px
+    }
+
+    .composer-footer span {
+        display: none
+    }
+
+    .speech-wave {
+        display: none
+    }
+}
+
+@media(prefers-reduced-motion:reduce) {
+
+    .interview-page *,
+    .interview-page *::before,
+    .interview-page *::after {
+        animation: none !important;
+        transition: none !important
+    }
+}
+
+@media print {
+
+    .interview-topbar,
+    .presenter-stage,
+    .conversation-bar,
+    .room-footer,
+    .practice-notice,
+    .completed-actions,
+    .connection-panel,
+    .voice-notice {
+        display: none !important
+    }
+
+    .interview-page,
+    .interview-room,
+    .interview-console {
+        background: white;
+        color: #111;
+        padding: 0;
+        max-width: none;
+        width: 100%
+    }
+
+    .interview-report {
+        color: #111
+    }
+
+    .report-section {
+        break-inside: avoid
+    }
+
+    .report-section p,
+    .report-hero p {
+        color: #333
+    }
+}
+
+.interview-room {
+    background: none;
+}
+
+.speech-controls button:first-child {
+    width: auto;
+    min-width: 78px;
+    display: flex;
+    gap: 6px;
+    padding: 0 10px;
+    border-radius: 16px;
+    font-size: 10px
+}
+
+.speech-controls {
+    flex-shrink: 0
+}
+
+.operation-status {
+    display: flex;
+    align-items: center;
+    gap: 9px;
+    padding: 12px 14px;
+    margin-bottom: 18px;
+    color: #d0b899;
+    background: #ff7a2008;
+    border: 1px solid #ff7a201f;
+    border-radius: 6px;
+    font-size: 11px;
+}
+
+.interview-page {
+    --color-text: #f4f4f0;
+    --color-text-secondary: #a09f9c;
+    --color-text-tertiary: #909487;
+    --color-canvas: #111214;
+    --color-border: #ffffff20;
+    --color-border-light: #ffffff14;
+}

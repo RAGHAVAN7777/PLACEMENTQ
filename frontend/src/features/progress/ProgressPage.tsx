@@ -4,9 +4,19 @@ import { FEATURE_DEFINITIONS } from '../../config';
 import EmptyWorkspace from '../../components/ui/EmptyWorkspace';
 import { TrendingUp, Clock, BarChart3 } from 'lucide-react';
 import './ProgressPage.css';
+import { useInterviewWorkspace, InterviewWorkspaceStatus } from '../../services/InterviewWorkspace';
+import { Link } from 'react-router-dom';
 
 export default function ProgressPage() {
-  const assessments = useStore((s) => s.assessments);
+  const { reports, report, loading, error } = useInterviewWorkspace();
+  if (loading || error) return <InterviewWorkspaceStatus />;
+  if (!report) return <NumericProgressPage />;
+  return <div className="progress-page"><section className="result-paper"><span className="workspace-kicker">YOUR INTERVIEW JOURNEY</span><div className="result-section-heading"><h2>Every conversation is a new step.</h2><Link to="/assessment?new=1">Start reassessment</Link></div><div className="table-container"><table className="interview-history-table"><thead><tr><th>Date</th><th>Starting domain</th><th>Interview score</th><th>Evidence</th></tr></thead><tbody>{reports.map((item)=><tr key={item.id}><td>{new Date(item.createdAt).toLocaleDateString()}</td><td>{item.selectedDomain}</td><td>{item.assessment.score}/100</td><td><Link to={`/app/interviews?report=${item.id}`}>View report</Link></td></tr>)}</tbody></table></div><p className="result-footnote">Your recorded scores, without sample profiles. Different question paths are not calibrated comparisons.</p></section>{report.comparison.length>0 && <section className="result-paper"><div className="result-section-heading"><h2>Since your last comparable interview</h2></div>{report.comparison.map((item)=><p className="comparison-row" key={item.skill}><span>{item.skill}</span><span>{item.previousScore ?? 'Not assessed'} → {item.currentScore ?? 'Not assessed'}</span><b>{item.change == null ? '—' : `${item.change>0?'+':''}${item.change}`}</b></p>)}</section>}</div>;
+}
+
+function NumericProgressPage() {
+  const storedAssessments = useStore((s) => s.assessments);
+  const assessments = useMemo(() => storedAssessments.filter((item) => !item.id.startsWith('sample-') && item.label !== 'Sample Profile'), [storedAssessments]);
   const tasks = useStore((s) => s.tasks);
 
   const taskStats = useMemo(() => ({

@@ -1,0 +1,197 @@
+{
+  "verifiedAt": "2026-10-04T00:58:12.896Z",
+  "fixture": "Fictional UI verification student; not a user assessment",
+  "completed": true,
+  "extractionMethod": "ollama-grounded-extraction",
+  "versions": {
+    "coordinator": "1.3.0",
+    "questionBank": "1.2.0",
+    "prompt": "1.3.0",
+    "scoring": "1.2.0"
+  },
+  "reportId": "report_2aaaa595-1eeb-4f05-8107-e7c01889e60b",
+  "assessment": {
+    "score": 88,
+    "totalPoints": 23,
+    "maxPoints": 26,
+    "skills": [
+      {
+        "skill": "Python",
+        "points": 7,
+        "maxPoints": 8,
+        "questions": 2,
+        "assessedAnswers": 2,
+        "reviewNeeded": true,
+        "score": 88,
+        "result": "assessed"
+      },
+      {
+        "skill": "Project explanation",
+        "points": 8,
+        "maxPoints": 10,
+        "questions": 2,
+        "assessedAnswers": 2,
+        "reviewNeeded": true,
+        "score": 80,
+        "result": "assessed"
+      },
+      {
+        "skill": "SQL",
+        "points": 8,
+        "maxPoints": 8,
+        "questions": 2,
+        "assessedAnswers": 2,
+        "reviewNeeded": false,
+        "score": 100,
+        "result": "assessed"
+      }
+    ],
+    "scoredQuestions": 6,
+    "recordedAttempts": 7
+  },
+  "answers": [
+    {
+      "bankId": "python_mutability_01",
+      "questionGroupId": "question_528ef1ab-6290-4d7f-baaf-705469daa605",
+      "points": 2,
+      "maxPoints": 4,
+      "method": "ollama-rubric-estimate",
+      "reviewNeeded": true
+    },
+    {
+      "bankId": "python_mutability_01",
+      "questionGroupId": "question_528ef1ab-6290-4d7f-baaf-705469daa605",
+      "points": 4,
+      "maxPoints": 4,
+      "method": "ollama-rubric-estimate",
+      "reviewNeeded": false
+    },
+    {
+      "bankId": "python_errors_02",
+      "questionGroupId": "question_4a93f245-a4f6-407e-a91d-d148fb7442fc",
+      "points": 3,
+      "maxPoints": 4,
+      "method": "ollama-rubric-estimate",
+      "reviewNeeded": true
+    },
+    {
+      "bankId": "project_decisions_01",
+      "questionGroupId": "question_500b266f-1607-4e76-b65b-b99927cb3cfe",
+      "points": 3,
+      "maxPoints": 5,
+      "method": "ollama-rubric-estimate",
+      "reviewNeeded": true
+    },
+    {
+      "bankId": "project_debugging_02",
+      "questionGroupId": "question_9fa8aa89-626c-4ea9-85bf-e07bf816eaf2",
+      "points": 5,
+      "maxPoints": 5,
+      "method": "ollama-rubric-estimate",
+      "reviewNeeded": false
+    },
+    {
+      "bankId": "sql_joins_01",
+      "questionGroupId": "question_567b06f8-438c-4358-81a9-4b8e1e7da80e",
+      "points": 4,
+      "maxPoints": 4,
+      "method": "ollama-rubric-estimate",
+      "reviewNeeded": false
+    },
+    {
+      "bankId": "sql_index_02",
+      "questionGroupId": "question_a7903094-b85b-449c-93cc-6cf530b83b37",
+      "points": 4,
+      "maxPoints": 4,
+      "method": "ollama-rubric-estimate",
+      "reviewNeeded": false
+    }
+  ],
+  "metrics": {
+    "profileExtraction": {
+      "wallMs": 7282,
+      "totalDurationNs": 7266155600,
+      "loadDurationNs": 9116900,
+      "evalDurationNs": 6870883000,
+      "evalCount": 126,
+      "promptEvalCount": 140,
+      "contextSize": 4096
+    },
+    "questionPlanning": {
+      "wallMs": 13111,
+      "totalDurationNs": 13104092900,
+      "loadDurationNs": 13469200,
+      "evalDurationNs": 12472502000,
+      "evalCount": 242,
+      "promptEvalCount": 506,
+      "contextSize": 4096
+    },
+    "grading_answer_eed3e966-6a42-43b7-bdfd-516cd7673951": {
+      "wallMs": 13353,
+      "totalDurationNs": 13344718600,
+      "loadDurationNs": 10891600,
+      "evalDurationNs": 12943295000,
+      "evalCount": 241,
+      "promptEvalCount": 479,
+      "contextSize": 4096
+    },
+    "grading_answer_1b005984-f86a-437f-a77d-afd2a5efa9d2": {
+      "wallMs": 11157,
+      "totalDurationNs": 11149685300,
+      "loadDurationNs": 7792200,
+      "evalDurationNs": 10645038000,
+      "evalCount": 191,
+      "promptEvalCount": 544,
+      "contextSize": 4096
+    },
+    "grading_answer_c2475102-c755-42ef-8e70-295cd1dbea14": {
+      "wallMs": 13075,
+      "totalDurationNs": 13067719800,
+      "loadDurationNs": 10530700,
+      "evalDurationNs": 12646339000,
+      "evalCount": 225,
+      "promptEvalCount": 528,
+      "contextSize": 4096
+    },
+    "grading_answer_54cef69b-745f-479c-8f16-f688aba0a2fc": {
+      "wallMs": 12525,
+      "totalDurationNs": 12518309400,
+      "loadDurationNs": 11105500,
+      "evalDurationNs": 12088022000,
+      "evalCount": 217,
+      "promptEvalCount": 536,
+      "contextSize": 4096
+    },
+    "grading_answer_3f1ca41e-c4da-4e4a-924e-89a5625eb9d1": {
+      "wallMs": 13521,
+      "totalDurationNs": 13512827300,
+      "loadDurationNs": 10290700,
+      "evalDurationNs": 13001488000,
+      "evalCount": 237,
+      "promptEvalCount": 559,
+      "contextSize": 4096
+    },
+    "grading_answer_de51bf25-de81-4321-86ab-d2a79c5c6ee1": {
+      "wallMs": 12520,
+      "totalDurationNs": 12508985900,
+      "loadDurationNs": 11120000,
+      "evalDurationNs": 11895779000,
+      "evalCount": 216,
+      "promptEvalCount": 501,
+      "contextSize": 4096
+    },
+    "grading_answer_d19b2abb-ecf5-4d19-8040-b24eda34d8aa": {
+      "wallMs": 14437,
+      "totalDurationNs": 14427756000,
+      "loadDurationNs": 9783700,
+      "evalDurationNs": 13808154000,
+      "evalCount": 248,
+      "promptEvalCount": 551,
+      "contextSize": 4096
+    }
+  },
+  "limitations": [
+    "Two answers were scored before the evidence-format retry fix and remain in this historical report with review flags. Their separate final-code recheck is in live-evidence-retry.json.",
+    "Repository step explicitly skipped; GitHub remains rate limited."
+  ]
+}

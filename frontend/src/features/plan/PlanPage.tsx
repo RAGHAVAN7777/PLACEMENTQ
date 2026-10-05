@@ -8,8 +8,11 @@ import {
   ChevronDown, ChevronUp, ListChecks
 } from 'lucide-react';
 import './PlanPage.css';
+import { useInterviewWorkspace } from '../../services/InterviewWorkspace';
 
 export default function PlanPage() {
+  const { report } = useInterviewWorkspace();
+  const hasTask = useStore((s) => s.hasTask);
   const latestAssessment = useStore((s) => s.getLatestAssessment());
   const tasks = useStore((s) => s.tasks);
   const addTask = useStore((s) => s.addTask);
@@ -89,6 +92,11 @@ export default function PlanPage() {
 
   return (
     <div className="plan-page">
+      {report && <section className="interview-plan-intro"><span className="workspace-kicker">FROM YOUR INTERVIEW</span><h2>Build on what you demonstrated.</h2><p>These recommendations come from the missing evidence in your saved {report.selectedDomain} interview.</p><div className="interview-plan-suggestions">{report.improvementTasks.map((task) => {
+        const feature = `interview:${report.id}`;
+        const added = hasTask(feature, task.title);
+        return <article key={task.id}><div><h3>{task.title}</h3><p>{task.action}</p></div><button className="btn btn-secondary" disabled={added} onClick={() => addTask({ title: task.title, rationale: task.action, priority: task.priority === 'high' ? 'high' : 'medium', effort: 'medium', feature, category: 'interview' })}>{added ? 'Added to plan' : 'Add to plan'}{added ? <Check size={14}/> : <Plus size={14}/>}</button></article>;
+      })}</div></section>}
       {/* Stats bar */}
       <div className="plan-stats">
         <div className="plan-stat">

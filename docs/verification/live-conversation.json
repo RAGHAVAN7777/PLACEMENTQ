@@ -1,0 +1,1108 @@
+{
+  "runAt": "2026-10-04T08:39:59.259Z",
+  "fixture": "Fictional student; each isolated branch uses one seeded base question plus one generated follow-up, then a real saved report. Production interviews use six base questions plus at most two follow-ups. All replies and grades are actual Ollama calls through the HTTP backend.",
+  "model": "qwen3:4b-instruct",
+  "context": 4096,
+  "paths": [
+    {
+      "name": "strong",
+      "sessionId": "session_d8fc538a-84c5-418c-b9db-d7bf4396c22b",
+      "turns": [
+        {
+          "question": "Explain the difference between mutable and immutable Python objects. Give one bug that shared mutable state can cause.",
+          "answer": "Lists and dictionaries are mutable: their contents can change in place. Strings, tuples and integers are immutable. Two names can reference the same list, so appending through one name changes what the other sees. A list used as a default argument is created once and reused across calls, leaking items between calls. I use None as the default and create a fresh list inside each call.",
+          "reply": {
+            "id": "turn_bccae321-fcf8-4255-bd99-52e3f1b768ab",
+            "role": "assistant",
+            "text": "You correctly identify shared mutable state in default arguments. How does copying a list differ from aliasing in this context?",
+            "reaction": "You correctly identify shared mutable state in default arguments.",
+            "questionId": "question_0652a8fa-375e-4a90-ba5d-4e459fa6a062",
+            "question": "How does copying a list differ from aliasing in this context?",
+            "kind": "clarify",
+            "model": "qwen3:4b-instruct",
+            "answerAnchor": "A list used as a default argument is created once and reused across calls, leaking items between calls.",
+            "createdAt": "2026-10-04T07:54:09.823Z"
+          },
+          "grade": {
+            "method": "ollama-rubric-estimate",
+            "evidenceValidationFailed": false,
+            "reviewNeeded": false,
+            "evidenceStatus": "assessed",
+            "uncertainty": "low",
+            "criteria": [
+              {
+                "criterionId": "definition",
+                "label": "Distinguishes mutation from rebinding",
+                "points": 1,
+                "maxPoints": 1,
+                "evidenceExcerpt": "Lists and dictionaries are mutable: their contents can change in place.",
+                "explanation": "Correctly distinguishes mutable (lists, dicts) and immutable (strings, tuples, ints) objects via in-place mutation."
+              },
+              {
+                "criterionId": "examples",
+                "label": "Gives valid mutable and immutable examples",
+                "points": 1,
+                "maxPoints": 1,
+                "evidenceExcerpt": "Strings, tuples and integers are immutable.",
+                "explanation": "Valid examples of mutable and immutable types are provided with correct types."
+              },
+              {
+                "criterionId": "bug",
+                "label": "Explains a shared-state bug",
+                "points": 2,
+                "maxPoints": 2,
+                "evidenceExcerpt": "Two names can reference the same list, so appending through one name changes what the other sees.",
+                "explanation": "Explains shared mutable state bug with list default argument leaking state across calls."
+              }
+            ],
+            "missingConcepts": [],
+            "explanation": "",
+            "rawPoints": 4,
+            "awardedPoints": 4,
+            "maxPoints": 4
+          },
+          "elapsedMs": 19332
+        },
+        {
+          "question": "How does copying a list differ from aliasing in this context?",
+          "answer": "Lists and dictionaries can be changed in place, while values such as strings, tuples, and integers cannot. If two names reference one mutable object, a change through one name is visible through the other; a mutable default argument can therefore leak state across calls. For example, a = [1]; b = a; b.append(2) makes a equal [1, 2], because both names reference the same list. A fresh list inside the function prevents sharing between calls.",
+          "reply": {
+            "id": "turn_89f3d016-5c6e-4b36-93b5-fb06a960588d",
+            "role": "assistant",
+            "text": "You correctly identify shared mutable state in default arguments.",
+            "reaction": "You correctly identify shared mutable state in default arguments.",
+            "questionId": null,
+            "question": null,
+            "kind": "confirm",
+            "model": "qwen3:4b-instruct",
+            "answerAnchor": "a mutable default argument can therefore leak state across calls.",
+            "createdAt": "2026-10-04T08:40:42.543Z"
+          },
+          "grade": {
+            "method": "ollama-rubric-estimate",
+            "evidenceValidationFailed": false,
+            "reviewNeeded": false,
+            "evidenceStatus": "assessed",
+            "uncertainty": "low",
+            "criteria": [
+              {
+                "criterionId": "definition",
+                "label": "Distinguishes mutation from rebinding",
+                "points": 1,
+                "maxPoints": 1,
+                "evidenceExcerpt": "Lists and dictionaries can be changed in place, while values such as strings, tuples, and integers cannot.",
+                "explanation": "Correctly distinguishes mutable vs immutable objects."
+              },
+              {
+                "criterionId": "examples",
+                "label": "Gives valid mutable and immutable examples",
+                "points": 1,
+                "maxPoints": 1,
+                "evidenceExcerpt": "append(2) makes a equal [1, 2], because both names reference the same list.",
+                "explanation": "Valid example of mutation through shared mutable state."
+              },
+              {
+                "criterionId": "bug",
+                "label": "Explains a shared-state bug",
+                "points": 2,
+                "maxPoints": 2,
+                "evidenceExcerpt": "a mutable default argument can therefore leak state across calls.",
+                "explanation": "Explains shared-state bug in mutable default arguments."
+              }
+            ],
+            "missingConcepts": [],
+            "explanation": "",
+            "rawPoints": 4,
+            "awardedPoints": 4,
+            "maxPoints": 4
+          },
+          "elapsedMs": 43287
+        }
+      ],
+      "report": {
+        "id": "report_1e285b0e-73b1-46df-bb34-c5e9927965e6",
+        "sessionId": "session_d8fc538a-84c5-418c-b9db-d7bf4396c22b",
+        "createdAt": "2026-10-04T08:40:42.551Z",
+        "selectedDomain": "Python",
+        "assessment": {
+          "score": 100,
+          "totalPoints": 4,
+          "maxPoints": 4,
+          "skills": [
+            {
+              "skill": "Python",
+              "points": 4,
+              "maxPoints": 4,
+              "questions": 1,
+              "assessedAnswers": 1,
+              "reviewNeeded": false,
+              "score": 100,
+              "result": "assessed"
+            }
+          ],
+          "scoredQuestions": 1,
+          "recordedAttempts": 2
+        },
+        "questions": [
+          {
+            "id": "answer_86ecf715-192e-431a-a785-232e13dc45b3",
+            "questionId": "python_mutability_01",
+            "questionGroupId": "python_mutability_01",
+            "bankId": "python_mutability_01",
+            "skill": "Python",
+            "question": "Explain the difference between mutable and immutable Python objects. Give one bug that shared mutable state can cause.",
+            "answer": "Lists and dictionaries are mutable: their contents can change in place. Strings, tuples and integers are immutable. Two names can reference the same list, so appending through one name changes what the other sees. A list used as a default argument is created once and reused across calls, leaking items between calls. I use None as the default and create a fresh list inside each call.",
+            "skipped": false,
+            "submittedAt": "2026-10-04T07:54:09.822Z",
+            "grade": {
+              "method": "ollama-rubric-estimate",
+              "evidenceValidationFailed": false,
+              "reviewNeeded": false,
+              "evidenceStatus": "assessed",
+              "uncertainty": "low",
+              "criteria": [
+                {
+                  "criterionId": "definition",
+                  "label": "Distinguishes mutation from rebinding",
+                  "points": 1,
+                  "maxPoints": 1,
+                  "evidenceExcerpt": "Lists and dictionaries are mutable: their contents can change in place.",
+                  "explanation": "Correctly distinguishes mutable (lists, dicts) and immutable (strings, tuples, ints) objects via in-place mutation."
+                },
+                {
+                  "criterionId": "examples",
+                  "label": "Gives valid mutable and immutable examples",
+                  "points": 1,
+                  "maxPoints": 1,
+                  "evidenceExcerpt": "Strings, tuples and integers are immutable.",
+                  "explanation": "Valid examples of mutable and immutable types are provided with correct types."
+                },
+                {
+                  "criterionId": "bug",
+                  "label": "Explains a shared-state bug",
+                  "points": 2,
+                  "maxPoints": 2,
+                  "evidenceExcerpt": "Two names can reference the same list, so appending through one name changes what the other sees.",
+                  "explanation": "Explains shared mutable state bug with list default argument leaking state across calls."
+                }
+              ],
+              "missingConcepts": [],
+              "explanation": "",
+              "rawPoints": 4,
+              "awardedPoints": 4,
+              "maxPoints": 4
+            },
+            "model": "qwen3:4b-instruct",
+            "acknowledgement": "You correctly identify shared mutable state in default arguments.",
+            "adaptation": {
+              "proposed": "follow_up",
+              "followUpQuestion": "How does copying a list differ from aliasing in this context?"
+            },
+            "promptVersion": "1.4.0",
+            "rubricVersion": "1.2.0",
+            "reply": {
+              "id": "turn_bccae321-fcf8-4255-bd99-52e3f1b768ab",
+              "role": "assistant",
+              "text": "You correctly identify shared mutable state in default arguments. How does copying a list differ from aliasing in this context?",
+              "reaction": "You correctly identify shared mutable state in default arguments.",
+              "questionId": "question_0652a8fa-375e-4a90-ba5d-4e459fa6a062",
+              "question": "How does copying a list differ from aliasing in this context?",
+              "kind": "clarify",
+              "model": "qwen3:4b-instruct",
+              "answerAnchor": "A list used as a default argument is created once and reused across calls, leaking items between calls.",
+              "createdAt": "2026-10-04T07:54:09.823Z"
+            }
+          },
+          {
+            "id": "answer_5e2fd42c-74b9-4f58-898f-3a1776e7d814",
+            "questionId": "question_0652a8fa-375e-4a90-ba5d-4e459fa6a062",
+            "questionGroupId": "python_mutability_01",
+            "bankId": "python_mutability_01",
+            "skill": "Python",
+            "question": "How does copying a list differ from aliasing in this context?",
+            "answer": "Lists and dictionaries can be changed in place, while values such as strings, tuples, and integers cannot. If two names reference one mutable object, a change through one name is visible through the other; a mutable default argument can therefore leak state across calls. For example, a = [1]; b = a; b.append(2) makes a equal [1, 2], because both names reference the same list. A fresh list inside the function prevents sharing between calls.",
+            "skipped": false,
+            "submittedAt": "2026-10-04T08:40:42.542Z",
+            "grade": {
+              "method": "ollama-rubric-estimate",
+              "evidenceValidationFailed": false,
+              "reviewNeeded": false,
+              "evidenceStatus": "assessed",
+              "uncertainty": "low",
+              "criteria": [
+                {
+                  "criterionId": "definition",
+                  "label": "Distinguishes mutation from rebinding",
+                  "points": 1,
+                  "maxPoints": 1,
+                  "evidenceExcerpt": "Lists and dictionaries can be changed in place, while values such as strings, tuples, and integers cannot.",
+                  "explanation": "Correctly distinguishes mutable vs immutable objects."
+                },
+                {
+                  "criterionId": "examples",
+                  "label": "Gives valid mutable and immutable examples",
+                  "points": 1,
+                  "maxPoints": 1,
+                  "evidenceExcerpt": "append(2) makes a equal [1, 2], because both names reference the same list.",
+                  "explanation": "Valid example of mutation through shared mutable state."
+                },
+                {
+                  "criterionId": "bug",
+                  "label": "Explains a shared-state bug",
+                  "points": 2,
+                  "maxPoints": 2,
+                  "evidenceExcerpt": "a mutable default argument can therefore leak state across calls.",
+                  "explanation": "Explains shared-state bug in mutable default arguments."
+                }
+              ],
+              "missingConcepts": [],
+              "explanation": "",
+              "rawPoints": 4,
+              "awardedPoints": 4,
+              "maxPoints": 4
+            },
+            "model": "qwen3:4b-instruct",
+            "acknowledgement": "You correctly identify shared mutable state in default arguments.",
+            "adaptation": {
+              "proposed": "advance",
+              "followUpQuestion": null
+            },
+            "promptVersion": "1.4.0",
+            "rubricVersion": "1.2.0",
+            "reply": {
+              "id": "turn_89f3d016-5c6e-4b36-93b5-fb06a960588d",
+              "role": "assistant",
+              "text": "You correctly identify shared mutable state in default arguments.",
+              "reaction": "You correctly identify shared mutable state in default arguments.",
+              "questionId": null,
+              "question": null,
+              "kind": "confirm",
+              "model": "qwen3:4b-instruct",
+              "answerAnchor": "a mutable default argument can therefore leak state across calls.",
+              "createdAt": "2026-10-04T08:40:42.543Z"
+            }
+          }
+        ],
+        "conversation": [
+          {
+            "id": "initial",
+            "role": "assistant",
+            "text": "Explain the difference between mutable and immutable Python objects. Give one bug that shared mutable state can cause.",
+            "kind": "question",
+            "questionId": "python_mutability_01"
+          },
+          {
+            "id": "answer_86ecf715-192e-431a-a785-232e13dc45b3",
+            "role": "student",
+            "text": "Lists and dictionaries are mutable: their contents can change in place. Strings, tuples and integers are immutable. Two names can reference the same list, so appending through one name changes what the other sees. A list used as a default argument is created once and reused across calls, leaking items between calls. I use None as the default and create a fresh list inside each call.",
+            "questionId": "python_mutability_01",
+            "kind": "answer",
+            "createdAt": "2026-10-04T07:54:09.822Z"
+          },
+          {
+            "id": "turn_bccae321-fcf8-4255-bd99-52e3f1b768ab",
+            "role": "assistant",
+            "text": "You correctly identify shared mutable state in default arguments. How does copying a list differ from aliasing in this context?",
+            "reaction": "You correctly identify shared mutable state in default arguments.",
+            "questionId": "question_0652a8fa-375e-4a90-ba5d-4e459fa6a062",
+            "question": "How does copying a list differ from aliasing in this context?",
+            "kind": "clarify",
+            "model": "qwen3:4b-instruct",
+            "answerAnchor": "A list used as a default argument is created once and reused across calls, leaking items between calls.",
+            "createdAt": "2026-10-04T07:54:09.823Z"
+          },
+          {
+            "id": "answer_5e2fd42c-74b9-4f58-898f-3a1776e7d814",
+            "role": "student",
+            "text": "Lists and dictionaries can be changed in place, while values such as strings, tuples, and integers cannot. If two names reference one mutable object, a change through one name is visible through the other; a mutable default argument can therefore leak state across calls. For example, a = [1]; b = a; b.append(2) makes a equal [1, 2], because both names reference the same list. A fresh list inside the function prevents sharing between calls.",
+            "questionId": "question_0652a8fa-375e-4a90-ba5d-4e459fa6a062",
+            "kind": "answer",
+            "createdAt": "2026-10-04T08:40:42.542Z"
+          },
+          {
+            "id": "turn_89f3d016-5c6e-4b36-93b5-fb06a960588d",
+            "role": "assistant",
+            "text": "You correctly identify shared mutable state in default arguments.",
+            "reaction": "You correctly identify shared mutable state in default arguments.",
+            "questionId": null,
+            "question": null,
+            "kind": "confirm",
+            "model": "qwen3:4b-instruct",
+            "answerAnchor": "a mutable default argument can therefore leak state across calls.",
+            "createdAt": "2026-10-04T08:40:42.543Z"
+          }
+        ],
+        "explainedConcepts": [
+          {
+            "skill": "Python",
+            "concept": "Explain the difference between mutable and immutable Python objects. Give one bug that shared mutable state can cause.",
+            "excerpt": "Lists and dictionaries are mutable: their contents can change in place. Strings, tuples and integers are immutable. Two names can reference the same list, so appending through one name changes what the other sees. A list used as a default argument is created o"
+          }
+        ],
+        "missingOrUncertainEvidence": [
+          "No major rubric gaps were detected in the bounded set; this does not establish unassessed skills."
+        ],
+        "improvementTasks": [
+          {
+            "id": "task_1",
+            "title": "Deepen assessed strengths",
+            "action": "Re-answer one assessed topic with a counterexample, trade-off, and verification method.",
+            "priority": "medium"
+          }
+        ],
+        "reassessmentTopics": [],
+        "comparison": [],
+        "evidenceProfile": {
+          "claimed": {
+            "skills": [],
+            "projects": [
+              {
+                "id": "fixture_project",
+                "value": "Placement tracker",
+                "sourcePassage": "I built a local Python and SQLite placement tracker.",
+                "confirmed": true
+              }
+            ],
+            "education": [],
+            "experience": [],
+            "strengths": []
+          },
+          "observed": [],
+          "assessed": [
+            {
+              "skill": "Python",
+              "points": 4,
+              "maxPoints": 4,
+              "questions": 1,
+              "assessedAnswers": 1,
+              "reviewNeeded": false,
+              "score": 100,
+              "result": "assessed"
+            }
+          ]
+        },
+        "provenance": {
+          "model": {
+            "requested": "qwen3:4b-instruct",
+            "used": "qwen3:4b-instruct",
+            "liveInference": true,
+            "lastStatus": {
+              "reachable": true,
+              "installed": true,
+              "ready": true,
+              "mode": "local-model",
+              "model": "qwen3:4b-instruct",
+              "endpoint": "http://localhost:11434",
+              "models": [
+                "qwen3:4b-instruct"
+              ],
+              "details": {
+                "capabilities": [
+                  "tools",
+                  "thinking",
+                  "completion"
+                ],
+                "family": "qwen3",
+                "parameterSize": "4.0B",
+                "quantization": "Q4_K_M"
+              },
+              "digest": "0edcdef34593eac1aa2be9c7d06c432dcf81945adca5eca2f27662c18f168ba0",
+              "settings": {
+                "contextSize": 4096,
+                "temperature": 0.1,
+                "thinking": false,
+                "maxConcurrentInference": 1
+              },
+              "setup": {
+                "check": "ollama list",
+                "pull": "ollama pull qwen3:4b-instruct",
+                "start": "ollama serve"
+              },
+              "message": "Local model is ready."
+            }
+          },
+          "versions": {
+            "coordinator": "1.4.0",
+            "questionBank": "1.2.0",
+            "prompt": "1.4.0",
+            "scoring": "1.2.0",
+            "conversation": "1.0.0"
+          },
+          "questionBankVersion": "1.2.0",
+          "aggregationPolicy": "Award concept-based partial credit in half-point steps; equivalent wording is valid and language style is not graded. A used hint caps that attempt at 70% of its maximum. A base question and its clarification share one rubric: count the strongest validated whole attempt once, so follow-ups do not add a scoring penalty. Skipped base questions receive zero and are marked insufficient evidence. The final percentage is 100 * total earned / total available across base questions. No score floor or placement guarantee is applied. Adaptive paths differ; these scores are preparation evidence, not calibrated rankings or placement probabilities.",
+          "questionSnapshots": [
+            {
+              "id": "python_mutability_01",
+              "skill": "Python",
+              "domain": "Python",
+              "difficulty": "foundation",
+              "prompt": "Explain the difference between mutable and immutable Python objects. Give one bug that shared mutable state can cause.",
+              "expectedConcepts": [
+                "mutation changes an existing object",
+                "immutable values require a new object",
+                "lists or dictionaries are mutable",
+                "aliasing or mutable defaults can share state"
+              ],
+              "referenceAnswer": "Lists and dictionaries can be changed in place, while values such as strings, tuples, and integers cannot. If two names reference one mutable object, a change through one name is visible through the other; a mutable default argument can therefore leak state across calls.",
+              "commonMisconceptions": [
+                "const variables make Python objects immutable",
+                "tuples can never contain mutable members"
+              ],
+              "maxPoints": 4,
+              "criteria": [
+                {
+                  "id": "definition",
+                  "label": "Distinguishes mutation from rebinding",
+                  "maxPoints": 1,
+                  "keywords": [
+                    "in place",
+                    "same object",
+                    "new object",
+                    "rebind"
+                  ]
+                },
+                {
+                  "id": "examples",
+                  "label": "Gives valid mutable and immutable examples",
+                  "maxPoints": 1,
+                  "keywords": [
+                    "list",
+                    "dict",
+                    "string",
+                    "tuple",
+                    "integer"
+                  ]
+                },
+                {
+                  "id": "bug",
+                  "label": "Explains a shared-state bug",
+                  "maxPoints": 2,
+                  "keywords": [
+                    "alias",
+                    "default argument",
+                    "shared",
+                    "across calls",
+                    "reference"
+                  ]
+                }
+              ],
+              "followUpCriteria": "If the answer is strong, ask how copying differs from aliasing; if shared state is vague, request a concrete function example.",
+              "hint": "Think about whether an operation changes an existing object identity or binds a name to a different object.",
+              "bankId": "python_mutability_01"
+            },
+            {
+              "id": "question_0652a8fa-375e-4a90-ba5d-4e459fa6a062",
+              "skill": "Python",
+              "domain": "Python",
+              "difficulty": "foundation",
+              "prompt": "How does copying a list differ from aliasing in this context?",
+              "expectedConcepts": [
+                "mutation changes an existing object",
+                "immutable values require a new object",
+                "lists or dictionaries are mutable",
+                "aliasing or mutable defaults can share state"
+              ],
+              "referenceAnswer": "Lists and dictionaries can be changed in place, while values such as strings, tuples, and integers cannot. If two names reference one mutable object, a change through one name is visible through the other; a mutable default argument can therefore leak state across calls.",
+              "commonMisconceptions": [
+                "const variables make Python objects immutable",
+                "tuples can never contain mutable members"
+              ],
+              "maxPoints": 4,
+              "criteria": [
+                {
+                  "id": "definition",
+                  "label": "Distinguishes mutation from rebinding",
+                  "maxPoints": 1,
+                  "keywords": [
+                    "in place",
+                    "same object",
+                    "new object",
+                    "rebind"
+                  ]
+                },
+                {
+                  "id": "examples",
+                  "label": "Gives valid mutable and immutable examples",
+                  "maxPoints": 1,
+                  "keywords": [
+                    "list",
+                    "dict",
+                    "string",
+                    "tuple",
+                    "integer"
+                  ]
+                },
+                {
+                  "id": "bug",
+                  "label": "Explains a shared-state bug",
+                  "maxPoints": 2,
+                  "keywords": [
+                    "alias",
+                    "default argument",
+                    "shared",
+                    "across calls",
+                    "reference"
+                  ]
+                }
+              ],
+              "followUpCriteria": "If the answer is strong, ask how copying differs from aliasing; if shared state is vague, request a concrete function example.",
+              "hint": "Think about whether an operation changes an existing object identity or binds a name to a different object.",
+              "bankId": "python_mutability_01",
+              "followUp": true,
+              "parentQuestionId": "python_mutability_01"
+            }
+          ]
+        },
+        "limitations": [
+          "This report covers only the skills and questions shown in this session.",
+          "Open-answer grading is an estimate and should be reviewed when the uncertainty flag is medium or high.",
+          "Repository contents do not prove authorship or proficiency.",
+          "Adaptive paths vary in difficulty; scores are not calibrated rankings and do not predict hiring outcomes."
+        ]
+      }
+    },
+    {
+      "name": "weak",
+      "sessionId": "session_38bc1320-3383-4cb6-b660-a1d169b5be5f",
+      "turns": [
+        {
+          "question": "Explain the difference between mutable and immutable Python objects. Give one bug that shared mutable state can cause.",
+          "answer": "I think mutable means I can assign another value to a variable. I use lists and strings but I am not sure what shared state means.",
+          "reply": {
+            "id": "turn_06357389-8c93-4c52-8ae8-546c44163d10",
+            "role": "assistant",
+            "text": "Correctly identifies variable assignment, but misses core mutation distinction. How would a function with a list default argument behave across calls if modified in one call?",
+            "reaction": "Correctly identifies variable assignment, but misses core mutation distinction.",
+            "questionId": "question_ead1b165-b126-4abc-b6f4-efcddd07858a",
+            "question": "How would a function with a list default argument behave across calls if modified in one call?",
+            "kind": "clarify",
+            "model": "qwen3:4b-instruct",
+            "answerAnchor": "I use lists and strings but I am not sure what shared state means.",
+            "createdAt": "2026-10-04T08:41:05.872Z"
+          },
+          "grade": {
+            "method": "ollama-rubric-estimate",
+            "evidenceValidationFailed": false,
+            "reviewNeeded": true,
+            "evidenceStatus": "assessed",
+            "uncertainty": "high",
+            "criteria": [],
+            "missingConcepts": [],
+            "explanation": "Your answer is saved. Detailed rubric feedback appears after the follow-up.",
+            "rawPoints": 0.5,
+            "awardedPoints": 0.5,
+            "maxPoints": 4
+          },
+          "elapsedMs": 23282
+        },
+        {
+          "question": "How would a function with a list default argument behave across calls if modified in one call?",
+          "answer": "Lists and dictionaries can be changed in place, while values such as strings, tuples, and integers cannot. If two names reference one mutable object, a change through one name is visible through the other; a mutable default argument can therefore leak state across calls. For example, a = [1]; b = a; b.append(2) makes a equal [1, 2], because both names reference the same list. A fresh list inside the function prevents sharing between calls.",
+          "reply": {
+            "id": "turn_f2f7e069-aa44-49c0-afab-8cc2bca8b7b5",
+            "role": "assistant",
+            "text": "You correctly explain how shared mutable state causes leakage across function calls.",
+            "reaction": "You correctly explain how shared mutable state causes leakage across function calls.",
+            "questionId": null,
+            "question": null,
+            "kind": "confirm",
+            "model": "qwen3:4b-instruct",
+            "answerAnchor": "a mutable default argument can therefore leak state across calls.",
+            "createdAt": "2026-10-04T08:41:56.544Z"
+          },
+          "grade": {
+            "method": "ollama-rubric-estimate",
+            "evidenceValidationFailed": false,
+            "reviewNeeded": false,
+            "evidenceStatus": "assessed",
+            "uncertainty": "low",
+            "criteria": [
+              {
+                "criterionId": "definition",
+                "label": "Distinguishes mutation from rebinding",
+                "points": 1,
+                "maxPoints": 1,
+                "evidenceExcerpt": "Lists and dictionaries can be changed in place, while values such as strings, tuples, and integers cannot.",
+                "explanation": "Correctly distinguishes mutation from rebinding via mutable vs immutable objects."
+              },
+              {
+                "criterionId": "examples",
+                "label": "Gives valid mutable and immutable examples",
+                "points": 1,
+                "maxPoints": 1,
+                "evidenceExcerpt": "append(2) makes a equal [1, 2], because both names reference the same list.",
+                "explanation": "Valid example shows mutation in shared mutable state across references."
+              },
+              {
+                "criterionId": "bug",
+                "label": "Explains a shared-state bug",
+                "points": 2,
+                "maxPoints": 2,
+                "evidenceExcerpt": "a mutable default argument can therefore leak state across calls.",
+                "explanation": "Clear explanation of shared-state bug in mutable default arguments."
+              }
+            ],
+            "missingConcepts": [],
+            "explanation": "All criteria met with clear, correct examples and explanations.",
+            "rawPoints": 4,
+            "awardedPoints": 4,
+            "maxPoints": 4
+          },
+          "elapsedMs": 50789
+        }
+      ],
+      "report": {
+        "id": "report_9931f8c2-c894-47b1-848b-c699514fead2",
+        "sessionId": "session_38bc1320-3383-4cb6-b660-a1d169b5be5f",
+        "createdAt": "2026-10-04T08:41:56.646Z",
+        "selectedDomain": "Python",
+        "assessment": {
+          "score": 100,
+          "totalPoints": 4,
+          "maxPoints": 4,
+          "skills": [
+            {
+              "skill": "Python",
+              "points": 4,
+              "maxPoints": 4,
+              "questions": 1,
+              "assessedAnswers": 1,
+              "reviewNeeded": false,
+              "score": 100,
+              "result": "assessed"
+            }
+          ],
+          "scoredQuestions": 1,
+          "recordedAttempts": 2
+        },
+        "questions": [
+          {
+            "id": "answer_602284a5-130f-4254-bc5e-f98a576187f1",
+            "questionId": "python_mutability_01",
+            "questionGroupId": "python_mutability_01",
+            "bankId": "python_mutability_01",
+            "skill": "Python",
+            "question": "Explain the difference between mutable and immutable Python objects. Give one bug that shared mutable state can cause.",
+            "answer": "I think mutable means I can assign another value to a variable. I use lists and strings but I am not sure what shared state means.",
+            "skipped": false,
+            "submittedAt": "2026-10-04T08:41:05.871Z",
+            "grade": {
+              "method": "ollama-rubric-estimate",
+              "evidenceValidationFailed": false,
+              "reviewNeeded": true,
+              "evidenceStatus": "assessed",
+              "uncertainty": "high",
+              "criteria": [
+                {
+                  "criterionId": "definition",
+                  "label": "Distinguishes mutation from rebinding",
+                  "points": 0.5,
+                  "maxPoints": 1,
+                  "evidenceExcerpt": "I think mutable means I can assign another value to a variable.",
+                  "explanation": "Partially correct: assigns value change to variable, but misses in-place mutation distinction."
+                },
+                {
+                  "criterionId": "examples",
+                  "label": "Gives valid mutable and immutable examples",
+                  "points": 0,
+                  "maxPoints": 1,
+                  "evidenceExcerpt": "I use lists and strings but I am not sure what shared state means.",
+                  "explanation": "Missing valid examples; strings and lists are mentioned but not clearly differentiated."
+                },
+                {
+                  "criterionId": "bug",
+                  "label": "Explains a shared-state bug",
+                  "points": 0,
+                  "maxPoints": 2,
+                  "evidenceExcerpt": "",
+                  "explanation": "No shared-state bug explained; 'shared state' undefined in answer."
+                }
+              ],
+              "missingConcepts": [
+                "shared mutable state",
+                "in-place mutation"
+              ],
+              "explanation": "Student confuses variable rebinding with mutation; fails to explain shared state or bugs.",
+              "rawPoints": 0.5,
+              "awardedPoints": 0.5,
+              "maxPoints": 4
+            },
+            "model": "qwen3:4b-instruct",
+            "acknowledgement": "Correctly identifies variable assignment, but misses core mutation distinction.",
+            "adaptation": {
+              "proposed": "follow_up",
+              "followUpQuestion": "How would a function with a list default argument behave across calls if modified in one call?"
+            },
+            "promptVersion": "1.4.0",
+            "rubricVersion": "1.2.0",
+            "reply": {
+              "id": "turn_06357389-8c93-4c52-8ae8-546c44163d10",
+              "role": "assistant",
+              "text": "Correctly identifies variable assignment, but misses core mutation distinction. How would a function with a list default argument behave across calls if modified in one call?",
+              "reaction": "Correctly identifies variable assignment, but misses core mutation distinction.",
+              "questionId": "question_ead1b165-b126-4abc-b6f4-efcddd07858a",
+              "question": "How would a function with a list default argument behave across calls if modified in one call?",
+              "kind": "clarify",
+              "model": "qwen3:4b-instruct",
+              "answerAnchor": "I use lists and strings but I am not sure what shared state means.",
+              "createdAt": "2026-10-04T08:41:05.872Z"
+            }
+          },
+          {
+            "id": "answer_5a3f3b29-f289-464c-a706-3e3645bd2378",
+            "questionId": "question_ead1b165-b126-4abc-b6f4-efcddd07858a",
+            "questionGroupId": "python_mutability_01",
+            "bankId": "python_mutability_01",
+            "skill": "Python",
+            "question": "How would a function with a list default argument behave across calls if modified in one call?",
+            "answer": "Lists and dictionaries can be changed in place, while values such as strings, tuples, and integers cannot. If two names reference one mutable object, a change through one name is visible through the other; a mutable default argument can therefore leak state across calls. For example, a = [1]; b = a; b.append(2) makes a equal [1, 2], because both names reference the same list. A fresh list inside the function prevents sharing between calls.",
+            "skipped": false,
+            "submittedAt": "2026-10-04T08:41:56.543Z",
+            "grade": {
+              "method": "ollama-rubric-estimate",
+              "evidenceValidationFailed": false,
+              "reviewNeeded": false,
+              "evidenceStatus": "assessed",
+              "uncertainty": "low",
+              "criteria": [
+                {
+                  "criterionId": "definition",
+                  "label": "Distinguishes mutation from rebinding",
+                  "points": 1,
+                  "maxPoints": 1,
+                  "evidenceExcerpt": "Lists and dictionaries can be changed in place, while values such as strings, tuples, and integers cannot.",
+                  "explanation": "Correctly distinguishes mutation from rebinding via mutable vs immutable objects."
+                },
+                {
+                  "criterionId": "examples",
+                  "label": "Gives valid mutable and immutable examples",
+                  "points": 1,
+                  "maxPoints": 1,
+                  "evidenceExcerpt": "append(2) makes a equal [1, 2], because both names reference the same list.",
+                  "explanation": "Valid example shows mutation in shared mutable state across references."
+                },
+                {
+                  "criterionId": "bug",
+                  "label": "Explains a shared-state bug",
+                  "points": 2,
+                  "maxPoints": 2,
+                  "evidenceExcerpt": "a mutable default argument can therefore leak state across calls.",
+                  "explanation": "Clear explanation of shared-state bug in mutable default arguments."
+                }
+              ],
+              "missingConcepts": [],
+              "explanation": "All criteria met with clear, correct examples and explanations.",
+              "rawPoints": 4,
+              "awardedPoints": 4,
+              "maxPoints": 4
+            },
+            "model": "qwen3:4b-instruct",
+            "acknowledgement": "You correctly explain how shared mutable state causes leakage across function calls.",
+            "adaptation": {
+              "proposed": "advance",
+              "followUpQuestion": null
+            },
+            "promptVersion": "1.4.0",
+            "rubricVersion": "1.2.0",
+            "reply": {
+              "id": "turn_f2f7e069-aa44-49c0-afab-8cc2bca8b7b5",
+              "role": "assistant",
+              "text": "You correctly explain how shared mutable state causes leakage across function calls.",
+              "reaction": "You correctly explain how shared mutable state causes leakage across function calls.",
+              "questionId": null,
+              "question": null,
+              "kind": "confirm",
+              "model": "qwen3:4b-instruct",
+              "answerAnchor": "a mutable default argument can therefore leak state across calls.",
+              "createdAt": "2026-10-04T08:41:56.544Z"
+            }
+          }
+        ],
+        "conversation": [
+          {
+            "id": "initial",
+            "role": "assistant",
+            "text": "Explain the difference between mutable and immutable Python objects. Give one bug that shared mutable state can cause.",
+            "kind": "question",
+            "questionId": "python_mutability_01"
+          },
+          {
+            "id": "answer_602284a5-130f-4254-bc5e-f98a576187f1",
+            "role": "student",
+            "text": "I think mutable means I can assign another value to a variable. I use lists and strings but I am not sure what shared state means.",
+            "questionId": "python_mutability_01",
+            "kind": "answer",
+            "createdAt": "2026-10-04T08:41:05.871Z"
+          },
+          {
+            "id": "turn_06357389-8c93-4c52-8ae8-546c44163d10",
+            "role": "assistant",
+            "text": "Correctly identifies variable assignment, but misses core mutation distinction. How would a function with a list default argument behave across calls if modified in one call?",
+            "reaction": "Correctly identifies variable assignment, but misses core mutation distinction.",
+            "questionId": "question_ead1b165-b126-4abc-b6f4-efcddd07858a",
+            "question": "How would a function with a list default argument behave across calls if modified in one call?",
+            "kind": "clarify",
+            "model": "qwen3:4b-instruct",
+            "answerAnchor": "I use lists and strings but I am not sure what shared state means.",
+            "createdAt": "2026-10-04T08:41:05.872Z"
+          },
+          {
+            "id": "answer_5a3f3b29-f289-464c-a706-3e3645bd2378",
+            "role": "student",
+            "text": "Lists and dictionaries can be changed in place, while values such as strings, tuples, and integers cannot. If two names reference one mutable object, a change through one name is visible through the other; a mutable default argument can therefore leak state across calls. For example, a = [1]; b = a; b.append(2) makes a equal [1, 2], because both names reference the same list. A fresh list inside the function prevents sharing between calls.",
+            "questionId": "question_ead1b165-b126-4abc-b6f4-efcddd07858a",
+            "kind": "answer",
+            "createdAt": "2026-10-04T08:41:56.543Z"
+          },
+          {
+            "id": "turn_f2f7e069-aa44-49c0-afab-8cc2bca8b7b5",
+            "role": "assistant",
+            "text": "You correctly explain how shared mutable state causes leakage across function calls.",
+            "reaction": "You correctly explain how shared mutable state causes leakage across function calls.",
+            "questionId": null,
+            "question": null,
+            "kind": "confirm",
+            "model": "qwen3:4b-instruct",
+            "answerAnchor": "a mutable default argument can therefore leak state across calls.",
+            "createdAt": "2026-10-04T08:41:56.544Z"
+          }
+        ],
+        "explainedConcepts": [
+          {
+            "skill": "Python",
+            "concept": "How would a function with a list default argument behave across calls if modified in one call?",
+            "excerpt": "Lists and dictionaries can be changed in place, while values such as strings, tuples, and integers cannot. If two names reference one mutable object, a change through one name is visible through the other; a mutable default argument can therefore leak state ac"
+          }
+        ],
+        "missingOrUncertainEvidence": [
+          "No major rubric gaps were detected in the bounded set; this does not establish unassessed skills."
+        ],
+        "improvementTasks": [
+          {
+            "id": "task_1",
+            "title": "Deepen assessed strengths",
+            "action": "Re-answer one assessed topic with a counterexample, trade-off, and verification method.",
+            "priority": "medium"
+          }
+        ],
+        "reassessmentTopics": [],
+        "comparison": [
+          {
+            "skill": "Python",
+            "previousScore": 100,
+            "currentScore": 100,
+            "change": 0
+          }
+        ],
+        "evidenceProfile": {
+          "claimed": {
+            "skills": [],
+            "projects": [
+              {
+                "id": "fixture_project",
+                "value": "Placement tracker",
+                "sourcePassage": "I built a local Python and SQLite placement tracker.",
+                "confirmed": true
+              }
+            ],
+            "education": [],
+            "experience": [],
+            "strengths": []
+          },
+          "observed": [],
+          "assessed": [
+            {
+              "skill": "Python",
+              "points": 4,
+              "maxPoints": 4,
+              "questions": 1,
+              "assessedAnswers": 1,
+              "reviewNeeded": false,
+              "score": 100,
+              "result": "assessed"
+            }
+          ]
+        },
+        "provenance": {
+          "model": {
+            "requested": "qwen3:4b-instruct",
+            "used": "qwen3:4b-instruct",
+            "liveInference": true,
+            "lastStatus": {
+              "reachable": true,
+              "installed": true,
+              "ready": true,
+              "mode": "local-model",
+              "model": "qwen3:4b-instruct",
+              "endpoint": "http://localhost:11434",
+              "models": [
+                "qwen3:4b-instruct"
+              ],
+              "details": {
+                "capabilities": [
+                  "tools",
+                  "thinking",
+                  "completion"
+                ],
+                "family": "qwen3",
+                "parameterSize": "4.0B",
+                "quantization": "Q4_K_M"
+              },
+              "digest": "0edcdef34593eac1aa2be9c7d06c432dcf81945adca5eca2f27662c18f168ba0",
+              "settings": {
+                "contextSize": 4096,
+                "temperature": 0.1,
+                "thinking": false,
+                "maxConcurrentInference": 1
+              },
+              "setup": {
+                "check": "ollama list",
+                "pull": "ollama pull qwen3:4b-instruct",
+                "start": "ollama serve"
+              },
+              "message": "Local model is ready."
+            }
+          },
+          "versions": {
+            "coordinator": "1.4.0",
+            "questionBank": "1.2.0",
+            "prompt": "1.4.0",
+            "scoring": "1.2.0",
+            "conversation": "1.0.0"
+          },
+          "questionBankVersion": "1.2.0",
+          "aggregationPolicy": "Award concept-based partial credit in half-point steps; equivalent wording is valid and language style is not graded. A used hint caps that attempt at 70% of its maximum. A base question and its clarification share one rubric: count the strongest validated whole attempt once, so follow-ups do not add a scoring penalty. Skipped base questions receive zero and are marked insufficient evidence. The final percentage is 100 * total earned / total available across base questions. No score floor or placement guarantee is applied. Adaptive paths differ; these scores are preparation evidence, not calibrated rankings or placement probabilities.",
+          "questionSnapshots": [
+            {
+              "id": "python_mutability_01",
+              "skill": "Python",
+              "domain": "Python",
+              "difficulty": "foundation",
+              "prompt": "Explain the difference between mutable and immutable Python objects. Give one bug that shared mutable state can cause.",
+              "expectedConcepts": [
+                "mutation changes an existing object",
+                "immutable values require a new object",
+                "lists or dictionaries are mutable",
+                "aliasing or mutable defaults can share state"
+              ],
+              "referenceAnswer": "Lists and dictionaries can be changed in place, while values such as strings, tuples, and integers cannot. If two names reference one mutable object, a change through one name is visible through the other; a mutable default argument can therefore leak state across calls.",
+              "commonMisconceptions": [
+                "const variables make Python objects immutable",
+                "tuples can never contain mutable members"
+              ],
+              "maxPoints": 4,
+              "criteria": [
+                {
+                  "id": "definition",
+                  "label": "Distinguishes mutation from rebinding",
+                  "maxPoints": 1,
+                  "keywords": [
+                    "in place",
+                    "same object",
+                    "new object",
+                    "rebind"
+                  ]
+                },
+                {
+                  "id": "examples",
+                  "label": "Gives valid mutable and immutable examples",
+                  "maxPoints": 1,
+                  "keywords": [
+                    "list",
+                    "dict",
+                    "string",
+                    "tuple",
+                    "integer"
+                  ]
+                },
+                {
+                  "id": "bug",
+                  "label": "Explains a shared-state bug",
+                  "maxPoints": 2,
+                  "keywords": [
+                    "alias",
+                    "default argument",
+                    "shared",
+                    "across calls",
+                    "reference"
+                  ]
+                }
+              ],
+              "followUpCriteria": "If the answer is strong, ask how copying differs from aliasing; if shared state is vague, request a concrete function example.",
+              "hint": "Think about whether an operation changes an existing object identity or binds a name to a different object.",
+              "bankId": "python_mutability_01"
+            },
+            {
+              "id": "question_ead1b165-b126-4abc-b6f4-efcddd07858a",
+              "skill": "Python",
+              "domain": "Python",
+              "difficulty": "foundation",
+              "prompt": "How would a function with a list default argument behave across calls if modified in one call?",
+              "expectedConcepts": [
+                "mutation changes an existing object",
+                "immutable values require a new object",
+                "lists or dictionaries are mutable",
+                "aliasing or mutable defaults can share state"
+              ],
+              "referenceAnswer": "Lists and dictionaries can be changed in place, while values such as strings, tuples, and integers cannot. If two names reference one mutable object, a change through one name is visible through the other; a mutable default argument can therefore leak state across calls.",
+              "commonMisconceptions": [
+                "const variables make Python objects immutable",
+                "tuples can never contain mutable members"
+              ],
+              "maxPoints": 4,
+              "criteria": [
+                {
+                  "id": "definition",
+                  "label": "Distinguishes mutation from rebinding",
+                  "maxPoints": 1,
+                  "keywords": [
+                    "in place",
+                    "same object",
+                    "new object",
+                    "rebind"
+                  ]
+                },
+                {
+                  "id": "examples",
+                  "label": "Gives valid mutable and immutable examples",
+                  "maxPoints": 1,
+                  "keywords": [
+                    "list",
+                    "dict",
+                    "string",
+                    "tuple",
+                    "integer"
+                  ]
+                },
+                {
+                  "id": "bug",
+                  "label": "Explains a shared-state bug",
+                  "maxPoints": 2,
+                  "keywords": [
+                    "alias",
+                    "default argument",
+                    "shared",
+                    "across calls",
+                    "reference"
+                  ]
+                }
+              ],
+              "followUpCriteria": "If the answer is strong, ask how copying differs from aliasing; if shared state is vague, request a concrete function example.",
+              "hint": "Think about whether an operation changes an existing object identity or binds a name to a different object.",
+              "bankId": "python_mutability_01",
+              "followUp": true,
+              "parentQuestionId": "python_mutability_01"
+            }
+          ]
+        },
+        "limitations": [
+          "This report covers only the skills and questions shown in this session.",
+          "Open-answer grading is an estimate and should be reviewed when the uncertainty flag is medium or high.",
+          "Repository contents do not prove authorship or proficiency.",
+          "Adaptive paths vary in difficulty; scores are not calibrated rankings and do not predict hiring outcomes."
+        ]
+      }
+    }
+  ],
+  "passed": true
+}

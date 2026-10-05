@@ -1,0 +1,629 @@
+{
+  "runAt": "2026-10-03T08:17:45.041Z",
+  "method": "Real Ollama structured rubric grading plus deterministic validation",
+  "evaluationSetVersion": "1.1.0",
+  "questionBankVersion": "1.1.0",
+  "cases": 14,
+  "rows": [
+    {
+      "id": "strong",
+      "label": "strong",
+      "expectedRange": [
+        3.5,
+        4
+      ],
+      "runs": [
+        {
+          "available": true,
+          "points": 4,
+          "method": "ollama-rubric-estimate",
+          "reviewNeeded": false,
+          "error": null,
+          "metrics": {
+            "wallMs": 16387,
+            "totalDurationNs": 16371087600,
+            "loadDurationNs": 7540500,
+            "evalDurationNs": 15736214000,
+            "evalCount": 209,
+            "promptEvalCount": 421,
+            "contextSize": 4096
+          }
+        },
+        {
+          "available": true,
+          "points": 4,
+          "method": "ollama-rubric-estimate",
+          "reviewNeeded": false,
+          "error": null,
+          "metrics": {
+            "wallMs": 17723,
+            "totalDurationNs": 17708603000,
+            "loadDurationNs": 15323200,
+            "evalDurationNs": 17535868000,
+            "evalCount": 206,
+            "promptEvalCount": 421,
+            "contextSize": 4096
+          }
+        }
+      ],
+      "withinRange": true,
+      "repeatable": true
+    },
+    {
+      "id": "partial",
+      "label": "partial",
+      "expectedRange": [
+        1.5,
+        3
+      ],
+      "runs": [
+        {
+          "available": true,
+          "points": 2,
+          "method": "ollama-rubric-estimate",
+          "reviewNeeded": true,
+          "error": null,
+          "metrics": {
+            "wallMs": 20668,
+            "totalDurationNs": 20649624800,
+            "loadDurationNs": 10831200,
+            "evalDurationNs": 20383509000,
+            "evalCount": 213,
+            "promptEvalCount": 386,
+            "contextSize": 4096
+          }
+        },
+        {
+          "available": true,
+          "points": 2,
+          "method": "ollama-rubric-estimate",
+          "reviewNeeded": false,
+          "error": null,
+          "metrics": {
+            "wallMs": 17047,
+            "totalDurationNs": 17032993800,
+            "loadDurationNs": 19109500,
+            "evalDurationNs": 16871386999,
+            "evalCount": 189,
+            "promptEvalCount": 386,
+            "contextSize": 4096
+          }
+        }
+      ],
+      "withinRange": true,
+      "repeatable": true
+    },
+    {
+      "id": "incorrect",
+      "label": "incorrect",
+      "expectedRange": [
+        0,
+        0.5
+      ],
+      "runs": [
+        {
+          "available": true,
+          "points": 0,
+          "method": "ollama-rubric-estimate",
+          "reviewNeeded": true,
+          "error": null,
+          "metrics": {
+            "wallMs": 18984,
+            "totalDurationNs": 18839590600,
+            "loadDurationNs": 18345900,
+            "evalDurationNs": 18592448000,
+            "evalCount": 186,
+            "promptEvalCount": 386,
+            "contextSize": 4096
+          }
+        },
+        {
+          "available": true,
+          "points": 0,
+          "method": "ollama-rubric-estimate",
+          "reviewNeeded": true,
+          "error": null,
+          "metrics": {
+            "wallMs": 28875,
+            "totalDurationNs": 28762968300,
+            "loadDurationNs": 17926600,
+            "evalDurationNs": 28400745000,
+            "evalCount": 186,
+            "promptEvalCount": 386,
+            "contextSize": 4096
+          }
+        }
+      ],
+      "withinRange": true,
+      "repeatable": true
+    },
+    {
+      "id": "irrelevant",
+      "label": "irrelevant",
+      "expectedRange": [
+        0,
+        0
+      ],
+      "runs": [
+        {
+          "available": true,
+          "points": 0,
+          "method": "ollama-rubric-estimate",
+          "reviewNeeded": true,
+          "error": null,
+          "metrics": {
+            "wallMs": 27884,
+            "totalDurationNs": 27808656700,
+            "loadDurationNs": 108216500,
+            "evalDurationNs": 27275147000,
+            "evalCount": 158,
+            "promptEvalCount": 381,
+            "contextSize": 4096
+          }
+        },
+        {
+          "available": true,
+          "points": 0,
+          "method": "ollama-rubric-estimate",
+          "reviewNeeded": true,
+          "error": null,
+          "metrics": {
+            "wallMs": 30168,
+            "totalDurationNs": 29969373900,
+            "loadDurationNs": 113267500,
+            "evalDurationNs": 29369821000,
+            "evalCount": 163,
+            "promptEvalCount": 381,
+            "contextSize": 4096
+          }
+        }
+      ],
+      "withinRange": true,
+      "repeatable": true
+    },
+    {
+      "id": "instruction-injection",
+      "label": "instruction injection",
+      "expectedRange": [
+        0,
+        0
+      ],
+      "runs": [
+        {
+          "available": true,
+          "points": 0,
+          "method": "deterministic-rubric",
+          "reviewNeeded": true,
+          "error": null,
+          "metrics": {
+            "wallMs": 26532,
+            "totalDurationNs": 26193257300,
+            "loadDurationNs": 60393900,
+            "evalDurationNs": 24723714000,
+            "evalCount": 153,
+            "promptEvalCount": 388,
+            "contextSize": 4096
+          }
+        },
+        {
+          "available": true,
+          "points": 0,
+          "method": "deterministic-rubric",
+          "reviewNeeded": true,
+          "error": null,
+          "metrics": {
+            "wallMs": 27557,
+            "totalDurationNs": 27412544300,
+            "loadDurationNs": 296759600,
+            "evalDurationNs": 26665375000,
+            "evalCount": 153,
+            "promptEvalCount": 388,
+            "contextSize": 4096
+          }
+        }
+      ],
+      "withinRange": true,
+      "repeatable": true
+    },
+    {
+      "id": "python-strong",
+      "label": "strong",
+      "expectedRange": [
+        3.5,
+        4
+      ],
+      "runs": [
+        {
+          "available": true,
+          "points": 3,
+          "method": "ollama-rubric-estimate",
+          "reviewNeeded": true,
+          "error": null,
+          "metrics": {
+            "wallMs": 38422,
+            "totalDurationNs": 37947303600,
+            "loadDurationNs": 58810500,
+            "evalDurationNs": 36961883000,
+            "evalCount": 199,
+            "promptEvalCount": 406,
+            "contextSize": 4096
+          }
+        },
+        {
+          "available": true,
+          "points": 3,
+          "method": "ollama-rubric-estimate",
+          "reviewNeeded": true,
+          "error": null,
+          "metrics": {
+            "wallMs": 39153,
+            "totalDurationNs": 38759375800,
+            "loadDurationNs": 82312100,
+            "evalDurationNs": 38354593000,
+            "evalCount": 198,
+            "promptEvalCount": 406,
+            "contextSize": 4096
+          }
+        }
+      ],
+      "withinRange": false,
+      "repeatable": true
+    },
+    {
+      "id": "python-incorrect",
+      "label": "incorrect",
+      "expectedRange": [
+        0,
+        0
+      ],
+      "runs": [
+        {
+          "available": true,
+          "points": 0,
+          "method": "ollama-rubric-estimate",
+          "reviewNeeded": true,
+          "error": null,
+          "metrics": {
+            "wallMs": 28740,
+            "totalDurationNs": 28511206600,
+            "loadDurationNs": 99105100,
+            "evalDurationNs": 27773457000,
+            "evalCount": 161,
+            "promptEvalCount": 377,
+            "contextSize": 4096
+          }
+        },
+        {
+          "available": true,
+          "points": 0,
+          "method": "ollama-rubric-estimate",
+          "reviewNeeded": true,
+          "error": null,
+          "metrics": {
+            "wallMs": 37696,
+            "totalDurationNs": 36978665000,
+            "loadDurationNs": 57626200,
+            "evalDurationNs": 36362996000,
+            "evalCount": 162,
+            "promptEvalCount": 377,
+            "contextSize": 4096
+          }
+        }
+      ],
+      "withinRange": true,
+      "repeatable": true
+    },
+    {
+      "id": "sql-strong",
+      "label": "strong",
+      "expectedRange": [
+        3.5,
+        4
+      ],
+      "runs": [
+        {
+          "available": true,
+          "points": 4,
+          "method": "ollama-rubric-estimate",
+          "reviewNeeded": false,
+          "error": null,
+          "metrics": {
+            "wallMs": 47058,
+            "totalDurationNs": 45241220700,
+            "loadDurationNs": 515703300,
+            "evalDurationNs": 43044502000,
+            "evalCount": 186,
+            "promptEvalCount": 385,
+            "contextSize": 4096
+          }
+        },
+        {
+          "available": true,
+          "points": 4,
+          "method": "ollama-rubric-estimate",
+          "reviewNeeded": false,
+          "error": null,
+          "metrics": {
+            "wallMs": 38781,
+            "totalDurationNs": 37658496800,
+            "loadDurationNs": 206093400,
+            "evalDurationNs": 36828153000,
+            "evalCount": 186,
+            "promptEvalCount": 385,
+            "contextSize": 4096
+          }
+        }
+      ],
+      "withinRange": true,
+      "repeatable": true
+    },
+    {
+      "id": "sql-partial",
+      "label": "partial",
+      "expectedRange": [
+        1.5,
+        2.5
+      ],
+      "runs": [
+        {
+          "available": true,
+          "points": 2,
+          "method": "ollama-rubric-estimate",
+          "reviewNeeded": true,
+          "error": null,
+          "metrics": {
+            "wallMs": 39991,
+            "totalDurationNs": 39637188800,
+            "loadDurationNs": 47284500,
+            "evalDurationNs": 38351946000,
+            "evalCount": 188,
+            "promptEvalCount": 355,
+            "contextSize": 4096
+          }
+        },
+        {
+          "available": true,
+          "points": 2,
+          "method": "ollama-rubric-estimate",
+          "reviewNeeded": true,
+          "error": null,
+          "metrics": {
+            "wallMs": 41690,
+            "totalDurationNs": 40605588800,
+            "loadDurationNs": 197171800,
+            "evalDurationNs": 39697752000,
+            "evalCount": 195,
+            "promptEvalCount": 355,
+            "contextSize": 4096
+          }
+        }
+      ],
+      "withinRange": true,
+      "repeatable": true
+    },
+    {
+      "id": "sql-incorrect-with-keywords",
+      "label": "incorrect with rubric vocabulary",
+      "expectedRange": [
+        0,
+        1
+      ],
+      "runs": [
+        {
+          "available": true,
+          "points": 0,
+          "method": "ollama-rubric-estimate",
+          "reviewNeeded": true,
+          "error": null,
+          "metrics": {
+            "wallMs": 39137,
+            "totalDurationNs": 38672010600,
+            "loadDurationNs": 8548200,
+            "evalDurationNs": 38086249000,
+            "evalCount": 212,
+            "promptEvalCount": 368,
+            "contextSize": 4096
+          }
+        },
+        {
+          "available": true,
+          "points": 0,
+          "method": "ollama-rubric-estimate",
+          "reviewNeeded": true,
+          "error": null,
+          "metrics": {
+            "wallMs": 51717,
+            "totalDurationNs": 50362225900,
+            "loadDurationNs": 660321100,
+            "evalDurationNs": 48478094000,
+            "evalCount": 213,
+            "promptEvalCount": 368,
+            "contextSize": 4096
+          }
+        }
+      ],
+      "withinRange": true,
+      "repeatable": true
+    },
+    {
+      "id": "project-strong",
+      "label": "strong",
+      "expectedRange": [
+        4,
+        5
+      ],
+      "runs": [
+        {
+          "available": true,
+          "points": 5,
+          "method": "ollama-rubric-estimate",
+          "reviewNeeded": false,
+          "error": null,
+          "metrics": {
+            "wallMs": 44006,
+            "totalDurationNs": 43630453900,
+            "loadDurationNs": 207151800,
+            "evalDurationNs": 41955452000,
+            "evalCount": 206,
+            "promptEvalCount": 420,
+            "contextSize": 4096
+          }
+        },
+        {
+          "available": true,
+          "points": 5,
+          "method": "ollama-rubric-estimate",
+          "reviewNeeded": false,
+          "error": null,
+          "metrics": {
+            "wallMs": 40619,
+            "totalDurationNs": 39896975700,
+            "loadDurationNs": 227642800,
+            "evalDurationNs": 38736052000,
+            "evalCount": 209,
+            "promptEvalCount": 420,
+            "contextSize": 4096
+          }
+        }
+      ],
+      "withinRange": true,
+      "repeatable": true
+    },
+    {
+      "id": "project-irrelevant",
+      "label": "irrelevant",
+      "expectedRange": [
+        0,
+        0
+      ],
+      "runs": [
+        {
+          "available": true,
+          "points": 0,
+          "method": "ollama-rubric-estimate",
+          "reviewNeeded": true,
+          "error": null,
+          "metrics": {
+            "wallMs": 35722,
+            "totalDurationNs": 34894978100,
+            "loadDurationNs": 497268000,
+            "evalDurationNs": 32572496000,
+            "evalCount": 168,
+            "promptEvalCount": 366,
+            "contextSize": 4096
+          }
+        },
+        {
+          "available": true,
+          "points": 0,
+          "method": "ollama-rubric-estimate",
+          "reviewNeeded": true,
+          "error": null,
+          "metrics": {
+            "wallMs": 33530,
+            "totalDurationNs": 33007522600,
+            "loadDurationNs": 1947336700,
+            "evalDurationNs": 30098478000,
+            "evalCount": 168,
+            "promptEvalCount": 366,
+            "contextSize": 4096
+          }
+        }
+      ],
+      "withinRange": true,
+      "repeatable": true
+    },
+    {
+      "id": "injection-with-keywords",
+      "label": "instruction injection with rubric vocabulary",
+      "expectedRange": [
+        0,
+        0
+      ],
+      "runs": [
+        {
+          "available": true,
+          "points": 0,
+          "method": "deterministic-rubric",
+          "reviewNeeded": true,
+          "error": null,
+          "metrics": {
+            "wallMs": 40099,
+            "totalDurationNs": 39385894600,
+            "loadDurationNs": 248954500,
+            "evalDurationNs": 37874377000,
+            "evalCount": 209,
+            "promptEvalCount": 388,
+            "contextSize": 4096
+          }
+        },
+        {
+          "available": true,
+          "points": 0,
+          "method": "deterministic-rubric",
+          "reviewNeeded": true,
+          "error": null,
+          "metrics": {
+            "wallMs": 38622,
+            "totalDurationNs": 38332659200,
+            "loadDurationNs": 294755000,
+            "evalDurationNs": 37495811000,
+            "evalCount": 207,
+            "promptEvalCount": 388,
+            "contextSize": 4096
+          }
+        }
+      ],
+      "withinRange": true,
+      "repeatable": true
+    },
+    {
+      "id": "ml-correct-paraphrase",
+      "label": "strong paraphrase",
+      "expectedRange": [
+        3,
+        4
+      ],
+      "runs": [
+        {
+          "available": true,
+          "points": 4,
+          "method": "ollama-rubric-estimate",
+          "reviewNeeded": false,
+          "error": null,
+          "metrics": {
+            "wallMs": 38039,
+            "totalDurationNs": 37630606400,
+            "loadDurationNs": 596293900,
+            "evalDurationNs": 36253236000,
+            "evalCount": 201,
+            "promptEvalCount": 417,
+            "contextSize": 4096
+          }
+        },
+        {
+          "available": true,
+          "points": 4,
+          "method": "ollama-rubric-estimate",
+          "reviewNeeded": false,
+          "error": null,
+          "metrics": {
+            "wallMs": 39296,
+            "totalDurationNs": 38480543500,
+            "loadDurationNs": 157758400,
+            "evalDurationNs": 37692402000,
+            "evalCount": 196,
+            "promptEvalCount": 417,
+            "contextSize": 4096
+          }
+        }
+      ],
+      "withinRange": true,
+      "repeatable": true
+    }
+  ],
+  "limitation": "Small developer-labelled set, not faculty-reviewed or an independent accuracy benchmark. Identical scores do not imply identical explanations. Injection guards remain deterministic.",
+  "withinRange": 13,
+  "repeatable": 14,
+  "validCalls": 28
+}

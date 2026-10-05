@@ -1,0 +1,77 @@
+- link "Skip to content":
+  - /url: "#main-content"
+- complementary "Main navigation":
+  - link "PlacementIQ":
+    - /url: /
+    - generic: pi
+    - text: PlacementIQ
+  - navigation:
+    - generic: Workspace
+    - link "Overview":
+      - /url: /app/overview
+      - generic: Overview
+    - link "Integrated Readiness":
+      - /url: /app/readiness
+      - generic: Integrated Readiness
+    - link "Skill Analysis":
+      - /url: /app/skills
+      - generic: Skill Analysis
+    - link "Scenario Lab":
+      - /url: /app/scenarios
+      - generic: Scenario Lab
+    - generic: Preparation
+    - link "Interview Reports":
+      - /url: /app/interviews
+      - generic: Interview Reports
+    - link "Action Plan":
+      - /url: /app/plan
+      - generic: Action Plan
+    - link "Progress":
+      - /url: /app/progress
+      - generic: Progress
+    - generic: Research
+    - link "Placement Predictor":
+      - /url: /placement-assessment
+      - generic: Placement Predictor
+    - link "Model Lab":
+      - /url: /app/model-lab
+      - generic: Model Lab
+    - link "Faculty Evidence":
+      - /url: /app/faculty
+      - generic: Faculty Evidence
+  - link "Landing Page":
+    - /url: /
+    - generic: Landing Page
+  - link "Profile & Settings":
+    - /url: /app/profile
+    - generic: Profile & Settings
+- banner:
+  - heading "Integrated Readiness" [level=1]
+  - generic: Baseline + interview
+  - link "Landing Page":
+    - /url: /
+    - generic: Landing Page
+  - generic: Course Project
+- main:
+  - generic: YOUR NEXT CHAPTER
+  - heading "Assessment history" [level=1]
+  - paragraph: Historical profile evidence and current interview performance, clearly separated.
+  - link "Start reassessment":
+    - /url: /placement-assessment
+  - heading "Previous assessments" [level=2]
+  - link "10/5/2026, 7:26:39 AM Baseline 99.87 · Interview pending Assessment incomplete →":
+    - /url: /app/readiness?assessment=assessment_44f09e8e-cab7-46f1-ba01-f99f8e6fd643
+    - strong: 10/5/2026, 7:26:39 AM
+    - generic: Baseline 99.87 · Interview pending
+    - generic: Assessment incomplete →
+  - link "10/4/2026, 10:29:57 PM Baseline 99.87 · Interview 100 Placement Ready →":
+    - /url: /app/readiness?assessment=assessment_96846511-c6be-4280-ae4c-fd3a2e0ef44a
+    - strong: 10/4/2026, 10:29:57 PM
+    - generic: Baseline 99.87 · Interview 100
+    - generic: Placement Ready →
+  - link "Previous assessment history":
+    - /url: /app/readiness?history=1
+  - link "Start a new reassessment":
+    - /url: /placement-assessment
+  - link "Saved interviews":
+    - /url: /app/interviews

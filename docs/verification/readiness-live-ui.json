@@ -1,0 +1,2717 @@
+{
+  "note": "Fictional test student; actual saved ML prediction and sequential live Ollama interview completed through browser UI.",
+  "assessment": {
+    "id": "assessment_96846511-c6be-4280-ae4c-fd3a2e0ef44a",
+    "sessionId": "session_5e5e7045-c935-4555-bb61-211528d2fa05",
+    "createdAt": "2026-10-04T16:59:57.559Z",
+    "policy": {
+      "version": "readiness-policy-1.0",
+      "baselineThreshold": 50,
+      "interviewThreshold": 65,
+      "baselineWeight": 0.5,
+      "interviewWeight": 0.5,
+      "weightStatus": "Policy defaults pending faculty validation; not learned from the dataset"
+    },
+    "baseline": {
+      "probability": 0.9987450907568426,
+      "score": 99.87450907568426,
+      "predictedClass": "Placed",
+      "modelVersion": "3f3e1a00b1896ef2076df63a4dc1bf837fe5b5617d9eceed512dd46cc7f5cb40",
+      "modelName": "HistGradientBoostingClassifier",
+      "featureOrder": [
+        "age",
+        "gender",
+        "cgpa",
+        "branch",
+        "college_tier",
+        "internships_count",
+        "projects_count",
+        "certifications_count",
+        "coding_skill_score",
+        "aptitude_score",
+        "communication_skill_score",
+        "logical_reasoning_score",
+        "hackathons_participated",
+        "github_repos",
+        "linkedin_connections",
+        "mock_interview_score",
+        "attendance_percentage",
+        "backlogs",
+        "extracurricular_score",
+        "leadership_score",
+        "volunteer_experience",
+        "sleep_hours",
+        "study_hours_per_day",
+        "tech_core_score",
+        "academic_consistency",
+        "backlog_risk_ratio",
+        "coding_cgpa_interaction",
+        "portfolio_strength",
+        "interview_readiness",
+        "high_performer_flag",
+        "zero_backlog_flag"
+      ],
+      "inputs": {
+        "age": 22,
+        "gender": "Male",
+        "cgpa": 9,
+        "branch": "CSE",
+        "college_tier": "Tier 1",
+        "internships_count": 4,
+        "projects_count": 6,
+        "certifications_count": 3,
+        "coding_skill_score": 90,
+        "aptitude_score": 90,
+        "communication_skill_score": 85,
+        "logical_reasoning_score": 90,
+        "hackathons_participated": 4,
+        "github_repos": 8,
+        "linkedin_connections": 500,
+        "mock_interview_score": 85,
+        "attendance_percentage": 95,
+        "backlogs": 0,
+        "extracurricular_score": 70,
+        "leadership_score": 75,
+        "volunteer_experience": "Yes",
+        "sleep_hours": 7,
+        "study_hours_per_day": 5
+      },
+      "timestamp": "2026-10-04T16:59:57.559Z",
+      "confirmed": true,
+      "sources": {
+        "age": {
+          "source": "Student confirmed input",
+          "confirmed": true
+        },
+        "gender": {
+          "source": "Student confirmed input",
+          "confirmed": true
+        },
+        "cgpa": {
+          "source": "Student confirmed input",
+          "confirmed": true
+        },
+        "branch": {
+          "source": "Student confirmed input",
+          "confirmed": true
+        },
+        "college_tier": {
+          "source": "Student confirmed input",
+          "confirmed": true
+        },
+        "internships_count": {
+          "source": "Student confirmed input",
+          "confirmed": true
+        },
+        "projects_count": {
+          "source": "Student confirmed input",
+          "confirmed": true
+        },
+        "certifications_count": {
+          "source": "Student confirmed input",
+          "confirmed": true
+        },
+        "coding_skill_score": {
+          "source": "Student confirmed input",
+          "confirmed": true
+        },
+        "aptitude_score": {
+          "source": "Student confirmed input",
+          "confirmed": true
+        },
+        "communication_skill_score": {
+          "source": "Student confirmed input",
+          "confirmed": true
+        },
+        "logical_reasoning_score": {
+          "source": "Student confirmed input",
+          "confirmed": true
+        },
+        "hackathons_participated": {
+          "source": "Student confirmed input",
+          "confirmed": true
+        },
+        "github_repos": {
+          "source": "Student confirmed input",
+          "confirmed": true
+        },
+        "linkedin_connections": {
+          "source": "Student confirmed input",
+          "confirmed": true
+        },
+        "mock_interview_score": {
+          "source": "Student confirmed input",
+          "confirmed": true
+        },
+        "attendance_percentage": {
+          "source": "Student confirmed input",
+          "confirmed": true
+        },
+        "backlogs": {
+          "source": "Student confirmed input",
+          "confirmed": true
+        },
+        "extracurricular_score": {
+          "source": "Student confirmed input",
+          "confirmed": true
+        },
+        "leadership_score": {
+          "source": "Student confirmed input",
+          "confirmed": true
+        },
+        "volunteer_experience": {
+          "source": "Student confirmed input",
+          "confirmed": true
+        },
+        "sleep_hours": {
+          "source": "Student confirmed input",
+          "confirmed": true
+        },
+        "study_hours_per_day": {
+          "source": "Student confirmed input",
+          "confirmed": true
+        }
+      }
+    },
+    "interview": {
+      "reportId": "report_7ecf6466-917e-4ac6-a838-b11b19e72f90",
+      "sessionId": "session_5e5e7045-c935-4555-bb61-211528d2fa05",
+      "timestamp": "2026-10-05T01:53:16.251Z",
+      "score": 100,
+      "totalPoints": 26,
+      "maxPoints": 26,
+      "skills": [
+        {
+          "skill": "Python",
+          "points": 8,
+          "maxPoints": 8,
+          "questions": 2,
+          "assessedAnswers": 2,
+          "reviewNeeded": false,
+          "score": 100,
+          "result": "assessed"
+        },
+        {
+          "skill": "Project explanation",
+          "points": 10,
+          "maxPoints": 10,
+          "questions": 2,
+          "assessedAnswers": 2,
+          "reviewNeeded": false,
+          "score": 100,
+          "result": "assessed"
+        },
+        {
+          "skill": "SQL",
+          "points": 8,
+          "maxPoints": 8,
+          "questions": 2,
+          "assessedAnswers": 2,
+          "reviewNeeded": false,
+          "score": 100,
+          "result": "assessed"
+        }
+      ],
+      "scoredQuestions": 6,
+      "recordedAttempts": 8,
+      "provenance": {
+        "model": {
+          "requested": "qwen3:4b-instruct",
+          "used": "qwen3:4b-instruct",
+          "liveInference": true,
+          "lastStatus": {
+            "reachable": true,
+            "installed": true,
+            "ready": true,
+            "mode": "local-model",
+            "model": "qwen3:4b-instruct",
+            "endpoint": "http://localhost:11434",
+            "models": [
+              "qwen3:4b-instruct"
+            ],
+            "details": {
+              "capabilities": [
+                "tools",
+                "thinking",
+                "completion"
+              ],
+              "family": "qwen3",
+              "parameterSize": "4.0B",
+              "quantization": "Q4_K_M"
+            },
+            "digest": "0edcdef34593eac1aa2be9c7d06c432dcf81945adca5eca2f27662c18f168ba0",
+            "settings": {
+              "contextSize": 4096,
+              "temperature": 0.1,
+              "thinking": false,
+              "maxConcurrentInference": 1
+            },
+            "setup": {
+              "check": "ollama list",
+              "pull": "ollama pull qwen3:4b-instruct",
+              "start": "ollama serve"
+            },
+            "message": "Local model is ready."
+          }
+        },
+        "versions": {
+          "coordinator": "1.4.0",
+          "questionBank": "1.2.0",
+          "prompt": "1.4.0",
+          "scoring": "1.2.0",
+          "conversation": "1.0.0"
+        },
+        "questionBankVersion": "1.2.0",
+        "aggregationPolicy": "Award concept-based partial credit in half-point steps; equivalent wording is valid and language style is not graded. A used hint caps that attempt at 70% of its maximum. A base question and its clarification share one rubric: count the strongest validated whole attempt once, so follow-ups do not add a scoring penalty. Skipped base questions receive zero and are marked insufficient evidence. The final percentage is 100 * total earned / total available across base questions. No score floor or placement guarantee is applied. Adaptive paths differ; these scores are preparation evidence, not calibrated rankings or placement probabilities.",
+        "questionSnapshots": [
+          {
+            "id": "question_d9a40e64-7862-4d23-b004-3b4c08f98b70",
+            "skill": "Python",
+            "domain": "Python",
+            "difficulty": "foundation",
+            "prompt": "Explain the difference between mutable and immutable Python objects. Give one bug that shared mutable state can cause.",
+            "expectedConcepts": [
+              "mutation changes an existing object",
+              "immutable values require a new object",
+              "lists or dictionaries are mutable",
+              "aliasing or mutable defaults can share state"
+            ],
+            "referenceAnswer": "Lists and dictionaries can be changed in place, while values such as strings, tuples, and integers cannot. If two names reference one mutable object, a change through one name is visible through the other; a mutable default argument can therefore leak state across calls.",
+            "commonMisconceptions": [
+              "const variables make Python objects immutable",
+              "tuples can never contain mutable members"
+            ],
+            "maxPoints": 4,
+            "criteria": [
+              {
+                "id": "definition",
+                "label": "Distinguishes mutation from rebinding",
+                "maxPoints": 1,
+                "keywords": [
+                  "in place",
+                  "same object",
+                  "new object",
+                  "rebind"
+                ]
+              },
+              {
+                "id": "examples",
+                "label": "Gives valid mutable and immutable examples",
+                "maxPoints": 1,
+                "keywords": [
+                  "list",
+                  "dict",
+                  "string",
+                  "tuple",
+                  "integer"
+                ]
+              },
+              {
+                "id": "bug",
+                "label": "Explains a shared-state bug",
+                "maxPoints": 2,
+                "keywords": [
+                  "alias",
+                  "default argument",
+                  "shared",
+                  "across calls",
+                  "reference"
+                ]
+              }
+            ],
+            "followUpCriteria": "If the answer is strong, ask how copying differs from aliasing; if shared state is vague, request a concrete function example.",
+            "hint": "Think about whether an operation changes an existing object identity or binds a name to a different object.",
+            "bankId": "python_mutability_01",
+            "context": null,
+            "hintUsed": false,
+            "followUp": false,
+            "originalPrompt": "Explain the difference between mutable and immutable Python objects. Give one bug that shared mutable state can cause.",
+            "generationMethod": "ollama-personalized",
+            "generationModel": "qwen3:4b-instruct"
+          },
+          {
+            "id": "question_e3890b23-af31-4915-8129-769c0a8901db",
+            "skill": "Python",
+            "domain": "Python",
+            "difficulty": "foundation",
+            "prompt": "How would a function with a mutable default argument behave if called multiple times with no explicit list creation?",
+            "expectedConcepts": [
+              "mutation changes an existing object",
+              "immutable values require a new object",
+              "lists or dictionaries are mutable",
+              "aliasing or mutable defaults can share state"
+            ],
+            "referenceAnswer": "Lists and dictionaries can be changed in place, while values such as strings, tuples, and integers cannot. If two names reference one mutable object, a change through one name is visible through the other; a mutable default argument can therefore leak state across calls.",
+            "commonMisconceptions": [
+              "const variables make Python objects immutable",
+              "tuples can never contain mutable members"
+            ],
+            "maxPoints": 4,
+            "criteria": [
+              {
+                "id": "definition",
+                "label": "Distinguishes mutation from rebinding",
+                "maxPoints": 1,
+                "keywords": [
+                  "in place",
+                  "same object",
+                  "new object",
+                  "rebind"
+                ]
+              },
+              {
+                "id": "examples",
+                "label": "Gives valid mutable and immutable examples",
+                "maxPoints": 1,
+                "keywords": [
+                  "list",
+                  "dict",
+                  "string",
+                  "tuple",
+                  "integer"
+                ]
+              },
+              {
+                "id": "bug",
+                "label": "Explains a shared-state bug",
+                "maxPoints": 2,
+                "keywords": [
+                  "alias",
+                  "default argument",
+                  "shared",
+                  "across calls",
+                  "reference"
+                ]
+              }
+            ],
+            "followUpCriteria": "If the answer is strong, ask how copying differs from aliasing; if shared state is vague, request a concrete function example.",
+            "hint": "Think about whether an operation changes an existing object identity or binds a name to a different object.",
+            "bankId": "python_mutability_01",
+            "context": null,
+            "hintUsed": false,
+            "followUp": true,
+            "originalPrompt": "Explain the difference between mutable and immutable Python objects. Give one bug that shared mutable state can cause.",
+            "generationMethod": "ollama-personalized",
+            "generationModel": "qwen3:4b-instruct",
+            "parentQuestionId": "question_d9a40e64-7862-4d23-b004-3b4c08f98b70"
+          },
+          {
+            "id": "question_d03b717c-b77d-40e8-ab53-14b673ef8f07",
+            "skill": "Python",
+            "domain": "Python",
+            "difficulty": "intermediate",
+            "prompt": "How would you design error handling for a function that reads and validates a user-supplied file without hiding programming defects?",
+            "expectedConcepts": [
+              "catch specific exceptions",
+              "validate input and size",
+              "use context manager",
+              "preserve or log unexpected failures"
+            ],
+            "referenceAnswer": "Validate allowed type and size before parsing, open resources with a context manager, catch only expected exceptions such as permission or parse errors, return actionable messages for those cases, and allow unexpected defects to propagate or be logged with their traceback.",
+            "commonMisconceptions": [
+              "catch Exception everywhere and ignore it",
+              "file extension alone proves file type"
+            ],
+            "maxPoints": 4,
+            "criteria": [
+              {
+                "id": "specific",
+                "label": "Catches expected, specific exceptions",
+                "maxPoints": 1,
+                "keywords": [
+                  "specific exception",
+                  "permission",
+                  "parse",
+                  "not found"
+                ]
+              },
+              {
+                "id": "validation",
+                "label": "Validates untrusted input",
+                "maxPoints": 1,
+                "keywords": [
+                  "type",
+                  "size",
+                  "validate",
+                  "limit"
+                ]
+              },
+              {
+                "id": "resources",
+                "label": "Manages file resources safely",
+                "maxPoints": 1,
+                "keywords": [
+                  "with",
+                  "context manager",
+                  "close"
+                ]
+              },
+              {
+                "id": "unexpected",
+                "label": "Does not suppress unexpected defects",
+                "maxPoints": 1,
+                "keywords": [
+                  "propagate",
+                  "raise",
+                  "traceback",
+                  "log"
+                ]
+              }
+            ],
+            "followUpCriteria": "Ask for an example exception boundary when the answer relies on a blanket catch.",
+            "hint": "Separate errors you expect from bugs you did not anticipate.",
+            "bankId": "python_errors_02",
+            "context": null,
+            "hintUsed": false,
+            "followUp": false,
+            "originalPrompt": "How would you design error handling for a function that reads and validates a user-supplied file without hiding programming defects?",
+            "generationMethod": "ollama-personalized",
+            "generationModel": "qwen3:4b-instruct"
+          },
+          {
+            "id": "question_0797014b-7b56-4b5f-a477-422c7f0c3f57",
+            "skill": "Python",
+            "domain": "Python",
+            "difficulty": "intermediate",
+            "prompt": "How would the error handling differ if a parser raised a TypeError due to invalid data format, not user input?",
+            "expectedConcepts": [
+              "catch specific exceptions",
+              "validate input and size",
+              "use context manager",
+              "preserve or log unexpected failures"
+            ],
+            "referenceAnswer": "Validate allowed type and size before parsing, open resources with a context manager, catch only expected exceptions such as permission or parse errors, return actionable messages for those cases, and allow unexpected defects to propagate or be logged with their traceback.",
+            "commonMisconceptions": [
+              "catch Exception everywhere and ignore it",
+              "file extension alone proves file type"
+            ],
+            "maxPoints": 4,
+            "criteria": [
+              {
+                "id": "specific",
+                "label": "Catches expected, specific exceptions",
+                "maxPoints": 1,
+                "keywords": [
+                  "specific exception",
+                  "permission",
+                  "parse",
+                  "not found"
+                ]
+              },
+              {
+                "id": "validation",
+                "label": "Validates untrusted input",
+                "maxPoints": 1,
+                "keywords": [
+                  "type",
+                  "size",
+                  "validate",
+                  "limit"
+                ]
+              },
+              {
+                "id": "resources",
+                "label": "Manages file resources safely",
+                "maxPoints": 1,
+                "keywords": [
+                  "with",
+                  "context manager",
+                  "close"
+                ]
+              },
+              {
+                "id": "unexpected",
+                "label": "Does not suppress unexpected defects",
+                "maxPoints": 1,
+                "keywords": [
+                  "propagate",
+                  "raise",
+                  "traceback",
+                  "log"
+                ]
+              }
+            ],
+            "followUpCriteria": "Ask for an example exception boundary when the answer relies on a blanket catch.",
+            "hint": "Separate errors you expect from bugs you did not anticipate.",
+            "bankId": "python_errors_02",
+            "context": null,
+            "hintUsed": false,
+            "followUp": true,
+            "originalPrompt": "How would you design error handling for a function that reads and validates a user-supplied file without hiding programming defects?",
+            "generationMethod": "ollama-personalized",
+            "generationModel": "qwen3:4b-instruct",
+            "parentQuestionId": "question_d03b717c-b77d-40e8-ab53-14b673ef8f07"
+          },
+          {
+            "id": "question_969987a6-635b-43ce-bc1f-2b2851d69478",
+            "skill": "Project explanation",
+            "domain": "Project explanation",
+            "difficulty": "foundation",
+            "prompt": "Your resume mentions: \"I built a Python and SQLite application to manage job applications offline, validate input, run parameterized queries, and preserve records across restarts.\". Choose one project decision you made. Explain the constraint, alternatives you considered, why you chose it, and how you verified the result.",
+            "expectedConcepts": [
+              "specific constraint",
+              "credible alternative",
+              "decision rationale",
+              "verification evidence"
+            ],
+            "referenceAnswer": "A strong response names a concrete decision, ties it to a real constraint, compares at least one alternative, states the trade-off, and describes a test, measurement, or user observation that checked the outcome.",
+            "commonMisconceptions": [
+              "listing technologies without a decision",
+              "claiming success without verification"
+            ],
+            "maxPoints": 5,
+            "criteria": [
+              {
+                "id": "decision",
+                "label": "Names a concrete technical decision and constraint",
+                "maxPoints": 1,
+                "keywords": [
+                  "because",
+                  "constraint",
+                  "needed",
+                  "requirement"
+                ]
+              },
+              {
+                "id": "alternative",
+                "label": "Compares an alternative",
+                "maxPoints": 1,
+                "keywords": [
+                  "alternative",
+                  "instead",
+                  "considered",
+                  "versus"
+                ]
+              },
+              {
+                "id": "tradeoff",
+                "label": "Explains the trade-off",
+                "maxPoints": 1,
+                "keywords": [
+                  "trade-off",
+                  "cost",
+                  "complexity",
+                  "performance",
+                  "maintain"
+                ]
+              },
+              {
+                "id": "verification",
+                "label": "Provides verification evidence",
+                "maxPoints": 2,
+                "keywords": [
+                  "test",
+                  "measure",
+                  "benchmark",
+                  "validated",
+                  "feedback"
+                ]
+              }
+            ],
+            "followUpCriteria": "Request a concrete measurement if verification is asserted but not described.",
+            "hint": "Use a four-part story: constraint, alternatives, decision, evidence.",
+            "bankId": "project_decisions_01",
+            "context": {
+              "type": "resume",
+              "label": "Resume project claim",
+              "passage": "I built a Python and SQLite application to manage job applications offline, validate input, run parameterized queries, and preserve records across restarts."
+            },
+            "hintUsed": false,
+            "followUp": false,
+            "originalPrompt": "Your resume mentions: “I built a Python and SQLite application to manage job applications offline, validate input, run parameterized queries, and preserve records across restarts.”. Choose one project decision you made. Explain the constraint, alternatives you considered, why you chose it, and how you verified the result.",
+            "generationMethod": "ollama-personalized",
+            "generationModel": "qwen3:4b-instruct"
+          },
+          {
+            "id": "question_ee4e7f7d-dc14-440a-8be2-678d9550ec07",
+            "skill": "Project explanation",
+            "domain": "Project explanation",
+            "difficulty": "intermediate",
+            "prompt": "Your resume mentions: \"I built a Python and SQLite application to manage job applications offline, validate input, run parameterized queries, and preserve records across restarts.\". Describe a difficult defect in one of your projects. How did you isolate the cause, what evidence changed your hypothesis, and what prevented regression?",
+            "expectedConcepts": [
+              "reproducible symptom",
+              "hypothesis-driven isolation",
+              "observed evidence",
+              "regression test or guard"
+            ],
+            "referenceAnswer": "A defensible answer gives a reproducible symptom, narrows variables or adds instrumentation, updates a hypothesis from observed evidence, fixes the root cause, and adds a regression test, validation rule, or monitoring check.",
+            "commonMisconceptions": [
+              "trial-and-error changes without evidence",
+              "describing only the final code change"
+            ],
+            "maxPoints": 5,
+            "criteria": [
+              {
+                "id": "symptom",
+                "label": "States a reproducible symptom",
+                "maxPoints": 1,
+                "keywords": [
+                  "reproduce",
+                  "steps",
+                  "symptom",
+                  "failed"
+                ]
+              },
+              {
+                "id": "isolation",
+                "label": "Uses evidence to isolate the cause",
+                "maxPoints": 2,
+                "keywords": [
+                  "log",
+                  "trace",
+                  "test",
+                  "hypothesis",
+                  "isolate"
+                ]
+              },
+              {
+                "id": "root",
+                "label": "Distinguishes root cause from symptom",
+                "maxPoints": 1,
+                "keywords": [
+                  "root cause",
+                  "because",
+                  "caused"
+                ]
+              },
+              {
+                "id": "regression",
+                "label": "Prevents recurrence",
+                "maxPoints": 1,
+                "keywords": [
+                  "regression",
+                  "unit test",
+                  "integration test",
+                  "validation",
+                  "monitor"
+                ]
+              }
+            ],
+            "followUpCriteria": "Ask what observation falsified the first hypothesis when the answer is purely chronological.",
+            "hint": "Focus on the evidence that narrowed the search, not only the final fix.",
+            "bankId": "project_debugging_02",
+            "context": {
+              "type": "resume",
+              "label": "Resume project claim",
+              "passage": "I built a Python and SQLite application to manage job applications offline, validate input, run parameterized queries, and preserve records across restarts."
+            },
+            "hintUsed": false,
+            "followUp": false,
+            "originalPrompt": "Your resume mentions: “I built a Python and SQLite application to manage job applications offline, validate input, run parameterized queries, and preserve records across restarts.”. Describe a difficult defect in one of your projects. How did you isolate the cause, what evidence changed your hypothesis, and what prevented regression?",
+            "generationMethod": "ollama-personalized",
+            "generationModel": "qwen3:4b-instruct"
+          },
+          {
+            "id": "question_d7b0f224-fb9d-4305-8f21-a52d38961d91",
+            "skill": "SQL",
+            "domain": "SQL",
+            "difficulty": "foundation",
+            "prompt": "Compare INNER JOIN and LEFT JOIN. When can a LEFT JOIN unexpectedly reduce to inner-join behaviour?",
+            "expectedConcepts": [
+              "inner join keeps matching rows",
+              "left join keeps all left rows",
+              "missing right rows contain null",
+              "WHERE predicate on right table can remove null rows"
+            ],
+            "referenceAnswer": "An inner join returns matched pairs; a left join also retains unmatched left rows and fills right columns with NULL. Filtering a right-table column in WHERE, instead of placing the condition in ON or accounting for NULL, removes those unmatched rows.",
+            "commonMisconceptions": [
+              "left join always returns more rows",
+              "join order never matters"
+            ],
+            "maxPoints": 4,
+            "criteria": [
+              {
+                "id": "inner",
+                "label": "Explains INNER JOIN",
+                "maxPoints": 1,
+                "keywords": [
+                  "matching",
+                  "matched",
+                  "both tables"
+                ]
+              },
+              {
+                "id": "left",
+                "label": "Explains LEFT JOIN and NULL extension",
+                "maxPoints": 1,
+                "keywords": [
+                  "all left",
+                  "unmatched",
+                  "null"
+                ]
+              },
+              {
+                "id": "filter",
+                "label": "Identifies WHERE-on-right filtering",
+                "maxPoints": 2,
+                "keywords": [
+                  "where",
+                  "right table",
+                  "null",
+                  "on clause"
+                ]
+              }
+            ],
+            "followUpCriteria": "Ask the student to place a status predicate correctly in ON versus WHERE.",
+            "hint": "Trace what happens to an unmatched row after the join and then after WHERE.",
+            "bankId": "sql_joins_01",
+            "context": null,
+            "hintUsed": false,
+            "followUp": false,
+            "originalPrompt": "Compare INNER JOIN and LEFT JOIN. When can a LEFT JOIN unexpectedly reduce to inner-join behaviour?",
+            "generationMethod": "ollama-personalized",
+            "generationModel": "qwen3:4b-instruct"
+          },
+          {
+            "id": "question_7e32dbf4-bbb7-4f99-a541-f4feca2406e1",
+            "skill": "SQL",
+            "domain": "SQL",
+            "difficulty": "intermediate",
+            "prompt": "A query filtering by user_id and sorting by created_at is slow. How would you investigate and choose an index?",
+            "expectedConcepts": [
+              "inspect execution plan",
+              "composite index",
+              "column order",
+              "write and storage trade-offs"
+            ],
+            "referenceAnswer": "Inspect the actual plan and row counts first. A composite index beginning with user_id and then created_at can support the equality filter and ordered retrieval. Validate selectivity and the plan, while accounting for additional write cost and storage.",
+            "commonMisconceptions": [
+              "add separate indexes to every column",
+              "an index always makes every query faster"
+            ],
+            "maxPoints": 4,
+            "criteria": [
+              {
+                "id": "plan",
+                "label": "Uses an execution plan",
+                "maxPoints": 1,
+                "keywords": [
+                  "explain",
+                  "execution plan",
+                  "scan"
+                ]
+              },
+              {
+                "id": "composite",
+                "label": "Proposes an ordered composite index",
+                "maxPoints": 2,
+                "keywords": [
+                  "composite",
+                  "user_id",
+                  "created_at",
+                  "order"
+                ]
+              },
+              {
+                "id": "tradeoff",
+                "label": "States index trade-offs",
+                "maxPoints": 1,
+                "keywords": [
+                  "write",
+                  "storage",
+                  "maintenance",
+                  "selectivity"
+                ]
+              }
+            ],
+            "followUpCriteria": "Ask why column order matters if the answer only says to add an index.",
+            "hint": "Consider one structure that can support both the equality predicate and the requested order.",
+            "bankId": "sql_index_02",
+            "context": null,
+            "hintUsed": false,
+            "followUp": false,
+            "originalPrompt": "A query filtering by user_id and sorting by created_at is slow. How would you investigate and choose an index?",
+            "generationMethod": "ollama-personalized",
+            "generationModel": "qwen3:4b-instruct"
+          }
+        ]
+      },
+      "uncertainty": [
+        {
+          "questionId": "question_d9a40e64-7862-4d23-b004-3b4c08f98b70",
+          "uncertainty": "low",
+          "reviewNeeded": false,
+          "evidenceStatus": "assessed"
+        },
+        {
+          "questionId": "question_e3890b23-af31-4915-8129-769c0a8901db",
+          "uncertainty": "low",
+          "reviewNeeded": false,
+          "evidenceStatus": "assessed"
+        },
+        {
+          "questionId": "question_d03b717c-b77d-40e8-ab53-14b673ef8f07",
+          "uncertainty": "low",
+          "reviewNeeded": false,
+          "evidenceStatus": "assessed"
+        },
+        {
+          "questionId": "question_0797014b-7b56-4b5f-a477-422c7f0c3f57",
+          "uncertainty": "low",
+          "reviewNeeded": false,
+          "evidenceStatus": "assessed"
+        },
+        {
+          "questionId": "question_969987a6-635b-43ce-bc1f-2b2851d69478",
+          "uncertainty": "low",
+          "reviewNeeded": false,
+          "evidenceStatus": "assessed"
+        },
+        {
+          "questionId": "question_ee4e7f7d-dc14-440a-8be2-678d9550ec07",
+          "uncertainty": "low",
+          "reviewNeeded": false,
+          "evidenceStatus": "assessed"
+        },
+        {
+          "questionId": "question_d7b0f224-fb9d-4305-8f21-a52d38961d91",
+          "uncertainty": "low",
+          "reviewNeeded": false,
+          "evidenceStatus": "assessed"
+        },
+        {
+          "questionId": "question_7e32dbf4-bbb7-4f99-a541-f4feca2406e1",
+          "uncertainty": "low",
+          "reviewNeeded": false,
+          "evidenceStatus": "assessed"
+        }
+      ]
+    },
+    "timeline": [
+      {
+        "stage": "baseline-inference",
+        "message": "Ran the unchanged historical model using its fitted encoders, scaler and original feature order.",
+        "timestamp": "2026-10-04T16:59:57.559Z"
+      },
+      {
+        "stage": "read-baseline",
+        "message": "Read saved baseline 99.87/100 (HistGradientBoostingClassifier).",
+        "timestamp": "2026-10-04T16:59:57.568Z"
+      },
+      {
+        "stage": "read-interview",
+        "message": "Waiting for a completed interview.",
+        "timestamp": "2026-10-04T16:59:57.568Z"
+      },
+      {
+        "stage": "compare",
+        "message": "Your baseline estimate is saved. Complete the robot interview to demonstrate your current skills.",
+        "timestamp": "2026-10-04T16:59:57.568Z"
+      },
+      {
+        "stage": "read-baseline",
+        "message": "Read saved baseline 99.87/100 (HistGradientBoostingClassifier).",
+        "timestamp": "2026-10-05T01:53:16.263Z"
+      },
+      {
+        "stage": "read-interview",
+        "message": "Read saved interview report report_7ecf6466-917e-4ac6-a838-b11b19e72f90: 100/100.",
+        "timestamp": "2026-10-05T01:53:16.263Z"
+      },
+      {
+        "stage": "compare",
+        "message": "Baseline 99.87/100 is at or above 50; interview 100/100 is at or above 65. The category compares these two separate results. It is preparation guidance, not a hiring decision.",
+        "timestamp": "2026-10-05T01:53:16.263Z"
+      },
+      {
+        "stage": "select-action",
+        "message": "Company-specific preparation: Both results meet the configured thresholds.",
+        "timestamp": "2026-10-05T01:53:16.263Z"
+      },
+      {
+        "stage": "start-preparation",
+        "message": "Started Company-specific preparation.",
+        "timestamp": "2026-10-05T01:54:00.308Z"
+      }
+    ],
+    "profileSnapshot": {
+      "inputs": {
+        "age": 22,
+        "gender": "Male",
+        "cgpa": 9,
+        "branch": "CSE",
+        "college_tier": "Tier 1",
+        "internships_count": 4,
+        "projects_count": 6,
+        "certifications_count": 3,
+        "coding_skill_score": 90,
+        "aptitude_score": 90,
+        "communication_skill_score": 85,
+        "logical_reasoning_score": 90,
+        "hackathons_participated": 4,
+        "github_repos": 8,
+        "linkedin_connections": 500,
+        "mock_interview_score": 85,
+        "attendance_percentage": 95,
+        "backlogs": 0,
+        "extracurricular_score": 70,
+        "leadership_score": 75,
+        "volunteer_experience": "Yes",
+        "sleep_hours": 7,
+        "study_hours_per_day": 5
+      },
+      "sources": {
+        "age": {
+          "source": "Student confirmed input",
+          "confirmed": true
+        },
+        "gender": {
+          "source": "Student confirmed input",
+          "confirmed": true
+        },
+        "cgpa": {
+          "source": "Student confirmed input",
+          "confirmed": true
+        },
+        "branch": {
+          "source": "Student confirmed input",
+          "confirmed": true
+        },
+        "college_tier": {
+          "source": "Student confirmed input",
+          "confirmed": true
+        },
+        "internships_count": {
+          "source": "Student confirmed input",
+          "confirmed": true
+        },
+        "projects_count": {
+          "source": "Student confirmed input",
+          "confirmed": true
+        },
+        "certifications_count": {
+          "source": "Student confirmed input",
+          "confirmed": true
+        },
+        "coding_skill_score": {
+          "source": "Student confirmed input",
+          "confirmed": true
+        },
+        "aptitude_score": {
+          "source": "Student confirmed input",
+          "confirmed": true
+        },
+        "communication_skill_score": {
+          "source": "Student confirmed input",
+          "confirmed": true
+        },
+        "logical_reasoning_score": {
+          "source": "Student confirmed input",
+          "confirmed": true
+        },
+        "hackathons_participated": {
+          "source": "Student confirmed input",
+          "confirmed": true
+        },
+        "github_repos": {
+          "source": "Student confirmed input",
+          "confirmed": true
+        },
+        "linkedin_connections": {
+          "source": "Student confirmed input",
+          "confirmed": true
+        },
+        "mock_interview_score": {
+          "source": "Student confirmed input",
+          "confirmed": true
+        },
+        "attendance_percentage": {
+          "source": "Student confirmed input",
+          "confirmed": true
+        },
+        "backlogs": {
+          "source": "Student confirmed input",
+          "confirmed": true
+        },
+        "extracurricular_score": {
+          "source": "Student confirmed input",
+          "confirmed": true
+        },
+        "leadership_score": {
+          "source": "Student confirmed input",
+          "confirmed": true
+        },
+        "volunteer_experience": {
+          "source": "Student confirmed input",
+          "confirmed": true
+        },
+        "sleep_hours": {
+          "source": "Student confirmed input",
+          "confirmed": true
+        },
+        "study_hours_per_day": {
+          "source": "Student confirmed input",
+          "confirmed": true
+        }
+      },
+      "confirmedAt": "2026-10-04T16:59:57.559Z"
+    },
+    "result": {
+      "status": "complete",
+      "category": "Placement Ready",
+      "baselineHigh": true,
+      "interviewHigh": true,
+      "reviewNeeded": false,
+      "explanation": "Baseline 99.87/100 is at or above 50; interview 100/100 is at or above 65. The category compares these two separate results. It is preparation guidance, not a hiring decision.",
+      "composite": {
+        "value": 99.94,
+        "baselineScore": 99.87450907568426,
+        "interviewScore": 100,
+        "baselineWeight": 0.5,
+        "interviewWeight": 0.5,
+        "label": "Decision-support index; not a placement probability"
+      },
+      "action": {
+        "type": "company-specific",
+        "title": "Company-specific preparation",
+        "reason": "Both results meet the configured thresholds.",
+        "steps": [
+          "Choose a target company and map its published role requirements to your demonstrated skills.",
+          "Practise role-specific scenarios, starting with Python (100/100), Project explanation (100/100).",
+          "Reassess after your next practice cycle."
+        ]
+      }
+    },
+    "updatedAt": "2026-10-05T01:53:16.263Z",
+    "preparation": {
+      "type": "company-specific",
+      "title": "Company-specific preparation",
+      "reason": "Both results meet the configured thresholds.",
+      "steps": [
+        "Choose a target company and map its published role requirements to your demonstrated skills.",
+        "Practise role-specific scenarios, starting with Python (100/100), Project explanation (100/100).",
+        "Reassess after your next practice cycle."
+      ],
+      "status": "started",
+      "startedAt": "2026-10-05T01:54:00.308Z"
+    }
+  },
+  "report": {
+    "id": "report_7ecf6466-917e-4ac6-a838-b11b19e72f90",
+    "sessionId": "session_5e5e7045-c935-4555-bb61-211528d2fa05",
+    "createdAt": "2026-10-05T01:53:16.251Z",
+    "selectedDomain": "Python",
+    "assessment": {
+      "score": 100,
+      "totalPoints": 26,
+      "maxPoints": 26,
+      "skills": [
+        {
+          "skill": "Python",
+          "points": 8,
+          "maxPoints": 8,
+          "questions": 2,
+          "assessedAnswers": 2,
+          "reviewNeeded": false,
+          "score": 100,
+          "result": "assessed"
+        },
+        {
+          "skill": "Project explanation",
+          "points": 10,
+          "maxPoints": 10,
+          "questions": 2,
+          "assessedAnswers": 2,
+          "reviewNeeded": false,
+          "score": 100,
+          "result": "assessed"
+        },
+        {
+          "skill": "SQL",
+          "points": 8,
+          "maxPoints": 8,
+          "questions": 2,
+          "assessedAnswers": 2,
+          "reviewNeeded": false,
+          "score": 100,
+          "result": "assessed"
+        }
+      ],
+      "scoredQuestions": 6,
+      "recordedAttempts": 8
+    },
+    "questions": [
+      {
+        "id": "answer_6f023b14-d3ed-49b1-a95f-61cf79873206",
+        "questionId": "question_d9a40e64-7862-4d23-b004-3b4c08f98b70",
+        "questionGroupId": "question_d9a40e64-7862-4d23-b004-3b4c08f98b70",
+        "bankId": "python_mutability_01",
+        "skill": "Python",
+        "question": "Explain the difference between mutable and immutable Python objects. Give one bug that shared mutable state can cause.",
+        "context": null,
+        "answer": "Lists and dictionaries are mutable: their contents can change in place. Strings, tuples and integers are immutable. Two names can reference the same list, so appending through one name changes what the other sees. A list used as a default argument is created once and reused across calls, leaking items between calls. I use None as the default and create a fresh list inside each call.",
+        "skipped": false,
+        "hintUsed": false,
+        "submittedAt": "2026-10-05T01:44:16.146Z",
+        "grade": {
+          "method": "ollama-rubric-estimate",
+          "evidenceValidationFailed": false,
+          "reviewNeeded": false,
+          "evidenceStatus": "assessed",
+          "uncertainty": "low",
+          "criteria": [
+            {
+              "criterionId": "definition",
+              "label": "Distinguishes mutation from rebinding",
+              "points": 1,
+              "maxPoints": 1,
+              "evidenceExcerpt": "Lists and dictionaries are mutable: their contents can change in place.",
+              "explanation": "Correctly distinguishes mutable objects via in-place modification."
+            },
+            {
+              "criterionId": "examples",
+              "label": "Gives valid mutable and immutable examples",
+              "points": 1,
+              "maxPoints": 1,
+              "evidenceExcerpt": "Strings, tuples and integers are immutable.",
+              "explanation": "Valid examples of immutable objects are provided."
+            },
+            {
+              "criterionId": "bug",
+              "label": "Explains a shared-state bug",
+              "points": 2,
+              "maxPoints": 2,
+              "evidenceExcerpt": "A list used as a default argument is created once and reused across calls, leaking items between calls.",
+              "explanation": "Clear explanation of shared mutable state bug in default arguments."
+            }
+          ],
+          "missingConcepts": [],
+          "explanation": "All required concepts are accurately and concisely addressed with correct examples and a real bug case.",
+          "rawPoints": 4,
+          "awardedPoints": 4,
+          "maxPoints": 4
+        },
+        "model": "qwen3:4b-instruct",
+        "acknowledgement": "The shared state bug in default arguments is well explained and correctly identified.",
+        "adaptation": {
+          "proposed": "follow_up",
+          "followUpQuestion": "How would a function with a mutable default argument behave if called multiple times with no explicit list creation?"
+        },
+        "promptVersion": "1.4.0",
+        "rubricVersion": "1.2.0",
+        "reply": {
+          "id": "turn_531aad08-0772-4f54-a671-1e6015fd5869",
+          "role": "assistant",
+          "text": "The shared state bug in default arguments is well explained and correctly identified. How would a function with a mutable default argument behave if called multiple times with no explicit list creation?",
+          "reaction": "The shared state bug in default arguments is well explained and correctly identified.",
+          "questionId": "question_e3890b23-af31-4915-8129-769c0a8901db",
+          "question": "How would a function with a mutable default argument behave if called multiple times with no explicit list creation?",
+          "kind": "clarify",
+          "model": "qwen3:4b-instruct",
+          "answerAnchor": "A list used as a default argument is created once and reused across calls, leaking items between calls.",
+          "createdAt": "2026-10-05T01:44:16.146Z"
+        }
+      },
+      {
+        "id": "answer_f6ead83d-370a-45e0-b348-36537f60c067",
+        "questionId": "question_e3890b23-af31-4915-8129-769c0a8901db",
+        "questionGroupId": "question_d9a40e64-7862-4d23-b004-3b4c08f98b70",
+        "bankId": "python_mutability_01",
+        "skill": "Python",
+        "question": "How would a function with a mutable default argument behave if called multiple times with no explicit list creation?",
+        "context": null,
+        "answer": "For def add(x, items=[]): items.append(x); return items, the default list is created once at function definition. add(1) returns [1]; add(2) then returns [1, 2], not a fresh [2], because both calls reuse the same mutable list. Fix it with items=None, then if items is None: items=[] inside the function. Each call then gets a fresh list, while an explicitly supplied list still retains caller-visible changes.",
+        "skipped": false,
+        "hintUsed": false,
+        "submittedAt": "2026-10-05T01:45:45.183Z",
+        "grade": {
+          "method": "ollama-rubric-estimate",
+          "evidenceValidationFailed": false,
+          "reviewNeeded": false,
+          "evidenceStatus": "assessed",
+          "uncertainty": "low",
+          "criteria": [
+            {
+              "criterionId": "definition",
+              "label": "Distinguishes mutation from rebinding",
+              "points": 1,
+              "maxPoints": 1,
+              "evidenceExcerpt": "For def add(x, items=[]): items.",
+              "explanation": "Correctly identifies mutation of mutable objects in default arguments."
+            },
+            {
+              "criterionId": "examples",
+              "label": "Gives valid mutable and immutable examples",
+              "points": 1,
+              "maxPoints": 1,
+              "evidenceExcerpt": "add(2) then returns [1, 2], not a fresh [2], because both calls reuse the same mutable list.",
+              "explanation": "Provides valid example of mutable default argument behavior across calls."
+            },
+            {
+              "criterionId": "bug",
+              "label": "Explains a shared-state bug",
+              "points": 2,
+              "maxPoints": 2,
+              "evidenceExcerpt": "add(2) then returns [1, 2], not a fresh [2], because both calls reuse the same mutable list.",
+              "explanation": "Explicitly explains shared-state bug with clear, correct reasoning."
+            }
+          ],
+          "missingConcepts": [],
+          "explanation": "All criteria met with clear, correct examples and bug explanation. No misconceptions present.",
+          "rawPoints": 4,
+          "awardedPoints": 4,
+          "maxPoints": 4
+        },
+        "model": "qwen3:4b-instruct",
+        "acknowledgement": "You correctly explain how shared mutable state leads to unexpected behavior across function calls.",
+        "adaptation": {
+          "proposed": "advance",
+          "followUpQuestion": null
+        },
+        "promptVersion": "1.4.0",
+        "rubricVersion": "1.2.0",
+        "reply": {
+          "id": "turn_02eb2c7d-998f-49dc-b216-4579069109a5",
+          "role": "assistant",
+          "text": "You correctly explain how shared mutable state leads to unexpected behavior across function calls. How would you design error handling for a function that reads and validates a user-supplied file without hiding programming defects?",
+          "reaction": "You correctly explain how shared mutable state leads to unexpected behavior across function calls.",
+          "questionId": "question_d03b717c-b77d-40e8-ab53-14b673ef8f07",
+          "question": "How would you design error handling for a function that reads and validates a user-supplied file without hiding programming defects?",
+          "kind": "confirm",
+          "model": "qwen3:4b-instruct",
+          "answerAnchor": "add(2) then returns [1, 2], not a fresh [2], because both calls reuse the same mutable list.",
+          "createdAt": "2026-10-05T01:45:45.183Z"
+        }
+      },
+      {
+        "id": "answer_8af78b35-4fea-453d-bc7c-b61bae315093",
+        "questionId": "question_d03b717c-b77d-40e8-ab53-14b673ef8f07",
+        "questionGroupId": "question_d03b717c-b77d-40e8-ab53-14b673ef8f07",
+        "bankId": "python_errors_02",
+        "skill": "Python",
+        "question": "How would you design error handling for a function that reads and validates a user-supplied file without hiding programming defects?",
+        "context": null,
+        "answer": "I use a with open context manager so the file closes even on failure. I catch FileNotFoundError and PermissionError around opening, UnicodeDecodeError for decoding, and a narrow ValueError for expected validation failures. I validate required columns and types and report an actionable message with the bad field. I do not use bare except or catch Exception around everything: unexpected TypeError or assertion failures should propagate with a traceback rather than look like bad user input. I test missing files, denied access, malformed content, valid content and unexpected parser defects.",
+        "skipped": false,
+        "hintUsed": false,
+        "submittedAt": "2026-10-05T01:49:18.625Z",
+        "grade": {
+          "method": "ollama-rubric-estimate",
+          "evidenceValidationFailed": false,
+          "reviewNeeded": false,
+          "evidenceStatus": "assessed",
+          "uncertainty": "low",
+          "criteria": [
+            {
+              "criterionId": "specific",
+              "label": "Catches expected, specific exceptions",
+              "points": 1,
+              "maxPoints": 1,
+              "evidenceExcerpt": "I catch FileNotFoundError and PermissionError around opening, UnicodeDecodeError for decoding, and a narrow ValueError for expected validation",
+              "explanation": "Catches specific exceptions like FileNotFoundError, PermissionError, UnicodeDecodeError, and narrow ValueError."
+            },
+            {
+              "criterionId": "validation",
+              "label": "Validates untrusted input",
+              "points": 1,
+              "maxPoints": 1,
+              "evidenceExcerpt": "I validate required columns and types and report an actionable message with the bad field.",
+              "explanation": "Validates required columns and types with actionable feedback on bad fields."
+            },
+            {
+              "criterionId": "resources",
+              "label": "Manages file resources safely",
+              "points": 1,
+              "maxPoints": 1,
+              "evidenceExcerpt": "I use a with open context manager so the file closes even on failure.",
+              "explanation": "Uses context manager to ensure file closes on failure."
+            },
+            {
+              "criterionId": "unexpected",
+              "label": "Does not suppress unexpected defects",
+              "points": 1,
+              "maxPoints": 1,
+              "evidenceExcerpt": "I do not use bare except or catch Exception around everything: unexpected TypeError or assertion failures should propagate with a traceback rather",
+              "explanation": "Explicitly states unexpected defects like TypeError should propagate with tracebacks."
+            }
+          ],
+          "missingConcepts": [],
+          "explanation": "",
+          "rawPoints": 4,
+          "awardedPoints": 4,
+          "maxPoints": 4
+        },
+        "model": "qwen3:4b-instruct",
+        "acknowledgement": "You correctly identify specific exception boundaries and avoid suppressing unexpected defects.",
+        "adaptation": {
+          "proposed": "follow_up",
+          "followUpQuestion": "How would the error handling differ if a parser raised a TypeError due to invalid data format, not user input?"
+        },
+        "promptVersion": "1.4.0",
+        "rubricVersion": "1.2.0",
+        "reply": {
+          "id": "turn_380f3de1-313b-4896-b6bc-7b95c4554d9c",
+          "role": "assistant",
+          "text": "You correctly identify specific exception boundaries and avoid suppressing unexpected defects. How would the error handling differ if a parser raised a TypeError due to invalid data format, not user input?",
+          "reaction": "You correctly identify specific exception boundaries and avoid suppressing unexpected defects.",
+          "questionId": "question_0797014b-7b56-4b5f-a477-422c7f0c3f57",
+          "question": "How would the error handling differ if a parser raised a TypeError due to invalid data format, not user input?",
+          "kind": "challenge",
+          "model": "qwen3:4b-instruct",
+          "answerAnchor": "I do not use bare except or catch Exception around everything: unexpected TypeError or assertion failures should propagate with a traceback rather",
+          "createdAt": "2026-10-05T01:49:18.625Z"
+        }
+      },
+      {
+        "id": "answer_b0461881-bba0-43a8-bf91-39f3ff9d30ca",
+        "questionId": "question_0797014b-7b56-4b5f-a477-422c7f0c3f57",
+        "questionGroupId": "question_d03b717c-b77d-40e8-ab53-14b673ef8f07",
+        "bankId": "python_errors_02",
+        "skill": "Python",
+        "question": "How would the error handling differ if a parser raised a TypeError due to invalid data format, not user input?",
+        "context": null,
+        "answer": "I would check the parser contract first. If its documentation explicitly uses TypeError for malformed external data, I catch TypeError only around that parser call and translate it into a domain validation error with the original exception chained. I do not catch TypeError around the entire function, because my own indexing or argument mistakes must still propagate. I validate input types at the boundary and add separate tests for malformed data and a deliberately broken parser to prove programming defects are not swallowed.",
+        "skipped": false,
+        "hintUsed": false,
+        "submittedAt": "2026-10-05T01:50:03.251Z",
+        "grade": {
+          "method": "ollama-rubric-estimate",
+          "evidenceValidationFailed": false,
+          "reviewNeeded": false,
+          "evidenceStatus": "assessed",
+          "uncertainty": "low",
+          "criteria": [
+            {
+              "criterionId": "specific",
+              "label": "Catches expected, specific exceptions",
+              "points": 1,
+              "maxPoints": 1,
+              "evidenceExcerpt": "If its documentation explicitly uses TypeError for malformed external data, I catch TypeError only around that parser call and translate it into a",
+              "explanation": "Correctly identifies catching specific TypeError for malformed data, with chaining for traceability."
+            },
+            {
+              "criterionId": "validation",
+              "label": "Validates untrusted input",
+              "points": 1,
+              "maxPoints": 1,
+              "evidenceExcerpt": "I validate input types at the boundary and add separate tests for malformed data and a deliberately broken parser to prove programming defects are not",
+              "explanation": "Explicitly mentions input type validation at boundary, satisfying validation criterion."
+            },
+            {
+              "criterionId": "resources",
+              "label": "Manages file resources safely",
+              "points": 0,
+              "maxPoints": 1,
+              "evidenceExcerpt": "",
+              "explanation": "No mention of file resource management or context managers; missing resource handling."
+            },
+            {
+              "criterionId": "unexpected",
+              "label": "Does not suppress unexpected defects",
+              "points": 0,
+              "maxPoints": 1,
+              "evidenceExcerpt": "",
+              "explanation": "No discussion of allowing unexpected defects to propagate or log; missing unexpected defect handling."
+            }
+          ],
+          "missingConcepts": [
+            "resources",
+            "unexpected"
+          ],
+          "explanation": "Answer correctly handles specific exceptions and input validation but omits resource management and propagation of unexpected defects.",
+          "rawPoints": 2,
+          "awardedPoints": 2,
+          "maxPoints": 4
+        },
+        "model": "qwen3:4b-instruct",
+        "acknowledgement": "You correctly address specific exception handling and input validation at the boundary.",
+        "adaptation": {
+          "proposed": "advance",
+          "followUpQuestion": null
+        },
+        "promptVersion": "1.4.0",
+        "rubricVersion": "1.2.0",
+        "reply": {
+          "id": "turn_2c3acb6e-d22e-43d7-b4cd-c5a7af19125f",
+          "role": "assistant",
+          "text": "You correctly address specific exception handling and input validation at the boundary. Your resume mentions: \"I built a Python and SQLite application to manage job applications offline, validate input, run parameterized queries, and preserve records across restarts.\". Choose one project decision you made. Explain the constraint, alternatives you considered, why you chose it, and how you verified the result.",
+          "reaction": "You correctly address specific exception handling and input validation at the boundary.",
+          "questionId": "question_969987a6-635b-43ce-bc1f-2b2851d69478",
+          "question": "Your resume mentions: \"I built a Python and SQLite application to manage job applications offline, validate input, run parameterized queries, and preserve records across restarts.\". Choose one project decision you made. Explain the constraint, alternatives you considered, why you chose it, and how you verified the result.",
+          "kind": "clarify",
+          "model": "qwen3:4b-instruct",
+          "answerAnchor": "I validate input types at the boundary and add separate tests for malformed data and a deliberately broken parser to prove programming defects are not",
+          "createdAt": "2026-10-05T01:50:03.251Z"
+        }
+      },
+      {
+        "id": "answer_f5dc78fd-1f19-41a4-9a5e-06c2c0d5d365",
+        "questionId": "question_969987a6-635b-43ce-bc1f-2b2851d69478",
+        "questionGroupId": "question_969987a6-635b-43ce-bc1f-2b2851d69478",
+        "bankId": "project_decisions_01",
+        "skill": "Project explanation",
+        "question": "Your resume mentions: \"I built a Python and SQLite application to manage job applications offline, validate input, run parameterized queries, and preserve records across restarts.\". Choose one project decision you made. Explain the constraint, alternatives you considered, why you chose it, and how you verified the result.",
+        "context": {
+          "type": "resume",
+          "label": "Resume project claim",
+          "passage": "I built a Python and SQLite application to manage job applications offline, validate input, run parameterized queries, and preserve records across restarts."
+        },
+        "answer": "For the fictional placement tracker, the constraint was offline operation on one laptop with records surviving restarts. I chose SQLite transactions and parameterized queries. I considered JSON files, which are simple but require manual locking and recovery, and PostgreSQL, which supports many simultaneous users but requires a separate server. SQLite fits single-user deployment; it is a trade-off because concurrent writers are limited. I verified persistence by inserting an application, restarting the process and reading it back. I tested rollback on invalid input, a unique constraint for duplicate applications, and quotes in user input to ensure parameters are treated as data.",
+        "skipped": false,
+        "hintUsed": false,
+        "submittedAt": "2026-10-05T01:50:51.279Z",
+        "grade": {
+          "method": "ollama-rubric-estimate",
+          "evidenceValidationFailed": false,
+          "reviewNeeded": false,
+          "evidenceStatus": "assessed",
+          "uncertainty": "low",
+          "criteria": [
+            {
+              "criterionId": "decision",
+              "label": "Names a concrete technical decision and constraint",
+              "points": 1,
+              "maxPoints": 1,
+              "evidenceExcerpt": "I chose SQLite transactions and parameterized queries.",
+              "explanation": "Names a concrete technical decision tied to offline operation and record persistence."
+            },
+            {
+              "criterionId": "alternative",
+              "label": "Compares an alternative",
+              "points": 1,
+              "maxPoints": 1,
+              "evidenceExcerpt": "I considered JSON files, which are simple but require manual locking and recovery, and PostgreSQL, which supports many simultaneous users but requires",
+              "explanation": "Compares JSON files and PostgreSQL as alternatives with distinct limitations."
+            },
+            {
+              "criterionId": "tradeoff",
+              "label": "Explains the trade-off",
+              "points": 1,
+              "maxPoints": 1,
+              "evidenceExcerpt": "it is a trade-off because concurrent writers are limited.",
+              "explanation": "Explains the trade-off of single-user concurrency limitation in SQLite."
+            },
+            {
+              "criterionId": "verification",
+              "label": "Provides verification evidence",
+              "points": 2,
+              "maxPoints": 2,
+              "evidenceExcerpt": "I verified persistence by inserting an application, restarting the process and reading it back.",
+              "explanation": "Provides verification evidence for record preservation across restarts."
+            }
+          ],
+          "missingConcepts": [],
+          "explanation": "All criteria are satisfied with clear, concise evidence from the student's answer.",
+          "rawPoints": 5,
+          "awardedPoints": 5,
+          "maxPoints": 5
+        },
+        "model": "qwen3:4b-instruct",
+        "acknowledgement": "You correctly identify SQLite transactions as a key decision under offline constraints.",
+        "adaptation": {
+          "proposed": "advance",
+          "followUpQuestion": null
+        },
+        "promptVersion": "1.4.0",
+        "rubricVersion": "1.2.0",
+        "reply": {
+          "id": "turn_d06a5317-69e9-4ebf-9e4d-34d527db1791",
+          "role": "assistant",
+          "text": "You correctly identify SQLite transactions as a key decision under offline constraints. Your resume mentions: \"I built a Python and SQLite application to manage job applications offline, validate input, run parameterized queries, and preserve records across restarts.\". Describe a difficult defect in one of your projects. How did you isolate the cause, what evidence changed your hypothesis, and what prevented regression?",
+          "reaction": "You correctly identify SQLite transactions as a key decision under offline constraints.",
+          "questionId": "question_ee4e7f7d-dc14-440a-8be2-678d9550ec07",
+          "question": "Your resume mentions: \"I built a Python and SQLite application to manage job applications offline, validate input, run parameterized queries, and preserve records across restarts.\". Describe a difficult defect in one of your projects. How did you isolate the cause, what evidence changed your hypothesis, and what prevented regression?",
+          "kind": "confirm",
+          "model": "qwen3:4b-instruct",
+          "answerAnchor": "I chose SQLite transactions and parameterized queries.",
+          "createdAt": "2026-10-05T01:50:51.279Z"
+        }
+      },
+      {
+        "id": "answer_3145f2f9-d7ea-4091-b003-f19fd6fcead8",
+        "questionId": "question_ee4e7f7d-dc14-440a-8be2-678d9550ec07",
+        "questionGroupId": "question_ee4e7f7d-dc14-440a-8be2-678d9550ec07",
+        "bankId": "project_debugging_02",
+        "skill": "Project explanation",
+        "question": "Your resume mentions: \"I built a Python and SQLite application to manage job applications offline, validate input, run parameterized queries, and preserve records across restarts.\". Describe a difficult defect in one of your projects. How did you isolate the cause, what evidence changed your hypothesis, and what prevented regression?",
+        "context": {
+          "type": "resume",
+          "label": "Resume project claim",
+          "passage": "I built a Python and SQLite application to manage job applications offline, validate input, run parameterized queries, and preserve records across restarts."
+        },
+        "answer": "In this fictional test project, a record appeared after saving but disappeared on restart. My first hypothesis was that the read query filtered it incorrectly. I reproduced the issue with a temporary database and inspected the row through a second connection before shutdown: the second connection could not see it. That evidence pointed to an uncommitted transaction rather than filtering. I traced the write path and found an early return before commit. I moved the transaction into a context manager that commits on success and rolls back on failure. A regression test inserts a record, closes the connection, reopens the database and asserts the same row exists; another test verifies failed validation leaves no partial row.",
+        "skipped": false,
+        "hintUsed": false,
+        "submittedAt": "2026-10-05T01:51:52.865Z",
+        "grade": {
+          "method": "ollama-rubric-estimate",
+          "evidenceValidationFailed": false,
+          "reviewNeeded": false,
+          "evidenceStatus": "assessed",
+          "uncertainty": "low",
+          "criteria": [
+            {
+              "criterionId": "symptom",
+              "label": "States a reproducible symptom",
+              "points": 1,
+              "maxPoints": 1,
+              "evidenceExcerpt": "In this fictional test project, a record appeared after saving but disappeared on restart.",
+              "explanation": "States a reproducible symptom: record appears then vanishes on restart."
+            },
+            {
+              "criterionId": "isolation",
+              "label": "Uses evidence to isolate the cause",
+              "points": 2,
+              "maxPoints": 2,
+              "evidenceExcerpt": "I reproduced the issue with a temporary database and inspected the row through a second connection before shutdown: the second connection could not",
+              "explanation": "Uses evidence to isolate cause: second connection fails to see row, indicating transaction state issue."
+            },
+            {
+              "criterionId": "root",
+              "label": "Distinguishes root cause from symptom",
+              "points": 1,
+              "maxPoints": 1,
+              "evidenceExcerpt": "That evidence pointed to an uncommitted transaction rather than filtering.",
+              "explanation": "Distinguishes root cause (uncommitted transaction) from symptom (record vanishes)."
+            },
+            {
+              "criterionId": "regression",
+              "label": "Prevents recurrence",
+              "points": 1,
+              "maxPoints": 1,
+              "evidenceExcerpt": "A regression test inserts a record, closes the connection, reopens the database and asserts the same row exists;",
+              "explanation": "Prevents recurrence via regression test that validates persistence after restart."
+            }
+          ],
+          "missingConcepts": [],
+          "explanation": "All criteria met with clear, evidence-backed reasoning. No misconceptions detected.",
+          "rawPoints": 5,
+          "awardedPoints": 5,
+          "maxPoints": 5
+        },
+        "model": "qwen3:4b-instruct",
+        "acknowledgement": "You correctly identify the symptom and use evidence to isolate the root cause of the transaction issue.",
+        "adaptation": {
+          "proposed": "advance",
+          "followUpQuestion": null
+        },
+        "promptVersion": "1.4.0",
+        "rubricVersion": "1.2.0",
+        "reply": {
+          "id": "turn_a2f5084f-23af-47eb-aeeb-5bc7df77308f",
+          "role": "assistant",
+          "text": "You correctly identify the symptom and use evidence to isolate the root cause of the transaction issue. Compare INNER JOIN and LEFT JOIN. When can a LEFT JOIN unexpectedly reduce to inner-join behaviour?",
+          "reaction": "You correctly identify the symptom and use evidence to isolate the root cause of the transaction issue.",
+          "questionId": "question_d7b0f224-fb9d-4305-8f21-a52d38961d91",
+          "question": "Compare INNER JOIN and LEFT JOIN. When can a LEFT JOIN unexpectedly reduce to inner-join behaviour?",
+          "kind": "confirm",
+          "model": "qwen3:4b-instruct",
+          "answerAnchor": "That evidence pointed to an uncommitted transaction rather than filtering.",
+          "createdAt": "2026-10-05T01:51:52.866Z"
+        }
+      },
+      {
+        "id": "answer_227d772a-3544-4bb8-bcc1-798579018958",
+        "questionId": "question_d7b0f224-fb9d-4305-8f21-a52d38961d91",
+        "questionGroupId": "question_d7b0f224-fb9d-4305-8f21-a52d38961d91",
+        "bankId": "sql_joins_01",
+        "skill": "SQL",
+        "question": "Compare INNER JOIN and LEFT JOIN. When can a LEFT JOIN unexpectedly reduce to inner-join behaviour?",
+        "context": null,
+        "answer": "INNER JOIN returns only matching rows. LEFT JOIN retains every left-side row, with NULL values for unmatched right-side columns. A WHERE condition on a right-side column such as WHERE jobs.status = active filters out those NULL-extended rows, effectively removing unmatched left rows and behaving like an inner join. If I want all applicants and only their active jobs, I put the status predicate in the ON clause: applicants LEFT JOIN jobs ON jobs.applicant_id = applicants.id AND jobs.status = the active parameter. I test applicants with zero jobs, only inactive jobs, and multiple active jobs; multiple matches correctly produce multiple rows.",
+        "skipped": false,
+        "hintUsed": false,
+        "submittedAt": "2026-10-05T01:52:39.055Z",
+        "grade": {
+          "method": "ollama-rubric-estimate",
+          "evidenceValidationFailed": false,
+          "reviewNeeded": false,
+          "evidenceStatus": "assessed",
+          "uncertainty": "low",
+          "criteria": [
+            {
+              "criterionId": "inner",
+              "label": "Explains INNER JOIN",
+              "points": 1,
+              "maxPoints": 1,
+              "evidenceExcerpt": "INNER JOIN returns only matching rows.",
+              "explanation": "Correctly identifies INNER JOIN behavior."
+            },
+            {
+              "criterionId": "left",
+              "label": "Explains LEFT JOIN and NULL extension",
+              "points": 1,
+              "maxPoints": 1,
+              "evidenceExcerpt": "LEFT JOIN retains every left-side row, with NULL values for unmatched right-side columns.",
+              "explanation": "Accurately explains LEFT JOIN and NULL extension."
+            },
+            {
+              "criterionId": "filter",
+              "label": "Identifies WHERE-on-right filtering",
+              "points": 2,
+              "maxPoints": 2,
+              "evidenceExcerpt": "A WHERE condition on a right-side column such as WHERE jobs.",
+              "explanation": "Correctly identifies WHERE filtering on right column as causing unexpected reduction to inner join."
+            }
+          ],
+          "missingConcepts": [],
+          "explanation": "All key concepts addressed with correct examples; no misconceptions present.",
+          "rawPoints": 4,
+          "awardedPoints": 4,
+          "maxPoints": 4
+        },
+        "model": "qwen3:4b-instruct",
+        "acknowledgement": "You correctly explain both joins and the filtering effect on unmatched rows.",
+        "adaptation": {
+          "proposed": "advance",
+          "followUpQuestion": null
+        },
+        "promptVersion": "1.4.0",
+        "rubricVersion": "1.2.0",
+        "reply": {
+          "id": "turn_9f568055-d938-4551-8557-55079653a45b",
+          "role": "assistant",
+          "text": "You correctly explain both joins and the filtering effect on unmatched rows. A query filtering by user_id and sorting by created_at is slow. How would you investigate and choose an index?",
+          "reaction": "You correctly explain both joins and the filtering effect on unmatched rows.",
+          "questionId": "question_7e32dbf4-bbb7-4f99-a541-f4feca2406e1",
+          "question": "A query filtering by user_id and sorting by created_at is slow. How would you investigate and choose an index?",
+          "kind": "confirm",
+          "model": "qwen3:4b-instruct",
+          "answerAnchor": "status = active filters out those NULL-extended rows, effectively removing unmatched left rows and behaving like an inner join.",
+          "createdAt": "2026-10-05T01:52:39.055Z"
+        }
+      },
+      {
+        "id": "answer_35c99946-7559-47c5-8e8d-89b06bec8d0a",
+        "questionId": "question_7e32dbf4-bbb7-4f99-a541-f4feca2406e1",
+        "questionGroupId": "question_7e32dbf4-bbb7-4f99-a541-f4feca2406e1",
+        "bankId": "sql_index_02",
+        "skill": "SQL",
+        "question": "A query filtering by user_id and sorting by created_at is slow. How would you investigate and choose an index?",
+        "context": null,
+        "answer": "First I measure the query on representative data and inspect EXPLAIN QUERY PLAN for a full table scan or a temporary sort. For WHERE user_id = ? ORDER BY created_at, I would test a composite index on (user_id, created_at): equality on the leading column narrows the range and the second column provides ordered rows for that user. I compare the plan and latency before and after, including users with few and many rows and any LIMIT. I check existing indexes and avoid redundant ones. An index costs storage and slows inserts and updates, so I benchmark that too; stale statistics, selecting many columns, and low selectivity can affect whether the planner uses it.",
+        "skipped": false,
+        "hintUsed": false,
+        "submittedAt": "2026-10-05T01:53:16.224Z",
+        "grade": {
+          "method": "ollama-rubric-estimate",
+          "evidenceValidationFailed": false,
+          "reviewNeeded": false,
+          "evidenceStatus": "assessed",
+          "uncertainty": "low",
+          "criteria": [
+            {
+              "criterionId": "plan",
+              "label": "Uses an execution plan",
+              "points": 1,
+              "maxPoints": 1,
+              "evidenceExcerpt": "First I measure the query on representative data and inspect EXPLAIN QUERY PLAN for a full table scan or a temporary sort.",
+              "explanation": "Correctly identifies inspecting execution plan as first step."
+            },
+            {
+              "criterionId": "composite",
+              "label": "Proposes an ordered composite index",
+              "points": 2,
+              "maxPoints": 2,
+              "evidenceExcerpt": "ORDER BY created_at, I would test a composite index on (user_id, created_at): equality on the leading column narrows the range and the second column",
+              "explanation": "Clearly proposes ordered composite index matching query needs."
+            },
+            {
+              "criterionId": "tradeoff",
+              "label": "States index trade-offs",
+              "points": 1,
+              "maxPoints": 1,
+              "evidenceExcerpt": "An index costs storage and slows inserts and updates, so I benchmark that too;",
+              "explanation": "States valid trade-off between storage and write performance."
+            }
+          ],
+          "missingConcepts": [],
+          "explanation": "All required concepts are present and correctly applied; no misconceptions detected.",
+          "rawPoints": 4,
+          "awardedPoints": 4,
+          "maxPoints": 4
+        },
+        "model": "qwen3:4b-instruct",
+        "acknowledgement": "You correctly identify the execution plan and propose a valid composite index with appropriate trade-off considerations.",
+        "adaptation": {
+          "proposed": "advance",
+          "followUpQuestion": null
+        },
+        "promptVersion": "1.4.0",
+        "rubricVersion": "1.2.0",
+        "reply": {
+          "id": "turn_1d8fe8c2-5a91-47d0-9f44-cc920e73c608",
+          "role": "assistant",
+          "text": "You correctly identify the execution plan and propose a valid composite index with appropriate trade-off considerations.",
+          "reaction": "You correctly identify the execution plan and propose a valid composite index with appropriate trade-off considerations.",
+          "questionId": null,
+          "question": null,
+          "kind": "confirm",
+          "model": "qwen3:4b-instruct",
+          "answerAnchor": "ORDER BY created_at, I would test a composite index on (user_id, created_at): equality on the leading column narrows the range and the second column",
+          "createdAt": "2026-10-05T01:53:16.225Z"
+        }
+      }
+    ],
+    "conversation": [
+      {
+        "id": "turn_2c799dcd-fd47-4350-b428-4dd7e750d9ce",
+        "role": "assistant",
+        "text": "Explain the difference between mutable and immutable Python objects. Give one bug that shared mutable state can cause.",
+        "kind": "question",
+        "questionId": "question_d9a40e64-7862-4d23-b004-3b4c08f98b70",
+        "createdAt": "2026-10-05T01:43:07.881Z"
+      },
+      {
+        "id": "answer_6f023b14-d3ed-49b1-a95f-61cf79873206",
+        "role": "student",
+        "text": "Lists and dictionaries are mutable: their contents can change in place. Strings, tuples and integers are immutable. Two names can reference the same list, so appending through one name changes what the other sees. A list used as a default argument is created once and reused across calls, leaking items between calls. I use None as the default and create a fresh list inside each call.",
+        "questionId": "question_d9a40e64-7862-4d23-b004-3b4c08f98b70",
+        "kind": "answer",
+        "createdAt": "2026-10-05T01:44:16.146Z"
+      },
+      {
+        "id": "turn_531aad08-0772-4f54-a671-1e6015fd5869",
+        "role": "assistant",
+        "text": "The shared state bug in default arguments is well explained and correctly identified. How would a function with a mutable default argument behave if called multiple times with no explicit list creation?",
+        "reaction": "The shared state bug in default arguments is well explained and correctly identified.",
+        "questionId": "question_e3890b23-af31-4915-8129-769c0a8901db",
+        "question": "How would a function with a mutable default argument behave if called multiple times with no explicit list creation?",
+        "kind": "clarify",
+        "model": "qwen3:4b-instruct",
+        "answerAnchor": "A list used as a default argument is created once and reused across calls, leaking items between calls.",
+        "createdAt": "2026-10-05T01:44:16.146Z"
+      },
+      {
+        "id": "answer_f6ead83d-370a-45e0-b348-36537f60c067",
+        "role": "student",
+        "text": "For def add(x, items=[]): items.append(x); return items, the default list is created once at function definition. add(1) returns [1]; add(2) then returns [1, 2], not a fresh [2], because both calls reuse the same mutable list. Fix it with items=None, then if items is None: items=[] inside the function. Each call then gets a fresh list, while an explicitly supplied list still retains caller-visible changes.",
+        "questionId": "question_e3890b23-af31-4915-8129-769c0a8901db",
+        "kind": "answer",
+        "createdAt": "2026-10-05T01:45:45.183Z"
+      },
+      {
+        "id": "turn_02eb2c7d-998f-49dc-b216-4579069109a5",
+        "role": "assistant",
+        "text": "You correctly explain how shared mutable state leads to unexpected behavior across function calls. How would you design error handling for a function that reads and validates a user-supplied file without hiding programming defects?",
+        "reaction": "You correctly explain how shared mutable state leads to unexpected behavior across function calls.",
+        "questionId": "question_d03b717c-b77d-40e8-ab53-14b673ef8f07",
+        "question": "How would you design error handling for a function that reads and validates a user-supplied file without hiding programming defects?",
+        "kind": "confirm",
+        "model": "qwen3:4b-instruct",
+        "answerAnchor": "add(2) then returns [1, 2], not a fresh [2], because both calls reuse the same mutable list.",
+        "createdAt": "2026-10-05T01:45:45.183Z"
+      },
+      {
+        "id": "answer_8af78b35-4fea-453d-bc7c-b61bae315093",
+        "role": "student",
+        "text": "I use a with open context manager so the file closes even on failure. I catch FileNotFoundError and PermissionError around opening, UnicodeDecodeError for decoding, and a narrow ValueError for expected validation failures. I validate required columns and types and report an actionable message with the bad field. I do not use bare except or catch Exception around everything: unexpected TypeError or assertion failures should propagate with a traceback rather than look like bad user input. I test missing files, denied access, malformed content, valid content and unexpected parser defects.",
+        "questionId": "question_d03b717c-b77d-40e8-ab53-14b673ef8f07",
+        "kind": "answer",
+        "createdAt": "2026-10-05T01:49:18.625Z"
+      },
+      {
+        "id": "turn_380f3de1-313b-4896-b6bc-7b95c4554d9c",
+        "role": "assistant",
+        "text": "You correctly identify specific exception boundaries and avoid suppressing unexpected defects. How would the error handling differ if a parser raised a TypeError due to invalid data format, not user input?",
+        "reaction": "You correctly identify specific exception boundaries and avoid suppressing unexpected defects.",
+        "questionId": "question_0797014b-7b56-4b5f-a477-422c7f0c3f57",
+        "question": "How would the error handling differ if a parser raised a TypeError due to invalid data format, not user input?",
+        "kind": "challenge",
+        "model": "qwen3:4b-instruct",
+        "answerAnchor": "I do not use bare except or catch Exception around everything: unexpected TypeError or assertion failures should propagate with a traceback rather",
+        "createdAt": "2026-10-05T01:49:18.625Z"
+      },
+      {
+        "id": "answer_b0461881-bba0-43a8-bf91-39f3ff9d30ca",
+        "role": "student",
+        "text": "I would check the parser contract first. If its documentation explicitly uses TypeError for malformed external data, I catch TypeError only around that parser call and translate it into a domain validation error with the original exception chained. I do not catch TypeError around the entire function, because my own indexing or argument mistakes must still propagate. I validate input types at the boundary and add separate tests for malformed data and a deliberately broken parser to prove programming defects are not swallowed.",
+        "questionId": "question_0797014b-7b56-4b5f-a477-422c7f0c3f57",
+        "kind": "answer",
+        "createdAt": "2026-10-05T01:50:03.251Z"
+      },
+      {
+        "id": "turn_2c3acb6e-d22e-43d7-b4cd-c5a7af19125f",
+        "role": "assistant",
+        "text": "You correctly address specific exception handling and input validation at the boundary. Your resume mentions: \"I built a Python and SQLite application to manage job applications offline, validate input, run parameterized queries, and preserve records across restarts.\". Choose one project decision you made. Explain the constraint, alternatives you considered, why you chose it, and how you verified the result.",
+        "reaction": "You correctly address specific exception handling and input validation at the boundary.",
+        "questionId": "question_969987a6-635b-43ce-bc1f-2b2851d69478",
+        "question": "Your resume mentions: \"I built a Python and SQLite application to manage job applications offline, validate input, run parameterized queries, and preserve records across restarts.\". Choose one project decision you made. Explain the constraint, alternatives you considered, why you chose it, and how you verified the result.",
+        "kind": "clarify",
+        "model": "qwen3:4b-instruct",
+        "answerAnchor": "I validate input types at the boundary and add separate tests for malformed data and a deliberately broken parser to prove programming defects are not",
+        "createdAt": "2026-10-05T01:50:03.251Z"
+      },
+      {
+        "id": "answer_f5dc78fd-1f19-41a4-9a5e-06c2c0d5d365",
+        "role": "student",
+        "text": "For the fictional placement tracker, the constraint was offline operation on one laptop with records surviving restarts. I chose SQLite transactions and parameterized queries. I considered JSON files, which are simple but require manual locking and recovery, and PostgreSQL, which supports many simultaneous users but requires a separate server. SQLite fits single-user deployment; it is a trade-off because concurrent writers are limited. I verified persistence by inserting an application, restarting the process and reading it back. I tested rollback on invalid input, a unique constraint for duplicate applications, and quotes in user input to ensure parameters are treated as data.",
+        "questionId": "question_969987a6-635b-43ce-bc1f-2b2851d69478",
+        "kind": "answer",
+        "createdAt": "2026-10-05T01:50:51.279Z"
+      },
+      {
+        "id": "turn_d06a5317-69e9-4ebf-9e4d-34d527db1791",
+        "role": "assistant",
+        "text": "You correctly identify SQLite transactions as a key decision under offline constraints. Your resume mentions: \"I built a Python and SQLite application to manage job applications offline, validate input, run parameterized queries, and preserve records across restarts.\". Describe a difficult defect in one of your projects. How did you isolate the cause, what evidence changed your hypothesis, and what prevented regression?",
+        "reaction": "You correctly identify SQLite transactions as a key decision under offline constraints.",
+        "questionId": "question_ee4e7f7d-dc14-440a-8be2-678d9550ec07",
+        "question": "Your resume mentions: \"I built a Python and SQLite application to manage job applications offline, validate input, run parameterized queries, and preserve records across restarts.\". Describe a difficult defect in one of your projects. How did you isolate the cause, what evidence changed your hypothesis, and what prevented regression?",
+        "kind": "confirm",
+        "model": "qwen3:4b-instruct",
+        "answerAnchor": "I chose SQLite transactions and parameterized queries.",
+        "createdAt": "2026-10-05T01:50:51.279Z"
+      },
+      {
+        "id": "answer_3145f2f9-d7ea-4091-b003-f19fd6fcead8",
+        "role": "student",
+        "text": "In this fictional test project, a record appeared after saving but disappeared on restart. My first hypothesis was that the read query filtered it incorrectly. I reproduced the issue with a temporary database and inspected the row through a second connection before shutdown: the second connection could not see it. That evidence pointed to an uncommitted transaction rather than filtering. I traced the write path and found an early return before commit. I moved the transaction into a context manager that commits on success and rolls back on failure. A regression test inserts a record, closes the connection, reopens the database and asserts the same row exists; another test verifies failed validation leaves no partial row.",
+        "questionId": "question_ee4e7f7d-dc14-440a-8be2-678d9550ec07",
+        "kind": "answer",
+        "createdAt": "2026-10-05T01:51:52.865Z"
+      },
+      {
+        "id": "turn_a2f5084f-23af-47eb-aeeb-5bc7df77308f",
+        "role": "assistant",
+        "text": "You correctly identify the symptom and use evidence to isolate the root cause of the transaction issue. Compare INNER JOIN and LEFT JOIN. When can a LEFT JOIN unexpectedly reduce to inner-join behaviour?",
+        "reaction": "You correctly identify the symptom and use evidence to isolate the root cause of the transaction issue.",
+        "questionId": "question_d7b0f224-fb9d-4305-8f21-a52d38961d91",
+        "question": "Compare INNER JOIN and LEFT JOIN. When can a LEFT JOIN unexpectedly reduce to inner-join behaviour?",
+        "kind": "confirm",
+        "model": "qwen3:4b-instruct",
+        "answerAnchor": "That evidence pointed to an uncommitted transaction rather than filtering.",
+        "createdAt": "2026-10-05T01:51:52.866Z"
+      },
+      {
+        "id": "answer_227d772a-3544-4bb8-bcc1-798579018958",
+        "role": "student",
+        "text": "INNER JOIN returns only matching rows. LEFT JOIN retains every left-side row, with NULL values for unmatched right-side columns. A WHERE condition on a right-side column such as WHERE jobs.status = active filters out those NULL-extended rows, effectively removing unmatched left rows and behaving like an inner join. If I want all applicants and only their active jobs, I put the status predicate in the ON clause: applicants LEFT JOIN jobs ON jobs.applicant_id = applicants.id AND jobs.status = the active parameter. I test applicants with zero jobs, only inactive jobs, and multiple active jobs; multiple matches correctly produce multiple rows.",
+        "questionId": "question_d7b0f224-fb9d-4305-8f21-a52d38961d91",
+        "kind": "answer",
+        "createdAt": "2026-10-05T01:52:39.055Z"
+      },
+      {
+        "id": "turn_9f568055-d938-4551-8557-55079653a45b",
+        "role": "assistant",
+        "text": "You correctly explain both joins and the filtering effect on unmatched rows. A query filtering by user_id and sorting by created_at is slow. How would you investigate and choose an index?",
+        "reaction": "You correctly explain both joins and the filtering effect on unmatched rows.",
+        "questionId": "question_7e32dbf4-bbb7-4f99-a541-f4feca2406e1",
+        "question": "A query filtering by user_id and sorting by created_at is slow. How would you investigate and choose an index?",
+        "kind": "confirm",
+        "model": "qwen3:4b-instruct",
+        "answerAnchor": "status = active filters out those NULL-extended rows, effectively removing unmatched left rows and behaving like an inner join.",
+        "createdAt": "2026-10-05T01:52:39.055Z"
+      },
+      {
+        "id": "answer_35c99946-7559-47c5-8e8d-89b06bec8d0a",
+        "role": "student",
+        "text": "First I measure the query on representative data and inspect EXPLAIN QUERY PLAN for a full table scan or a temporary sort. For WHERE user_id = ? ORDER BY created_at, I would test a composite index on (user_id, created_at): equality on the leading column narrows the range and the second column provides ordered rows for that user. I compare the plan and latency before and after, including users with few and many rows and any LIMIT. I check existing indexes and avoid redundant ones. An index costs storage and slows inserts and updates, so I benchmark that too; stale statistics, selecting many columns, and low selectivity can affect whether the planner uses it.",
+        "questionId": "question_7e32dbf4-bbb7-4f99-a541-f4feca2406e1",
+        "kind": "answer",
+        "createdAt": "2026-10-05T01:53:16.224Z"
+      },
+      {
+        "id": "turn_1d8fe8c2-5a91-47d0-9f44-cc920e73c608",
+        "role": "assistant",
+        "text": "You correctly identify the execution plan and propose a valid composite index with appropriate trade-off considerations.",
+        "reaction": "You correctly identify the execution plan and propose a valid composite index with appropriate trade-off considerations.",
+        "questionId": null,
+        "question": null,
+        "kind": "confirm",
+        "model": "qwen3:4b-instruct",
+        "answerAnchor": "ORDER BY created_at, I would test a composite index on (user_id, created_at): equality on the leading column narrows the range and the second column",
+        "createdAt": "2026-10-05T01:53:16.225Z"
+      }
+    ],
+    "explainedConcepts": [
+      {
+        "skill": "Python",
+        "concept": "Explain the difference between mutable and immutable Python objects. Give one bug that shared mutable state can cause.",
+        "excerpt": "Lists and dictionaries are mutable: their contents can change in place. Strings, tuples and integers are immutable. Two names can reference the same list, so appending through one name changes what the other sees. A list used as a default argument is created o"
+      },
+      {
+        "skill": "Python",
+        "concept": "How would you design error handling for a function that reads and validates a user-supplied file without hiding programming defects?",
+        "excerpt": "I use a with open context manager so the file closes even on failure. I catch FileNotFoundError and PermissionError around opening, UnicodeDecodeError for decoding, and a narrow ValueError for expected validation failures. I validate required columns and types"
+      },
+      {
+        "skill": "Project explanation",
+        "concept": "Your resume mentions: \"I built a Python and SQLite application to manage job applications offline, validate input, run parameterized queries, and preserve records across restarts.\". Choose one project decision you made. Explain the constraint, alternatives you considered, why you chose it, and how you verified the result.",
+        "excerpt": "For the fictional placement tracker, the constraint was offline operation on one laptop with records surviving restarts. I chose SQLite transactions and parameterized queries. I considered JSON files, which are simple but require manual locking and recovery, a"
+      },
+      {
+        "skill": "Project explanation",
+        "concept": "Your resume mentions: \"I built a Python and SQLite application to manage job applications offline, validate input, run parameterized queries, and preserve records across restarts.\". Describe a difficult defect in one of your projects. How did you isolate the cause, what evidence changed your hypothesis, and what prevented regression?",
+        "excerpt": "In this fictional test project, a record appeared after saving but disappeared on restart. My first hypothesis was that the read query filtered it incorrectly. I reproduced the issue with a temporary database and inspected the row through a second connection b"
+      },
+      {
+        "skill": "SQL",
+        "concept": "Compare INNER JOIN and LEFT JOIN. When can a LEFT JOIN unexpectedly reduce to inner-join behaviour?",
+        "excerpt": "INNER JOIN returns only matching rows. LEFT JOIN retains every left-side row, with NULL values for unmatched right-side columns. A WHERE condition on a right-side column such as WHERE jobs.status = active filters out those NULL-extended rows, effectively remov"
+      },
+      {
+        "skill": "SQL",
+        "concept": "A query filtering by user_id and sorting by created_at is slow. How would you investigate and choose an index?",
+        "excerpt": "First I measure the query on representative data and inspect EXPLAIN QUERY PLAN for a full table scan or a temporary sort. For WHERE user_id = ? ORDER BY created_at, I would test a composite index on (user_id, created_at): equality on the leading column narrow"
+      }
+    ],
+    "missingOrUncertainEvidence": [
+      "No major rubric gaps were detected in the bounded set; this does not establish unassessed skills."
+    ],
+    "improvementTasks": [
+      {
+        "id": "task_1",
+        "title": "Deepen assessed strengths",
+        "action": "Re-answer one assessed topic with a counterexample, trade-off, and verification method.",
+        "priority": "medium"
+      }
+    ],
+    "reassessmentTopics": [],
+    "comparison": [
+      {
+        "skill": "Python",
+        "previousScore": 100,
+        "currentScore": 100,
+        "change": 0
+      },
+      {
+        "skill": "Project explanation",
+        "previousScore": 100,
+        "currentScore": 100,
+        "change": 0
+      },
+      {
+        "skill": "SQL",
+        "previousScore": 100,
+        "currentScore": 100,
+        "change": 0
+      }
+    ],
+    "evidenceProfile": {
+      "claimed": {
+        "skills": [
+          {
+            "id": "skill_847cc6a2d9f3a432",
+            "name": "Python",
+            "sourcePassage": "Python, SQL, Git, testing and debugging.",
+            "origin": "resume",
+            "confidence": "student-reviewed",
+            "confirmed": true
+          },
+          {
+            "id": "skill_08777238edd35f03",
+            "name": "SQL",
+            "sourcePassage": "Python, SQL, Git, testing and debugging.",
+            "origin": "resume",
+            "confidence": "student-reviewed",
+            "confirmed": true
+          },
+          {
+            "id": "skill_2f267f17efc3a982",
+            "name": "Git",
+            "sourcePassage": "Python, SQL, Git, testing and debugging.",
+            "origin": "resume",
+            "confidence": "student-reviewed",
+            "confirmed": true
+          },
+          {
+            "id": "skill_d8cf7c6602867a6d",
+            "name": "testing and debugging",
+            "sourcePassage": "Python, SQL, Git, testing and debugging.",
+            "origin": "resume",
+            "confidence": "student-reviewed",
+            "confirmed": true
+          }
+        ],
+        "projects": [
+          {
+            "id": "project_6eb238e4a89a33f0",
+            "name": "Placement tracker",
+            "sourcePassage": "I built a Python and SQLite application to manage job applications offline, validate input, run parameterized queries, and preserve records across restarts.",
+            "origin": "resume",
+            "confidence": "student-reviewed",
+            "confirmed": true
+          },
+          {
+            "id": "project_e48e4ad8e7068fbc",
+            "name": "Project: Placement tracker.",
+            "sourcePassage": "Project: Placement tracker.",
+            "origin": "resume",
+            "confidence": "student-reviewed",
+            "confirmed": true
+          },
+          {
+            "id": "project_b236e999e321ba68",
+            "name": "I can explain Python data structures, complexity, SQL joins and project trade-offs.",
+            "sourcePassage": "I can explain Python data structures, complexity, SQL joins and project trade-offs.",
+            "origin": "resume",
+            "confidence": "student-reviewed",
+            "confirmed": true
+          }
+        ],
+        "education": [
+          {
+            "id": "education_3cbe0dcbd2e26a5d",
+            "name": "B.Tech CSE",
+            "sourcePassage": "B.Tech CSE, CGPA: 9.0/10.",
+            "origin": "resume",
+            "confidence": "student-reviewed",
+            "confirmed": true
+          }
+        ],
+        "experience": [],
+        "strengths": [
+          {
+            "id": "strength_6b3975b7410b72af",
+            "name": "Python data structures",
+            "sourcePassage": "I can explain Python data structures, complexity, SQL joins and project trade-offs.",
+            "origin": "resume",
+            "confidence": "student-reviewed",
+            "confirmed": true
+          }
+        ]
+      },
+      "observed": [],
+      "assessed": [
+        {
+          "skill": "Python",
+          "points": 8,
+          "maxPoints": 8,
+          "questions": 2,
+          "assessedAnswers": 2,
+          "reviewNeeded": false,
+          "score": 100,
+          "result": "assessed"
+        },
+        {
+          "skill": "Project explanation",
+          "points": 10,
+          "maxPoints": 10,
+          "questions": 2,
+          "assessedAnswers": 2,
+          "reviewNeeded": false,
+          "score": 100,
+          "result": "assessed"
+        },
+        {
+          "skill": "SQL",
+          "points": 8,
+          "maxPoints": 8,
+          "questions": 2,
+          "assessedAnswers": 2,
+          "reviewNeeded": false,
+          "score": 100,
+          "result": "assessed"
+        }
+      ]
+    },
+    "provenance": {
+      "model": {
+        "requested": "qwen3:4b-instruct",
+        "used": "qwen3:4b-instruct",
+        "liveInference": true,
+        "lastStatus": {
+          "reachable": true,
+          "installed": true,
+          "ready": true,
+          "mode": "local-model",
+          "model": "qwen3:4b-instruct",
+          "endpoint": "http://localhost:11434",
+          "models": [
+            "qwen3:4b-instruct"
+          ],
+          "details": {
+            "capabilities": [
+              "tools",
+              "thinking",
+              "completion"
+            ],
+            "family": "qwen3",
+            "parameterSize": "4.0B",
+            "quantization": "Q4_K_M"
+          },
+          "digest": "0edcdef34593eac1aa2be9c7d06c432dcf81945adca5eca2f27662c18f168ba0",
+          "settings": {
+            "contextSize": 4096,
+            "temperature": 0.1,
+            "thinking": false,
+            "maxConcurrentInference": 1
+          },
+          "setup": {
+            "check": "ollama list",
+            "pull": "ollama pull qwen3:4b-instruct",
+            "start": "ollama serve"
+          },
+          "message": "Local model is ready."
+        }
+      },
+      "versions": {
+        "coordinator": "1.4.0",
+        "questionBank": "1.2.0",
+        "prompt": "1.4.0",
+        "scoring": "1.2.0",
+        "conversation": "1.0.0"
+      },
+      "questionBankVersion": "1.2.0",
+      "aggregationPolicy": "Award concept-based partial credit in half-point steps; equivalent wording is valid and language style is not graded. A used hint caps that attempt at 70% of its maximum. A base question and its clarification share one rubric: count the strongest validated whole attempt once, so follow-ups do not add a scoring penalty. Skipped base questions receive zero and are marked insufficient evidence. The final percentage is 100 * total earned / total available across base questions. No score floor or placement guarantee is applied. Adaptive paths differ; these scores are preparation evidence, not calibrated rankings or placement probabilities.",
+      "questionSnapshots": [
+        {
+          "id": "question_d9a40e64-7862-4d23-b004-3b4c08f98b70",
+          "skill": "Python",
+          "domain": "Python",
+          "difficulty": "foundation",
+          "prompt": "Explain the difference between mutable and immutable Python objects. Give one bug that shared mutable state can cause.",
+          "expectedConcepts": [
+            "mutation changes an existing object",
+            "immutable values require a new object",
+            "lists or dictionaries are mutable",
+            "aliasing or mutable defaults can share state"
+          ],
+          "referenceAnswer": "Lists and dictionaries can be changed in place, while values such as strings, tuples, and integers cannot. If two names reference one mutable object, a change through one name is visible through the other; a mutable default argument can therefore leak state across calls.",
+          "commonMisconceptions": [
+            "const variables make Python objects immutable",
+            "tuples can never contain mutable members"
+          ],
+          "maxPoints": 4,
+          "criteria": [
+            {
+              "id": "definition",
+              "label": "Distinguishes mutation from rebinding",
+              "maxPoints": 1,
+              "keywords": [
+                "in place",
+                "same object",
+                "new object",
+                "rebind"
+              ]
+            },
+            {
+              "id": "examples",
+              "label": "Gives valid mutable and immutable examples",
+              "maxPoints": 1,
+              "keywords": [
+                "list",
+                "dict",
+                "string",
+                "tuple",
+                "integer"
+              ]
+            },
+            {
+              "id": "bug",
+              "label": "Explains a shared-state bug",
+              "maxPoints": 2,
+              "keywords": [
+                "alias",
+                "default argument",
+                "shared",
+                "across calls",
+                "reference"
+              ]
+            }
+          ],
+          "followUpCriteria": "If the answer is strong, ask how copying differs from aliasing; if shared state is vague, request a concrete function example.",
+          "hint": "Think about whether an operation changes an existing object identity or binds a name to a different object.",
+          "bankId": "python_mutability_01",
+          "context": null,
+          "hintUsed": false,
+          "followUp": false,
+          "originalPrompt": "Explain the difference between mutable and immutable Python objects. Give one bug that shared mutable state can cause.",
+          "generationMethod": "ollama-personalized",
+          "generationModel": "qwen3:4b-instruct"
+        },
+        {
+          "id": "question_e3890b23-af31-4915-8129-769c0a8901db",
+          "skill": "Python",
+          "domain": "Python",
+          "difficulty": "foundation",
+          "prompt": "How would a function with a mutable default argument behave if called multiple times with no explicit list creation?",
+          "expectedConcepts": [
+            "mutation changes an existing object",
+            "immutable values require a new object",
+            "lists or dictionaries are mutable",
+            "aliasing or mutable defaults can share state"
+          ],
+          "referenceAnswer": "Lists and dictionaries can be changed in place, while values such as strings, tuples, and integers cannot. If two names reference one mutable object, a change through one name is visible through the other; a mutable default argument can therefore leak state across calls.",
+          "commonMisconceptions": [
+            "const variables make Python objects immutable",
+            "tuples can never contain mutable members"
+          ],
+          "maxPoints": 4,
+          "criteria": [
+            {
+              "id": "definition",
+              "label": "Distinguishes mutation from rebinding",
+              "maxPoints": 1,
+              "keywords": [
+                "in place",
+                "same object",
+                "new object",
+                "rebind"
+              ]
+            },
+            {
+              "id": "examples",
+              "label": "Gives valid mutable and immutable examples",
+              "maxPoints": 1,
+              "keywords": [
+                "list",
+                "dict",
+                "string",
+                "tuple",
+                "integer"
+              ]
+            },
+            {
+              "id": "bug",
+              "label": "Explains a shared-state bug",
+              "maxPoints": 2,
+              "keywords": [
+                "alias",
+                "default argument",
+                "shared",
+                "across calls",
+                "reference"
+              ]
+            }
+          ],
+          "followUpCriteria": "If the answer is strong, ask how copying differs from aliasing; if shared state is vague, request a concrete function example.",
+          "hint": "Think about whether an operation changes an existing object identity or binds a name to a different object.",
+          "bankId": "python_mutability_01",
+          "context": null,
+          "hintUsed": false,
+          "followUp": true,
+          "originalPrompt": "Explain the difference between mutable and immutable Python objects. Give one bug that shared mutable state can cause.",
+          "generationMethod": "ollama-personalized",
+          "generationModel": "qwen3:4b-instruct",
+          "parentQuestionId": "question_d9a40e64-7862-4d23-b004-3b4c08f98b70"
+        },
+        {
+          "id": "question_d03b717c-b77d-40e8-ab53-14b673ef8f07",
+          "skill": "Python",
+          "domain": "Python",
+          "difficulty": "intermediate",
+          "prompt": "How would you design error handling for a function that reads and validates a user-supplied file without hiding programming defects?",
+          "expectedConcepts": [
+            "catch specific exceptions",
+            "validate input and size",
+            "use context manager",
+            "preserve or log unexpected failures"
+          ],
+          "referenceAnswer": "Validate allowed type and size before parsing, open resources with a context manager, catch only expected exceptions such as permission or parse errors, return actionable messages for those cases, and allow unexpected defects to propagate or be logged with their traceback.",
+          "commonMisconceptions": [
+            "catch Exception everywhere and ignore it",
+            "file extension alone proves file type"
+          ],
+          "maxPoints": 4,
+          "criteria": [
+            {
+              "id": "specific",
+              "label": "Catches expected, specific exceptions",
+              "maxPoints": 1,
+              "keywords": [
+                "specific exception",
+                "permission",
+                "parse",
+                "not found"
+              ]
+            },
+            {
+              "id": "validation",
+              "label": "Validates untrusted input",
+              "maxPoints": 1,
+              "keywords": [
+                "type",
+                "size",
+                "validate",
+                "limit"
+              ]
+            },
+            {
+              "id": "resources",
+              "label": "Manages file resources safely",
+              "maxPoints": 1,
+              "keywords": [
+                "with",
+                "context manager",
+                "close"
+              ]
+            },
+            {
+              "id": "unexpected",
+              "label": "Does not suppress unexpected defects",
+              "maxPoints": 1,
+              "keywords": [
+                "propagate",
+                "raise",
+                "traceback",
+                "log"
+              ]
+            }
+          ],
+          "followUpCriteria": "Ask for an example exception boundary when the answer relies on a blanket catch.",
+          "hint": "Separate errors you expect from bugs you did not anticipate.",
+          "bankId": "python_errors_02",
+          "context": null,
+          "hintUsed": false,
+          "followUp": false,
+          "originalPrompt": "How would you design error handling for a function that reads and validates a user-supplied file without hiding programming defects?",
+          "generationMethod": "ollama-personalized",
+          "generationModel": "qwen3:4b-instruct"
+        },
+        {
+          "id": "question_0797014b-7b56-4b5f-a477-422c7f0c3f57",
+          "skill": "Python",
+          "domain": "Python",
+          "difficulty": "intermediate",
+          "prompt": "How would the error handling differ if a parser raised a TypeError due to invalid data format, not user input?",
+          "expectedConcepts": [
+            "catch specific exceptions",
+            "validate input and size",
+            "use context manager",
+            "preserve or log unexpected failures"
+          ],
+          "referenceAnswer": "Validate allowed type and size before parsing, open resources with a context manager, catch only expected exceptions such as permission or parse errors, return actionable messages for those cases, and allow unexpected defects to propagate or be logged with their traceback.",
+          "commonMisconceptions": [
+            "catch Exception everywhere and ignore it",
+            "file extension alone proves file type"
+          ],
+          "maxPoints": 4,
+          "criteria": [
+            {
+              "id": "specific",
+              "label": "Catches expected, specific exceptions",
+              "maxPoints": 1,
+              "keywords": [
+                "specific exception",
+                "permission",
+                "parse",
+                "not found"
+              ]
+            },
+            {
+              "id": "validation",
+              "label": "Validates untrusted input",
+              "maxPoints": 1,
+              "keywords": [
+                "type",
+                "size",
+                "validate",
+                "limit"
+              ]
+            },
+            {
+              "id": "resources",
+              "label": "Manages file resources safely",
+              "maxPoints": 1,
+              "keywords": [
+                "with",
+                "context manager",
+                "close"
+              ]
+            },
+            {
+              "id": "unexpected",
+              "label": "Does not suppress unexpected defects",
+              "maxPoints": 1,
+              "keywords": [
+                "propagate",
+                "raise",
+                "traceback",
+                "log"
+              ]
+            }
+          ],
+          "followUpCriteria": "Ask for an example exception boundary when the answer relies on a blanket catch.",
+          "hint": "Separate errors you expect from bugs you did not anticipate.",
+          "bankId": "python_errors_02",
+          "context": null,
+          "hintUsed": false,
+          "followUp": true,
+          "originalPrompt": "How would you design error handling for a function that reads and validates a user-supplied file without hiding programming defects?",
+          "generationMethod": "ollama-personalized",
+          "generationModel": "qwen3:4b-instruct",
+          "parentQuestionId": "question_d03b717c-b77d-40e8-ab53-14b673ef8f07"
+        },
+        {
+          "id": "question_969987a6-635b-43ce-bc1f-2b2851d69478",
+          "skill": "Project explanation",
+          "domain": "Project explanation",
+          "difficulty": "foundation",
+          "prompt": "Your resume mentions: \"I built a Python and SQLite application to manage job applications offline, validate input, run parameterized queries, and preserve records across restarts.\". Choose one project decision you made. Explain the constraint, alternatives you considered, why you chose it, and how you verified the result.",
+          "expectedConcepts": [
+            "specific constraint",
+            "credible alternative",
+            "decision rationale",
+            "verification evidence"
+          ],
+          "referenceAnswer": "A strong response names a concrete decision, ties it to a real constraint, compares at least one alternative, states the trade-off, and describes a test, measurement, or user observation that checked the outcome.",
+          "commonMisconceptions": [
+            "listing technologies without a decision",
+            "claiming success without verification"
+          ],
+          "maxPoints": 5,
+          "criteria": [
+            {
+              "id": "decision",
+              "label": "Names a concrete technical decision and constraint",
+              "maxPoints": 1,
+              "keywords": [
+                "because",
+                "constraint",
+                "needed",
+                "requirement"
+              ]
+            },
+            {
+              "id": "alternative",
+              "label": "Compares an alternative",
+              "maxPoints": 1,
+              "keywords": [
+                "alternative",
+                "instead",
+                "considered",
+                "versus"
+              ]
+            },
+            {
+              "id": "tradeoff",
+              "label": "Explains the trade-off",
+              "maxPoints": 1,
+              "keywords": [
+                "trade-off",
+                "cost",
+                "complexity",
+                "performance",
+                "maintain"
+              ]
+            },
+            {
+              "id": "verification",
+              "label": "Provides verification evidence",
+              "maxPoints": 2,
+              "keywords": [
+                "test",
+                "measure",
+                "benchmark",
+                "validated",
+                "feedback"
+              ]
+            }
+          ],
+          "followUpCriteria": "Request a concrete measurement if verification is asserted but not described.",
+          "hint": "Use a four-part story: constraint, alternatives, decision, evidence.",
+          "bankId": "project_decisions_01",
+          "context": {
+            "type": "resume",
+            "label": "Resume project claim",
+            "passage": "I built a Python and SQLite application to manage job applications offline, validate input, run parameterized queries, and preserve records across restarts."
+          },
+          "hintUsed": false,
+          "followUp": false,
+          "originalPrompt": "Your resume mentions: “I built a Python and SQLite application to manage job applications offline, validate input, run parameterized queries, and preserve records across restarts.”. Choose one project decision you made. Explain the constraint, alternatives you considered, why you chose it, and how you verified the result.",
+          "generationMethod": "ollama-personalized",
+          "generationModel": "qwen3:4b-instruct"
+        },
+        {
+          "id": "question_ee4e7f7d-dc14-440a-8be2-678d9550ec07",
+          "skill": "Project explanation",
+          "domain": "Project explanation",
+          "difficulty": "intermediate",
+          "prompt": "Your resume mentions: \"I built a Python and SQLite application to manage job applications offline, validate input, run parameterized queries, and preserve records across restarts.\". Describe a difficult defect in one of your projects. How did you isolate the cause, what evidence changed your hypothesis, and what prevented regression?",
+          "expectedConcepts": [
+            "reproducible symptom",
+            "hypothesis-driven isolation",
+            "observed evidence",
+            "regression test or guard"
+          ],
+          "referenceAnswer": "A defensible answer gives a reproducible symptom, narrows variables or adds instrumentation, updates a hypothesis from observed evidence, fixes the root cause, and adds a regression test, validation rule, or monitoring check.",
+          "commonMisconceptions": [
+            "trial-and-error changes without evidence",
+            "describing only the final code change"
+          ],
+          "maxPoints": 5,
+          "criteria": [
+            {
+              "id": "symptom",
+              "label": "States a reproducible symptom",
+              "maxPoints": 1,
+              "keywords": [
+                "reproduce",
+                "steps",
+                "symptom",
+                "failed"
+              ]
+            },
+            {
+              "id": "isolation",
+              "label": "Uses evidence to isolate the cause",
+              "maxPoints": 2,
+              "keywords": [
+                "log",
+                "trace",
+                "test",
+                "hypothesis",
+                "isolate"
+              ]
+            },
+            {
+              "id": "root",
+              "label": "Distinguishes root cause from symptom",
+              "maxPoints": 1,
+              "keywords": [
+                "root cause",
+                "because",
+                "caused"
+              ]
+            },
+            {
+              "id": "regression",
+              "label": "Prevents recurrence",
+              "maxPoints": 1,
+              "keywords": [
+                "regression",
+                "unit test",
+                "integration test",
+                "validation",
+                "monitor"
+              ]
+            }
+          ],
+          "followUpCriteria": "Ask what observation falsified the first hypothesis when the answer is purely chronological.",
+          "hint": "Focus on the evidence that narrowed the search, not only the final fix.",
+          "bankId": "project_debugging_02",
+          "context": {
+            "type": "resume",
+            "label": "Resume project claim",
+            "passage": "I built a Python and SQLite application to manage job applications offline, validate input, run parameterized queries, and preserve records across restarts."
+          },
+          "hintUsed": false,
+          "followUp": false,
+          "originalPrompt": "Your resume mentions: “I built a Python and SQLite application to manage job applications offline, validate input, run parameterized queries, and preserve records across restarts.”. Describe a difficult defect in one of your projects. How did you isolate the cause, what evidence changed your hypothesis, and what prevented regression?",
+          "generationMethod": "ollama-personalized",
+          "generationModel": "qwen3:4b-instruct"
+        },
+        {
+          "id": "question_d7b0f224-fb9d-4305-8f21-a52d38961d91",
+          "skill": "SQL",
+          "domain": "SQL",
+          "difficulty": "foundation",
+          "prompt": "Compare INNER JOIN and LEFT JOIN. When can a LEFT JOIN unexpectedly reduce to inner-join behaviour?",
+          "expectedConcepts": [
+            "inner join keeps matching rows",
+            "left join keeps all left rows",
+            "missing right rows contain null",
+            "WHERE predicate on right table can remove null rows"
+          ],
+          "referenceAnswer": "An inner join returns matched pairs; a left join also retains unmatched left rows and fills right columns with NULL. Filtering a right-table column in WHERE, instead of placing the condition in ON or accounting for NULL, removes those unmatched rows.",
+          "commonMisconceptions": [
+            "left join always returns more rows",
+            "join order never matters"
+          ],
+          "maxPoints": 4,
+          "criteria": [
+            {
+              "id": "inner",
+              "label": "Explains INNER JOIN",
+              "maxPoints": 1,
+              "keywords": [
+                "matching",
+                "matched",
+                "both tables"
+              ]
+            },
+            {
+              "id": "left",
+              "label": "Explains LEFT JOIN and NULL extension",
+              "maxPoints": 1,
+              "keywords": [
+                "all left",
+                "unmatched",
+                "null"
+              ]
+            },
+            {
+              "id": "filter",
+              "label": "Identifies WHERE-on-right filtering",
+              "maxPoints": 2,
+              "keywords": [
+                "where",
+                "right table",
+                "null",
+                "on clause"
+              ]
+            }
+          ],
+          "followUpCriteria": "Ask the student to place a status predicate correctly in ON versus WHERE.",
+          "hint": "Trace what happens to an unmatched row after the join and then after WHERE.",
+          "bankId": "sql_joins_01",
+          "context": null,
+          "hintUsed": false,
+          "followUp": false,
+          "originalPrompt": "Compare INNER JOIN and LEFT JOIN. When can a LEFT JOIN unexpectedly reduce to inner-join behaviour?",
+          "generationMethod": "ollama-personalized",
+          "generationModel": "qwen3:4b-instruct"
+        },
+        {
+          "id": "question_7e32dbf4-bbb7-4f99-a541-f4feca2406e1",
+          "skill": "SQL",
+          "domain": "SQL",
+          "difficulty": "intermediate",
+          "prompt": "A query filtering by user_id and sorting by created_at is slow. How would you investigate and choose an index?",
+          "expectedConcepts": [
+            "inspect execution plan",
+            "composite index",
+            "column order",
+            "write and storage trade-offs"
+          ],
+          "referenceAnswer": "Inspect the actual plan and row counts first. A composite index beginning with user_id and then created_at can support the equality filter and ordered retrieval. Validate selectivity and the plan, while accounting for additional write cost and storage.",
+          "commonMisconceptions": [
+            "add separate indexes to every column",
+            "an index always makes every query faster"
+          ],
+          "maxPoints": 4,
+          "criteria": [
+            {
+              "id": "plan",
+              "label": "Uses an execution plan",
+              "maxPoints": 1,
+              "keywords": [
+                "explain",
+                "execution plan",
+                "scan"
+              ]
+            },
+            {
+              "id": "composite",
+              "label": "Proposes an ordered composite index",
+              "maxPoints": 2,
+              "keywords": [
+                "composite",
+                "user_id",
+                "created_at",
+                "order"
+              ]
+            },
+            {
+              "id": "tradeoff",
+              "label": "States index trade-offs",
+              "maxPoints": 1,
+              "keywords": [
+                "write",
+                "storage",
+                "maintenance",
+                "selectivity"
+              ]
+            }
+          ],
+          "followUpCriteria": "Ask why column order matters if the answer only says to add an index.",
+          "hint": "Consider one structure that can support both the equality predicate and the requested order.",
+          "bankId": "sql_index_02",
+          "context": null,
+          "hintUsed": false,
+          "followUp": false,
+          "originalPrompt": "A query filtering by user_id and sorting by created_at is slow. How would you investigate and choose an index?",
+          "generationMethod": "ollama-personalized",
+          "generationModel": "qwen3:4b-instruct"
+        }
+      ]
+    },
+    "limitations": [
+      "This report covers only the skills and questions shown in this session.",
+      "Open-answer grading is an estimate and should be reviewed when the uncertainty flag is medium or high.",
+      "Repository contents do not prove authorship or proficiency.",
+      "Adaptive paths vary in difficulty; scores are not calibrated rankings and do not predict hiring outcomes."
+    ]
+  }
+}

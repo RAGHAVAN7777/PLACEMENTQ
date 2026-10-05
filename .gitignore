@@ -43,3 +43,12 @@ yarn-debug.log*
 yarn-error.log*
 pnpm-debug.log*
 *.log
+
+# PlacementIQ local interview data and uploads
+server/data/runtime/
+server/data/test-runtime/
+server/data/cache/
+frontend/public/models/*.tar.gz
+server/uploads/
+*.resume.pdf
+*.resume.docx

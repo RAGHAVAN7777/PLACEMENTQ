@@ -80,7 +80,7 @@ This expands the predictive feature space from 23 raw features to **31 standardi
 3. **Stratified Train-Test Split:**
    - **Training Set:** 80,000 instances (80%)
    - **Testing Set:** 20,000 instances (20%)
-   - Stratification guarantees that the 55% / 45% class balance is preserved in both splits.
+   - Stratification keeps the observed 55% / 45% class proportions approximately aligned across both splits for this run.
 4. **Feature Standardization:** `StandardScaler` (mean = 0, standard deviation = 1) applied across all 31 predictors, fitted strictly on `X_train` and applied to `X_test` to prevent data snooping.
 
 ---
@@ -118,12 +118,12 @@ In statistical learning theory, the maximum theoretical accuracy achievable by a
 The Bayes Error Rate represents irreducible noise caused by unobserved variables and stochastic recruitment dynamics:
 - Two candidates with identical academic grades, coding test scores, and tier colleges can receive different hiring decisions due to factors unrecorded in the dataset (such as company hiring freeze, panel interviewer subjectivity, interpersonal rapport, or interview-day nerves).
 
-### Empirical Validation:
+### Empirical diagnostic:
 Using a k-Nearest Neighbors neighborhood consistency audit (k=9) across 100,000 records:
 - **Average local neighborhood label consistency:** **69.73%**
-- **Estimated irreducible / stochastic noise:** **30.27%**
+- **Complement of local consistency:** **30.27%**
 
-Because students in overlapping feature regions naturally have mixed placement outcomes, an empirical test accuracy of **85.66%** and an **ROC-AUC of 0.9363** indicates that the model has captured **virtually 100% of the learnable deterministic signal** without memorizing noise or overfitting.
+This neighbourhood statistic describes local label mixing under one choice of distance metric and `k`. It is not an estimator that proves the Bayes error rate, a theoretical accuracy ceiling, or the fraction of learnable signal captured. The held-out accuracy and ROC-AUC should therefore be reported as empirical results for this dataset and split only.
 
 ---
 

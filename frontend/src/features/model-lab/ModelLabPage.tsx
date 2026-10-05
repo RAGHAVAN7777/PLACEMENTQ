@@ -19,8 +19,8 @@ export default function ModelLabPage() {
           <div className="ml-banner-badge">
             <span className="badge badge-primary">Research &amp; Model Transparency</span>
           </div>
-          <Link to={ROUTES.assessment} className="btn btn-primary btn-sm">
-            Start Assessment
+          <Link to={ROUTES.placementAssessment} className="btn btn-primary btn-sm">
+            Run Placement Prediction
             <ArrowRight size={16} />
           </Link>
         </div>
@@ -336,7 +336,7 @@ export default function ModelLabPage() {
                 <span className="font-mono">92.2% Recall (863 FN)</span>
               </div>
               <p style={{ fontSize: '0.75rem', color: 'var(--color-text-secondary)', marginTop: '4px', lineHeight: '1.4' }}>
-                Lowering cutoff to 0.41 rescues 403 qualified students who would otherwise have been missed.
+                On this test split, lowering the cutoff to 0.41 reclassifies 403 records from negative to positive. It does not establish that those students are qualified or that the policy causes better outcomes.
               </p>
             </div>
           </div>
@@ -355,7 +355,7 @@ export default function ModelLabPage() {
             <div>
               <strong>Dataset provenance &amp; Calibration</strong>
               <p style={{ marginTop: 4 }}>
-                The dataset was calibrated with multi-stage industry recruitment evaluation rules (coding, CGPA, aptitude, interview quality, backlog penalties) to authentically mirror real-world campus hiring dynamics.
+                The dataset provenance is not verified. Its patterns appear generated or rule-shaped, so results should not be presented as validated real-world campus-hiring performance.
               </p>
             </div>
           </div>
@@ -368,7 +368,7 @@ export default function ModelLabPage() {
               <strong>Guidance over Gatekeeping:</strong> While the machine learning pipeline models placement likelihood, the interactive frontend readiness score provides formative feedback to help students address skill gaps rather than serving as a punitive screening filter.
             </li>
             <li>
-              <strong>Algorithmic Fairness:</strong> Demographic attributes (gender, age) exhibited minimal predictive weight. In an enterprise deployment, demographic attributes should be fully de-identified to guarantee equality of opportunity.
+              <strong>Algorithmic Fairness:</strong> Low feature importance for demographic fields does not establish fairness. Any real deployment would require subgroup error analysis, governance, privacy review, and human oversight; de-identification alone cannot guarantee equality of opportunity.
             </li>
             <li>
               <strong>Recruitment Volatility:</strong> Even with strong technical and academic scores, real-world interviews carry unobserved variance (company culture fit, interview panel subjectivity, spot tests).

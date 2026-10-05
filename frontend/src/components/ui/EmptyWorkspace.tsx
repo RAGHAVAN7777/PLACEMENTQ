@@ -1,5 +1,4 @@
 import { Link } from 'react-router-dom';
-import { useStore } from '../../services/store';
 import { ROUTES } from '../../config';
 import { ClipboardList, BarChart3 } from 'lucide-react';
 import type { ReactNode } from 'react';
@@ -13,9 +12,8 @@ interface EmptyWorkspaceProps {
 export default function EmptyWorkspace({
   icon,
   title = 'No assessment yet',
-  description = 'Complete an assessment to see your readiness profile, or load a sample to explore.',
+  description = 'Complete an interview to see your actual score, evidence and preparation plan.',
 }: EmptyWorkspaceProps) {
-  const loadSampleProfile = useStore((s) => s.loadSampleProfile);
 
   return (
     <div className="empty-state">
@@ -27,11 +25,9 @@ export default function EmptyWorkspace({
       <div className="empty-state-actions">
         <Link to={ROUTES.assessment} className="btn btn-primary">
           <ClipboardList size={16} />
-          Start assessment
+          Meet your interviewer
         </Link>
-        <button className="btn btn-secondary" onClick={loadSampleProfile}>
-          Load sample profile
-        </button>
+        <Link className="btn btn-secondary" to={ROUTES.placementAssessment}>Placement predictor</Link>
       </div>
     </div>
   );

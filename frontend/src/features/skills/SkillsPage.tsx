@@ -5,8 +5,16 @@ import { FEATURE_DEFINITIONS, ROUTES } from '../../config';
 import EmptyWorkspace from '../../components/ui/EmptyWorkspace';
 import { Plus, Check, Info } from 'lucide-react';
 import './SkillsPage.css';
+import { useInterviewWorkspace, InterviewWorkspaceStatus } from '../../services/InterviewWorkspace';
+import { InterviewSkillResults } from '../overview/InterviewOverview';
 
 export default function SkillsPage() {
+  const { report, loading, error } = useInterviewWorkspace();
+  if (loading || error) return <InterviewWorkspaceStatus />;
+  return report ? <InterviewSkillResults report={report} /> : <NumericSkillsPage />;
+}
+
+function NumericSkillsPage() {
   const latestAssessment = useStore((s) => s.getLatestAssessment());
   const addTask = useStore((s) => s.addTask);
   const hasTask = useStore((s) => s.hasTask);

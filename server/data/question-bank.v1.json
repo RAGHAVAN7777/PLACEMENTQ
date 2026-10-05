@@ -1,0 +1,499 @@
+{
+  "version": "1.2.0",
+  "aggregationPolicy": "Award concept-based partial credit in half-point steps; equivalent wording is valid and language style is not graded. A used hint caps that attempt at 70% of its maximum. A base question and its clarification share one rubric: count the strongest validated whole attempt once, so follow-ups do not add a scoring penalty. Skipped base questions receive zero and are marked insufficient evidence. The final percentage is 100 * total earned / total available across base questions. No score floor or placement guarantee is applied. Adaptive paths differ; these scores are preparation evidence, not calibrated rankings or placement probabilities.",
+  "questions": [
+    {
+      "id": "python_mutability_01",
+      "skill": "Python",
+      "domain": "Python",
+      "difficulty": "foundation",
+      "prompt": "Explain the difference between mutable and immutable Python objects. Give one bug that shared mutable state can cause.",
+      "expectedConcepts": [
+        "mutation changes an existing object",
+        "immutable values require a new object",
+        "lists or dictionaries are mutable",
+        "aliasing or mutable defaults can share state"
+      ],
+      "referenceAnswer": "Lists and dictionaries can be changed in place, while values such as strings, tuples, and integers cannot. If two names reference one mutable object, a change through one name is visible through the other; a mutable default argument can therefore leak state across calls.",
+      "commonMisconceptions": [
+        "const variables make Python objects immutable",
+        "tuples can never contain mutable members"
+      ],
+      "maxPoints": 4,
+      "criteria": [
+        {
+          "id": "definition",
+          "label": "Distinguishes mutation from rebinding",
+          "maxPoints": 1,
+          "keywords": [
+            "in place",
+            "same object",
+            "new object",
+            "rebind"
+          ]
+        },
+        {
+          "id": "examples",
+          "label": "Gives valid mutable and immutable examples",
+          "maxPoints": 1,
+          "keywords": [
+            "list",
+            "dict",
+            "string",
+            "tuple",
+            "integer"
+          ]
+        },
+        {
+          "id": "bug",
+          "label": "Explains a shared-state bug",
+          "maxPoints": 2,
+          "keywords": [
+            "alias",
+            "default argument",
+            "shared",
+            "across calls",
+            "reference"
+          ]
+        }
+      ],
+      "followUpCriteria": "If the answer is strong, ask how copying differs from aliasing; if shared state is vague, request a concrete function example.",
+      "hint": "Think about whether an operation changes an existing object identity or binds a name to a different object."
+    },
+    {
+      "id": "python_errors_02",
+      "skill": "Python",
+      "domain": "Python",
+      "difficulty": "intermediate",
+      "prompt": "How would you design error handling for a function that reads and validates a user-supplied file without hiding programming defects?",
+      "expectedConcepts": [
+        "catch specific exceptions",
+        "validate input and size",
+        "use context manager",
+        "preserve or log unexpected failures"
+      ],
+      "referenceAnswer": "Validate allowed type and size before parsing, open resources with a context manager, catch only expected exceptions such as permission or parse errors, return actionable messages for those cases, and allow unexpected defects to propagate or be logged with their traceback.",
+      "commonMisconceptions": [
+        "catch Exception everywhere and ignore it",
+        "file extension alone proves file type"
+      ],
+      "maxPoints": 4,
+      "criteria": [
+        {
+          "id": "specific",
+          "label": "Catches expected, specific exceptions",
+          "maxPoints": 1,
+          "keywords": [
+            "specific exception",
+            "permission",
+            "parse",
+            "not found"
+          ]
+        },
+        {
+          "id": "validation",
+          "label": "Validates untrusted input",
+          "maxPoints": 1,
+          "keywords": [
+            "type",
+            "size",
+            "validate",
+            "limit"
+          ]
+        },
+        {
+          "id": "resources",
+          "label": "Manages file resources safely",
+          "maxPoints": 1,
+          "keywords": [
+            "with",
+            "context manager",
+            "close"
+          ]
+        },
+        {
+          "id": "unexpected",
+          "label": "Does not suppress unexpected defects",
+          "maxPoints": 1,
+          "keywords": [
+            "propagate",
+            "raise",
+            "traceback",
+            "log"
+          ]
+        }
+      ],
+      "followUpCriteria": "Ask for an example exception boundary when the answer relies on a blanket catch.",
+      "hint": "Separate errors you expect from bugs you did not anticipate."
+    },
+    {
+      "id": "sql_joins_01",
+      "skill": "SQL",
+      "domain": "SQL",
+      "difficulty": "foundation",
+      "prompt": "Compare INNER JOIN and LEFT JOIN. When can a LEFT JOIN unexpectedly reduce to inner-join behaviour?",
+      "expectedConcepts": [
+        "inner join keeps matching rows",
+        "left join keeps all left rows",
+        "missing right rows contain null",
+        "WHERE predicate on right table can remove null rows"
+      ],
+      "referenceAnswer": "An inner join returns matched pairs; a left join also retains unmatched left rows and fills right columns with NULL. Filtering a right-table column in WHERE, instead of placing the condition in ON or accounting for NULL, removes those unmatched rows.",
+      "commonMisconceptions": [
+        "left join always returns more rows",
+        "join order never matters"
+      ],
+      "maxPoints": 4,
+      "criteria": [
+        {
+          "id": "inner",
+          "label": "Explains INNER JOIN",
+          "maxPoints": 1,
+          "keywords": [
+            "matching",
+            "matched",
+            "both tables"
+          ]
+        },
+        {
+          "id": "left",
+          "label": "Explains LEFT JOIN and NULL extension",
+          "maxPoints": 1,
+          "keywords": [
+            "all left",
+            "unmatched",
+            "null"
+          ]
+        },
+        {
+          "id": "filter",
+          "label": "Identifies WHERE-on-right filtering",
+          "maxPoints": 2,
+          "keywords": [
+            "where",
+            "right table",
+            "null",
+            "on clause"
+          ]
+        }
+      ],
+      "followUpCriteria": "Ask the student to place a status predicate correctly in ON versus WHERE.",
+      "hint": "Trace what happens to an unmatched row after the join and then after WHERE."
+    },
+    {
+      "id": "sql_index_02",
+      "skill": "SQL",
+      "domain": "SQL",
+      "difficulty": "intermediate",
+      "prompt": "A query filtering by user_id and sorting by created_at is slow. How would you investigate and choose an index?",
+      "expectedConcepts": [
+        "inspect execution plan",
+        "composite index",
+        "column order",
+        "write and storage trade-offs"
+      ],
+      "referenceAnswer": "Inspect the actual plan and row counts first. A composite index beginning with user_id and then created_at can support the equality filter and ordered retrieval. Validate selectivity and the plan, while accounting for additional write cost and storage.",
+      "commonMisconceptions": [
+        "add separate indexes to every column",
+        "an index always makes every query faster"
+      ],
+      "maxPoints": 4,
+      "criteria": [
+        {
+          "id": "plan",
+          "label": "Uses an execution plan",
+          "maxPoints": 1,
+          "keywords": [
+            "explain",
+            "execution plan",
+            "scan"
+          ]
+        },
+        {
+          "id": "composite",
+          "label": "Proposes an ordered composite index",
+          "maxPoints": 2,
+          "keywords": [
+            "composite",
+            "user_id",
+            "created_at",
+            "order"
+          ]
+        },
+        {
+          "id": "tradeoff",
+          "label": "States index trade-offs",
+          "maxPoints": 1,
+          "keywords": [
+            "write",
+            "storage",
+            "maintenance",
+            "selectivity"
+          ]
+        }
+      ],
+      "followUpCriteria": "Ask why column order matters if the answer only says to add an index.",
+      "hint": "Consider one structure that can support both the equality predicate and the requested order."
+    },
+    {
+      "id": "ml_leakage_01",
+      "skill": "Machine learning",
+      "domain": "Machine learning",
+      "difficulty": "foundation",
+      "prompt": "What is target leakage, and how can it make a placement classifier look better than it will perform in real use?",
+      "expectedConcepts": [
+        "feature contains outcome or future information",
+        "information unavailable at prediction time",
+        "inflated validation metrics",
+        "split and feature pipeline must reflect deployment"
+      ],
+      "referenceAnswer": "Leakage occurs when training features contain the label or information produced after the outcome. A salary recorded only after placement, for example, can reveal the target. Validation then rewards unavailable information, so the deployed model performs worse. Feature construction and splitting must be confined to information available at decision time.",
+      "commonMisconceptions": [
+        "leakage means overfitting only",
+        "dropping duplicate rows alone prevents leakage"
+      ],
+      "maxPoints": 4,
+      "criteria": [
+        {
+          "id": "definition",
+          "label": "Defines outcome or future-information leakage",
+          "maxPoints": 1,
+          "keywords": [
+            "target",
+            "future",
+            "outcome",
+            "after"
+          ]
+        },
+        {
+          "id": "impact",
+          "label": "Explains optimistic evaluation",
+          "maxPoints": 1,
+          "keywords": [
+            "inflated",
+            "validation",
+            "accuracy",
+            "real world"
+          ]
+        },
+        {
+          "id": "prevention",
+          "label": "Connects prevention to deployment-time availability",
+          "maxPoints": 2,
+          "keywords": [
+            "prediction time",
+            "available",
+            "pipeline",
+            "split",
+            "deployment"
+          ]
+        }
+      ],
+      "followUpCriteria": "If a repository contains a classifier, ask the student to identify one possible leakage source in its data flow.",
+      "hint": "Ask whether every feature would exist at the exact moment the prediction is made."
+    },
+    {
+      "id": "ml_metrics_02",
+      "skill": "Machine learning",
+      "domain": "Machine learning",
+      "difficulty": "intermediate",
+      "prompt": "For an imbalanced classifier, why can accuracy be misleading, and how would you choose among precision, recall, F1, and ROC-AUC?",
+      "expectedConcepts": [
+        "majority baseline",
+        "false positive and false negative costs",
+        "precision and recall trade-off",
+        "threshold-independent ranking metric limitations"
+      ],
+      "referenceAnswer": "Accuracy can be high by predicting the majority class. Select recall when missed positives are costly, precision when false alarms are costly, and F1 when a balance is useful. ROC-AUC measures ranking across thresholds but can hide class-specific operating costs, so choose and report an operating threshold with relevant confusion-matrix measures.",
+      "commonMisconceptions": [
+        "ROC-AUC chooses the production threshold",
+        "F1 is always the best metric"
+      ],
+      "maxPoints": 5,
+      "criteria": [
+        {
+          "id": "imbalance",
+          "label": "Explains the majority-class problem",
+          "maxPoints": 1,
+          "keywords": [
+            "majority",
+            "imbalance",
+            "baseline"
+          ]
+        },
+        {
+          "id": "costs",
+          "label": "Links precision/recall to error costs",
+          "maxPoints": 2,
+          "keywords": [
+            "false positive",
+            "false negative",
+            "precision",
+            "recall",
+            "cost"
+          ]
+        },
+        {
+          "id": "f1",
+          "label": "Explains F1 as a balance",
+          "maxPoints": 1,
+          "keywords": [
+            "f1",
+            "harmonic",
+            "balance"
+          ]
+        },
+        {
+          "id": "auc",
+          "label": "Qualifies ROC-AUC",
+          "maxPoints": 1,
+          "keywords": [
+            "threshold",
+            "ranking",
+            "roc",
+            "operating point"
+          ]
+        }
+      ],
+      "followUpCriteria": "Ask which error is more costly in the student's stated use case.",
+      "hint": "Start from the cost of each kind of mistake, not from a universally best metric."
+    },
+    {
+      "id": "project_decisions_01",
+      "skill": "Project explanation",
+      "domain": "Project explanation",
+      "difficulty": "foundation",
+      "prompt": "Choose one project decision you made. Explain the constraint, alternatives you considered, why you chose it, and how you verified the result.",
+      "expectedConcepts": [
+        "specific constraint",
+        "credible alternative",
+        "decision rationale",
+        "verification evidence"
+      ],
+      "referenceAnswer": "A strong response names a concrete decision, ties it to a real constraint, compares at least one alternative, states the trade-off, and describes a test, measurement, or user observation that checked the outcome.",
+      "commonMisconceptions": [
+        "listing technologies without a decision",
+        "claiming success without verification"
+      ],
+      "maxPoints": 5,
+      "criteria": [
+        {
+          "id": "decision",
+          "label": "Names a concrete technical decision and constraint",
+          "maxPoints": 1,
+          "keywords": [
+            "because",
+            "constraint",
+            "needed",
+            "requirement"
+          ]
+        },
+        {
+          "id": "alternative",
+          "label": "Compares an alternative",
+          "maxPoints": 1,
+          "keywords": [
+            "alternative",
+            "instead",
+            "considered",
+            "versus"
+          ]
+        },
+        {
+          "id": "tradeoff",
+          "label": "Explains the trade-off",
+          "maxPoints": 1,
+          "keywords": [
+            "trade-off",
+            "cost",
+            "complexity",
+            "performance",
+            "maintain"
+          ]
+        },
+        {
+          "id": "verification",
+          "label": "Provides verification evidence",
+          "maxPoints": 2,
+          "keywords": [
+            "test",
+            "measure",
+            "benchmark",
+            "validated",
+            "feedback"
+          ]
+        }
+      ],
+      "followUpCriteria": "Request a concrete measurement if verification is asserted but not described.",
+      "hint": "Use a four-part story: constraint, alternatives, decision, evidence."
+    },
+    {
+      "id": "project_debugging_02",
+      "skill": "Project explanation",
+      "domain": "Project explanation",
+      "difficulty": "intermediate",
+      "prompt": "Describe a difficult defect in one of your projects. How did you isolate the cause, what evidence changed your hypothesis, and what prevented regression?",
+      "expectedConcepts": [
+        "reproducible symptom",
+        "hypothesis-driven isolation",
+        "observed evidence",
+        "regression test or guard"
+      ],
+      "referenceAnswer": "A defensible answer gives a reproducible symptom, narrows variables or adds instrumentation, updates a hypothesis from observed evidence, fixes the root cause, and adds a regression test, validation rule, or monitoring check.",
+      "commonMisconceptions": [
+        "trial-and-error changes without evidence",
+        "describing only the final code change"
+      ],
+      "maxPoints": 5,
+      "criteria": [
+        {
+          "id": "symptom",
+          "label": "States a reproducible symptom",
+          "maxPoints": 1,
+          "keywords": [
+            "reproduce",
+            "steps",
+            "symptom",
+            "failed"
+          ]
+        },
+        {
+          "id": "isolation",
+          "label": "Uses evidence to isolate the cause",
+          "maxPoints": 2,
+          "keywords": [
+            "log",
+            "trace",
+            "test",
+            "hypothesis",
+            "isolate"
+          ]
+        },
+        {
+          "id": "root",
+          "label": "Distinguishes root cause from symptom",
+          "maxPoints": 1,
+          "keywords": [
+            "root cause",
+            "because",
+            "caused"
+          ]
+        },
+        {
+          "id": "regression",
+          "label": "Prevents recurrence",
+          "maxPoints": 1,
+          "keywords": [
+            "regression",
+            "unit test",
+            "integration test",
+            "validation",
+            "monitor"
+          ]
+        }
+      ],
+      "followUpCriteria": "Ask what observation falsified the first hypothesis when the answer is purely chronological.",
+      "hint": "Focus on the evidence that narrowed the search, not only the final fix."
+    }
+  ]
+}

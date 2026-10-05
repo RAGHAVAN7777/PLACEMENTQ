@@ -75,7 +75,7 @@ export default function PolicySwitcher({
             <div className="verdict-badge-box">
               <Sparkles size={16} className="text-success animate-pulse" />
               <span className="verdict-label text-success font-mono font-bold">
-                RESCUED BORDERLINE CANDIDATE
+                RECLASSIFIED AT LOWER THRESHOLD
               </span>
             </div>
           )}
@@ -100,7 +100,7 @@ export default function PolicySwitcher({
               isPlacedUnderStandard ? (
                 `Student score (${currentScore}/100) satisfies the standard corporate 0.50 cutoff bar.`
               ) : (
-                `Score (${currentScore}/100) falls below the strict 0.50 cutoff. (Switch to Early Discovery policy to evaluate sensitivity rescue).`
+                `Score (${currentScore}/100) falls below the 0.50 cutoff. Switch policies to inspect sensitivity to the selected threshold.`
               )
             ) : (
               isRescuedCandidate ? (
@@ -141,7 +141,7 @@ export default function PolicySwitcher({
               <span className="pm-value font-mono font-bold">{policy.precision}%</span>
             </div>
             <div className="policy-metric-item">
-              <span className="pm-label font-mono">Rescued Students</span>
+              <span className="pm-label font-mono">Reclassified Records</span>
               <span className="pm-value font-mono font-bold text-primary">
                 {activePolicy === 'high-recall' ? '418 Candidates' : '0 (Baseline)'}
               </span>

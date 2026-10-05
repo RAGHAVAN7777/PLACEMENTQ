@@ -183,8 +183,8 @@ function WhiteStructures({ count, pixelRatio }: { count: number, pixelRatio: num
     for (let i = 0; i < count; i++) {
       const cluster = Math.floor(rng() * 4);
       let cy = 0, cz = 0;
-      // Shift clusters to right half to avoid overlapping headline text
-      const cx = [1.8, 3.6, 5.4, 7.2][cluster];
+      // Distribute clusters: 2 on the left, 2 on the right
+      const cx = [-5.4, -3.6, 3.6, 5.4][cluster];
       const edge = Math.floor(rng() * 4);
       const along = rng() - 0.5;
       pos[i * 3] = cx + (edge < 2 ? (edge === 0 ? -0.45 : 0.45) : along * 0.9);
@@ -409,7 +409,39 @@ function SceneSetup() {
   return null;
 }
 
-export default function ParticleHero() {
+function AnimatedScene({ children, isTransitioning }: { children: React.ReactNode, isTransitioning?: boolean }) {
+  const groupRef = useRef<THREE.Group>(null!);
+  const transitionRef = useRef(0);
+
+  useFrame((state, delta) => {
+    if (!groupRef.current) return;
+    if (isTransitioning) {
+      transitionRef.current += delta;
+      // Exponentially scale up for the explosion
+      const scale = 1.0 + Math.pow(transitionRef.current * 2.5, 4);
+      // Add extra spin for the chakra effect
+      const rotationZ = 0.46 + Math.pow(transitionRef.current * 2.5, 2);
+
+      groupRef.current.scale.set(scale, scale, scale);
+      groupRef.current.rotation.z = rotationZ;
+    } else {
+      // Reset if aborted
+      transitionRef.current = 0;
+      groupRef.current.scale.set(1, 1, 1);
+      groupRef.current.rotation.z = 0.46;
+    }
+  });
+
+  return (
+    <group ref={groupRef} position={[0.6, -0.5, 0]} rotation={[0, 0, 0.46]}>
+      <group rotation={[-0.78, 0, 0]}>
+        {children}
+      </group>
+    </group>
+  );
+}
+
+export default function ParticleHero({ isTransitioning }: { isTransitioning?: boolean }) {
   const [webglFailed, setWebglFailed] = useState(false);
   const [paused, setPaused] = useState(false);
   const [visible, setVisible] = useState(true);
@@ -448,7 +480,7 @@ export default function ParticleHero() {
     <div ref={containerRef} className="hero-canvas-container">
       <Canvas
         orthographic
-        frameloop={reducedMotion || paused || !visible ? 'demand' : 'always'}
+        frameloop={reducedMotion || paused || (!visible && !isTransitioning) ? 'demand' : 'always'}
         aria-hidden="true"
         dpr={dpr}
         gl={{ alpha: false, antialias: true, powerPreference: 'high-performance' }}
@@ -460,15 +492,13 @@ export default function ParticleHero() {
       >
         <SceneSetup />
 
-        <group position={[0.6, -0.5, 0]} rotation={[0, 0, 0.46]}>
-          <group rotation={[-0.78, 0, 0]}>
-            <gridHelper args={[60, 60, '#162038', '#11192c']}
-              position={[0, 0, -0.2]} rotation={[Math.PI / 2, 0, 0]} />
-            <TorusRing count={counts.ring} pixelRatio={dpr} />
-            <WhiteStructures count={counts.structures} pixelRatio={dpr} />
-            <DirectionalStreams count={counts.streams} pixelRatio={dpr} />
-          </group>
-        </group>
+        <AnimatedScene isTransitioning={isTransitioning}>
+          <gridHelper args={[60, 60, '#162038', '#11192c']}
+            position={[0, 0, -0.2]} rotation={[Math.PI / 2, 0, 0]} />
+          <TorusRing count={counts.ring} pixelRatio={dpr} />
+          <WhiteStructures count={counts.structures} pixelRatio={dpr} />
+          <DirectionalStreams count={counts.streams} pixelRatio={dpr} />
+        </AnimatedScene>
       </Canvas>
       <button type="button" className="piq-motion" onClick={() => setPaused(v => !v)}
         aria-label={paused ? 'Resume scene animation' : 'Pause scene animation'}>

@@ -1,4 +1,4 @@
-import { useEffect, Suspense } from 'react';
+import { useEffect, Suspense, useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { ROUTES } from '../../config';
 import { useStore } from '../../services/store';
@@ -9,10 +9,19 @@ import './LandingPage.css';
 export default function LandingPage() {
   const navigate = useNavigate();
   const loadSampleProfile = useStore((s) => s.loadSampleProfile);
+  const [isTransitioning, setIsTransitioning] = useState(false);
 
   useEffect(() => {
     document.title = 'PlacementIQ — Placement Readiness Assessment';
   }, []);
+
+  const handleStartAssessment = (e: React.MouseEvent) => {
+    e.preventDefault();
+    setIsTransitioning(true);
+    setTimeout(() => {
+      navigate(ROUTES.assessment);
+    }, 1200); // Wait for explosion animation to finish
+  };
 
   const handleExplore = async () => {
     await loadSampleProfile();
@@ -25,7 +34,7 @@ export default function LandingPage() {
       <section className="hero">
         <div className="hero-background">
           <Suspense fallback={<div style={{ width: '100%', height: '100%', background: '#030407' }} />}>
-            <ParticleHero />
+            <ParticleHero isTransitioning={isTransitioning} />
           </Suspense>
         </div>
 
@@ -38,8 +47,8 @@ export default function LandingPage() {
               <a href="#how-it-works" className="landing-nav-link">How it works</a>
               <Link to={ROUTES.modelLab} className="landing-nav-link">Model transparency</Link>
               <Link to={ROUTES.overview} className="landing-nav-link">Open workspace</Link>
-              <Link to={ROUTES.assessment} className="btn btn-primary btn-sm hero-nav-cta">
-                Start assessment
+              <Link to={ROUTES.assessment} onClick={handleStartAssessment} className="btn btn-primary btn-sm hero-nav-cta">
+                Tell Your Success
               </Link>
             </nav>
           </div>
@@ -54,11 +63,11 @@ export default function LandingPage() {
           </div>
           <div className="piq-hero-caption">
             <p className="hero-description">
-              Understand your skills, explore your possibilities, and turn preparation into a clear plan.
+              Meet your AI interviewer. Discover what you can demonstrate.
             </p>
             <div className="hero-actions">
-              <Link to={ROUTES.assessment} className="btn btn-primary btn-lg">
-                Start assessment
+              <Link to={ROUTES.assessment} onClick={handleStartAssessment} className="btn btn-primary btn-lg">
+                Tell Your Success
                 <ArrowRight size={16} />
               </Link>
               <button className="btn btn-outline btn-lg hero-outline-btn" onClick={handleExplore}>
@@ -251,10 +260,10 @@ export default function LandingPage() {
             Ready to begin?
           </h2>
           <p className="text-secondary" style={{ marginBottom: '24px', maxWidth: '400px', margin: '0 auto 24px' }}>
-            Complete your profile assessment and start building a placement preparation plan.
+            Meet your AI interviewer, demonstrate your project thinking, and leave with an evidence-backed preparation plan.
           </p>
-          <Link to={ROUTES.assessment} className="btn btn-primary btn-lg">
-            Start assessment
+          <Link to={ROUTES.assessment} onClick={handleStartAssessment} className="btn btn-primary btn-lg">
+            Tell Your Success
             <ArrowRight size={16} />
           </Link>
         </div>

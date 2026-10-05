@@ -1,0 +1,46 @@
+{
+  "runAt": "2026-10-04T01:36:51.856Z",
+  "fixture": "Fictional student; seeded reviewed profile and bank question to compare strong/weak answers fairly. All replies and grades are actual Ollama calls through the HTTP backend.",
+  "model": "qwen3:4b-instruct",
+  "context": 4096,
+  "paths": [
+    {
+      "name": "strong",
+      "turns": [
+        {
+          "question": "Explain the difference between mutable and immutable Python objects. Give one bug that shared mutable state can cause.",
+          "answer": "Lists and dictionaries are mutable: their contents can change in place. Strings, tuples and integers are immutable. Two names can reference the same list, so appending through one name changes what the other sees. A list used as a default argument is created once and reused across calls, leaking items between calls. I use None as the default and create a fresh list inside each call.",
+          "reply": {
+            "id": "turn_f81d06b1-90db-434d-b47d-20870fa1ee5a",
+            "role": "assistant",
+            "text": "Good example of shared mutable state bug. How does copying a list differ from aliasing in a function?",
+            "reaction": "Good example of shared mutable state bug.",
+            "questionId": "question_ed531759-b1f1-4333-bf83-1d80d8e14719",
+            "question": "How does copying a list differ from aliasing in a function?",
+            "kind": "challenge",
+            "model": "qwen3:4b-instruct",
+            "answerAnchor": "A list used as a default argument is created once and reused across calls, leaking items between calls.",
+            "createdAt": "2026-10-04T01:37:29.331Z"
+          },
+          "grade": {
+            "method": "ollama-rubric-estimate",
+            "evidenceValidationFailed": false,
+            "reviewNeeded": false,
+            "evidenceStatus": "assessed",
+            "uncertainty": "low",
+            "criteria": [],
+            "missingConcepts": [],
+            "explanation": "Your answer is saved. Detailed rubric feedback appears after the follow-up.",
+            "rawPoints": 4,
+            "awardedPoints": 4,
+            "maxPoints": 4
+          },
+          "elapsedMs": 37473
+        }
+      ],
+      "report": null
+    }
+  ],
+  "passed": false,
+  "error": "Expected values to be strictly equal:\n\nfalse !== true\n"
+}

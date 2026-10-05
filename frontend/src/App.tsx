@@ -4,7 +4,9 @@ import AppLayout from './components/layout/AppLayout';
 
 // Lazy-load pages
 const Landing = lazy(() => import('./features/landing/LandingPage'));
-const Assessment = lazy(() => import('./features/assessment/AssessmentPage'));
+const Interview = lazy(() => import('./features/interview/InterviewPage'));
+const PlacementAssessment = lazy(() => import('./features/assessment/AssessmentPage'));
+const Reports = lazy(() => import('./features/reports/ReportsPage'));
 const Overview = lazy(() => import('./features/overview/OverviewPage'));
 const Skills = lazy(() => import('./features/skills/SkillsPage'));
 const Scenarios = lazy(() => import('./features/scenarios/ScenariosPage'));
@@ -13,6 +15,7 @@ const Progress = lazy(() => import('./features/progress/ProgressPage'));
 const ModelLab = lazy(() => import('./features/model-lab/ModelLabPage'));
 const Profile = lazy(() => import('./features/profile/ProfilePage'));
 const NotFound = lazy(() => import('./features/not-found/NotFoundPage'));
+const Readiness = lazy(() => import('./features/readiness/ReadinessPage'));
 
 function PageLoader() {
   return (
@@ -32,13 +35,17 @@ export default function App() {
         <Routes>
           <Route path="/" element={<Landing />} />
           <Route path="/model-lab" element={<Navigate to="/app/model-lab" replace />} />
-          <Route path="/assessment" element={<Assessment />} />
+          <Route path="/assessment" element={<Interview />} />
+          <Route path="/placement-assessment" element={<PlacementAssessment />} />
           <Route path="/app" element={<AppLayout />}>
+            <Route path="readiness" element={<Readiness />} />
             <Route path="overview" element={<Overview />} />
             <Route path="skills" element={<Skills />} />
             <Route path="scenarios" element={<Scenarios />} />
             <Route path="plan" element={<Plan />} />
             <Route path="progress" element={<Progress />} />
+            <Route path="interviews" element={<Reports />} />
+            <Route path="faculty" element={<Reports faculty />} />
             <Route path="model-lab" element={<ModelLab />} />
             <Route path="profile" element={<Profile />} />
           </Route>

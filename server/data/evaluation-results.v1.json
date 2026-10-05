@@ -1,0 +1,194 @@
+{
+  "evaluationSetVersion": "1.1.0",
+  "questionBankVersion": "1.1.0",
+  "method": "deterministic keyword-backed rubric fallback",
+  "runAt": "2026-10-03T08:38:21.804Z",
+  "cases": 14,
+  "withinRange": 12,
+  "repeatable": 14,
+  "rows": [
+    {
+      "id": "strong",
+      "questionId": "ml_leakage_01",
+      "label": "strong",
+      "expectedRange": [
+        3.5,
+        4
+      ],
+      "actualPoints": 4,
+      "maxPoints": 4,
+      "withinReferenceRange": true,
+      "repeatable": true
+    },
+    {
+      "id": "partial",
+      "questionId": "ml_leakage_01",
+      "label": "partial",
+      "expectedRange": [
+        1.5,
+        3
+      ],
+      "actualPoints": 1.5,
+      "maxPoints": 4,
+      "withinReferenceRange": true,
+      "repeatable": true
+    },
+    {
+      "id": "incorrect",
+      "questionId": "ml_leakage_01",
+      "label": "incorrect",
+      "expectedRange": [
+        0,
+        0.5
+      ],
+      "actualPoints": 0.5,
+      "maxPoints": 4,
+      "withinReferenceRange": true,
+      "repeatable": true
+    },
+    {
+      "id": "irrelevant",
+      "questionId": "ml_leakage_01",
+      "label": "irrelevant",
+      "expectedRange": [
+        0,
+        0
+      ],
+      "actualPoints": 0,
+      "maxPoints": 4,
+      "withinReferenceRange": true,
+      "repeatable": true
+    },
+    {
+      "id": "instruction-injection",
+      "questionId": "ml_leakage_01",
+      "label": "instruction injection",
+      "expectedRange": [
+        0,
+        0
+      ],
+      "actualPoints": 0,
+      "maxPoints": 4,
+      "withinReferenceRange": true,
+      "repeatable": true
+    },
+    {
+      "id": "python-strong",
+      "questionId": "python_mutability_01",
+      "label": "strong",
+      "expectedRange": [
+        3.5,
+        4
+      ],
+      "actualPoints": 3.5,
+      "maxPoints": 4,
+      "withinReferenceRange": true,
+      "repeatable": true
+    },
+    {
+      "id": "python-incorrect",
+      "questionId": "python_mutability_01",
+      "label": "incorrect",
+      "expectedRange": [
+        0,
+        0
+      ],
+      "actualPoints": 0,
+      "maxPoints": 4,
+      "withinReferenceRange": true,
+      "repeatable": true
+    },
+    {
+      "id": "sql-strong",
+      "questionId": "sql_joins_01",
+      "label": "strong",
+      "expectedRange": [
+        3.5,
+        4
+      ],
+      "actualPoints": 4,
+      "maxPoints": 4,
+      "withinReferenceRange": true,
+      "repeatable": true
+    },
+    {
+      "id": "sql-partial",
+      "questionId": "sql_joins_01",
+      "label": "partial",
+      "expectedRange": [
+        1.5,
+        2.5
+      ],
+      "actualPoints": 2.5,
+      "maxPoints": 4,
+      "withinReferenceRange": true,
+      "repeatable": true
+    },
+    {
+      "id": "sql-incorrect-with-keywords",
+      "questionId": "sql_joins_01",
+      "label": "incorrect with rubric vocabulary",
+      "expectedRange": [
+        0,
+        1
+      ],
+      "actualPoints": 4,
+      "maxPoints": 4,
+      "withinReferenceRange": false,
+      "repeatable": true
+    },
+    {
+      "id": "project-strong",
+      "questionId": "project_decisions_01",
+      "label": "strong",
+      "expectedRange": [
+        4,
+        5
+      ],
+      "actualPoints": 4,
+      "maxPoints": 5,
+      "withinReferenceRange": true,
+      "repeatable": true
+    },
+    {
+      "id": "project-irrelevant",
+      "questionId": "project_decisions_01",
+      "label": "irrelevant",
+      "expectedRange": [
+        0,
+        0
+      ],
+      "actualPoints": 0,
+      "maxPoints": 5,
+      "withinReferenceRange": true,
+      "repeatable": true
+    },
+    {
+      "id": "injection-with-keywords",
+      "questionId": "ml_leakage_01",
+      "label": "instruction injection with rubric vocabulary",
+      "expectedRange": [
+        0,
+        0
+      ],
+      "actualPoints": 0,
+      "maxPoints": 4,
+      "withinReferenceRange": true,
+      "repeatable": true
+    },
+    {
+      "id": "ml-correct-paraphrase",
+      "questionId": "ml_leakage_01",
+      "label": "strong paraphrase",
+      "expectedRange": [
+        3,
+        4
+      ],
+      "actualPoints": 0.5,
+      "maxPoints": 4,
+      "withinReferenceRange": false,
+      "repeatable": true
+    }
+  ],
+  "limitation": "This small development set checks fallback behaviour and repeatability. Range labels are developer-assigned, not independently faculty-reviewed. Lexical estimates may miss correct paraphrases or credit incorrect claims using rubric words. This does not validate live-model grading or establish inter-rater reliability."
+}

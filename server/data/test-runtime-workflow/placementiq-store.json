@@ -1,0 +1,97 @@
+{
+  "version": 1,
+  "sessions": {
+    "session_2f30cbe2-b383-4b44-a54c-fa5ee2eaceea": {
+      "id": "session_2f30cbe2-b383-4b44-a54c-fa5ee2eaceea",
+      "ownerId": "student_workflow_aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+      "createdAt": "2026-10-03T02:26:34.206Z",
+      "updatedAt": "2026-10-03T02:26:34.214Z",
+      "status": "github",
+      "avatarState": "awaiting",
+      "paused": false,
+      "profile": {
+        "skills": [
+          {
+            "id": "skill_cfaa4d1829e8fdb2",
+            "name": "Kubernetes",
+            "sourcePassage": "I am an expert in Kubernetes production clusters.",
+            "origin": "student-correction",
+            "confidence": "student-reviewed",
+            "confirmed": true
+          },
+          {
+            "id": "skill_16c34a70bef3e82e",
+            "name": "SQL",
+            "sourcePassage": "Built a Python project with SQL queries for placement records.",
+            "origin": "resume",
+            "confidence": "student-reviewed",
+            "confirmed": false
+          }
+        ],
+        "projects": [
+          {
+            "id": "project_ec781104489ddf27",
+            "name": "Built a Python project with SQL queries for placement records.",
+            "sourcePassage": "Built a Python project with SQL queries for placement records.",
+            "origin": "resume",
+            "confidence": "student-reviewed",
+            "confirmed": false
+          }
+        ],
+        "education": [],
+        "experience": [],
+        "strengths": []
+      },
+      "resume": {
+        "fileName": "Pasted resume text",
+        "mimeType": "text/plain",
+        "method": "pasted-text",
+        "text": "Built a Python project with SQL queries for placement records.",
+        "warnings": []
+      },
+      "github": {
+        "skipped": false,
+        "repositories": [],
+        "evidence": [],
+        "inspectedFiles": []
+      },
+      "domains": [],
+      "selectedDomain": null,
+      "questions": [],
+      "answers": [],
+      "questionIndex": 0,
+      "followUpsUsed": 0,
+      "targetQuestions": 6,
+      "model": {
+        "requested": "qwen3:4b-instruct",
+        "used": null,
+        "liveInference": false,
+        "lastStatus": {
+          "reachable": false,
+          "installed": false,
+          "ready": false,
+          "mode": "local-practice",
+          "model": "qwen3:4b-instruct",
+          "endpoint": "http://127.0.0.1:9",
+          "models": [],
+          "details": null,
+          "setup": {
+            "check": "ollama list",
+            "pull": "ollama pull qwen3:4b-instruct",
+            "start": "ollama serve"
+          },
+          "message": "Ollama is not reachable at http://127.0.0.1:9. After installing Ollama, start it and run: ollama pull qwen3:4b-instruct. Resume extraction, GitHub evidence, and practice interviews work now with review-required rubric estimates."
+        }
+      },
+      "versions": {
+        "coordinator": "1.1.0",
+        "questionBank": "1.1.0",
+        "prompt": "1.1.0",
+        "scoring": "1.1.0"
+      },
+      "suggestedDomain": null
+    }
+  },
+  "reports": {},
+  "githubCache": {}
+}

@@ -1,403 +1,67 @@
-import { useState, useEffect, useCallback, useRef } from 'react';
-import { useNavigate, Link } from 'react-router-dom';
-import { useStore } from '../../services/store';
-import { FEATURE_DEFINITIONS, ASSESSMENT_STEPS, ROUTES } from '../../config';
-import type { StudentProfile, FeatureDefinition } from '../../types';
-import { ArrowLeft, ArrowRight, Check, AlertTriangle, Save } from 'lucide-react';
+import { useEffect, useState } from 'react';
+import { Link, useNavigate, useSearchParams } from 'react-router-dom';
+import { FEATURE_DEFINITIONS } from '../../config';
+import { readinessApi, type BaselineField, type BaselineSource } from '../../services/readinessApi';
+import { rememberSession } from '../../services/interviewApi';
 import './AssessmentPage.css';
-
-type ValidationErrors = Record<string, string>;
-type ValidationWarnings = Record<string, string>;
-
-function validateField(def: FeatureDefinition, value: unknown): { error?: string; warning?: string } {
-  if (def.required && (value === undefined || value === null || value === '')) {
-    return { error: `${def.label} is required.` };
-  }
-  if (value === undefined || value === null || value === '') return {};
-
-  if (def.type === 'number') {
-    const num = Number(value);
-    if (isNaN(num)) return { error: 'Must be a valid number.' };
-    if (def.min !== undefined && num < def.min) return { error: `Must be at least ${def.min}.` };
-    if (def.max !== undefined && num > def.max) return { error: `Must be at most ${def.max}.` };
-
-    // Warn for out-of-range but valid
-    if (def.warningThreshold) {
-      const { low, high, message } = def.warningThreshold;
-      if ((low !== undefined && num < low) || (high !== undefined && num > high)) {
-        return { warning: message };
-      }
-    }
-  }
-  return {};
-}
-
-function validateStep(step: number, profile: Partial<StudentProfile>): { errors: ValidationErrors; warnings: ValidationWarnings } {
-  const stepConfig = ASSESSMENT_STEPS[step - 1];
-  if (!stepConfig || step === 4) return { errors: {}, warnings: {} };
-
-  const fields = FEATURE_DEFINITIONS.filter((f) => (stepConfig.categories as unknown as string[]).includes(f.category));
-  const errors: ValidationErrors = {};
-  const warnings: ValidationWarnings = {};
-
-  for (const def of fields) {
-    const value = (profile as unknown as Record<string, unknown>)[def.key];
-    const result = validateField(def, value);
-    if (result.error) errors[def.key] = result.error;
-    if (result.warning) warnings[def.key] = result.warning;
-  }
-
-  return { errors, warnings };
-}
+import '../readiness/ReadinessPage.css';
 
 export default function AssessmentPage() {
   const navigate = useNavigate();
-  const { draft, initDraft, updateDraft, setDraftStep, clearDraft, submitAssessment } = useStore();
-  const [errors, setErrors] = useState<ValidationErrors>({});
-  const [warnings, setWarnings] = useState<ValidationWarnings>({});
-  const [isSubmitting, setIsSubmitting] = useState(false);
-  const [showDiscardDialog, setShowDiscardDialog] = useState(false);
-  const formRef = useRef<HTMLDivElement>(null);
-
+  const [params] = useSearchParams();
+  const sessionId = params.get('session') || undefined;
+  const [fields, setFields] = useState<BaselineField[]>([]);
+  const [values, setValues] = useState<Record<string, string | number>>({});
+  const [sources, setSources] = useState<Record<string, BaselineSource>>({});
+  const [confirmed, setConfirmed] = useState(false);
+  const [step, setStep] = useState(0);
+  const [error, setError] = useState('');
+  const [busy, setBusy] = useState(false);
+  const [revision, setRevision] = useState(0);
   useEffect(() => {
-    document.title = 'Assessment — PlacementIQ';
-    initDraft();
-  }, [initDraft]);
-
-  const currentStep = draft?.step ?? 1;
-  const profile = draft?.profile ?? {};
-
-  const fieldsForStep = useCallback(
-    (step: number) => {
-      const stepConfig = ASSESSMENT_STEPS[step - 1];
-      if (!stepConfig) return [];
-      return FEATURE_DEFINITIONS.filter((f) => (stepConfig.categories as unknown as string[]).includes(f.category));
-    },
-    []
-  );
-
-  const handleChange = useCallback(
-    (key: string, value: string) => {
-      const def = FEATURE_DEFINITIONS.find((f) => f.key === key);
-      let parsed: unknown = value;
-      if (def?.type === 'number' && value !== '') {
-        parsed = parseFloat(value);
-      }
-      if (value === '') parsed = undefined;
-      updateDraft({ [key]: parsed } as Partial<StudentProfile>);
-
-      // Clear error for this field
-      setErrors((prev) => {
-        const next = { ...prev };
-        delete next[key];
-        return next;
-      });
-    },
-    [updateDraft]
-  );
-
-  const handleNext = useCallback(() => {
-    const { errors: stepErrors, warnings: stepWarnings } = validateStep(currentStep, profile);
-    setErrors(stepErrors);
-    setWarnings(stepWarnings);
-
-    if (Object.keys(stepErrors).length > 0) {
-      // Focus first error
-      const firstErrorKey = Object.keys(stepErrors)[0];
-      const el = document.getElementById(`field-${firstErrorKey}`);
-      el?.focus();
-      return;
-    }
-
-    setDraftStep(Math.min(currentStep + 1, 4));
-    window.scrollTo({ top: 0, behavior: 'smooth' });
-  }, [currentStep, profile, setDraftStep]);
-
-  const handleBack = useCallback(() => {
-    setErrors({});
-    setWarnings({});
-    setDraftStep(Math.max(currentStep - 1, 1));
-    window.scrollTo({ top: 0, behavior: 'smooth' });
-  }, [currentStep, setDraftStep]);
-
-  const handleSubmit = useCallback(async () => {
-    // Validate all required fields
-    const allErrors: ValidationErrors = {};
-    for (const def of FEATURE_DEFINITIONS.filter((f) => f.required)) {
-      const value = (profile as Record<string, unknown>)[def.key];
-      const result = validateField(def, value);
-      if (result.error) allErrors[def.key] = result.error;
-    }
-
-    if (Object.keys(allErrors).length > 0) {
-      setErrors(allErrors);
-      return;
-    }
-
-    setIsSubmitting(true);
+    let active = true;
+    readinessApi.schema(sessionId).then(data => {
+      if (!active) return;
+      setFields(data.fields); setSources(data.prefill);
+      setValues(Object.fromEntries(Object.entries(data.prefill).map(([key, source]) => [key, source.value!])));
+      setError('');
+    }).catch(err => { if (active) setError(err.message); });
+    return () => { active = false; };
+  }, [sessionId, revision]);
+  const category = (key: string) => FEATURE_DEFINITIONS.find(field => field.key === key)?.category || 'supplementary';
+  const groups = [fields.filter(f => category(f.key) === 'academic'), fields.filter(f => ['experience','activity'].includes(category(f.key))), fields.filter(f => ['skill','supplementary'].includes(category(f.key)))];
+  const titles = ['Academic profile', 'Experience & activity', 'Skills & other model inputs', 'Confirm & predict'];
+  const check = (list: BaselineField[]) => list.every(field => {
+    const value = values[field.key];
+    return field.type === 'select' ? field.options!.includes(String(value)) : typeof value === 'number' && Number.isFinite(value) && value >= field.min! && value <= field.max! && (!field.integer || Number.isInteger(value));
+  });
+  async function submit(event: React.FormEvent) {
+    event.preventDefault(); setError('');
+    if (step < 3) { if (!check(groups[step])) { setError('Complete every field in this step using valid values.'); return; } setStep(step + 1); return; }
+    if (!confirmed || !check(fields)) { setError('Confirm or correct every required model input before prediction.'); return; }
+    setBusy(true);
     try {
-      await submitAssessment(profile as StudentProfile);
-      navigate(ROUTES.overview);
-    } catch (e) {
-      console.error('Submission failed', e);
-    } finally {
-      setIsSubmitting(false);
-    }
-  }, [profile, submitAssessment, navigate]);
-
-  const handleDiscard = useCallback(() => {
-    clearDraft();
-    navigate(ROUTES.home);
-  }, [clearDraft, navigate]);
-
-  const renderField = useCallback(
-    (def: FeatureDefinition) => {
-      const value = (profile as Record<string, unknown>)[def.key];
-      const error = errors[def.key];
-      const warning = warnings[def.key];
-
-      return (
-        <div key={def.key} className="form-group assessment-field">
-          <label htmlFor={`field-${def.key}`} className="form-label">
-            {def.label}
-            {def.required && <span className="required" aria-label="required">*</span>}
-            {!def.required && <span className="form-optional">(optional)</span>}
-            {def.unit && <span className="form-unit" style={{ marginLeft: 6 }}>{def.unit}</span>}
-          </label>
-
-          {def.type === 'select' ? (
-            <select
-              id={`field-${def.key}`}
-              className={`form-select ${error ? 'error' : ''}`}
-              value={(value as string) ?? ''}
-              onChange={(e) => handleChange(def.key, e.target.value)}
-            >
-              <option value="">Select...</option>
-              {def.options?.map((opt) => (
-                <option key={opt} value={opt}>{opt}</option>
-              ))}
-            </select>
-          ) : (
-            <input
-              id={`field-${def.key}`}
-              type="number"
-              className={`form-input ${error ? 'error' : ''}`}
-              value={value !== undefined && value !== null ? String(value) : ''}
-              onChange={(e) => handleChange(def.key, e.target.value)}
-              min={def.min}
-              max={def.max}
-              step={def.step}
-              placeholder={`${def.min ?? 0}–${def.max ?? ''}`}
-            />
-          )}
-
-          {def.description && !error && (
-            <span className="form-hint">{def.description}</span>
-          )}
-          {error && <span className="form-error">{error}</span>}
-          {warning && !error && (
-            <span className="form-warning">
-              <AlertTriangle size={12} />
-              {warning}
-            </span>
-          )}
-        </div>
-      );
-    },
-    [profile, errors, warnings, handleChange]
-  );
-
-  const renderReview = () => {
-    const categories = ['academic', 'experience', 'activity', 'skill', 'supplementary'] as const;
-    return (
-      <div className="review-sections">
-        {categories.map((cat) => {
-          const fields = FEATURE_DEFINITIONS.filter((f) => f.category === cat);
-          const filledFields = fields.filter((f) => {
-            const v = (profile as Record<string, unknown>)[f.key];
-            return v !== undefined && v !== null && v !== '';
-          });
-          if (filledFields.length === 0) return null;
-
-          return (
-            <div key={cat} className="review-section">
-              <h4 className="review-section-title">
-                {cat.charAt(0).toUpperCase() + cat.slice(1)}
-                <button
-                  className="btn btn-ghost btn-sm"
-                  onClick={() => {
-                    const step = ASSESSMENT_STEPS.findIndex((s) =>
-                      (s.categories as readonly string[]).includes(cat)
-                    );
-                    if (step >= 0) setDraftStep(step + 1);
-                  }}
-                >
-                  Edit
-                </button>
-              </h4>
-              <div className="review-fields">
-                {filledFields.map((f) => (
-                  <div key={f.key} className="review-field">
-                    <span className="review-field-label">{f.label}</span>
-                    <span className="review-field-value font-mono">
-                      {String((profile as Record<string, unknown>)[f.key])}
-                      {f.unit && <span className="form-unit" style={{ marginLeft: 4 }}>{f.unit}</span>}
-                    </span>
-                  </div>
-                ))}
-              </div>
-            </div>
-          );
-        })}
-
-        {Object.keys(errors).length > 0 && (
-          <div className="notice notice-error" style={{ marginTop: 16 }}>
-            <AlertTriangle size={16} />
-            <span>Some required fields are missing. Please review the highlighted sections above.</span>
-          </div>
-        )}
-      </div>
-    );
-  };
-
-  return (
-    <div className="assessment-page">
-      <div className="assessment-container">
-        {/* Header */}
-        <div className="assessment-header">
-          <Link to={ROUTES.home} className="btn btn-ghost btn-sm">
-            <ArrowLeft size={16} />
-            Back
-          </Link>
-          <div className="assessment-header-right">
-            {draft?.isDirty && (
-              <span className="badge badge-success">
-                <Save size={10} />
-                Draft saved
-              </span>
-            )}
-            {draft && (
-              <button
-                className="btn btn-ghost btn-sm"
-                onClick={() => setShowDiscardDialog(true)}
-              >
-                Discard
-              </button>
-            )}
-          </div>
-        </div>
-
-        <h1 className="assessment-title">Profile Assessment</h1>
-        <p className="assessment-subtitle text-secondary">
-          Complete your academic and skills profile to generate a readiness analysis.
-        </p>
-
-        {/* Stepper */}
-        <div className="stepper" role="navigation" aria-label="Assessment steps">
-          {ASSESSMENT_STEPS.map((step, i) => (
-            <div key={step.id} className="stepper-step-wrap">
-              <div
-                className={`stepper-step ${
-                  step.id === currentStep ? 'active' : step.id < currentStep ? 'completed' : ''
-                }`}
-              >
-                <span className="stepper-number">
-                  {step.id < currentStep ? <Check size={12} /> : step.id}
-                </span>
-                <span className="stepper-label">{step.title}</span>
-              </div>
-              {i < ASSESSMENT_STEPS.length - 1 && <span className="stepper-divider" />}
-            </div>
-          ))}
-        </div>
-
-        {/* Form content */}
-        <div className="assessment-form" ref={formRef}>
-          {currentStep < 4 ? (
-            <>
-              <h2 className="assessment-step-title">
-                {ASSESSMENT_STEPS[currentStep - 1].title}
-              </h2>
-
-              {currentStep === 1 && (
-                <div className="notice notice-info" style={{ marginBottom: 20 }}>
-                  <span>
-                    Skill scores should ideally come from structured assessments. Self-reported scores
-                    are not verified measurements and should be treated as approximate.
-                  </span>
-                </div>
-              )}
-
-              <div className="assessment-fields-grid">
-                {fieldsForStep(currentStep).map(renderField)}
-              </div>
-            </>
-          ) : (
-            <>
-              <h2 className="assessment-step-title">Review your profile</h2>
-              <p className="text-secondary" style={{ marginBottom: 20 }}>
-                Review your entries below. Click "Edit" on any section to make changes before submitting.
-              </p>
-              {renderReview()}
-            </>
-          )}
-        </div>
-
-        {/* Navigation */}
-        <div className="assessment-nav">
-          {currentStep > 1 && (
-            <button className="btn btn-secondary" onClick={handleBack}>
-              <ArrowLeft size={16} />
-              Back
-            </button>
-          )}
-          <div style={{ flex: 1 }} />
-          {currentStep < 4 ? (
-            <button className="btn btn-primary" onClick={handleNext}>
-              Next
-              <ArrowRight size={16} />
-            </button>
-          ) : (
-            <button
-              className="btn btn-primary btn-lg"
-              onClick={handleSubmit}
-              disabled={isSubmitting}
-            >
-              {isSubmitting ? (
-                <>
-                  <div className="loading-dots"><span /><span /><span /></div>
-                  Generating readiness analysis...
-                </>
-              ) : (
-                <>
-                  Submit assessment
-                  <Check size={16} />
-                </>
-              )}
-            </button>
-          )}
-        </div>
-      </div>
-
-      {/* Discard dialog */}
-      {showDiscardDialog && (
-        <div className="dialog-overlay" onClick={() => setShowDiscardDialog(false)}>
-          <div className="dialog" onClick={(e) => e.stopPropagation()} role="alertdialog" aria-label="Discard draft">
-            <h3>Discard assessment draft?</h3>
-            <p className="text-secondary" style={{ fontSize: '0.875rem' }}>
-              This will permanently remove your current draft. Any entered data will be lost.
-            </p>
-            <div className="dialog-actions">
-              <button className="btn btn-secondary" onClick={() => setShowDiscardDialog(false)}>
-                Keep editing
-              </button>
-              <button className="btn btn-danger" onClick={handleDiscard}>
-                Discard draft
-              </button>
-            </div>
-          </div>
-        </div>
-      )}
-    </div>
-  );
+      const { assessment } = await readinessApi.predict(values, sessionId);
+      rememberSession(assessment.sessionId);
+      navigate(`/app/readiness?assessment=${assessment.id}`);
+    } catch (err) { setError(err instanceof Error ? err.message : 'Prediction failed. Your inputs are still here.'); }
+    finally { setBusy(false); }
+  }
+  return <div className="assessment-page"><div className="assessment-container">
+    <header className="assessment-header"><Link to="/app/overview" className="btn btn-ghost">← Workspace</Link><Link to="/app/readiness?history=1">Assessment history</Link></header>
+    <h1 className="assessment-title">Baseline placement assessment</h1>
+    <p className="assessment-subtitle text-secondary">First, your historical-model estimate. Then, a conversation with Aria to demonstrate your current skills.</p>
+    <div className="stepper" aria-label="Assessment steps">{titles.map((title, i) => <span key={title} className={`stepper-step ${i === step ? 'active' : ''}`}><span className="stepper-number">{i + 1}</span><span className="stepper-label">{title}</span></span>)}</div>
+    {error && <p role="alert" className="form-error">{error} {!fields.length && <button onClick={() => setRevision(n => n + 1)}>Retry model connection</button>}</p>}
+    {!fields.length && !error && <p role="status">Loading the saved model’s input specification…</p>}
+    {!!fields.length && <form onSubmit={submit} className="assessment-form"><h2 className="assessment-step-title">{titles[step]}</h2>
+      {step < 3 ? <div className="assessment-fields-grid">{groups[step].map(field => <div className="form-group assessment-field" key={field.key}>
+        <label className="form-label" htmlFor={`baseline-${field.key}`}>{field.key === 'mock_interview_score' ? 'Previous mock interview score' : FEATURE_DEFINITIONS.find(f => f.key === field.key)?.label || field.label} *</label>
+        {field.type === 'select' ? <select id={`baseline-${field.key}`} className="form-select" required value={values[field.key] ?? ''} onChange={e => { setValues(v => ({...v,[field.key]:e.target.value}));setConfirmed(false); }}><option value="">Select…</option>{field.options?.map(option => <option key={option}>{option}</option>)}</select> : <input id={`baseline-${field.key}`} className="form-input" type="number" required min={field.min} max={field.max} step="any" value={values[field.key] ?? ''} onChange={e => {setValues(v => ({...v,[field.key]:e.target.value === '' ? '' : Number(e.target.value)}));setConfirmed(false);}} />}
+        {sources[field.key] && <small>Suggested from {sources[field.key].source}: “{sources[field.key].passage}”. Confirm or correct this value.</small>}
+        {field.key === 'mock_interview_score' && <small>Historical input from an earlier mock assessment. Aria’s new interview score is kept separate and never substituted here.</small>}
+      </div>)}</div> : <><p>All {fields.length} original model inputs are required. Review your values; no interview score is inserted into these inputs.</p><dl className="baseline-review">{fields.map(field => <div key={field.key}><dt>{field.label}</dt><dd>{values[field.key]} <small>{sources[field.key] ? `Résumé suggestion ${values[field.key] === sources[field.key].value ? 'confirmed' : 'corrected'}` : 'Student supplied'}</small></dd></div>)}</dl><label><input type="checkbox" checked={confirmed} onChange={e => setConfirmed(e.target.checked)} /> I have checked and confirm these inputs, including any résumé suggestions.</label></>}
+      <div className="assessment-actions">{step > 0 && <button type="button" className="btn btn-secondary" disabled={busy} onClick={() => setStep(step - 1)}>Back</button>}<button className="btn btn-primary" disabled={busy || (step === 3 && !confirmed)}>{busy ? 'Running saved ML model…' : step < 3 ? 'Next' : 'Generate baseline estimate'}</button></div>
+    </form>}
+  </div></div>;
 }

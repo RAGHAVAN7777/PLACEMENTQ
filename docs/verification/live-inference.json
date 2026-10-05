@@ -1,0 +1,273 @@
+{
+  "timestamp": "2026-10-03T08:11:03.522Z",
+  "fixture": "Synthetic PlacementIQ live verification student",
+  "model": "qwen3:4b-instruct",
+  "context": 4096,
+  "calls": [
+    {
+      "path": "/health",
+      "status": 200,
+      "elapsedMs": 47
+    },
+    {
+      "path": "/sessions",
+      "status": 201,
+      "elapsedMs": 8
+    },
+    {
+      "path": "/sessions/session_e956118b-629b-4382-87e3-6dff9742f4e6/resume",
+      "status": 200,
+      "elapsedMs": 10233
+    },
+    {
+      "path": "/sessions/session_e956118b-629b-4382-87e3-6dff9742f4e6/profile",
+      "status": 200,
+      "elapsedMs": 8
+    },
+    {
+      "path": "/sessions/session_e956118b-629b-4382-87e3-6dff9742f4e6/github",
+      "status": 200,
+      "elapsedMs": 5
+    },
+    {
+      "path": "/sessions/session_e956118b-629b-4382-87e3-6dff9742f4e6/start",
+      "status": 200,
+      "elapsedMs": 14020
+    },
+    {
+      "path": "/sessions/session_e956118b-629b-4382-87e3-6dff9742f4e6/pause",
+      "status": 200,
+      "elapsedMs": 7
+    },
+    {
+      "path": "/sessions/session_e956118b-629b-4382-87e3-6dff9742f4e6",
+      "status": 200,
+      "elapsedMs": 2
+    },
+    {
+      "path": "/sessions/session_e956118b-629b-4382-87e3-6dff9742f4e6/resume",
+      "status": 200,
+      "elapsedMs": 6
+    },
+    {
+      "path": "/sessions/session_e956118b-629b-4382-87e3-6dff9742f4e6/answer",
+      "status": 200,
+      "elapsedMs": 9629
+    },
+    {
+      "path": "/sessions/session_e956118b-629b-4382-87e3-6dff9742f4e6/answer",
+      "status": 200,
+      "elapsedMs": 11747
+    },
+    {
+      "path": "/sessions/session_e956118b-629b-4382-87e3-6dff9742f4e6/answer",
+      "status": 200,
+      "elapsedMs": 9668
+    },
+    {
+      "path": "/sessions/session_e956118b-629b-4382-87e3-6dff9742f4e6/answer",
+      "status": 200,
+      "elapsedMs": 9695
+    },
+    {
+      "path": "/sessions/session_e956118b-629b-4382-87e3-6dff9742f4e6/answer",
+      "status": 200,
+      "elapsedMs": 9977
+    },
+    {
+      "path": "/sessions/session_e956118b-629b-4382-87e3-6dff9742f4e6/answer",
+      "status": 200,
+      "elapsedMs": 9264
+    },
+    {
+      "path": "/sessions/session_e956118b-629b-4382-87e3-6dff9742f4e6/answer",
+      "status": 200,
+      "elapsedMs": 9216
+    },
+    {
+      "path": "/reports/report_3fe67bba-7760-4417-9497-dd01d8eb9677",
+      "status": 200,
+      "elapsedMs": 4
+    },
+    {
+      "path": "/sessions/session_e956118b-629b-4382-87e3-6dff9742f4e6/report",
+      "status": 200,
+      "elapsedMs": 5
+    }
+  ],
+  "passed": true,
+  "health": {
+    "reachable": true,
+    "installed": true,
+    "ready": true,
+    "mode": "local-model",
+    "model": "qwen3:4b-instruct",
+    "endpoint": "http://localhost:11434",
+    "models": [
+      "qwen3:4b-instruct"
+    ],
+    "details": {
+      "capabilities": [
+        "tools",
+        "thinking",
+        "completion"
+      ],
+      "family": "qwen3",
+      "parameterSize": "4.0B",
+      "quantization": "Q4_K_M"
+    },
+    "setup": {
+      "check": "ollama list",
+      "pull": "ollama pull qwen3:4b-instruct",
+      "start": "ollama serve"
+    },
+    "message": "Local model is ready."
+  },
+  "analysis": [
+    {
+      "type": "progress",
+      "progress": 12,
+      "message": "Reading resume passages"
+    },
+    {
+      "type": "progress",
+      "progress": 34,
+      "message": "Identifying project evidence"
+    },
+    {
+      "type": "progress",
+      "progress": 66,
+      "message": "Building a claimed and observed skill profile"
+    },
+    {
+      "type": "progress",
+      "progress": 88,
+      "message": "Preparing a bounded question path"
+    },
+    {
+      "type": "complete",
+      "progress": 100,
+      "message": "Analysis ready"
+    }
+  ],
+  "result": {
+    "sessionId": "session_e956118b-629b-4382-87e3-6dff9742f4e6",
+    "reportId": "report_3fe67bba-7760-4417-9497-dd01d8eb9677",
+    "score": 44,
+    "questions": 7,
+    "followUps": 1,
+    "gradingMethods": [
+      "ollama-rubric-estimate"
+    ],
+    "metrics": {
+      "profileExtraction": {
+        "wallMs": 10187,
+        "totalDurationNs": 10181619100,
+        "loadDurationNs": 4429519700,
+        "evalDurationNs": 5473913000,
+        "evalCount": 123,
+        "promptEvalCount": 153,
+        "contextSize": 4096
+      },
+      "questionPlanning": {
+        "wallMs": 13995,
+        "totalDurationNs": 13986525000,
+        "loadDurationNs": 7450900,
+        "evalDurationNs": 13421034000,
+        "evalCount": 268,
+        "promptEvalCount": 549,
+        "contextSize": 4096
+      },
+      "grading_answer_abbb49dc-c5a4-4f44-9b88-7228d51644f4": {
+        "wallMs": 9596,
+        "totalDurationNs": 9587092000,
+        "loadDurationNs": 5372400,
+        "evalDurationNs": 9189189000,
+        "evalCount": 189,
+        "promptEvalCount": 386,
+        "contextSize": 4096
+      },
+      "grading_answer_14fc1f8b-01a6-4c04-a613-512572506b32": {
+        "wallMs": 11705,
+        "totalDurationNs": 11697276800,
+        "loadDurationNs": 11922600,
+        "evalDurationNs": 11304983000,
+        "evalCount": 235,
+        "promptEvalCount": 453,
+        "contextSize": 4096
+      },
+      "grading_answer_947e43bd-8672-498a-a55f-0f4681d69c25": {
+        "wallMs": 9631,
+        "totalDurationNs": 9624951100,
+        "loadDurationNs": 9442800,
+        "evalDurationNs": 9285503000,
+        "evalCount": 190,
+        "promptEvalCount": 409,
+        "contextSize": 4096
+      },
+      "grading_answer_f9242496-6d21-4d6e-bbeb-853ab4407ecc": {
+        "wallMs": 9664,
+        "totalDurationNs": 9659180900,
+        "loadDurationNs": 9268000,
+        "evalDurationNs": 9324333000,
+        "evalCount": 198,
+        "promptEvalCount": 422,
+        "contextSize": 4096
+      },
+      "grading_answer_10c6ad8a-7dd1-44d4-8025-78c973092c42": {
+        "wallMs": 9940,
+        "totalDurationNs": 9935441100,
+        "loadDurationNs": 8315600,
+        "evalDurationNs": 9611451000,
+        "evalCount": 199,
+        "promptEvalCount": 389,
+        "contextSize": 4096
+      },
+      "grading_answer_742b5a0d-71b3-4565-b237-24d47cf08566": {
+        "wallMs": 9239,
+        "totalDurationNs": 9233697300,
+        "loadDurationNs": 8356800,
+        "evalDurationNs": 8892523000,
+        "evalCount": 186,
+        "promptEvalCount": 410,
+        "contextSize": 4096
+      },
+      "grading_answer_bd69d3a1-415a-44d5-9ca1-ed37fc4212d8": {
+        "wallMs": 9151,
+        "totalDurationNs": 9143718700,
+        "loadDurationNs": 30873500,
+        "evalDurationNs": 8773425000,
+        "evalCount": 183,
+        "promptEvalCount": 404,
+        "contextSize": 4096
+      }
+    },
+    "firstPrompt": "What is target leakage, and how can it make a placement classifier look better than it will perform in real use?",
+    "followUpPrompts": [
+      "What observation falsified your first hypothesis when the classifier failed?"
+    ]
+  },
+  "ollamaMemory": {
+    "models": [
+      {
+        "name": "qwen3:4b-instruct",
+        "model": "qwen3:4b-instruct",
+        "size": 3525081824,
+        "digest": "0edcdef34593eac1aa2be9c7d06c432dcf81945adca5eca2f27662c18f168ba0",
+        "details": {
+          "parent_model": "",
+          "format": "gguf",
+          "family": "qwen3",
+          "families": [
+            "qwen3"
+          ],
+          "parameter_size": "4.0B",
+          "quantization_level": "Q4_K_M"
+        },
+        "expires_at": "2026-10-03T13:52:37.0680143+05:30",
+        "size_vram": 2345297510,
+        "context_length": 4096
+      }
+    ]
+  }
+}

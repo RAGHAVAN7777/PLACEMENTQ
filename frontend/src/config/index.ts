@@ -46,11 +46,14 @@ export const TOKENS = {
 export const ROUTES = {
   home: '/',
   assessment: '/assessment',
+  placementAssessment: '/placement-assessment',
   overview: '/app/overview',
   skills: '/app/skills',
   scenarios: '/app/scenarios',
   plan: '/app/plan',
   progress: '/app/progress',
+  interviewReports: '/app/interviews',
+  faculty: '/app/faculty',
   modelLab: '/app/model-lab',
   profile: '/app/profile',
 } as const;
@@ -365,7 +368,7 @@ export const ASSESSMENT_POLICIES: Record<PolicyMode, PolicyDefinition> = {
     precision: 82.91,
     accuracy: 85.19,
     rescuedCount: 418,
-    tagline: 'High-Recall Candidate Discovery (Rescues 418 Borderline Students)',
+    tagline: 'High-Recall Test Policy (Reclassifies 418 Test Records)',
   },
 };
 

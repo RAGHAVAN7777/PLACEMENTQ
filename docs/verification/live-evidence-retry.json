@@ -1,0 +1,147 @@
+{
+  "runAt": "2026-10-04T00:55:07.367Z",
+  "fixture": "Fictional development answers, isolated question sessions",
+  "model": "qwen3:4b-instruct",
+  "context": 4096,
+  "results": [
+    {
+      "questionId": "python_errors_02",
+      "answer": "Check the allowed file type and enforce a size limit before parsing; do not trust the extension alone. Open the file with a context manager so it closes even on failure. Catch expected errors specifically, such as FileNotFoundError, PermissionError and the parser’s documented error, and give an actionable message. Unexpected defects should propagate to the application error boundary or be logged with their traceback. Avoid a blanket catch that returns success or silently discards the exception.",
+      "grade": {
+        "method": "ollama-rubric-estimate",
+        "evidenceValidationFailed": false,
+        "reviewNeeded": false,
+        "evidenceStatus": "assessed",
+        "uncertainty": "low",
+        "criteria": [
+          {
+            "criterionId": "specific",
+            "label": "Catches expected, specific exceptions",
+            "points": 1,
+            "maxPoints": 1,
+            "evidenceExcerpt": "Catch expected errors specifically, such as FileNotFoundError, PermissionError and the parser’s documented error",
+            "explanation": "Verbatim evidence shows specific exception handling."
+          },
+          {
+            "criterionId": "validation",
+            "label": "Validates untrusted input",
+            "points": 1,
+            "maxPoints": 1,
+            "evidenceExcerpt": "Check the allowed file type and enforce a size limit before parsing",
+            "explanation": "Directly addresses untrusted input validation."
+          },
+          {
+            "criterionId": "resources",
+            "label": "Manages file resources safely",
+            "points": 1,
+            "maxPoints": 1,
+            "evidenceExcerpt": "Open the file with a context manager so it closes even on failure",
+            "explanation": "Explicitly mentions safe resource management."
+          },
+          {
+            "criterionId": "unexpected",
+            "label": "Does not suppress unexpected defects",
+            "points": 1,
+            "maxPoints": 1,
+            "evidenceExcerpt": "Unexpected defects should propagate to the application error boundary or be logged with their traceback",
+            "explanation": "Clear commitment to not suppressing unexpected defects."
+          }
+        ],
+        "missingConcepts": [],
+        "explanation": "All criteria met with verbatim evidence; no misconceptions present.",
+        "rawPoints": 4,
+        "awardedPoints": 4,
+        "maxPoints": 4
+      },
+      "metrics": {
+        "wallMs": 18947,
+        "totalDurationNs": 18916729100,
+        "loadDurationNs": 19030200,
+        "evalDurationNs": 18634870000,
+        "evalCount": 235,
+        "promptEvalCount": 604,
+        "contextSize": 4096,
+        "evidenceRetry": true,
+        "firstAttempt": {
+          "wallMs": 26670,
+          "totalDurationNs": 26655101000,
+          "loadDurationNs": 8803698900,
+          "evalDurationNs": 16761848999,
+          "evalCount": 226,
+          "promptEvalCount": 528,
+          "contextSize": 4096
+        }
+      }
+    },
+    {
+      "questionId": "project_decisions_01",
+      "answer": "I chose SQLite because this tracker was for one person on an offline laptop with no budget for server administration. PostgreSQL was an alternative with better concurrent writes, but it required a running service. SQLite gave us a single local database file and simple installation; the trade-off was limited concurrent writes and no shared multi-user server. I tested inserting, updating and reopening saved application records, verified rollback after a failed update, and measured the response time of list queries with 10,000 fixture rows.",
+      "grade": {
+        "method": "ollama-rubric-estimate",
+        "evidenceValidationFailed": false,
+        "reviewNeeded": false,
+        "evidenceStatus": "assessed",
+        "uncertainty": "low",
+        "criteria": [
+          {
+            "criterionId": "decision",
+            "label": "Names a concrete technical decision and constraint",
+            "points": 1,
+            "maxPoints": 1,
+            "evidenceExcerpt": "I chose SQLite because this tracker was for one person on an offline laptop with no budget for server administration.",
+            "explanation": "Names a concrete technical decision and constraint."
+          },
+          {
+            "criterionId": "alternative",
+            "label": "Compares an alternative",
+            "points": 1,
+            "maxPoints": 1,
+            "evidenceExcerpt": "PostgreSQL was an alternative with better concurrent writes, but it required a running service.",
+            "explanation": "Compares an alternative explicitly."
+          },
+          {
+            "criterionId": "tradeoff",
+            "label": "Explains the trade-off",
+            "points": 1,
+            "maxPoints": 1,
+            "evidenceExcerpt": "the trade-off was limited concurrent writes and no shared multi-user server.",
+            "explanation": "Explains the trade-off clearly."
+          },
+          {
+            "criterionId": "verification",
+            "label": "Provides verification evidence",
+            "points": 2,
+            "maxPoints": 2,
+            "evidenceExcerpt": "I tested inserting, updating and reopening saved application records, verified rollback after a failed update, and measured the response time of list queries with 10,000 fixture rows.",
+            "explanation": "Provides multiple verification actions including test and measurement."
+          }
+        ],
+        "missingConcepts": [],
+        "explanation": "All criteria met with verbatim evidence; full credit given.",
+        "rawPoints": 5,
+        "awardedPoints": 5,
+        "maxPoints": 5
+      },
+      "metrics": {
+        "wallMs": 25819,
+        "totalDurationNs": 25697344400,
+        "loadDurationNs": 39034000,
+        "evalDurationNs": 25282289000,
+        "evalCount": 264,
+        "promptEvalCount": 609,
+        "contextSize": 4096,
+        "evidenceRetry": true,
+        "firstAttempt": {
+          "wallMs": 21552,
+          "totalDurationNs": 21522669000,
+          "loadDurationNs": 11229600,
+          "evalDurationNs": 20913575000,
+          "evalCount": 226,
+          "promptEvalCount": 533,
+          "contextSize": 4096
+        }
+      }
+    }
+  ],
+  "passed": true
+}

@@ -1,0 +1,44 @@
+.report-document { min-width: 0; }
+.report-document-actions { display: flex; align-items: center; justify-content: space-between; gap: 12px; margin-bottom: 12px; }
+.report-document-actions > span { color: var(--color-text-secondary); font-size: .7rem; }
+.reports-page .notice { display: flex; gap: 12px; align-items: center; }
+.reports-page .notice > span { flex: 1; }
+.report-section-note { color: var(--color-text-secondary); font-size: .75rem; line-height: 1.6; margin: 0 0 18px; }
+.report-source-list { display: grid; gap: 8px; }
+.report-two-column h4 { margin: 0 0 12px; font-size: .8rem; font-weight: 600; }
+.report-source { min-width: 0; padding: 12px; border: 1px solid var(--color-border-light); border-radius: 6px; }
+.report-source summary { cursor: pointer; }
+.report-source summary strong { font-size: .75rem; }
+.report-source summary span { display: block; margin-top: 4px; color: var(--color-text-secondary); font-size: .65rem; overflow-wrap: anywhere; }
+.report-source blockquote { margin: 12px 0 6px; padding-left: 12px; border-left: 2px solid var(--color-primary); color: var(--color-text-secondary); font-size: .7rem; line-height: 1.7; white-space: pre-wrap; overflow-wrap: anywhere; }
+.report-source small { font-size: .6rem; color: var(--color-text-tertiary); }
+.reassessment-topics { padding-top: 18px; font-size: .75rem; }
+.reassessment-topics ul { margin: 8px 0 0; padding-left: 18px; color: var(--color-text-secondary); line-height: 1.7; }
+.report-policy { margin-top: 16px; }
+.rubric-table > div > div { min-width: 0; }
+.rubric-table > div > div p + p { margin-top: 4px; }
+.answer-review-body p { white-space: pre-wrap; overflow-wrap: anywhere; }
+
+/* Saved reports continue the existing cream, ink, and cobalt workspace palette. */
+.reports-page .interview-report { --room-line: var(--color-border-light); --room-cyan: var(--color-primary); --room-blue: var(--color-primary); --room-panel-solid: var(--color-white, #fff); background: var(--color-white, #fff); color: var(--color-text); }
+.reports-page .report-score-ring { background: conic-gradient(var(--color-primary) var(--score), var(--color-border-light) 0); }
+.reports-page .report-hero p, .reports-page .report-task p, .reports-page .report-list-item p, .reports-page .answer-review-body p, .reports-page .skill-result div span, .reports-page .evidence-gap-list, .reports-page .report-empty, .reports-page .comparison-row { color: var(--color-text-secondary); }
+.reports-page .report-list-item strong, .reports-page .rubric-table b, .reports-page .answer-review summary b { color: var(--color-text); }
+.reports-page .result-bar { background: var(--color-border-light); }
+.reports-page .skill-result, .reports-page .report-task { background: var(--color-canvas, #f5f3ed); }
+.reports-page .answer-review, .reports-page .rubric-table > div, .reports-page .comparison-row { border-color: var(--color-border-light); }
+.reports-page .report-provenance { color: var(--color-primary); }
+.reports-page .grade-note { color: var(--color-text-secondary) !important; }
+.reports-page .report-limitations { background: #fff8e7; border-color: #ead6a0; color: #705217; }
+.reports-page .report-limitations p { color: #705217; }
+.reports-page .report-footer-meta { flex-wrap: wrap; line-height: 1.6; color: var(--color-text-secondary); }
+.reports-page .report-section { border-color: var(--color-border-light); }
+.reports-page .report-index { max-height: 70vh; overflow: auto; }
+
+@media (max-width: 720px) {
+  .report-document-actions { align-items: flex-start; flex-wrap: wrap; }
+  .report-two-column { grid-template-columns: minmax(0, 1fr); }
+  .rubric-table > div { grid-template-columns: minmax(0, 1fr) auto; }
+  .rubric-table > div > div { grid-row: 2; grid-column: 1 / -1; }
+  .reports-page .report-index { max-height: 240px; }
+}

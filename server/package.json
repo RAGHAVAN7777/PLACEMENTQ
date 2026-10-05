@@ -1,0 +1,22 @@
+{
+  "name": "placementiq-local-server",
+  "version": "1.0.0",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "dev": "node --watch src/server.mjs",
+    "start": "node src/server.mjs",
+    "test": "node --test --test-concurrency=1 tests/*.test.mjs",
+    "evaluate": "node src/evaluate.mjs",
+    "evaluate:live": "node src/evaluate-live.mjs",
+    "verify:live": "node src/verify-live.mjs"
+  },
+  "dependencies": {
+    "mammoth": "^1.10.0",
+    "pdfjs-dist": "^6.2.108"
+  },
+  "devDependencies": {
+    "jszip": "^3.10.1",
+    "pdfkit": "^0.17.2"
+  }
+}

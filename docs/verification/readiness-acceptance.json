@@ -1,0 +1,371 @@
+{
+  "runAt": "2026-10-05T01:50:09.283Z",
+  "note": "Fictional baseline inputs with actual saved-model inference. Matrix scenarios use real saved interview scores 100 and 88 with a visible test threshold of 90; production default remains 65. No live report marks are altered.",
+  "policy": {
+    "version": "readiness-policy-1.0",
+    "baselineThreshold": 50,
+    "interviewThreshold": 90,
+    "baselineWeight": 0.5,
+    "interviewWeight": 0.5,
+    "weightStatus": "Policy defaults pending faculty validation; not learned from the dataset"
+  },
+  "checks": [
+    {
+      "category": "Placement Ready",
+      "baseline": 99.87450907568426,
+      "interview": 100,
+      "sourceReport": "report_0793e12e-19de-4d15-a57e-c7b80e6d4005"
+    },
+    {
+      "category": "Profile Strong, Interview Preparation Required",
+      "baseline": 99.87450907568426,
+      "interview": 88,
+      "sourceReport": "report_2aaaa595-1eeb-4f05-8107-e7c01889e60b"
+    },
+    {
+      "category": "Demonstrated Skill Strong, Profile Improvement Required",
+      "baseline": 0.12857393866141406,
+      "interview": 100,
+      "sourceReport": "report_0793e12e-19de-4d15-a57e-c7b80e6d4005"
+    },
+    {
+      "category": "Structured Readiness Development Required",
+      "baseline": 0.12857393866141406,
+      "interview": 88,
+      "sourceReport": "report_2aaaa595-1eeb-4f05-8107-e7c01889e60b"
+    },
+    "Missing interview remains pending",
+    "Missing baseline remains pending",
+    "Invalid, incomplete, unconfirmed and unknown-category inputs rejected",
+    "Real insufficient-evidence interview withheld from matrix",
+    "Saved result and original policy reload identically",
+    "Second assessment preserves first; preparation persists",
+    "Ownership and immutable baseline enforced"
+  ],
+  "baselines": [
+    {
+      "probability": 0.9987450907568426,
+      "score": 99.87450907568426,
+      "predictedClass": "Placed",
+      "modelVersion": "3f3e1a00b1896ef2076df63a4dc1bf837fe5b5617d9eceed512dd46cc7f5cb40",
+      "modelName": "HistGradientBoostingClassifier",
+      "featureOrder": [
+        "age",
+        "gender",
+        "cgpa",
+        "branch",
+        "college_tier",
+        "internships_count",
+        "projects_count",
+        "certifications_count",
+        "coding_skill_score",
+        "aptitude_score",
+        "communication_skill_score",
+        "logical_reasoning_score",
+        "hackathons_participated",
+        "github_repos",
+        "linkedin_connections",
+        "mock_interview_score",
+        "attendance_percentage",
+        "backlogs",
+        "extracurricular_score",
+        "leadership_score",
+        "volunteer_experience",
+        "sleep_hours",
+        "study_hours_per_day",
+        "tech_core_score",
+        "academic_consistency",
+        "backlog_risk_ratio",
+        "coding_cgpa_interaction",
+        "portfolio_strength",
+        "interview_readiness",
+        "high_performer_flag",
+        "zero_backlog_flag"
+      ],
+      "inputs": {
+        "age": 22,
+        "gender": "Male",
+        "cgpa": 9,
+        "branch": "CSE",
+        "college_tier": "Tier 1",
+        "internships_count": 4,
+        "projects_count": 6,
+        "certifications_count": 3,
+        "coding_skill_score": 90,
+        "aptitude_score": 90,
+        "communication_skill_score": 85,
+        "logical_reasoning_score": 90,
+        "hackathons_participated": 4,
+        "github_repos": 8,
+        "linkedin_connections": 500,
+        "mock_interview_score": 85,
+        "attendance_percentage": 95,
+        "backlogs": 0,
+        "extracurricular_score": 70,
+        "leadership_score": 75,
+        "volunteer_experience": "Yes",
+        "sleep_hours": 7,
+        "study_hours_per_day": 5
+      },
+      "timestamp": "2026-10-05T01:50:24.984Z",
+      "confirmed": true,
+      "sources": {
+        "age": {
+          "source": "Student confirmed input",
+          "confirmed": true
+        },
+        "gender": {
+          "source": "Student confirmed input",
+          "confirmed": true
+        },
+        "cgpa": {
+          "source": "Student confirmed input",
+          "confirmed": true
+        },
+        "branch": {
+          "source": "Student confirmed input",
+          "confirmed": true
+        },
+        "college_tier": {
+          "source": "Student confirmed input",
+          "confirmed": true
+        },
+        "internships_count": {
+          "source": "Student confirmed input",
+          "confirmed": true
+        },
+        "projects_count": {
+          "source": "Student confirmed input",
+          "confirmed": true
+        },
+        "certifications_count": {
+          "source": "Student confirmed input",
+          "confirmed": true
+        },
+        "coding_skill_score": {
+          "source": "Student confirmed input",
+          "confirmed": true
+        },
+        "aptitude_score": {
+          "source": "Student confirmed input",
+          "confirmed": true
+        },
+        "communication_skill_score": {
+          "source": "Student confirmed input",
+          "confirmed": true
+        },
+        "logical_reasoning_score": {
+          "source": "Student confirmed input",
+          "confirmed": true
+        },
+        "hackathons_participated": {
+          "source": "Student confirmed input",
+          "confirmed": true
+        },
+        "github_repos": {
+          "source": "Student confirmed input",
+          "confirmed": true
+        },
+        "linkedin_connections": {
+          "source": "Student confirmed input",
+          "confirmed": true
+        },
+        "mock_interview_score": {
+          "source": "Student confirmed input",
+          "confirmed": true
+        },
+        "attendance_percentage": {
+          "source": "Student confirmed input",
+          "confirmed": true
+        },
+        "backlogs": {
+          "source": "Student confirmed input",
+          "confirmed": true
+        },
+        "extracurricular_score": {
+          "source": "Student confirmed input",
+          "confirmed": true
+        },
+        "leadership_score": {
+          "source": "Student confirmed input",
+          "confirmed": true
+        },
+        "volunteer_experience": {
+          "source": "Student confirmed input",
+          "confirmed": true
+        },
+        "sleep_hours": {
+          "source": "Student confirmed input",
+          "confirmed": true
+        },
+        "study_hours_per_day": {
+          "source": "Student confirmed input",
+          "confirmed": true
+        }
+      }
+    },
+    {
+      "probability": 0.0012857393866141406,
+      "score": 0.12857393866141406,
+      "predictedClass": "Not Placed",
+      "modelVersion": "3f3e1a00b1896ef2076df63a4dc1bf837fe5b5617d9eceed512dd46cc7f5cb40",
+      "modelName": "HistGradientBoostingClassifier",
+      "featureOrder": [
+        "age",
+        "gender",
+        "cgpa",
+        "branch",
+        "college_tier",
+        "internships_count",
+        "projects_count",
+        "certifications_count",
+        "coding_skill_score",
+        "aptitude_score",
+        "communication_skill_score",
+        "logical_reasoning_score",
+        "hackathons_participated",
+        "github_repos",
+        "linkedin_connections",
+        "mock_interview_score",
+        "attendance_percentage",
+        "backlogs",
+        "extracurricular_score",
+        "leadership_score",
+        "volunteer_experience",
+        "sleep_hours",
+        "study_hours_per_day",
+        "tech_core_score",
+        "academic_consistency",
+        "backlog_risk_ratio",
+        "coding_cgpa_interaction",
+        "portfolio_strength",
+        "interview_readiness",
+        "high_performer_flag",
+        "zero_backlog_flag"
+      ],
+      "inputs": {
+        "age": 22,
+        "gender": "Male",
+        "cgpa": 5,
+        "branch": "CSE",
+        "college_tier": "Tier 1",
+        "internships_count": 0,
+        "projects_count": 1,
+        "certifications_count": 3,
+        "coding_skill_score": 30,
+        "aptitude_score": 35,
+        "communication_skill_score": 85,
+        "logical_reasoning_score": 35,
+        "hackathons_participated": 4,
+        "github_repos": 8,
+        "linkedin_connections": 500,
+        "mock_interview_score": 30,
+        "attendance_percentage": 60,
+        "backlogs": 3,
+        "extracurricular_score": 70,
+        "leadership_score": 75,
+        "volunteer_experience": "Yes",
+        "sleep_hours": 7,
+        "study_hours_per_day": 5
+      },
+      "timestamp": "2026-10-05T01:50:27.005Z",
+      "confirmed": true,
+      "sources": {
+        "age": {
+          "source": "Student confirmed input",
+          "confirmed": true
+        },
+        "gender": {
+          "source": "Student confirmed input",
+          "confirmed": true
+        },
+        "cgpa": {
+          "source": "Student confirmed input",
+          "confirmed": true
+        },
+        "branch": {
+          "source": "Student confirmed input",
+          "confirmed": true
+        },
+        "college_tier": {
+          "source": "Student confirmed input",
+          "confirmed": true
+        },
+        "internships_count": {
+          "source": "Student confirmed input",
+          "confirmed": true
+        },
+        "projects_count": {
+          "source": "Student confirmed input",
+          "confirmed": true
+        },
+        "certifications_count": {
+          "source": "Student confirmed input",
+          "confirmed": true
+        },
+        "coding_skill_score": {
+          "source": "Student confirmed input",
+          "confirmed": true
+        },
+        "aptitude_score": {
+          "source": "Student confirmed input",
+          "confirmed": true
+        },
+        "communication_skill_score": {
+          "source": "Student confirmed input",
+          "confirmed": true
+        },
+        "logical_reasoning_score": {
+          "source": "Student confirmed input",
+          "confirmed": true
+        },
+        "hackathons_participated": {
+          "source": "Student confirmed input",
+          "confirmed": true
+        },
+        "github_repos": {
+          "source": "Student confirmed input",
+          "confirmed": true
+        },
+        "linkedin_connections": {
+          "source": "Student confirmed input",
+          "confirmed": true
+        },
+        "mock_interview_score": {
+          "source": "Student confirmed input",
+          "confirmed": true
+        },
+        "attendance_percentage": {
+          "source": "Student confirmed input",
+          "confirmed": true
+        },
+        "backlogs": {
+          "source": "Student confirmed input",
+          "confirmed": true
+        },
+        "extracurricular_score": {
+          "source": "Student confirmed input",
+          "confirmed": true
+        },
+        "leadership_score": {
+          "source": "Student confirmed input",
+          "confirmed": true
+        },
+        "volunteer_experience": {
+          "source": "Student confirmed input",
+          "confirmed": true
+        },
+        "sleep_hours": {
+          "source": "Student confirmed input",
+          "confirmed": true
+        },
+        "study_hours_per_day": {
+          "source": "Student confirmed input",
+          "confirmed": true
+        }
+      }
+    }
+  ],
+  "passed": true,
+  "dataDir": "server/data/test-runtime/readiness-1791165009246"
+}
