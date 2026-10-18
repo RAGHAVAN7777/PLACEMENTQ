@@ -1,0 +1,11 @@
+import fs from 'node:fs/promises';
+import assert from 'node:assert/strict';
+const {baselineInference,baselineExplain,baselineSchema}=await import('../server/src/baseline.mjs');
+const {demoInputs}=await import('../server/src/demo.mjs');
+const inputs=demoInputs('intermediate');
+const schema=await baselineSchema();
+const start=performance.now();const before=await baselineInference({inputs});const explanation=await baselineExplain(inputs);const beforeMs=performance.now()-start;
+const afterStart=performance.now();const after=await baselineInference({operation:'assessment',inputs});const afterMs=performance.now()-afterStart;
+assert.equal(after.score,before.score);assert.deepEqual(after.explanation,explanation);
+const proof={at:new Date().toISOString(),fixture:'fictional intermediate demo',method:'Single sequential comparison: previous two Python invocations versus one combined invocation. Schema already loaded. Not a statistical benchmark.',beforeMs:Math.round(beforeMs),afterMs:Math.round(afterMs),identicalPredictionAndExplanation:true,modelVersion:after.modelVersion,fields:schema.fields,featureOrder:schema.featureOrder};
+await fs.writeFile('docs/verification/unified-baseline-benchmark.json',JSON.stringify(proof,null,2));console.log(JSON.stringify({beforeMs:proof.beforeMs,afterMs:proof.afterMs,identical:true}));

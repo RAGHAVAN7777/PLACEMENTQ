@@ -1,0 +1,45 @@
+{
+  "at": "2026-10-17T10:25:49.777Z",
+  "fixture": "Fictional Python task planner, normal interview code path",
+  "passed": true,
+  "startMs": 35244,
+  "first": {
+    "prompt": "In your task planner, you use per-user lists. If two users share a list object and one appends an item, does the other see it? Explain why this happens and how to prevent it without rebinding variables.",
+    "method": "ollama-personalized",
+    "metrics": {
+      "wallMs": 34968,
+      "totalDurationNs": 34958540000,
+      "loadDurationNs": 15415195700,
+      "promptEvalDurationNs": 7123826000,
+      "evalDurationNs": 12402543000,
+      "evalCount": 72,
+      "promptEvalCount": 171,
+      "contextSize": 4096,
+      "attempts": 1,
+      "requestBytes": 1286,
+      "queueMs": 0,
+      "endToEndMs": 35240,
+      "method": "first-question-personalization",
+      "llmCalls": 1
+    }
+  },
+  "nextMs": 17887,
+  "second": {
+    "prompt": "Your task planner saves user data. How would you modify the file-writing logic to catch specific exceptions for invalid inputs, ensure files close safely, and explicitly log unexpected errors instead of suppressing them?",
+    "method": "ollama-personalized",
+    "metrics": {
+      "wallMs": 17703,
+      "totalDurationNs": 17693290500,
+      "loadDurationNs": 20543300,
+      "promptEvalDurationNs": 7178896000,
+      "evalDurationNs": 10399256000,
+      "evalCount": 56,
+      "promptEvalCount": 173,
+      "contextSize": 4096,
+      "attempts": 1,
+      "requestBytes": 1306,
+      "queueMs": 0
+    }
+  },
+  "note": "Live first and second personalized questions; skip transition, not a complete live grading benchmark."
+}

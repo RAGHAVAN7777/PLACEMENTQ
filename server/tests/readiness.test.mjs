@@ -14,7 +14,7 @@ for (const [b, i, expected] of [
   const result = compareReadiness(baseline(b), report(i), readinessPolicy);
   assert.equal(result.category, expected);
   assert.ok(result.action.steps.length);
-  assert.equal(result.composite.value, (b + i) / 2);
+  assert.equal(result.composite.value, 0.4*b + 0.6*i);
 });
 test('missing results never become zero or a readiness category', () => {
   assert.equal(compareReadiness(null, report(90), readinessPolicy).status, 'missing-baseline');

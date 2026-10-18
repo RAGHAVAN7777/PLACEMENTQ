@@ -1,3 +1,5 @@
+import { UnifiedProgress } from '../readiness/UnifiedPages';
+export default UnifiedProgress;
 import { useMemo } from 'react';
 import { useStore } from '../../services/store';
 import { FEATURE_DEFINITIONS } from '../../config';
@@ -7,7 +9,7 @@ import './ProgressPage.css';
 import { useInterviewWorkspace, InterviewWorkspaceStatus } from '../../services/InterviewWorkspace';
 import { Link } from 'react-router-dom';
 
-export default function ProgressPage() {
+function LegacyProgressPage() {
   const { reports, report, loading, error } = useInterviewWorkspace();
   if (loading || error) return <InterviewWorkspaceStatus />;
   if (!report) return <NumericProgressPage />;

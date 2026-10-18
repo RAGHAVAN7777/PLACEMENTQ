@@ -1,0 +1,7 @@
+import {Link} from 'react-router-dom';
+import type {IntegratedAssessment} from '../../services/readinessApi';
+export default function RoadmapSummary({record}:{record:IntegratedAssessment}){
+ const plan=record.roadmap,tasks=plan?.tasks||[],done=tasks.filter(t=>t.completed).length,total=tasks.filter(t=>!plan?.preferences||t.week!==null||t.completed).length;
+ const next=tasks.filter(t=>!t.completed&&(!plan?.preferences||t.week!==null)).sort((a,b)=>(a.week??0)-(b.week??0)||b.priorityScore-a.priorityScore)[0];
+ return <section className="readiness-card"><h2>Your preparation roadmap</h2><p>{plan?.preferences?`${plan.preferences.targetRole} · ${plan.preferences.weeks} weeks · ${plan.preferences.hoursPerWeek} h/week`:'Choose your role and weekly availability to schedule your evidence-based plan.'}</p>{next&&<p><strong>Next:</strong> {next.title}</p>}{plan&&<><progress max={total||1} value={done}/><p>{done}/{total} assigned tasks complete</p><details><summary>Top improvement priorities</summary><ol>{tasks.filter(t=>!t.completed).slice(0,3).map(t=><li key={t.id}>{t.title}<small> — {t.why}</small></li>)}</ol></details></>}<div className="readiness-links"><Link className="btn btn-primary" to={`/app/plan?assessment=${record.id}`}>{plan?.preferences?'View full action plan':'Start preparation'}</Link><Link to={`/app/skills?assessment=${record.id}`}>Skill analysis</Link><Link to="/assessment?new=1">Retake interview</Link></div></section>;
+}

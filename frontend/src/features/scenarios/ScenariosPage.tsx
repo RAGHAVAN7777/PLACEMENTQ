@@ -1,4 +1,6 @@
-import { useState, useMemo, useCallback } from 'react';
+import { UnifiedScenario } from '../readiness/UnifiedPages';
+import { useInterviewWorkspace, InterviewWorkspaceStatus } from '../../services/InterviewWorkspace';
+import { useState, useMemo, useCallback, useEffect } from 'react';
 import { useStore } from '../../services/store';
 import { predictionService } from '../../services/prediction';
 import { SCENARIO_EDITABLE_FIELDS, FEATURE_DEFINITIONS, ROUTES } from '../../config';
@@ -8,7 +10,7 @@ import { RotateCcw, Save, ListChecks, ArrowRight, AlertTriangle } from 'lucide-r
 import CounterfactualOptimizer from './CounterfactualOptimizer';
 import './ScenariosPage.css';
 
-export default function ScenariosPage() {
+function LegacyScenariosPage() {
   const latestAssessment = useStore((s) => s.getLatestAssessment());
   const saveScenario = useStore((s) => s.saveScenario);
   const addTask = useStore((s) => s.addTask);
@@ -28,20 +30,19 @@ export default function ScenariosPage() {
     return { ...baseProfile, ...hypothetical };
   }, [baseProfile, hypothetical]);
 
-  // Evaluate hypothetical
-  const evaluate = useCallback(async () => {
-    if (!mergedProfile) return;
-    const result = await predictionService.evaluate(mergedProfile as StudentProfile);
-    setHypotheticalResult(result);
-  }, [mergedProfile]);
-
   // Auto-evaluate on change
-  useMemo(() => {
+  useEffect(() => {
+    let active = true;
     if (mergedProfile && Object.keys(hypothetical).length > 0) {
-      predictionService.evaluate(mergedProfile as StudentProfile).then(setHypotheticalResult);
+      predictionService.evaluate(mergedProfile as StudentProfile).then((res) => {
+        if (active) setHypotheticalResult(res);
+      });
     } else {
       setHypotheticalResult(null);
     }
+    return () => {
+      active = false;
+    };
   }, [mergedProfile, hypothetical]);
 
   const handleFieldChange = useCallback(
@@ -116,7 +117,6 @@ export default function ScenariosPage() {
       {/* Prescriptive Counterfactual Optimizer */}
       <CounterfactualOptimizer
         baseProfile={baseProfile}
-        currentScore={baseResult.illustrativeReadinessScore}
         onApplyToSimulator={(hyp) => setHypothetical(hyp)}
       />
 
@@ -129,7 +129,7 @@ export default function ScenariosPage() {
           </h3>
           <div className="scenario-score-box">
             <span className="font-mono" style={{ fontSize: '0.6875rem', color: 'var(--color-text-tertiary)' }}>
-              Readiness
+              Illustrative readiness
             </span>
             <span className="font-serif" style={{ fontSize: '2.5rem', lineHeight: 1 }}>
               {baseResult.illustrativeReadinessScore}
@@ -168,7 +168,7 @@ export default function ScenariosPage() {
 
           <div className="scenario-score-box">
             <span className="font-mono" style={{ fontSize: '0.6875rem', color: 'var(--color-text-tertiary)' }}>
-              Readiness
+              Illustrative readiness
             </span>
             <span
               className="font-serif"
@@ -265,3 +265,5 @@ export default function ScenariosPage() {
     </div>
   );
 }
+
+export default function ScenariosPage(){const {assessment,loading,error}=useInterviewWorkspace();if(loading||error)return <InterviewWorkspaceStatus/>;return assessment?.baseline?<UnifiedScenario record={assessment}/>:<LegacyScenariosPage/>;}

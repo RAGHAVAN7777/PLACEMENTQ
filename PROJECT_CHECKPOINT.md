@@ -1,5 +1,7 @@
 # PlacementIQ implementation checkpoint
 
+> Historical checkpoint. For the current audit, verified fixes, and completion roadmap, read [PROJECT_STATUS.md](PROJECT_STATUS.md). The machine paths, installed-model claims, branch name, and test counts below describe earlier environments; this supplied folder currently has no Git repository.
+
 Updated: 4 October 2026. Branch: `feature/placement-prediction`. Work remains in the existing checkout; no commit or deployment was made. Preserve the user's existing landing, particle hero, predictor, and workspace changes.
 
 ## Latest request — conversational interview complete
@@ -56,7 +58,7 @@ The user installed `qwen3:4b-instruct`; do not install or download it again. Bac
 
 ## Run and inspect
 
-From `D:\PLACEMENTAGENTIQ`: `.\Start-PlacementIQ.cmd` (or `.\Start-PlacementIQ.cmd -SkipInstall` when dependencies already exist). Open `http://127.0.0.1:3000/assessment`. Keep Ollama running. Launcher starts both local services and stops them on Ctrl+C.
+From the repository root: `.\Start-PlacementIQ.cmd` (or `.\Start-PlacementIQ.cmd -SkipInstall` when dependencies already exist). Open `http://127.0.0.1:3000/assessment`. Keep Ollama running. Launcher starts both local services and stops them on Ctrl+C.
 
 Checks: `npm.cmd test --prefix server`, `npm.cmd run build --prefix frontend`, `npm.cmd run verify:live --prefix server`, `npm.cmd run evaluate:live --prefix server`. Run live scripts sequentially with no interview request in progress.
 

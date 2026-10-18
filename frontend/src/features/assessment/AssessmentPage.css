@@ -153,3 +153,5 @@
     grid-template-columns: 1fr;
   }
 }
+
+.assessment-embedded{min-height:0;border-radius:18px;padding:24px 0;color:#342c25;background:#fffaf3}.assessment-embedded .assessment-container{padding:0 20px}.assessment-embedded .baseline-review input,.assessment-embedded .baseline-review select{max-width:100%;min-width:0;background:#fff;color:#342c25;padding:8px;border:1px solid #d9cfc3;border-radius:6px}.assessment-embedded .assessment-title{color:#342c25}

@@ -15,6 +15,7 @@ const Progress = lazy(() => import('./features/progress/ProgressPage'));
 const ModelLab = lazy(() => import('./features/model-lab/ModelLabPage'));
 const Profile = lazy(() => import('./features/profile/ProfilePage'));
 const NotFound = lazy(() => import('./features/not-found/NotFoundPage'));
+const FacultyEvidence=lazy(()=>import('./features/readiness/FacultyEvidence'));
 const Readiness = lazy(() => import('./features/readiness/ReadinessPage'));
 
 function PageLoader() {
@@ -45,7 +46,7 @@ export default function App() {
             <Route path="plan" element={<Plan />} />
             <Route path="progress" element={<Progress />} />
             <Route path="interviews" element={<Reports />} />
-            <Route path="faculty" element={<Reports faculty />} />
+            <Route path="faculty" element={<FacultyEvidence />} />
             <Route path="model-lab" element={<ModelLab />} />
             <Route path="profile" element={<Profile />} />
           </Route>

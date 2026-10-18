@@ -1,3 +1,5 @@
+import evaluationArtifact from '../../../ml/outputs/model_evaluation_artifacts.json' with { type: 'json' };
+import cutoffArtifact from '../../../ml/outputs/threshold_tuning_results.json' with { type: 'json' };
 import type { FeatureDefinition, PolicyMode, PolicyDefinition } from '../types';
 
 // ─── Design Tokens ──────────────────────────────────────────────────────────
@@ -79,7 +81,7 @@ export const FEATURE_DEFINITIONS: FeatureDefinition[] = [
   {
     key: 'branch', label: 'Branch / Department', shortLabel: 'Branch',
     category: 'academic', type: 'select', required: true,
-    options: ['CSE', 'IT', 'ECE', 'EEE', 'ME', 'CE', 'Other'],
+    options: ['CSE', 'Civil', 'ECE', 'EEE', 'IT', 'Mechanical'],
     description: 'Your academic department or branch of study.',
     target: 0,
   },
@@ -259,7 +261,7 @@ export const DATASET_META = {
 // ─── Trained Model Benchmark Results & Artifacts ────────────────────────────
 export const TRAINED_MODEL_RESULTS = {
   status: 'validated' as const,
-  label: 'Empirically validated run — 100,000 samples, 80/20 stratified split with domain feature engineering',
+  label: 'Recorded dataset benchmark — 100,000 samples, 80/20 stratified split; external validity is unverified',
   splitConfig: {
     testSize: 0.2,
     randomState: 42,
@@ -273,43 +275,28 @@ export const TRAINED_MODEL_RESULTS = {
     'Threshold tuning for high recall: adjusting cutoff from 0.50 to 0.39 boosts recall to 92.04%.',
   ],
   majorityBaseline: 55.00,
-  models: [
-    { modelName: 'HistGradientBoosting', accuracy: 85.66, precision: 86.04, recall: 88.24, f1Score: 87.12, rocAuc: 0.9363, trainTime: '5.64s' },
-    { modelName: 'XGBoost', accuracy: 85.56, precision: 85.60, recall: 88.65, f1Score: 87.10, rocAuc: 0.9367, trainTime: '1.85s' },
-    { modelName: 'Stacking Classifier', accuracy: 85.47, precision: 85.84, recall: 88.10, f1Score: 86.96, rocAuc: 0.9364, trainTime: '48.19s' },
-    { modelName: 'Voting Ensemble (RF+HGB+XGB)', accuracy: 85.37, precision: 85.44, recall: 88.47, f1Score: 86.93, rocAuc: 0.9358, trainTime: '15.57s' },
-    { modelName: 'Linear SVM', accuracy: 85.13, precision: 84.98, recall: 88.63, f1Score: 86.77, rocAuc: 0.9319, trainTime: '1.53s' },
-    { modelName: 'Logistic Regression', accuracy: 85.08, precision: 85.08, recall: 88.36, f1Score: 86.69, rocAuc: 0.9318, trainTime: '0.42s' },
-    { modelName: 'Random Forest (150 trees)', accuracy: 84.63, precision: 84.33, recall: 88.50, f1Score: 86.36, rocAuc: 0.9286, trainTime: '5.66s' },
-    { modelName: 'Bagging (Decision Tree)', accuracy: 84.20, precision: 84.00, recall: 88.04, f1Score: 85.97, rocAuc: 0.9223, trainTime: '12.93s' },
-    { modelName: 'Decision Tree (Gini, d=8)', accuracy: 82.92, precision: 82.31, recall: 87.81, f1Score: 84.97, rocAuc: 0.9099, trainTime: '3.65s' },
-    { modelName: 'Decision Tree (Entropy, d=8)', accuracy: 82.76, precision: 83.62, recall: 85.38, f1Score: 84.49, rocAuc: 0.9095, trainTime: '3.35s' },
-    { modelName: 'Perceptron (Linear)', accuracy: 82.64, precision: 83.59, recall: 85.15, f1Score: 84.36, rocAuc: 0.9087, trainTime: '0.27s' },
-    { modelName: 'AdaBoost', accuracy: 79.42, precision: 78.23, recall: 86.72, f1Score: 82.26, rocAuc: 0.8968, trainTime: '42.85s' },
-  ],
+  models: evaluationArtifact.benchmark_comparison.map(item => ({
+    modelName: item.model, accuracy: item.accuracy, precision: item.precision,
+    recall: item.recall, f1Score: item.f1_score, rocAuc: item.roc_auc,
+    trainTime: `${item.train_time_sec}s`,
+  })),
   champion: {
-    name: 'HistGradientBoosting',
+    name: evaluationArtifact.champion_model.name,
+    metrics: evaluationArtifact.champion_model,
+    rocPoints: evaluationArtifact.champion_model.roc_points,
     confusionMatrix: {
-      tn: 7425,
-      fp: 1575,
-      fn: 1294,
-      tp: 9706,
+      tn: evaluationArtifact.champion_model.confusion_matrix.true_negative,
+      fp: evaluationArtifact.champion_model.confusion_matrix.false_positive,
+      fn: evaluationArtifact.champion_model.confusion_matrix.false_negative,
+      tp: evaluationArtifact.champion_model.confusion_matrix.true_positive,
     },
-    topFeatures: [
-      { name: 'Coding Skill Score', importance: 0.228 },
-      { name: 'Tech Core Score (Engineered)', importance: 0.205 },
-      { name: 'CGPA', importance: 0.182 },
-      { name: 'Mock Interview Score', importance: 0.141 },
-      { name: 'Aptitude Score', importance: 0.125 },
-      { name: 'Coding x CGPA Interaction', importance: 0.095 },
-      { name: 'Portfolio Strength', importance: 0.082 },
-      { name: 'Logical Reasoning', importance: 0.068 },
-      { name: 'Backlogs Penalty', importance: 0.054 },
-    ],
+    topFeatures: evaluationArtifact.champion_model.feature_importances.map(item => ({
+      name: item.feature.replaceAll('_', ' '), importance: item.importance,
+    })),
     cutoffTuning: {
-      defaultCutoff: { threshold: 0.50, accuracy: 85.66, recall: 88.24, precision: 86.04, f1: 87.12 },
-      bestF1Cutoff: { threshold: 0.44, accuracy: 85.47, recall: 90.36, precision: 84.33, f1: 87.24 },
-      highRecallCutoff: { threshold: 0.39, accuracy: 85.19, recall: 92.04, precision: 82.91, f1: 87.23 },
+      defaultCutoff: cutoffArtifact.default_cutoff,
+      bestF1Cutoff: cutoffArtifact.best_f1_cutoff,
+      highRecallCutoff: cutoffArtifact.high_recall_cutoff,
     },
   },
 };
@@ -348,34 +335,34 @@ export const STORAGE_VERSION = 1;
 export const ASSESSMENT_POLICIES: Record<PolicyMode, PolicyDefinition> = {
   standard: {
     mode: 'standard',
-    name: 'Corporate Balanced Policy',
+    name: 'Default Test Threshold',
     shortName: 'Standard (0.50 Cutoff)',
     cutoff: 0.50,
-    description: 'Standard symmetric classification threshold balancing false alarms and missed candidates.',
+    description: 'Default classification threshold; no corporate hiring policy is implied.',
     recall: 88.24,
     precision: 86.04,
     accuracy: 85.66,
     rescuedCount: 0,
-    tagline: 'Strict Corporate Hiring Threshold',
+    tagline: 'Default threshold on the recorded test split',
   },
   'high-recall': {
     mode: 'high-recall',
     name: 'Early Discovery Policy',
     shortName: 'Early Discovery (0.39 Cutoff)',
     cutoff: 0.39,
-    description: 'Prioritizes sensitivity (recall) to discover borderline candidates and prevent missing employable talent.',
+    description: 'Raises measured recall on this dataset while increasing false positives; real hiring outcomes remain unverified.',
     recall: 92.04,
     precision: 82.91,
     accuracy: 85.19,
     rescuedCount: 418,
-    tagline: 'High-Recall Test Policy (Reclassifies 418 Test Records)',
+    tagline: 'High-Recall Test Policy (418 Fewer False Negatives)',
   },
 };
 
 // ─── Counterfactual Optimizer Configuration ────────────────────────────────
 export const COUNTERFACTUAL_TARGETS = [
-  { id: 'developing', label: 'Developing Competence', targetScore: 70, description: 'Solid baseline for tier-2 placement eligibility' },
-  { id: 'well-prepared', label: 'Well-Prepared Tier', targetScore: 80, description: 'Competitive profile for tier-1 IT & corporate drives' },
-  { id: 'top-tier', label: 'Product / High-Package Tier', targetScore: 88, description: 'Elite qualification bar for top tech recruiters' },
+  { id: 'developing', label: 'Target 70', targetScore: 70, description: 'Illustrative preparation target; not a hiring eligibility threshold' },
+  { id: 'well-prepared', label: 'Target 80', targetScore: 80, description: 'Illustrative preparation target; not a hiring eligibility threshold' },
+  { id: 'top-tier', label: 'Target 88', targetScore: 88, description: 'Illustrative preparation target; not a hiring eligibility threshold' },
 ] as const;
 

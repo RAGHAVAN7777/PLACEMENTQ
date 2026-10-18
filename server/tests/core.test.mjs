@@ -3,6 +3,7 @@ import assert from 'node:assert/strict';
 
 process.env.PLACEMENTIQ_DATA_DIR = 'server/data/test-runtime';
 process.env.OLLAMA_BASE_URL = 'http://127.0.0.1:9';
+process.env.OLLAMA_MODEL = 'qwen3:4b-instruct';
 
 const { extractProfileDeterministically, validateAiProfile } = await import('../src/profile-extractor.mjs');
 const { deterministicGrade, validateModelGrade, aggregateAnswers } = await import('../src/scoring.mjs');

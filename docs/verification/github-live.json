@@ -1,13 +1,13 @@
 {
-  "timestamp": "2026-10-03T18:40:49.459Z",
+  "timestamp": "2026-10-16T16:22:55.456Z",
   "repository": "pallets/flask",
   "purpose": "Public reference repository inspection; no authorship claim",
   "success": false,
   "error": {
     "code": "github_rate_limited",
-    "message": "GitHub rate limit reached. Try again after 2026-10-03T18:56:37.000Z (UTC), configure GITHUB_TOKEN for a higher limit, or continue without GitHub.",
+    "message": "GitHub rate limit reached. Try again after 2026-10-16T16:32:47.000Z (UTC), configure GITHUB_TOKEN for a higher limit, or continue without GitHub.",
     "details": {
-      "resetAt": "2026-10-03T18:56:37.000Z",
+      "resetAt": "2026-10-16T16:32:47.000Z",
       "retryAfterSeconds": null
     }
   }

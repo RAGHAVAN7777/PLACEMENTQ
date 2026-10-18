@@ -1,0 +1,9 @@
+{
+  "timestamp": "2026-10-16T16:23:00.598Z",
+  "passed": true,
+  "fixture": "Windows synthesized: Hello. This is a test of local speech recognition. Thank you.",
+  "scope": "Real local Vosk model and browser worker; synthetic WAV only, no microphone or quality validation.",
+  "transcript": "hello this is a test of local speech recognition thank you",
+  "durationSeconds": 5.878625,
+  "sampleRate": 16000
+}

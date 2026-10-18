@@ -1,0 +1,279 @@
+{
+  "at": "2026-10-17T17:36:00.045Z",
+  "fixture": "fictional intermediate demo",
+  "method": "Single sequential comparison: previous two Python invocations versus one combined invocation. Schema already loaded. Not a statistical benchmark.",
+  "beforeMs": 11596,
+  "afterMs": 6310,
+  "identicalPredictionAndExplanation": true,
+  "modelVersion": "3f3e1a00b1896ef2076df63a4dc1bf837fe5b5617d9eceed512dd46cc7f5cb40",
+  "fields": [
+    {
+      "key": "age",
+      "label": "Age",
+      "required": true,
+      "type": "number",
+      "min": 15,
+      "max": 100,
+      "step": 1,
+      "integer": true
+    },
+    {
+      "key": "gender",
+      "label": "Gender",
+      "required": true,
+      "type": "select",
+      "options": [
+        "Female",
+        "Male"
+      ]
+    },
+    {
+      "key": "cgpa",
+      "label": "Cgpa",
+      "required": true,
+      "type": "number",
+      "min": 0,
+      "max": 10,
+      "step": 0.01,
+      "integer": false
+    },
+    {
+      "key": "branch",
+      "label": "Branch",
+      "required": true,
+      "type": "select",
+      "options": [
+        "CSE",
+        "Civil",
+        "ECE",
+        "EEE",
+        "IT",
+        "Mechanical"
+      ]
+    },
+    {
+      "key": "college_tier",
+      "label": "College Tier",
+      "required": true,
+      "type": "select",
+      "options": [
+        "Tier 1",
+        "Tier 2",
+        "Tier 3"
+      ]
+    },
+    {
+      "key": "internships_count",
+      "label": "Internships Count",
+      "required": true,
+      "type": "number",
+      "min": 0,
+      "max": 100,
+      "step": 1,
+      "integer": true
+    },
+    {
+      "key": "projects_count",
+      "label": "Projects Count",
+      "required": true,
+      "type": "number",
+      "min": 0,
+      "max": 100,
+      "step": 1,
+      "integer": true
+    },
+    {
+      "key": "certifications_count",
+      "label": "Certifications Count",
+      "required": true,
+      "type": "number",
+      "min": 0,
+      "max": 100,
+      "step": 1,
+      "integer": true
+    },
+    {
+      "key": "coding_skill_score",
+      "label": "Coding Skill Score",
+      "required": true,
+      "type": "number",
+      "min": 0,
+      "max": 100,
+      "step": 0.01,
+      "integer": false
+    },
+    {
+      "key": "aptitude_score",
+      "label": "Aptitude Score",
+      "required": true,
+      "type": "number",
+      "min": 0,
+      "max": 100,
+      "step": 0.01,
+      "integer": false
+    },
+    {
+      "key": "communication_skill_score",
+      "label": "Communication Skill Score",
+      "required": true,
+      "type": "number",
+      "min": 0,
+      "max": 100,
+      "step": 0.01,
+      "integer": false
+    },
+    {
+      "key": "logical_reasoning_score",
+      "label": "Logical Reasoning Score",
+      "required": true,
+      "type": "number",
+      "min": 0,
+      "max": 100,
+      "step": 0.01,
+      "integer": false
+    },
+    {
+      "key": "hackathons_participated",
+      "label": "Hackathons Participated",
+      "required": true,
+      "type": "number",
+      "min": 0,
+      "max": 100,
+      "step": 1,
+      "integer": true
+    },
+    {
+      "key": "github_repos",
+      "label": "Github Repos",
+      "required": true,
+      "type": "number",
+      "min": 0,
+      "max": 10000,
+      "step": 1,
+      "integer": true
+    },
+    {
+      "key": "linkedin_connections",
+      "label": "Linkedin Connections",
+      "required": true,
+      "type": "number",
+      "min": 0,
+      "max": 100000,
+      "step": 1,
+      "integer": true
+    },
+    {
+      "key": "mock_interview_score",
+      "label": "Mock Interview Score",
+      "required": true,
+      "type": "number",
+      "min": 0,
+      "max": 100,
+      "step": 0.01,
+      "integer": false
+    },
+    {
+      "key": "attendance_percentage",
+      "label": "Attendance Percentage",
+      "required": true,
+      "type": "number",
+      "min": 0,
+      "max": 100,
+      "step": 0.01,
+      "integer": false
+    },
+    {
+      "key": "backlogs",
+      "label": "Backlogs",
+      "required": true,
+      "type": "number",
+      "min": 0,
+      "max": 100,
+      "step": 1,
+      "integer": true
+    },
+    {
+      "key": "extracurricular_score",
+      "label": "Extracurricular Score",
+      "required": true,
+      "type": "number",
+      "min": 0,
+      "max": 100,
+      "step": 0.01,
+      "integer": false
+    },
+    {
+      "key": "leadership_score",
+      "label": "Leadership Score",
+      "required": true,
+      "type": "number",
+      "min": 0,
+      "max": 100,
+      "step": 0.01,
+      "integer": false
+    },
+    {
+      "key": "volunteer_experience",
+      "label": "Volunteer Experience",
+      "required": true,
+      "type": "select",
+      "options": [
+        "No",
+        "Yes"
+      ]
+    },
+    {
+      "key": "sleep_hours",
+      "label": "Sleep Hours",
+      "required": true,
+      "type": "number",
+      "min": 0,
+      "max": 24,
+      "step": 0.01,
+      "integer": false
+    },
+    {
+      "key": "study_hours_per_day",
+      "label": "Study Hours Per Day",
+      "required": true,
+      "type": "number",
+      "min": 0,
+      "max": 24,
+      "step": 0.01,
+      "integer": false
+    }
+  ],
+  "featureOrder": [
+    "age",
+    "gender",
+    "cgpa",
+    "branch",
+    "college_tier",
+    "internships_count",
+    "projects_count",
+    "certifications_count",
+    "coding_skill_score",
+    "aptitude_score",
+    "communication_skill_score",
+    "logical_reasoning_score",
+    "hackathons_participated",
+    "github_repos",
+    "linkedin_connections",
+    "mock_interview_score",
+    "attendance_percentage",
+    "backlogs",
+    "extracurricular_score",
+    "leadership_score",
+    "volunteer_experience",
+    "sleep_hours",
+    "study_hours_per_day",
+    "tech_core_score",
+    "academic_consistency",
+    "backlog_risk_ratio",
+    "coding_cgpa_interaction",
+    "portfolio_strength",
+    "interview_readiness",
+    "high_performer_flag",
+    "zero_backlog_flag"
+  ]
+}

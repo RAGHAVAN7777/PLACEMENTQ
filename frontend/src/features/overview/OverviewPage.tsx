@@ -1,14 +1,11 @@
-import EmptyWorkspace from '../../components/ui/EmptyWorkspace';
-import InterviewOverview from './InterviewOverview';
+import RoadmapSummary from '../plan/RoadmapSummary';
+import { Link } from 'react-router-dom';
 import { useInterviewWorkspace, InterviewWorkspaceStatus } from '../../services/InterviewWorkspace';
-import { Link, useSearchParams } from 'react-router-dom';
-import ReadinessPage from '../readiness/ReadinessPage';
-
-export default function OverviewPage() {
-  const { report, loading, error } = useInterviewWorkspace();
-  const [params] = useSearchParams();
-  if (!params.get('report')) return <ReadinessPage />;
-  if (loading || error) return <InterviewWorkspaceStatus />;
-  if (report) return <><p><Link to={`/placement-assessment?session=${report.sessionId}`}>Add a baseline estimate for this interview</Link> · <Link to={`/app/readiness?session=${report.sessionId}`}>Integrated readiness</Link></p><InterviewOverview report={report} /></>;
-  return <EmptyWorkspace title="Your story starts with a conversation." description="Complete your interview to see your actual score, evidence and next steps here." />;
+import IntegratedSummary from '../readiness/IntegratedSummary';
+export default function OverviewPage(){
+ const {assessment,assessments,report,loading,error}=useInterviewWorkspace();
+ if(loading||error)return <InterviewWorkspaceStatus/>;
+ const strengths=report?.assessment.skills.filter(x=>x.score!==null&&x.score>=65).slice(0,3)||[];
+ const history=assessments.filter(x=>!!x.demo===!!assessment?.demo).slice(0,3);
+ return <div className="unified-stack overview-clean"><header className="overview-heading"><div><h1>Your placement readiness</h1><p>Your latest assessment, with clear next steps.</p></div><Link className="btn btn-secondary" to="/assessment?new=1">New assessment</Link></header>{assessment?<><IntegratedSummary record={assessment}/><div className="overview-bottom-grid"><section className="readiness-card"><h2>Demonstrated strengths</h2>{strengths.length?strengths.map(x=><div className="overview-strength" key={x.skill}><span>{x.skill}</span><strong>{x.score}/100</strong></div>):<p>{report?'No assessed skill currently meets the strength threshold.':'Complete the interview to see demonstrated strengths.'}</p>}<Link to={`/app/skills?assessment=${assessment.id}`}>View skill analysis →</Link></section><RoadmapSummary record={assessment}/></div></>:<section className="readiness-card"><h2>Begin your first assessment</h2><p>Upload a résumé, optionally connect GitHub, verify missing inputs, then meet your interviewer.</p><Link className="btn btn-primary" to="/assessment?new=1">Start Assessment</Link><Link className="btn btn-secondary" to="/assessment">Continue saved assessment</Link></section>}{history.length>0&&<details className="readiness-card overview-history"><summary>Recent assessments · {history.length}</summary>{history.map(x=><Link className="readiness-history" key={x.id} to={`/app/overview?assessment=${x.id}`}><span>{new Date(x.createdAt).toLocaleDateString()}</span><strong>{x.result.composite?`${x.result.composite.value}/100`:'In progress'}</strong></Link>)}<Link to="/app/readiness?history=1">View assessment history →</Link></details>}</div>;
 }

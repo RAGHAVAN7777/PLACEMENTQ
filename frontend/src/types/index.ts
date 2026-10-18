@@ -13,7 +13,7 @@ export const DATASET_COLUMNS = [
 export type DatasetColumn = typeof DATASET_COLUMNS[number];
 
 // ─── Branch / Tier ──────────────────────────────────────────────────────────
-export const BRANCHES = ['CSE', 'IT', 'ECE', 'EEE', 'ME', 'CE', 'Other'] as const;
+export const BRANCHES = ['CSE', 'IT', 'ECE', 'EEE', 'Mechanical', 'Civil', 'ME', 'CE', 'Other'] as const;
 export type Branch = typeof BRANCHES[number];
 
 export const COLLEGE_TIERS = ['Tier 1', 'Tier 2', 'Tier 3'] as const;
@@ -51,6 +51,10 @@ export interface StudentProfile {
   leadership_score?: number;           // 0–100
   volunteer_experience?: string;       // Yes/No in dataset
   study_hours_per_day?: number;        // 0–24
+  age?: number;
+  gender?: string;
+  linkedin_connections?: number;
+  sleep_hours?: number;
 }
 
 // ─── Assessment Draft ───────────────────────────────────────────────────────

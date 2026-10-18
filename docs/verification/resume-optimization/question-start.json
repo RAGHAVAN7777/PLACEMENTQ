@@ -1,0 +1,68 @@
+{
+  "at": "2026-10-17T10:15:11.971Z",
+  "note": "Single synthetic paired run on installed model, CPU only due observed CUDA fault. Not an RTX 2050/Qwen3 4B benchmark. Output shape/length checked; semantic quality needs human review.",
+  "rows": [
+    {
+      "label": "previous-six",
+      "wallMs": 107474,
+      "model": "qwen3.5:9b",
+      "context": 4096,
+      "tokens": 1000,
+      "numGpu": 0,
+      "requestBytes": 2753,
+      "loadMs": 21520.4913,
+      "promptMs": 21103.459,
+      "generationMs": 64524.497,
+      "evalCount": 307,
+      "doneReason": "stop",
+      "valid": true,
+      "questions": [
+        {
+          "bankId": "python_mutability_01",
+          "prompt": "Explain the difference between mutable and immutable Python objects. Give one bug that shared mutable state can cause."
+        },
+        {
+          "bankId": "python_errors_02",
+          "prompt": "How would you design error handling for a function that reads and validates a user-supplied file without hiding programming defects?"
+        },
+        {
+          "bankId": "sql_joins_01",
+          "prompt": "Compare INNER JOIN and LEFT JOIN. When can a LEFT JOIN unexpectedly reduce to inner-join behaviour?"
+        },
+        {
+          "bankId": "sql_index_02",
+          "prompt": "A query filtering by user_id and sorting by created_at is slow. How would you investigate and choose an index?"
+        },
+        {
+          "bankId": "ml_leakage_01",
+          "prompt": "What is target leakage, and how can it make a placement classifier look better than it will perform in real use?"
+        },
+        {
+          "bankId": "ml_metrics_02",
+          "prompt": "For an imbalanced classifier, why can accuracy be misleading, and how would you choose among precision, recall, F1, and ROC-AUC?"
+        }
+      ]
+    },
+    {
+      "label": "first-only",
+      "wallMs": 37865,
+      "model": "qwen3.5:9b",
+      "context": 2048,
+      "tokens": 220,
+      "numGpu": 0,
+      "requestBytes": 1157,
+      "loadMs": 19537.0323,
+      "promptMs": 6623.47,
+      "generationMs": 11670.082,
+      "evalCount": 60,
+      "doneReason": "stop",
+      "valid": true,
+      "questions": [
+        {
+          "bankId": "python_mutability_01",
+          "prompt": "Explain the difference between mutable and immutable Python objects, and provide one bug caused by shared mutable state."
+        }
+      ]
+    }
+  ]
+}

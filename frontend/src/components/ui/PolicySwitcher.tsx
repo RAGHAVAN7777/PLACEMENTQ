@@ -20,8 +20,8 @@ export default function PolicySwitcher({
   const [showDetails, setShowDetails] = useState(showExplanationDefault);
   const policy = ASSESSMENT_POLICIES[activePolicy];
 
-  // In our calibrated model, score directly correlates with placement probability
-  // Score 50 ~= cutoff 0.50, Score 39 ~= cutoff 0.39
+  // Callers must supply the trained model probability on a 0–100 scale.
+  // Illustrative readiness points and interview scores are not compatible.
   const isPlacedUnderStandard = currentScore >= 50;
   const isPlacedUnderHighRecall = currentScore >= 39;
   const isRescuedCandidate = !isPlacedUnderStandard && isPlacedUnderHighRecall;
@@ -39,11 +39,11 @@ export default function PolicySwitcher({
           </div>
           <div>
             <div className="policy-title-row">
-              <h4 className="policy-title">Recruitment Decision Policy</h4>
+              <h4 className="policy-title">Model Threshold Comparison</h4>
               <span className="badge badge-primary font-mono">{policy.shortName}</span>
             </div>
             <p className="policy-subtitle font-mono">
-              Institutional Cutoff Strategy: {policy.tagline}
+              Recorded test split: {policy.tagline}
             </p>
           </div>
         </div>
@@ -82,7 +82,7 @@ export default function PolicySwitcher({
           {currentVerdict === 'placed' && (
             <div className="verdict-badge-box">
               <span className="verdict-label text-success font-mono font-bold">
-                PLACEMENT ELIGIBLE (QUALIFIED)
+                ABOVE SELECTED MODEL THRESHOLD
               </span>
             </div>
           )}
@@ -90,7 +90,7 @@ export default function PolicySwitcher({
             <div className="verdict-badge-box">
               <AlertCircle size={16} className="text-warning" />
               <span className="verdict-label text-warning font-mono font-bold">
-                BELOW POLICY CUTOFF (NEEDS PREPARATION)
+                BELOW SELECTED MODEL THRESHOLD
               </span>
             </div>
           )}
@@ -98,17 +98,17 @@ export default function PolicySwitcher({
           <p className="verdict-description">
             {activePolicy === 'standard' ? (
               isPlacedUnderStandard ? (
-                `Student score (${currentScore}/100) satisfies the standard corporate 0.50 cutoff bar.`
+                `Model probability (${currentScore}%) meets the default 0.50 threshold. This does not establish hiring eligibility.`
               ) : (
-                `Score (${currentScore}/100) falls below the 0.50 cutoff. Switch policies to inspect sensitivity to the selected threshold.`
+                `Model probability (${currentScore}%) falls below the 0.50 threshold. Switch thresholds to inspect sensitivity.`
               )
             ) : (
               isRescuedCandidate ? (
-                `Under the Early Discovery 0.39 policy, this student is successfully captured (+3.8% recall gain)! In a real campus drive, this student qualifies for prioritized counseling rather than being rejected.`
+                `This prediction changes class at 0.39. The lower threshold increases recall and false positives on the recorded test split; it does not establish hiring eligibility.`
               ) : isPlacedUnderHighRecall ? (
-                `Strongly qualifies under the 0.39 high-recall threshold with 92.04% institutional sensitivity.`
+                `Model probability (${currentScore}%) meets the 0.39 threshold. Test-split recall is ${policy.recall}%; individual outcomes remain unverified.`
               ) : (
-                `Student score (${currentScore}/100) requires structured preparation to cross the 0.39 threshold.`
+                `Model probability (${currentScore}%) is below the 0.39 threshold. This result is not a hiring decision.`
               )
             )}
           </p>
@@ -141,14 +141,14 @@ export default function PolicySwitcher({
               <span className="pm-value font-mono font-bold">{policy.precision}%</span>
             </div>
             <div className="policy-metric-item">
-              <span className="pm-label font-mono">Reclassified Records</span>
+              <span className="pm-label font-mono">Fewer False Negatives</span>
               <span className="pm-value font-mono font-bold text-primary">
-                {activePolicy === 'high-recall' ? '418 Candidates' : '0 (Baseline)'}
+                {policy.rescuedCount} (vs. default)
               </span>
             </div>
           </div>
           <p className="policy-explainer-text">
-            <strong>Academic Viva Note:</strong> Standard machine learning benchmarks assume equal loss for False Positives and False Negatives. In educational recruitment counseling, missing a placeable student (False Negative) deprives them of career opportunities. By lowering the cutoff to 0.39, the model achieves <strong>92.04% recall</strong>, capturing 418 additional students across the cohort while sacrificing under 0.47% in accuracy.
+            <strong>Test-split tradeoff:</strong> Lowering the cutoff from 0.50 to 0.39 raises measured recall from 88.24% to 92.04%, with 418 fewer false negatives and more false positives. Accuracy decreases from 85.66% to 85.19% (0.47 percentage points). These results do not demonstrate real-world recruitment benefit.
           </p>
         </div>
       )}

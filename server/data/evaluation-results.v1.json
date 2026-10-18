@@ -1,8 +1,8 @@
 {
   "evaluationSetVersion": "1.1.0",
-  "questionBankVersion": "1.1.0",
+  "questionBankVersion": "1.2.0",
   "method": "deterministic keyword-backed rubric fallback",
-  "runAt": "2026-10-03T08:38:21.804Z",
+  "runAt": "2026-10-11T11:08:23.548Z",
   "cases": 14,
   "withinRange": 12,
   "repeatable": 14,

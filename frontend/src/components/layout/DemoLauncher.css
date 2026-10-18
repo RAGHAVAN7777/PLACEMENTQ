@@ -1,0 +1,14 @@
+.demo-launcher{position:relative;flex-shrink:0;font:12px/1.5 var(--font-sans);color:var(--color-text,#252622)}
+.demo-launcher summary{display:flex;align-items:center;gap:8px;list-style:none;cursor:pointer;padding:9px 12px;border:1px solid var(--color-border,#dcd5cb);border-radius:7px;white-space:nowrap}
+.demo-launcher summary::-webkit-details-marker{display:none}
+.demo-launcher summary:focus-visible,.demo-launcher button:focus-visible,.demo-launcher select:focus-visible{outline:2px solid #c7824c;outline-offset:3px}
+.demo-launcher-menu{position:absolute;right:0;top:calc(100% + 10px);z-index:100;width:260px;max-width:calc(100vw - 32px);padding:20px;border:1px solid #dcd5cb;border-radius:10px;background:#fffefa;box-shadow:0 12px 35px #0002;color:#252622}
+.demo-launcher-menu p{margin:6px 0 18px;color:#716c62;font-size:12px;line-height:1.5}
+.demo-launcher-menu label{display:grid;gap:8px;font-size:12px}.demo-launcher-menu select{width:100%;padding:10px;background:#fffefa;color:#252622;border:1px solid #dcd5cb;border-radius:6px}
+.demo-launcher-menu button{width:100%;margin-top:16px;padding:10px;border:0;border-radius:6px;background:#a65d2c;color:white;cursor:pointer}.demo-launcher-menu button:disabled{opacity:.5;cursor:wait}
+.interview-page .demo-launcher summary{color:var(--room-text);border-color:var(--room-line)}
+.interview-nav-actions{display:flex;align-items:center;gap:20px}
+@media(max-width:1100px){.interview-page .interview-topbar{flex:0 0 auto}}
+@media(max-width:600px){.interview-page .stage-editorial h1 em{display:none}.interview-page:has(.demo-session-strip) .practice-notice{display:none}}
+@media(max-width:1100px){.interview-topbar{flex-wrap:wrap;gap:14px!important;height:auto!important;min-height:76px;padding-block:14px!important}.interview-steps{order:3;width:100%;justify-content:center}.interview-nav-actions{margin-left:auto;gap:12px}}
+@media(max-width:600px){.interview-nav-actions{width:100%;justify-content:space-between}.interview-nav-actions .demo-launcher-menu{left:0;right:auto}.app-topbar .topbar-right>a,.app-topbar .preview-indicator{display:none}}

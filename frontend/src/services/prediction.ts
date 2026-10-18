@@ -19,7 +19,7 @@ import type {
   SkillGap,
   ReadinessBand,
 } from '../types';
-import { FEATURE_DEFINITIONS, READINESS_THRESHOLDS } from '../config';
+import { FEATURE_DEFINITIONS, READINESS_THRESHOLDS } from '../config/index.ts';
 
 // ─── Illustrative Weights ───────────────────────────────────────────────────
 // These are transparent, product-defined weights for the readiness score.
@@ -60,7 +60,8 @@ export function computeReadinessScore(profile: StudentProfile): {
     if (value === undefined || value === null) continue;
 
     const numValue = Number(value);
-    const normalised = config.normalize(numValue);
+    if (!Number.isFinite(numValue)) continue;
+    const normalised = Math.min(1, Math.max(0, config.normalize(numValue)));
     const contribution = normalised * config.weight * 100;
     totalScore += contribution;
 
@@ -88,13 +89,14 @@ export function computeSkillGaps(profile: StudentProfile): SkillGap[] {
   const gaps: SkillGap[] = [];
 
   for (const def of FEATURE_DEFINITIONS) {
-    if (def.type === 'select' || def.target === 0) continue;
+    if (def.type === 'select' || (def.target === 0 && def.key !== 'backlogs')) continue;
 
     const value = (profile as unknown as Record<string, unknown>)[def.key];
     if (value === undefined || value === null) continue;
 
     const numValue = Number(value);
-    const gap = def.target - numValue;
+    if (!Number.isFinite(numValue)) continue;
+    const gap = def.key === 'backlogs' ? numValue - def.target : def.target - numValue;
 
     gaps.push({
       feature: def.key,

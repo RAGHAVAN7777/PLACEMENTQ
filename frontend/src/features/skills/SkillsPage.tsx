@@ -1,3 +1,5 @@
+import RoadmapSummary from '../plan/RoadmapSummary';
+import { CandidateEvidence } from '../readiness/UnifiedPages';
 import { useMemo, useCallback } from 'react';
 import { useStore } from '../../services/store';
 import { computeSkillGaps } from '../../services/prediction';
@@ -9,9 +11,9 @@ import { useInterviewWorkspace, InterviewWorkspaceStatus } from '../../services/
 import { InterviewSkillResults } from '../overview/InterviewOverview';
 
 export default function SkillsPage() {
-  const { report, loading, error } = useInterviewWorkspace();
+  const { report, assessment, loading, error } = useInterviewWorkspace();
   if (loading || error) return <InterviewWorkspaceStatus />;
-  return report ? <InterviewSkillResults report={report} /> : <NumericSkillsPage />;
+  return <div className="unified-stack">{assessment&&<CandidateEvidence record={assessment}/ >}{report?<InterviewSkillResults report={report}/>:assessment?<p>Interview proficiency will appear after an evaluated interview.</p>:<NumericSkillsPage/>}{assessment?.roadmap&&<RoadmapSummary record={assessment}/>}</div>;
 }
 
 function NumericSkillsPage() {

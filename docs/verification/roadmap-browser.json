@@ -1,0 +1,13 @@
+{
+  "passed": true,
+  "at": "2026-10-18T06:14:38.312Z",
+  "checks": [
+    "scheduled evidence-based demo roadmap",
+    "saved notes and completed task",
+    "reload persisted progress",
+    "role/duration/hours changes retained completed work",
+    "weekly progress and overview summary",
+    "desktop/mobile no horizontal overflow"
+  ],
+  "errors": []
+}

@@ -7,6 +7,7 @@ import {
   TrendingUp, Microscope, User, Menu, X, Home, Bot, ClipboardList, GraduationCap
 } from 'lucide-react';
 import './AppLayout.css';
+import DemoLauncher from './DemoLauncher';
 import { InterviewWorkspaceProvider, useInterviewWorkspace } from '../../services/InterviewWorkspace';
 import './WorkspaceTheme.css';
 import '../../features/overview/InterviewOverview.css';
@@ -60,7 +61,7 @@ function WorkspaceLayout() {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const location = useLocation();
   const latestAssessment = useStore((s) => s.getLatestAssessment());
-  const { report, loading } = useInterviewWorkspace();
+  const { report, assessment, loading } = useInterviewWorkspace();
   const pageTitle = PAGE_TITLES[location.pathname] ?? 'PlacementIQ';
 
   useEffect(() => {
@@ -95,7 +96,7 @@ function WorkspaceLayout() {
               {group.items.map((item) => (
                 <NavLink
                   key={item.to}
-                  to={item.to}
+                  to={assessment?.demo && item.to.startsWith('/app/') ? `${item.to}?assessment=${assessment.id}&demo=1` : item.to}
                   className={({ isActive }) =>
                     `nav-item ${isActive ? 'active' : ''}`
                   }
@@ -164,6 +165,7 @@ function WorkspaceLayout() {
           </div>
 
           <div className="topbar-right" style={{ display: 'flex', alignItems: 'center', gap: '12px' }}>
+            <DemoLauncher />
             <NavLink
               to="/"
               className="btn btn-ghost btn-sm"

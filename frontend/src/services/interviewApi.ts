@@ -19,6 +19,12 @@ export function ownerId() {
 export const savedSessionId = () => localStorage.getItem(SESSION_KEY);
 export const rememberSession = (id: string | null) => id ? localStorage.setItem(SESSION_KEY, id) : localStorage.removeItem(SESSION_KEY);
 
+export interface ResumeField { value: string | null; sourcePassage: string; origin: 'explicit'|'inferred'|'student-correction'; confidence: string }
+export interface ResumeDetails {
+  version: string; fields: Record<string, ResumeField>; warnings: string[];
+  languages: ResumeField[]; skills: ResumeField[]; education: ResumeField[]; projects: ResumeField[]; experience: ResumeField[]; certifications: ResumeField[]; achievements: ResumeField[]; domains: ResumeField[];
+}
+export interface DemoInfo { level: string; name: string; notice: string; resumeText: string }
 export interface EvidenceClaim {
   id: string;
   name: string;
@@ -31,6 +37,8 @@ export interface EvidenceClaim {
 export interface InterviewQuestion {
   id: string;
   bankId: string;
+  generationMethod?: string;
+  generationNotice?: string;
   skill: string;
   domain: string;
   difficulty: string;
@@ -61,6 +69,18 @@ export interface InterviewGrade {
   maxPoints: number;
 }
 
+export interface DeliveryMetrics {
+  wordCount: number;
+  durationSeconds: number;
+  wpm: number;
+  pace: 'Optimal' | 'Deliberate / Slow' | 'Rushed / Fast';
+  timingSource?: 'provided-duration';
+  totalFillers: number;
+  detectedFillers: Record<string, number>;
+  clarityScore: number;
+  coachingTip: string;
+}
+
 export interface InterviewAnswer {
   feedbackDeferred?: boolean;
   id: string;
@@ -70,9 +90,20 @@ export interface InterviewAnswer {
   skipped: boolean;
   hintUsed: boolean;
   grade: InterviewGrade;
+  deliveryMetrics?: DeliveryMetrics | null;
+}
+
+export interface CommunicationInsights {
+  averageWpm: number;
+  totalFillerWords: number;
+  clarityScore: number;
+  paceClassification: string;
+  keyFeedback: string;
+  timingSource?: 'provided-duration';
 }
 
 export interface InterviewReport {
+  demo?: DemoInfo | null;
   conversation?: ConversationTurn[];
   id: string;
   sessionId: string;
@@ -95,6 +126,7 @@ export interface InterviewReport {
   evidenceProfile: { claimed: Record<string, EvidenceClaim[]>; observed: RepositoryEvidence[]; assessed: unknown[] };
   provenance: { model: { requested: string; used: string | null; liveInference: boolean }; versions: Record<string, string>; questionBankVersion: string; aggregationPolicy: string };
   limitations: string[];
+  communicationInsights?: CommunicationInsights;
 }
 
 export interface RepositoryEvidence {
@@ -107,6 +139,10 @@ export interface RepositoryEvidence {
 }
 
 export interface InterviewSession {
+  workflowVersion?:number;assessmentId?:string;baselineReady?:boolean;profileVerifiedAt?:string;
+  demo?: DemoInfo | null;
+  resumeDetails?: ResumeDetails;
+  inferenceMetrics?: {resumeProcessing?: {parseMs:number;extractionMs:number;cacheHit:boolean;llmCalls:number}};
   conversation?: ConversationTurn[];
   id: string;
   createdAt: string;
@@ -139,6 +175,16 @@ export interface ConversationTurn {
   questionId?: string | null;
   createdAt?: string;
   model?: string | null;
+}
+
+export interface AvailableModel {
+  name: string;
+  size?: number;
+  modifiedAt?: string;
+  digest?: string;
+  family?: string;
+  parameterSize?: string;
+  active: boolean;
 }
 
 export interface OllamaStatus {
@@ -177,11 +223,23 @@ export function fileToBase64(file: File, onProgress: (percent: number) => void):
 }
 
 export const interviewApi = {
+  demoProfiles: () => request<{profiles:Array<{id:string;name:string;label:string;description:string}>}>('/api/demo/profiles'),
+  createDemo: (level:string) => request<{session:InterviewSession}>('/api/demo/sessions',{method:'POST',body:JSON.stringify({level})}),
+  demoAnswer: (id:string,questionId:string) => request<{answer:string;questionId:string;method:string}>(`/api/sessions/${encodeURIComponent(id)}/demo-answer`,{method:'POST',body:JSON.stringify({questionId})}),
+  demoAssessment: (id:string) => request<{assessment:import('./readinessApi').IntegratedAssessment}>(`/api/sessions/${encodeURIComponent(id)}/demo-assessment`,{method:'POST',body:'{}'}),
+  uploadResumeStream: async (id:string, body:unknown, onStage:(stage:string)=>void) => {
+    const response=await fetch(`${API_BASE}/api/sessions/${encodeURIComponent(id)}/resume?stream=1`,{method:'POST',signal:AbortSignal.timeout(270000),headers:{'Content-Type':'application/json','X-PlacementIQ-Owner':ownerId()},body:JSON.stringify(body)});
+    if(!response.ok || !response.body){const data=await response.json().catch(()=>({}));throw new Error(data.error?.message || 'Resume upload failed.');}
+    const reader=response.body.getReader(),decoder=new TextDecoder();let pending='',result:{session:InterviewSession}|null=null;
+    const consume=(line:string)=>{const event=JSON.parse(line);if(event.type==='error')throw new Error(event.message);if(event.stage)onStage(event.stage);if(event.type==='complete')result=event;};
+    try {while(true){const {done,value}=await reader.read();pending+=decoder.decode(value||new Uint8Array(),{stream:!done});const lines=pending.split('\n');pending=lines.pop()||'';for(const line of lines)if(line.trim())consume(line);if(done)break;}if(pending.trim())consume(pending);if(!result)throw new Error('Resume processing was interrupted before completion. Retry the upload.');return result as {session:InterviewSession};}
+    finally {await reader.cancel().catch(()=>{});reader.releaseLock();}
+  },
   health: () => request<{ ollama: OllamaStatus; limits: Record<string, number> }>('/api/health'),
   createSession: () => request<{ session: InterviewSession }>('/api/sessions', { method: 'POST', body: '{}' }),
   getSession: (id: string) => request<{ session: InterviewSession }>(`/api/sessions/${encodeURIComponent(id)}`),
   uploadResume: (id: string, body: unknown) => request<{ session: InterviewSession; extraction: { fileName: string; method: string; characters: number } }>(`/api/sessions/${encodeURIComponent(id)}/resume`, { method: 'POST', body: JSON.stringify(body) }),
-  saveProfile: (id: string, profile: InterviewSession['profile']) => request<{ session: InterviewSession }>(`/api/sessions/${encodeURIComponent(id)}/profile`, { method: 'PATCH', body: JSON.stringify({ profile }) }),
+  saveProfile: (id: string, profile: InterviewSession['profile'], resumeDetails?: ResumeDetails) => request<{ session: InterviewSession }>(`/api/sessions/${encodeURIComponent(id)}/profile`, { method: 'PATCH', body: JSON.stringify({ profile, resumeDetails }) }),
   previewGitHub: (url: string) => request<{ type: string; profile: { login: string; name?: string }; repositories: Array<{ owner: string; name: string; fullName: string; description?: string; language?: string; updatedAt: string }>; cached: boolean }>('/api/github/preview', { method: 'POST', body: JSON.stringify({ url }) }),
   saveGitHub: (id: string, repositories: Array<{ owner: string; name: string }>, skipped = false) => request<{ session: InterviewSession; results: unknown[] }>(`/api/sessions/${encodeURIComponent(id)}/github`, { method: 'POST', body: JSON.stringify({ repositories, skipped }) }),
   start: (id: string, domain: string) => request<{ session: InterviewSession }>(`/api/sessions/${encodeURIComponent(id)}/start`, { method: 'POST', body: JSON.stringify({ domain }) }),
@@ -191,6 +249,8 @@ export const interviewApi = {
   pause: (id: string, paused: boolean) => request<{ session: InterviewSession }>(`/api/sessions/${encodeURIComponent(id)}/${paused ? 'pause' : 'resume'}`, { method: 'POST', body: '{}' }),
   reports: () => request<{ reports: InterviewReport[] }>('/api/reports'),
   report: (id: string) => request<{ report: InterviewReport }>(`/api/reports/${encodeURIComponent(id)}`),
+  getModels: () => request<{ models: AvailableModel[]; activeModel: string }>('/api/models'),
+  selectModel: (model: string) => request<{ ok: boolean; activeModel: string; status: OllamaStatus }>('/api/models/select', { method: 'POST', body: JSON.stringify({ model }) }),
   analyze: async (id: string, onEvent: (event: { type: string; stage?: string; message: string; progress?: number; session?: InterviewSession }) => void) => {
     const response = await fetch(`${API_BASE}/api/sessions/${encodeURIComponent(id)}/analyze`, { method: 'POST', signal: AbortSignal.timeout(180000), headers: { 'Content-Type': 'application/json', 'X-PlacementIQ-Owner': ownerId() }, body: '{}' });
     if (!response.ok || !response.body) throw new Error('Analysis could not start.');

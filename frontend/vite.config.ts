@@ -19,4 +19,16 @@ export default defineConfig(({ mode }) => {
     proxy,
   },
   preview: { port: 3000, strictPort: true, proxy },
+  build: {
+    chunkSizeWarningLimit: 1200,
+    rollupOptions: {
+      output: {
+        manualChunks(id) {
+          if (id.includes('vosk-browser')) return 'vosk-vendor';
+          if (id.includes('three') || id.includes('@react-three')) return 'three-vendor';
+          if (id.includes('recharts') || id.includes('d3-')) return 'charts-vendor';
+        },
+      },
+    },
+  },
 }; });

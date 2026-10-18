@@ -1,3 +1,4 @@
+import { structuredResume } from './resume-details.mjs';
 import { config } from './config.mjs';
 import { createHash } from 'node:crypto';
 
@@ -60,6 +61,8 @@ export function validateAiProfile(output, sourceText) {
       const name = row.name.trim().slice(0, 160);
       const passage = row.sourcePassage.trim().slice(0, 700);
       if (!name || !passage || !passageExists(sourceText, passage)) continue;
+      const groundedName = passageExists(passage,name) || (key==='skills' && structuredResume(passage).skills.some(item=>item.value.toLowerCase()===name.toLowerCase()));
+      if(!groundedName)continue;
       result[key].push(claim(name, passage, key.replace(/s$/, ''), 'model-extracted'));
     }
   }

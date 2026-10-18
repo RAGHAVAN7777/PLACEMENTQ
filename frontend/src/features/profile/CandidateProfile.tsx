@@ -1,0 +1,12 @@
+import { useEffect,useState } from 'react';
+import { Link } from 'react-router-dom';
+import { request } from '../../services/interviewApi';
+import '../readiness/ReadinessPage.css';
+import '../readiness/Unified.css';
+type Candidate={version:number;personal:Record<string,string>;baselineInputs:Record<string,string|number>;resume?:{fileName:string};details?:{fields?:Record<string,{value:string}>}};
+export default function CandidateProfile(){
+ const [candidate,setCandidate]=useState<Candidate|null>(null),[personal,setPersonal]=useState<Record<string,string>>({}),[message,setMessage]=useState(''),[busy,setBusy]=useState(false);
+ useEffect(()=>{request<{candidate:Candidate}>('/api/candidate').then(({candidate:c})=>{setCandidate(c);const f=c.details?.fields;setPersonal({name:f?.candidateName?.value||'',email:f?.email?.value||'',phone:f?.phone?.value||'',education:f?.degree?.value||'',college:f?.institution?.value||'',githubUrl:f?.github?.value||'',...c.personal});}).catch(e=>setMessage(e.message));},[]);
+ async function save(e:React.FormEvent){e.preventDefault();setBusy(true);try{const c=(await request<{candidate:Candidate}>('/api/candidate',{method:'PATCH',body:JSON.stringify({personal})})).candidate;setCandidate(c);setMessage('Current profile saved. Historical assessment snapshots are unchanged.');}catch(e){setMessage((e as Error).message);}finally{setBusy(false);}}
+ return <section className="readiness-card"><h2>Current candidate profile</h2><p>Profile version {candidate?.version??'…'} · {candidate?.resume?.fileName||'No saved résumé metadata yet'}</p>{message&&<p role="status">{message}</p>}{candidate&&<form onSubmit={save}><div className="unified-grid">{['name','email','phone','education','college','technicalInterests','githubUrl'].map(k=><label key={k}>{k.replace(/([A-Z])/g,' $1')}<input maxLength={500} type={k==='email'?'email':k==='githubUrl'?'url':'text'} value={personal[k]||''} onChange={e=>setPersonal({...personal,[k]:e.target.value})}/></label>)}</div><button className="btn btn-primary" disabled={busy}>{busy?'Saving…':'Save current profile'}</button></form>}<details><summary>Previously verified baseline inputs</summary>{Object.entries(candidate?.baselineInputs||{}).map(([k,v])=><p key={k}>{k.replaceAll('_',' ')}: {v}</p>)}<p>Use a new assessment to verify updated inputs. Saved assessment snapshots remain immutable.</p><Link to="/placement-assessment">Open research predictor with these inputs</Link></details><Link to="/app/readiness?history=1">Assessment history</Link></section>;
+}

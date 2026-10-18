@@ -1,3 +1,8 @@
+import AssessmentPage from '../assessment/AssessmentPage';
+import ResumeDetailsReview from './ResumeDetailsReview';
+import DemoLauncher from '../../components/layout/DemoLauncher';
+import ReportView from '../reports/ReportView';
+import './ResumeDemo.css';
 import { useEffect, useMemo, useRef, useState } from 'react';
 import { Link, useNavigate, useSearchParams } from 'react-router-dom';
 import {
@@ -60,6 +65,14 @@ export default function InterviewPage() {
   const operationRef = useRef(false);
   const submittingAnswer = useRef(false);
 
+  const [resumeStage,setResumeStage]=useState('');
+  const [semantic,setSemantic]=useState(()=>localStorage.getItem('placementiq_auto_semantic')!=='false');
+  const [demoRunning,setDemoRunning]=useState(false);
+  const [demoFilled,setDemoFilled]=useState('');
+  const [demoAssessment,setDemoAssessment]=useState<Awaited<ReturnType<typeof interviewApi.demoAssessment>>['assessment']|null>(null);
+  const normalState=useRef<{session:InterviewSession;report:InterviewReport|null;answer:string;file:File|null;pastedText:string;selectedDomain:string;hint:string;lastFeedback:string;githubUrl:string;githubPreview:typeof githubPreview;selectedRepos:string[];showPaste:boolean;analysis:typeof analysis}|null>(null);
+  const mounted=useRef(true);
+  useEffect(()=>{mounted.current=true;return()=>{mounted.current=false;};},[]);
   const currentQuestion = session?.questions[session.questionIndex];
 
   useEffect(() => {
@@ -67,10 +80,8 @@ export default function InterviewPage() {
     let active = true;
     (async () => {
       try {
-        const healthResult = await interviewApi.health();
-        if (!active) return;
-        setHealth(healthResult.ollama);
-        const saved = newRequested.current ? null : savedSessionId();
+        void interviewApi.health().then(result=>{if(active)setHealth(result.ollama);}).catch(()=>{});
+        const saved = newRequested.current ? null : searchParams.get('session') || savedSessionId();
         let next: InterviewSession;
         if (saved) {
           try { next = (await interviewApi.getSession(saved)).session; }
@@ -89,7 +100,7 @@ export default function InterviewPage() {
 
   useEffect(() => { localStorage.setItem('placementiq_muted', String(muted)); }, [muted]);
   useEffect(() => { if (session?.suggestedDomain && !selectedDomain) setSelectedDomain(session.suggestedDomain); }, [session?.suggestedDomain, selectedDomain]);
-  useEffect(() => { setHint(''); setAnswer(currentQuestion ? sessionStorage.getItem(`piq_draft_${currentQuestion.id}`) || '' : ''); }, [currentQuestion?.id]);
+  useEffect(() => { document.querySelector('.interview-console')?.scrollTo({top:0}); setDemoFilled(''); setHint(''); setAnswer(currentQuestion ? sessionStorage.getItem(`piq_draft_${currentQuestion.id}`) || '' : ''); }, [currentQuestion?.id]);
 
   const speech = useMemo(() => {
     if (error) return `I need your attention. ${error}`;
@@ -109,16 +120,16 @@ export default function InterviewPage() {
 
   const speechPlayer = useInterviewerSpeech(speech, muted, !busy && !voiceActive);
   useEffect(() => {
-    if (session?.status === 'completed' && report && !busy && (!completedHere || speechPlayer.finishedText === speech)) {
+    if (!searchParams.has('demo') && !session?.demo && session?.status === 'completed' && report && !busy && (!completedHere || speechPlayer.finishedText === speech)) {
       speechPlayer.stop();
-      navigate(`${ROUTES.overview}?report=${encodeURIComponent(report.id)}`, { replace: true });
+      navigate(`${ROUTES.overview}?session=${encodeURIComponent(session.id)}`, { replace: true });
     }
   }, [session?.status, report?.id, busy, completedHere, speechPlayer.finishedText, speech, navigate, speechPlayer.stop]);
   const updateAnswer = (value: string) => { setAnswer(value); if (currentQuestion) sessionStorage.setItem(`piq_draft_${currentQuestion.id}`, value); };
   const voice = useLocalVoiceInput(answer, updateAnswer, busy || session?.status !== 'interview', (active) => { if (active) speechPlayer.stop(); setVoiceActive(active); });
   const robotState: RobotState = error ? 'error' : busy ? 'processing' : speechPlayer.speaking ? 'speaking' : voice.listening ? 'listening' : (session?.avatarState || 'awaiting');
-  const setSafeSession = (next: InterviewSession) => { setSession(next); rememberSession(next.id); setError(''); if (next.model.lastStatus) setHealth(next.model.lastStatus); };
-  const run = async (task: () => Promise<void>, isAnswer = false) => { if (operationRef.current) return; operationRef.current = true; submittingAnswer.current = isAnswer; speechPlayer.stop(); voice.stop(); setBusy(true); setError(''); try { await task(); } catch (err) { setError(err instanceof Error ? err.message : 'Something went wrong.'); } finally { operationRef.current = false; submittingAnswer.current = false; setBusy(false); } };
+  const setSafeSession = (next: InterviewSession) => { setSession(next); if(!next.demo)rememberSession(next.id); setError(''); if (next.model.lastStatus) setHealth(next.model.lastStatus); };
+  const run = async (task: () => Promise<void>, isAnswer = false) => { if (operationRef.current) return; operationRef.current = true; submittingAnswer.current = isAnswer; speechPlayer.stop(); voice.stop(); setBusy(true); setError(''); try { await task(); } catch (err) { setDemoRunning(false); setError(err instanceof Error ? err.message : 'Something went wrong.'); } finally { operationRef.current = false; submittingAnswer.current = false; setBusy(false); } };
   const refreshHealth = async () => { setHealthBusy(true); try { setHealth((await interviewApi.health()).ollama); } catch (err) { setError(err instanceof Error ? err.message : 'Could not connect.'); } finally { setHealthBusy(false); } };
   const selectFile = (next: File | null) => {
     setError(''); setUploadProgress(0);
@@ -131,22 +142,23 @@ export default function InterviewPage() {
     if (!file && pastedText.trim().length < 40) throw new Error('Choose a PDF or DOCX, or paste at least 40 characters of resume text.');
     if (file && file.size > 8 * 1024 * 1024) throw new Error('Resume files must be 8 MB or smaller.');
     if (file && !/\.(pdf|docx)$/i.test(file.name)) throw new Error('Only PDF and DOCX files are supported.');
-    setUploadProgress(file ? 1 : 75);
+    setResumeStage('Reading file'); setUploadProgress(file ? 1 : 0);
     const contentBase64 = file ? await fileToBase64(file, setUploadProgress) : undefined;
-    const result = await interviewApi.uploadResume(session.id, { fileName: file?.name, mimeType: file?.type, contentBase64, pastedText: file ? undefined : pastedText });
+    setResumeStage('Uploading');
+    const result = await interviewApi.uploadResumeStream(session.id, { fileName: file?.name, mimeType: file?.type, contentBase64, pastedText: file ? undefined : pastedText, semantic },setResumeStage);
     setUploadProgress(100); setSafeSession(result.session);
   });
 
   const changeClaim = (category: keyof InterviewSession['profile'], index: number, changes: Partial<EvidenceClaim>) => {
     if (!session) return;
-    const profile = { ...session.profile, [category]: session.profile[category].map((item, itemIndex) => itemIndex === index ? { ...item, ...changes, origin: changes.name !== undefined ? 'student-correction' : item.origin } : item) };
+    const profile = { ...session.profile, [category]: session.profile[category].map((item, itemIndex) => itemIndex === index ? { ...item, ...changes, origin: changes.name !== undefined || changes.sourcePassage !== undefined ? 'student-correction' : item.origin } : item) };
     setSession({ ...session, profile });
   };
   const removeClaim = (category: keyof InterviewSession['profile'], index: number) => session && setSession({ ...session, profile: { ...session.profile, [category]: session.profile[category].filter((_, itemIndex) => itemIndex !== index) } });
   const addClaim = (category: keyof InterviewSession['profile']) => session && setSession({ ...session, profile: { ...session.profile, [category]: [...session.profile[category], { id: `${category}_${Date.now()}`, name: '', sourcePassage: 'Added by student during review.', origin: 'student-correction', confidence: 'student-supplied', confirmed: true }] } });
   const confirmAllClaims = () => session && setSession({ ...session, profile: Object.fromEntries(Object.entries(session.profile).map(([key, items]) => [key, items.map((item) => ({ ...item, confirmed: true }))])) as InterviewSession['profile'] });
 
-  const saveProfile = () => run(async () => { if (session) setSafeSession((await interviewApi.saveProfile(session.id, session.profile)).session); });
+  const saveProfile = () => run(async () => { if (session) {const saved=(await interviewApi.saveProfile(session.id, session.profile, session.resumeDetails)).session;setSafeSession(saved);setSelectedDomain(saved.suggestedDomain||'');} });
   const previewGithub = () => run(async () => { const preview = await interviewApi.previewGitHub(githubUrl); setGithubPreview(preview); setSelectedRepos(preview.type === 'repository' ? [preview.repositories[0].fullName] : []); });
 
   const runAnalysis = async (id: string) => {
@@ -170,12 +182,49 @@ export default function InterviewPage() {
     if (!session) return;
     const result = await interviewApi.answer(session.id, answer, skipped, currentQuestion?.id);
     if (currentQuestion) sessionStorage.removeItem(`piq_draft_${currentQuestion.id}`);
-    setLastFeedback(skipped ? 'Question skipped and recorded as insufficient evidence.' : result.answer.feedbackDeferred ? 'Your answer is saved. Let’s explore a little further before reviewing the rubric.' : `${result.answer.grade.awardedPoints}/${result.answer.grade.maxPoints} rubric points recorded · ${result.answer.grade.uncertainty} uncertainty`);
+    const delivery = result.answer.deliveryMetrics;
+    const deliveryBadge = delivery ? ` · ${delivery.wpm} WPM (${delivery.pace}) · ${delivery.clarityScore}/100 text heuristic` : '';
+    setLastFeedback(skipped ? 'Question skipped and recorded as insufficient evidence.' : result.answer.feedbackDeferred ? 'Your answer is saved. Let’s explore a little further before reviewing the rubric.' : `${result.answer.grade.awardedPoints}/${result.answer.grade.maxPoints} rubric points recorded${deliveryBadge}`);
     setSafeSession(result.session); if (result.report) { setCompletedHere(true); setReport(result.report); }
   }, !skipped);
   const requestHint = () => run(async () => { if (session) { const result = await interviewApi.hint(session.id); setHint(`${result.hint} ${result.scoringPolicy}`); setSafeSession(result.session); } });
   const togglePause = () => run(async () => { if (session) setSafeSession((await interviewApi.pause(session.id, session.status === 'interview')).session); });
   const newSession = () => run(async () => { const next = (await interviewApi.createSession()).session; setReport(null); setFile(null); setPastedText(''); setShowPaste(false); setGithubUrl(''); setGithubPreview(null); setSelectedRepos([]); setSelectedDomain(''); setHint(''); setAnswer(''); setLastFeedback(''); setUploadProgress(0); setAnalysis({ progress: 0, message: 'Ready to analyse', events: [] }); setSafeSession(next); });
+
+  const beginDemo = (level:string) => run(async()=>{
+    if(!session)return;
+    if(!session.demo)normalState.current={session,report,answer,file,pastedText,selectedDomain,hint,lastFeedback,githubUrl,githubPreview,selectedRepos,showPaste,analysis};
+    const next=(await interviewApi.createDemo(level)).session;
+    setDemoRunning(false);setDemoFilled('');setDemoAssessment(null);setReport(null);setFile(null);setPastedText(next.demo!.resumeText);setShowPaste(true);setSelectedDomain('');setHint('');setLastFeedback('');setResumeStage('');setSafeSession(next);
+  });
+  useEffect(()=>{
+    const level=searchParams.get('demo');
+    if(session&&!busy&&!session.demo&&level&&['beginner','intermediate','advanced'].includes(level)){
+      setSearchParams({}, {replace:true});void beginDemo(level);
+    }
+  },[session?.id,busy,searchParams]);
+  const exitDemo = () => {
+    if(operationRef.current)return;
+    setDemoRunning(false);speechPlayer.stop();voice.stop();setDemoFilled('');setDemoAssessment(null);setError('');setResumeStage('');
+    const old=normalState.current;if(old){setSession(old.session);setReport(old.report);setAnswer(old.answer);setFile(old.file);setPastedText(old.pastedText);setSelectedDomain(old.selectedDomain);setHint(old.hint);setLastFeedback(old.lastFeedback);setGithubUrl(old.githubUrl);setGithubPreview(old.githubPreview);setSelectedRepos(old.selectedRepos);setShowPaste(old.showPaste);setAnalysis(old.analysis);normalState.current=null;}
+  };
+  const fillDemo = () => run(async()=>{if(!session||!currentQuestion)return;const result=await interviewApi.demoAnswer(session.id,currentQuestion.id);updateAnswer(result.answer);setDemoFilled(result.questionId);});
+  useEffect(()=>{
+    if(!session?.demo||!demoRunning||busy||error||voice.active)return;
+    const timer=window.setTimeout(()=>{
+      if(!mounted.current)return;
+      if(session.status==='resume'){void submitResume();return;}
+      if(session.status==='profile-review'){void run(async()=>{const profile=Object.fromEntries(Object.entries(session.profile).map(([k,v])=>[k,v.map(c=>({...c,confirmed:true}))])) as InterviewSession['profile'];setSafeSession((await interviewApi.saveProfile(session.id,profile,session.resumeDetails)).session);});return;}
+      if(session.status==='github'){void run(async()=>setSafeSession((await interviewApi.saveGitHub(session.id,[],true)).session));return;}
+      if(session.status==='analysis'){void run(()=>runAnalysis(session.id));return;}
+      if(session.status==='domain-selection'){void startInterview();return;}
+      if(session.status==='paused'){setDemoRunning(false);return;}
+      if(session.status==='interview'){if(demoFilled!==currentQuestion?.id)void fillDemo();else void submitAnswer(false);return;}
+      if(session.status==='reporting'){void run(async()=>{const result=await interviewApi.finishReport(session.id);setSafeSession(result.session);setReport(result.report);});return;}
+      if(session.status==='completed'&&!demoAssessment){void run(async()=>{setDemoAssessment((await interviewApi.demoAssessment(session.id)).assessment);setDemoRunning(false);});}
+    },1600);
+    return()=>clearTimeout(timer);
+  },[session,demoRunning,busy,error,voice.active,demoFilled,demoAssessment,answer,selectedDomain]);
 
   const step = stageNumber(session?.status);
   const statusLabel = error ? 'Needs attention' : voice.listening ? 'Listening to you' : speechPlayer.speaking ? 'Speaking' : busy ? 'Preparing' : session?.status === 'paused' ? 'Paused' : session?.status === 'completed' ? 'Session complete' : 'Ready when you are';
@@ -183,7 +232,7 @@ export default function InterviewPage() {
     <header className="interview-topbar">
       <Link to={ROUTES.home} className="interview-wordmark" aria-label="PlacementIQ home"><span className="wordmark-symbol">p<span>i</span></span>PlacementIQ<span className="wordmark-divider" /><small>THE INTERVIEW ROOM</small></Link>
       <div className="interview-steps" aria-label="Interview progress">{STAGES.map((label, index) => <div key={label} className={`${index === step ? 'active' : ''} ${index < step ? 'done' : ''}`}><i>{index < step ? <Check size={11} /> : index + 1}</i><span>{label}</span></div>)}</div>
-      <Link to={ROUTES.interviewReports} className="interview-history-link">My interviews <ArrowUpRight size={15} /></Link>
+      <nav className="interview-nav-actions" aria-label="Interview navigation"><DemoLauncher disabled={busy||!!session?.demo} onStart={beginDemo}/><Link to={ROUTES.interviewReports} className="interview-history-link">My interviews <ArrowUpRight size={15} /></Link></nav>
     </header>
 
     <main className="interview-room" id="main-content">
@@ -204,8 +253,9 @@ export default function InterviewPage() {
       </section>
       {speechPlayer.speechError && <p className="voice-notice">{speechPlayer.speechError}</p>}
       <section className="interview-console">
-        {busy && session && <p className="operation-status" role="status"><Loader2 size={14} className="spin" />{session.status === 'resume' ? 'Reading your résumé and extracting source-backed claims…' : session.status === 'domain-selection' ? 'Preparing your questions with the local model…' : session.status === 'interview' ? 'Reviewing this step and saving your progress…' : 'Working on your evidence…'}</p>}
-        {error && <div className="interview-error"><AlertCircle size={17} /><span>{error}</span><button onClick={() => setError('')} aria-label="Dismiss error">×</button></div>}
+        {session?.demo && <div className="demo-controls demo-session-strip"><div><strong>DEMO · {session.demo.name} · {session.demo.level}</strong><p>Fictional data · Rule-based practice scores, not live AI evaluation.</p></div><div className="demo-actions"><button onClick={()=>setDemoRunning(!demoRunning)} disabled={session.status==='completed'&&!!demoAssessment}>{demoRunning?'Pause demo':session.status==='resume'?'Run Full Demo':'Continue demo'}</button><button onClick={exitDemo} disabled={busy}>Exit Demo</button></div><details><summary>Sample résumé & controls</summary><pre>{session.demo.resumeText}</pre><p>Pause stops after the current request. Exit restores your real session and draft.</p></details></div>}
+        {busy && session && <p className="operation-status" role="status"><Loader2 size={14} className="spin" />{session.status === 'resume' ? `${resumeStage || 'Preparing'} résumé…` : session.status === 'domain-selection' ? (session.demo ? 'Loading curated demo questions…' : 'Preparing your first question…') : session.status === 'interview' ? 'Reviewing this step and saving your progress…' : 'Working on your evidence…'}</p>}
+        {error && <div className="interview-error"><AlertCircle size={17} /><span>{error}</span>{session?.status==='domain-selection' && <><button disabled={busy} onClick={startInterview}>Retry</button><button disabled={busy} onClick={()=>{setError('');setDemoRunning(false);}}>Back to domain selection</button></>}<button onClick={() => setError('')} aria-label="Dismiss error">×</button></div>}
         {!session && !busy && <div className="connection-recovery"><h2>Let’s reconnect your interview room.</h2><p>Start the local service with Start-PlacementIQ.cmd, then try again.</p><button className="interview-primary" onClick={() => window.location.reload()}><RotateCcw size={16} /> Reconnect</button></div>}
 
         {busy && !session && <div className="console-loading"><Loader2 className="spin" /><span>Connecting to the local interview service…</span></div>}
@@ -218,11 +268,12 @@ export default function InterviewPage() {
           </label>
           <div className="resume-footer"><button className="paste-toggle" onClick={() => { setShowPaste(!showPaste); setFile(null); }}><FileText size={14} /> {showPaste ? 'Use a document instead' : 'Or paste your résumé text'}</button><span><ShieldCheck size={13} /> Stored locally · Linked to this browser</span></div>
           {showPaste && <textarea className="resume-paste" aria-label="Résumé text" value={pastedText} maxLength={30000} onChange={(event) => setPastedText(event.target.value)} placeholder="Paste the resume text exactly as it appears. PlacementIQ never invents missing content." rows={5} />}
-          {uploadProgress > 0 && <div className="upload-progress"><div><i style={{ width: `${uploadProgress}%` }} /></div><span>{uploadProgress >= 100 ? 'Extraction complete' : uploadProgress >= 75 ? 'Text ready · extracting and validating claims' : `Reading file · ${uploadProgress}%`}</span></div>}
+          {resumeStage && <p className="voice-notice" role="status">{resumeStage}{resumeStage==='Reading file'?` · ${Math.min(100,Math.round(uploadProgress/75*100))}%`:''}{resumeStage==='Completed'?' · saved for review':''}</p>}
+          {!session.demo && <details><summary>Advanced extraction settings</summary><label><input type="checkbox" checked={semantic} onChange={e=>{setSemantic(e.target.checked);localStorage.setItem('placementiq_auto_semantic',String(e.target.checked));}} disabled={busy}/> Automatically review ambiguous extraction with local AI</label><p>Clear fields stay deterministic. Only ambiguous results may need extra processing. Demo Mode always skips this review.</p></details>}
           <div className="resume-continue"><span>No perfect résumé needed.<br /><strong>Just a place to start.</strong></span><button className="interview-primary" disabled={busy || (!file && pastedText.trim().length < 40)} onClick={submitResume}>{busy ? <Loader2 className="spin" size={17} /> : null} {busy ? 'Reading your résumé…' : 'Let’s get to know you'} <ArrowRight size={17} /></button></div>
         </div>}
 
-        {session?.status === 'profile-review' && <ProfileReview profile={session.profile} busy={busy} onChange={changeClaim} onRemove={removeClaim} onAdd={addClaim} onConfirmAll={confirmAllClaims} onContinue={saveProfile} />}
+        {session?.status === 'profile-review' && <>{session.resumeDetails && <ResumeDetailsReview details={session.resumeDetails} busy={busy} onChange={details=>setSession({...session,resumeDetails:details})}/>}<ProfileReview profile={session.profile} busy={busy} onChange={changeClaim} onRemove={removeClaim} onAdd={addClaim} onConfirmAll={confirmAllClaims} onContinue={saveProfile} /></>}
 
         {session?.status === 'github' && <div className="console-panel github-panel">
           <span className="eyebrow">03 · OPTIONAL REPOSITORY EVIDENCE</span><h1>Show me what I may inspect.</h1><p className="console-lede">Add a public profile or repository. I read a bounded set of READMEs, manifests, source files, and tests—never execute downloaded code.</p>
@@ -238,7 +289,7 @@ export default function InterviewPage() {
           {!busy && <button className="interview-primary" onClick={() => run(() => runAnalysis(session.id))}>Resume analysis <RotateCcw size={16} /></button>}
         </div>}
 
-        {session?.status === 'domain-selection' && <div className="console-panel domain-panel">
+        {session?.status === 'domain-selection' && (session.workflowVersion!==2||session.baselineReady||session.demo) && <div className="console-panel domain-panel">
           <span className="eyebrow">05 · CHOOSE YOUR STARTING DOMAIN</span><h1>Where should we begin?</h1><p className="console-lede">The suggestion is evidence-informed, not a claim of proficiency. You control the starting point.</p>
           <div className="domain-grid">{session.domains.map((domain, index) => <button key={domain.domain} className={selectedDomain === domain.domain ? 'selected' : ''} onClick={() => setSelectedDomain(domain.domain)}><div><span>{index === 0 && 'Suggested · '}{domain.basis}</span><strong>{domain.domain}</strong></div><i>{domain.claimed ? `${domain.claimed} claimed` : 'not claimed'}</i><i>{domain.observed ? `${domain.observed} observed` : 'no repo evidence'}</i><p>{domain.evidence[0]}</p></button>)}</div>
           <div className="evidence-legend"><span><i className="claimed" /> Claimed in resume</span><span><i className="observed" /> Observed in files</span><span><i className="assessed" /> Demonstrated in interview</span></div>
@@ -246,9 +297,13 @@ export default function InterviewPage() {
           <button className="interview-primary" onClick={startInterview} disabled={busy || !selectedDomain}>Begin with {selectedDomain || 'selected domain'} <ArrowRight size={17} /></button>
         </div>}
 
+        {session?.status==='domain-selection'&&session.workflowVersion===2&&!session.baselineReady&&!session.demo&&<div className="console-panel">
+          {!session.profileVerifiedAt?<><h2>Verify your candidate evidence</h2>{session.resumeDetails&&<ResumeDetailsReview details={session.resumeDetails} busy={busy} onChange={details=>setSession({...session,resumeDetails:details})}/>}<details><summary>GitHub project evidence · {session.github.evidence.length} observations</summary>{session.github.evidence.map((e,i)=><p key={i}>{e.repository}: {e.sourcePath} · {e.passage}</p>)}<p>Files support project discussion, not proof of authorship or full proficiency. Missing access is not a skill deficit.</p></details><ProfileReview profile={session.profile} busy={busy} onChange={changeClaim} onRemove={removeClaim} onAdd={addClaim} onConfirmAll={confirmAllClaims} onContinue={saveProfile}/></>:<AssessmentPage embedded session={session.id} onComplete={()=>void run(async()=>setSafeSession((await interviewApi.getSession(session.id)).session))}/>}
+        </div>}
         {session?.status === 'paused' && <div className="console-panel paused-panel"><Pause size={30} /><span className="eyebrow">SESSION SAVED</span><h1>Take the time you need.</h1><p>Your question position, evidence, and submitted answers are persisted locally by the backend.</p><button className="interview-primary" onClick={togglePause}><Play size={17} /> Resume interview</button></div>}
 
         {session?.status === 'interview' && currentQuestion && <div className="console-panel question-panel">
+          {currentQuestion.generationMethod==='curated-fallback' && <p className="voice-notice" role="status">Local question-bank fallback · Ollama could not generate this question. Evaluation is reported separately.</p>}
           <div className="question-meta"><span>{currentQuestion.skill}</span><span>{currentQuestion.difficulty}</span><span>{currentQuestion.followUp ? 'adaptive follow-up' : `question ${session.questionIndex + 1} of ${session.questions.length}`}</span></div>
           <div className="question-progress"><i style={{ width: `${(session.questionIndex / session.questions.length) * 100}%` }} /></div>
           {lastFeedback && <div className="last-feedback"><CheckCircle2 size={15} /> {lastFeedback}</div>}
@@ -256,6 +311,7 @@ export default function InterviewPage() {
           <h1 className="question-text conversation-your-turn">Your turn</h1>
           {currentQuestion.context && <div className="question-source"><span>{currentQuestion.context.type === 'repository' ? 'Observed source' : 'Claimed source'} · {currentQuestion.context.label}</span><p>{currentQuestion.context.passage}</p></div>}
           {hint && <div className="hint-panel"><Lightbulb size={17} /><p>{hint}</p></div>}
+          {session.demo && <button className="interview-secondary" disabled={busy||voice.active} onClick={fillDemo}><Sparkles size={15}/> Auto-Fill Demo Answer</button>}
           <div className="answer-composer"><textarea aria-label="Your answer" value={answer} onChange={(event) => updateAnswer(event.target.value)} placeholder="Explain your reasoning. A concrete example is stronger than a keyword list." rows={5} maxLength={4000} disabled={busy || voice.active} /><div className="composer-footer"><div><button className={`voice-button ${voice.listening ? 'listening' : ''}`} onClick={voice.toggle} disabled={!voice.supported || busy || (voice.active && !voice.listening)} title="Offline transcription on this device; review before submitting"><Mic size={16} /> {voice.listening ? 'Stop microphone' : 'Microphone · answer by voice'}</button><span>{answer.length}/4000 · draft saved</span></div><button className="send-answer" onClick={() => submitAnswer(false)} disabled={busy || voice.active || answer.trim().length < 1}>{busy ? <Loader2 className="spin" size={17} /> : <ArrowUpRight size={17} />} Submit answer</button></div></div>
           {voice.error && <p className="voice-notice">{voice.error}</p>}
           <div className="question-actions"><button onClick={togglePause} disabled={busy}><Pause size={15} /> Pause</button><button onClick={requestHint} disabled={busy || Boolean(hint)}><Lightbulb size={15} /> {currentQuestion.hintUsed ? 'Show hint' : 'Hint'} <small>70% cap</small></button><button onClick={() => submitAnswer(true)} disabled={busy}><SkipForward size={15} /> Skip</button></div>
@@ -264,14 +320,16 @@ export default function InterviewPage() {
         </div>}
 
         {session?.status === 'reporting' && <div className="console-panel analysis-panel"><span className="eyebrow">FINALISING</span><h1>Preparing your report.</h1><p>Your recorded answers are saved. We’ll calculate your results from the rubric scores.</p>{busy ? <Loader2 className="spin report-spinner" size={34} /> : <button className="interview-primary" onClick={() => run(async () => { const result = await interviewApi.finishReport(session.id); setSafeSession(result.session); setReport(result.report); })}>Finish saved report <ArrowRight size={16} /></button>}</div>}
-        {session?.status === 'completed' && report && <div className="console-panel completed-panel"><ConversationHistory turns={session.conversation || []} /><p>Your report is saved. Aria’s final reply is shown above.</p><div className="completed-actions"><button className="interview-primary" onClick={() => { speechPlayer.stop(); navigate(`${ROUTES.overview}?report=${report.id}`); }}>View my results <ArrowRight size={17} /></button><button className="interview-secondary" onClick={() => window.print()}>Print report</button><button className="interview-primary" onClick={newSession}>Start reassessment <ArrowRight size={17} /></button></div></div>}
+        {session?.status === 'completed' && report && session.demo && <div className="console-panel"><ReportView report={report}/>{demoAssessment?<div className="demo-result"><strong>Fictional baseline model output: {demoAssessment.baseline!.score.toFixed(1)}%</strong><p>Computed by {demoAssessment.baseline!.modelName} using explicitly fictional numeric inputs, separately from interview grading.</p><p>{demoAssessment.result.composite?`Integrated Placement Readiness Score: ${demoAssessment.result.composite.value}/100 (40% baseline + 60% interview). Decision support, not a probability.`:demoAssessment.result.explanation}</p><Link to={`/app/overview?assessment=${demoAssessment.id}&demo=1`}>Open integrated demo dashboard</Link></div>:<button disabled={busy} onClick={()=>run(async()=>setDemoAssessment((await interviewApi.demoAssessment(session.id)).assessment))}>Calculate demo placement prediction</button>}</div>}
+        {session?.status === 'completed' && report && !session.demo && <div className="console-panel completed-panel"><ConversationHistory turns={session.conversation || []} /><p>Your report is saved. Aria’s final reply is shown above.</p><div className="completed-actions"><button className="interview-primary" onClick={() => { speechPlayer.stop(); navigate(`${ROUTES.overview}?report=${report.id}`); }}>View my results <ArrowRight size={17} /></button><button className="interview-secondary" onClick={() => window.print()}>Print report</button><button className="interview-primary" onClick={newSession}>Start reassessment <ArrowRight size={17} /></button></div></div>}
       </section>
       </div>
       <footer className="room-footer" style={{ justifyContent: 'center' }}>
         <span>&copy; {new Date().getFullYear()} Developed by RAGHAVAN S , VEERA M</span>
       </footer>
-      {health && !health.installed && <p className="practice-notice">Ollama isn’t connected yet. You can finish guided practice now; results use a limited rule-based rubric and need review.</p>}
+      {health && !health.installed && <p className="practice-notice">Ollama is unavailable. Curated questions remain available; real answer evaluation needs a working model. Demo Mode can complete offline with labelled practice scoring.</p>}
       {setupOpen && <section className="connection-panel"><div><h2>Your local connection</h2><button aria-label="Close connection details" onClick={() => setSetupOpen(false)}><X size={17} /></button></div><p>{health?.message || 'The local interview service is not connected.'}</p><dl><dt>Model</dt><dd>{health?.model || 'qwen3:4b-instruct'}</dd><dt>Endpoint</dt><dd>{health?.endpoint || 'http://127.0.0.1:11434'}</dd><dt>Voice</dt><dd>{speechPlayer.supported ? speechPlayer.voiceName || 'Available after playback starts' : 'Unavailable in this browser; all dialogue is shown as text.'}</dd></dl>{!health?.installed && <><p>When you install Ollama, run:</p><code>ollama pull {health?.model || 'qwen3:4b-instruct'}</code></>}<button className="interview-secondary" disabled={healthBusy} onClick={refreshHealth}><RotateCcw size={15} className={healthBusy ? 'spin' : ''} /> Check connection</button><small>Facial movement follows speech events with estimated mouth shapes. Voice availability depends on your browser and Windows voices.</small></section>}
     </main>
   </div>;
 }
+

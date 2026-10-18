@@ -1,59 +1,52 @@
+import { Worker } from 'node:worker_threads';
+import { createHash } from 'node:crypto';
 import { config } from './config.mjs';
-import { HttpError, cleanText } from './security.mjs';
-
-const allowed = new Map([
-  ['application/pdf', 'pdf'],
-  ['application/vnd.openxmlformats-officedocument.wordprocessingml.document', 'docx']
-]);
-
-export async function extractResume({ fileName, mimeType, contentBase64, pastedText }) {
-  if (typeof pastedText === 'string' && pastedText.trim()) {
-    return { fileName: fileName || 'Pasted resume text', mimeType: 'text/plain', method: 'pasted-text', text: cleanText(pastedText, config.maxResumeTextChars, 'Resume text'), warnings: [] };
-  }
-  if (typeof contentBase64 !== 'string' || !contentBase64) throw new HttpError(400, 'Choose a PDF or DOCX, or paste the resume text.', 'resume_required');
-  if (!/^[A-Za-z0-9+/]*={0,2}$/.test(contentBase64) || contentBase64.length % 4 === 1) throw new HttpError(400, 'The uploaded file could not be decoded.', 'invalid_upload');
-  const extension = String(fileName || '').toLowerCase().split('.').pop();
-  const kind = allowed.get(mimeType) || (extension === 'pdf' ? 'pdf' : extension === 'docx' ? 'docx' : null);
-  if (!kind) throw new HttpError(415, 'Only PDF and DOCX resumes are supported. You can also paste text.', 'unsupported_resume_type');
-  let buffer;
-  try { buffer = Buffer.from(contentBase64, 'base64'); } catch { throw new HttpError(400, 'The uploaded file could not be decoded.', 'invalid_upload'); }
-  if (!buffer.length || buffer.length > config.maxResumeBytes) throw new HttpError(413, `Resume files must be between 1 byte and ${config.maxResumeBytes / 1024 / 1024} MB.`, 'resume_too_large');
-
-  let text = '';
-  const warnings = [];
-  try {
-    if (kind === 'pdf') {
-      const pdfjs = await import('pdfjs-dist/legacy/build/pdf.mjs');
-      const loadingTask = pdfjs.getDocument({ data: new Uint8Array(buffer), useSystemFonts: true, isEvalSupported: false });
-      const document = await loadingTask.promise;
-      const pages = [];
-      try {
-        const pageLimit = Math.min(document.numPages, 40);
-        if (document.numPages > pageLimit) warnings.push(`Only the first ${pageLimit} PDF pages were inspected.`);
-        for (let pageNumber = 1; pageNumber <= pageLimit; pageNumber += 1) {
-          const page = await document.getPage(pageNumber);
-          const content = await page.getTextContent();
-          pages.push(content.items.map((item) => 'str' in item ? item.str : '').join(' '));
-          page.cleanup();
-        }
-      } finally {
-        await document.cleanup();
-        await loadingTask.destroy();
-      }
-      text = pages.join('\n');
-    } else {
-      const mammoth = await import('mammoth');
-      const result = await (mammoth.default || mammoth).extractRawText({ buffer });
-      text = result.value || '';
+import { HttpError } from './security.mjs';
+import { extractResume as parseText } from './resume-parser.mjs';
+const cache=new Map(), pending=new Map(), workers=[], jobs=[];
+const VERSION='layout-2';
+function drain() {
+  while(jobs.length) {
+    let slot=workers.find(s=>!s.busy);
+    if(!slot && workers.length<2) {
+      const worker=new Worker(new URL('./resume-worker.mjs',import.meta.url));
+      slot={worker,busy:false};workers.push(slot);worker.unref();
     }
-  } catch (error) {
-    throw new HttpError(422, `The ${kind.toUpperCase()} could not be read locally. Try the paste-text option.`, 'resume_parse_failed', error.message);
+    if(!slot) return;
+    const job=jobs.shift();slot.busy=true;slot.worker.ref();
+    const finish=(error,result)=>{
+      clearTimeout(timer);slot.worker.removeAllListeners('message');slot.worker.removeAllListeners('error');
+      slot.busy=false;slot.worker.unref();
+      if(error) job.reject(error); else job.resolve(result);
+      drain();
+    };
+    const timer=setTimeout(()=>{workers.splice(workers.indexOf(slot),1);void slot.worker.terminate();finish(new HttpError(422,'Resume parsing timed out. Paste the text instead.','resume_timeout'));},20000);
+    slot.worker.once('message',m=>finish(m.error?new HttpError(m.error.status,m.error.message,m.error.code):null,m.result));
+    slot.worker.once('error',()=>{workers.splice(workers.indexOf(slot),1);finish(new HttpError(422,'The parser could not read this file. Paste text instead.','resume_parse_failed'));});
+    slot.worker.postMessage(job.payload);
   }
-  text = text.replace(/\u0000/g, '').replace(/[ \t]+/g, ' ').replace(/\n{3,}/g, '\n\n').trim();
-  if (text.length > config.maxResumeTextChars) warnings.push(`Extracted text was limited to ${config.maxResumeTextChars.toLocaleString()} characters.`);
-  text = text.slice(0, config.maxResumeTextChars);
-  if (text.length < 40) {
-    throw new HttpError(422, 'Almost no text was found. This may be a scanned PDF; OCR is not included, so please paste the resume text.', 'scanned_pdf_or_empty');
+}
+export async function extractResume(payload, scope='local') {
+  const start=performance.now();
+  if(typeof payload?.contentBase64==='string' && payload.contentBase64.length>Math.ceil(config.maxResumeBytes*4/3)+4) throw new HttpError(413,'Resume files must be 8 MB or smaller.','resume_too_large');
+  const pasted=typeof payload?.pastedText==='string' && payload.pastedText.trim();
+  if(!pasted && (typeof payload?.contentBase64!=='string'||!payload.contentBase64))throw new HttpError(400,'Choose a PDF or DOCX, or paste resume text.','resume_required');
+  if(!pasted && (!/^[A-Za-z0-9+/]*={0,2}$/.test(payload.contentBase64)||payload.contentBase64.length%4===1))throw new HttpError(400,'The uploaded file could not be decoded.','invalid_upload');
+  const content=pasted?payload.pastedText:payload?.contentBase64 || '';
+  const hash=createHash('sha256').update(pasted?content:Buffer.from(content,'base64')).digest('hex');
+  const key=`${scope}:${VERSION}:${pasted?'text':String(payload?.mimeType)+':'+String(payload?.fileName).split('.').pop()}:${hash}`;
+  const hit=cache.get(key);
+  if(hit && Date.now()-hit.at<15*60*1000) return {...structuredClone(hit.value),fileName:payload.fileName || hit.value.fileName,cacheHit:true,parseMs:Math.round(performance.now()-start)};
+  if(jobs.length>=12) throw new HttpError(429,'Resume parser is busy. Retry shortly.','parser_busy');
+  const reused=pending.has(key);
+  if(!reused) {
+    const task=pasted?parseText(payload):new Promise((resolve,reject)=>{jobs.push({payload,resolve,reject});drain();});
+    pending.set(key,task);
   }
-  return { fileName: String(fileName).slice(0, 180), mimeType: kind === 'pdf' ? 'application/pdf' : 'application/vnd.openxmlformats-officedocument.wordprocessingml.document', method: `${kind}-local-extraction`, text, warnings };
+  try {
+    const result=await pending.get(key);
+    if(cache.size>=32) cache.delete(cache.keys().next().value);
+    cache.set(key,{at:Date.now(),value:{...result,contentHash:hash}});
+    return {...structuredClone(result),contentHash:hash,cacheHit:reused,parseMs:Math.round(performance.now()-start)};
+  } finally {pending.delete(key);}
 }

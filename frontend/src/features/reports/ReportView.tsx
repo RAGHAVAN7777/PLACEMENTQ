@@ -1,4 +1,4 @@
-import { AlertTriangle, ArrowUpRight, CheckCircle2, Minus, RefreshCw, ShieldCheck } from 'lucide-react';
+import { AlertTriangle, ArrowUpRight, CheckCircle2, Minus, RefreshCw, ShieldCheck, Mic, Activity, MessageSquare, Sparkles } from 'lucide-react';
 import type { InterviewReport } from '../../services/interviewApi';
 import './ReportsPage.css';
 import ConversationHistory from '../interview/ConversationHistory';
@@ -21,6 +21,7 @@ export default function ReportView({ report, compact = false }: { report: Interv
   const claims = Object.entries(report.evidenceProfile.claimed).flatMap(([category, items]) => items.map((item) => ({ ...item, category })));
   return (
     <div className={`interview-report ${compact ? 'report-compact' : ''}`}>
+      {report.demo && <p className="voice-notice"><strong>DEMO — {report.demo.name}</strong> · Fictional candidate and sample answers. This is not a real candidate assessment.</p>}
       <div className="report-hero">
         <div className="report-score-ring" style={{ '--score': `${report.assessment.score * 3.6}deg` } as React.CSSProperties}>
           <span>{report.assessment.score}</span><small>/ 100</small>
@@ -46,6 +47,72 @@ export default function ReportView({ report, compact = false }: { report: Interv
           ))}
         </div>
       </section>
+
+      {report.communicationInsights && (
+        <section className="report-section">
+          <div className="section-heading">
+            <div>
+              <span className="eyebrow">TRANSCRIPT COACHING</span>
+              <h3>Transcript and timing diagnostics</h3>
+            </div>
+          </div>
+          <p className="report-section-note">{report.communicationInsights.timingSource === 'provided-duration' ? 'Pace uses the provided recording duration. Word matching and clarity are simple text heuristics, not validated measures of speaking ability.' : 'Historical record: timing was estimated from text and is not a measured speaking rate.'}</p>
+          <div className="skill-result-grid" style={{ gridTemplateColumns: 'repeat(auto-fit, minmax(220px, 1fr))' }}>
+            <article className="skill-result">
+              <div>
+                <strong>Speaking Cadence</strong>
+                <span>Average pace</span>
+              </div>
+              <b style={{ color: 'var(--color-primary, #6366f1)' }}>
+                {report.communicationInsights.averageWpm} <small style={{ fontSize: '0.8rem', fontWeight: 500 }}>WPM</small>
+              </b>
+              <div className="result-bar">
+                <i style={{ width: `${Math.min(100, (report.communicationInsights.averageWpm / 180) * 100)}%` }} />
+              </div>
+              <small><Activity size={12} style={{ display: 'inline', marginRight: 3 }} /> {report.communicationInsights.paceClassification}</small>
+            </article>
+
+            <article className="skill-result">
+              <div>
+                <strong>Text clarity heuristic</strong>
+                <span>Not a rubric grade</span>
+              </div>
+              <b style={{ color: '#059669' }}>
+                {report.communicationInsights.clarityScore} <small style={{ fontSize: '0.8rem', fontWeight: 500 }}>/ 100</small>
+              </b>
+              <div className="result-bar">
+                <i style={{ width: `${report.communicationInsights.clarityScore}%`, background: '#10b981' }} />
+              </div>
+              <small><Sparkles size={12} style={{ display: 'inline', marginRight: 3 }} /> Based on transcript length and word matches</small>
+            </article>
+
+            <article className="skill-result">
+              <div>
+                <strong>Filler Word Load</strong>
+                <span>Total count detected</span>
+              </div>
+              <b style={{ color: report.communicationInsights.totalFillerWords > 5 ? '#dc2626' : '#64748b' }}>
+                {report.communicationInsights.totalFillerWords} <small style={{ fontSize: '0.8rem', fontWeight: 500 }}>fillers</small>
+              </b>
+              <div className="result-bar">
+                <i style={{ width: `${Math.min(100, report.communicationInsights.totalFillerWords * 10)}%`, background: '#ef4444' }} />
+              </div>
+              <small><Mic size={12} style={{ display: 'inline', marginRight: 3 }} /> um, uh, basically, etc.</small>
+            </article>
+          </div>
+
+          {report.communicationInsights.keyFeedback && (
+            <div style={{ marginTop: '1rem', padding: '0.85rem 1rem', background: 'var(--color-surface-raised, #f8fafc)', borderRadius: '8px', border: '1px solid var(--color-border, #e2e8f0)', fontSize: '0.8125rem' }}>
+              <strong>Aria’s Delivery Coaching:</strong>
+              <ul style={{ margin: '0.35rem 0 0 1.25rem', padding: 0 }}>
+                {[report.communicationInsights.keyFeedback].map((note, idx) => (
+                  <li key={idx} style={{ color: 'var(--color-text-secondary, #475569)' }}>{note}</li>
+                ))}
+              </ul>
+            </div>
+          )}
+        </section>
+      )}
 
       {!compact && Boolean(report.conversation?.length) && <details className="report-section"><summary>Read the full interview conversation</summary><ConversationHistory turns={report.conversation || []} /></details>}
       {report.comparison.length > 0 && (
@@ -95,6 +162,17 @@ export default function ReportView({ report, compact = false }: { report: Interv
             <summary><span>Q{index + 1}</span><strong>{answer.question}</strong><b>{answer.grade.awardedPoints}/{answer.grade.maxPoints}</b></summary>
             <div className="answer-review-body">
               <div><span className="answer-label">Submitted answer</span><p>{answer.skipped ? 'Skipped — insufficient evidence.' : answer.answer}</p></div>
+              {answer.deliveryMetrics && (
+                <div style={{ margin: '6px 0 10px 0', padding: '6px 10px', background: 'var(--color-surface-raised, #f8fafc)', border: '1px solid var(--color-border, #e2e8f0)', borderRadius: '6px', fontSize: '0.75rem', display: 'flex', flexWrap: 'wrap', gap: '8px', alignItems: 'center' }}>
+                  <span className="font-mono"><strong>{answer.deliveryMetrics.wpm}</strong> WPM ({answer.deliveryMetrics.pace})</span>
+                  <span>·</span>
+                  <span><strong>{answer.deliveryMetrics.clarityScore}/100</strong> Text heuristic</span>
+                  <span>·</span>
+                  <span><strong>{answer.deliveryMetrics.totalFillers}</strong> Fillers</span>
+                  <span>·</span>
+                  <span style={{ fontStyle: 'italic', color: 'var(--color-text-secondary, #64748b)' }}>“{answer.deliveryMetrics.coachingTip}”</span>
+                </div>
+              )}
               {answer.hintUsed && <div className="hint-flag">A hint was used; the published 70% cap was applied.</div>}
               <div className="rubric-table">{answer.grade.criteria.map((criterion) => <div key={criterion.criterionId}><span>{criterion.label}</span><div><p>{criterion.evidenceExcerpt ? `“${criterion.evidenceExcerpt}”` : 'No supporting excerpt.'}</p><p>{criterion.explanation}</p></div><b>{criterion.points}/{criterion.maxPoints}</b></div>)}</div>
               {answer.grade.missingConcepts.length > 0 && <p className="grade-note">Missing concepts: {answer.grade.missingConcepts.join('; ')}</p>}

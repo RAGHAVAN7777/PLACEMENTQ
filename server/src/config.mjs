@@ -26,13 +26,28 @@ const integer = (name, fallback, min, max) => {
   return Number.isFinite(parsed) ? Math.min(max, Math.max(min, parsed)) : fallback;
 };
 
-export const config = Object.freeze({
+let activeOllamaModel = process.env.OLLAMA_MODEL || 'qwen3:4b-instruct';
+
+export function getActiveOllamaModel() {
+  return activeOllamaModel;
+}
+
+export function setActiveOllamaModel(name) {
+  if (typeof name === 'string' && name.trim()) {
+    activeOllamaModel = name.trim();
+  }
+  return activeOllamaModel;
+}
+
+export const config = {
   host: process.env.PLACEMENTIQ_HOST || '127.0.0.1',
   port: integer('PLACEMENTIQ_PORT', 8787, 1, 65535),
   dataDir: path.resolve(REPO_ROOT, process.env.PLACEMENTIQ_DATA_DIR || 'server/data/runtime'),
   ollamaBaseUrl: (process.env.OLLAMA_BASE_URL || 'http://localhost:11434').replace(/\/$/, ''),
-  ollamaModel: process.env.OLLAMA_MODEL || 'qwen3:4b-instruct',
+  get ollamaModel() { return activeOllamaModel; },
+  set ollamaModel(val) { setActiveOllamaModel(val); },
   ollamaContextSize: integer('OLLAMA_CONTEXT_SIZE', 4096, 2048, 16384),
+  ollamaNumGpu: process.env.OLLAMA_NUM_GPU === undefined ? null : integer('OLLAMA_NUM_GPU', 0, 0, 999),
   ollamaTimeoutMs: integer('OLLAMA_TIMEOUT_MS', 120000, 5000, 300000),
   ollamaMaxRetries: integer('OLLAMA_MAX_RETRIES', 1, 0, 2),
   ollamaMaxOutputTokens: integer('OLLAMA_MAX_OUTPUT_TOKENS', 900, 128, 2048),
@@ -44,4 +59,4 @@ export const config = Object.freeze({
   maxAnswerChars: 4000,
   targetQuestions: 6,
   maxFollowUps: 2
-});
+};

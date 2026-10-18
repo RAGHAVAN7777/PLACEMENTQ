@@ -1,5 +1,5 @@
 {
-  "version": "1.2.0",
+  "version": "1.3.0",
   "aggregationPolicy": "Award concept-based partial credit in half-point steps; equivalent wording is valid and language style is not graded. A used hint caps that attempt at 70% of its maximum. A base question and its clarification share one rubric: count the strongest validated whole attempt once, so follow-ups do not add a scoring penalty. Skipped base questions receive zero and are marked insufficient evidence. The final percentage is 100 * total earned / total available across base questions. No score floor or placement guarantee is applied. Adaptive paths differ; these scores are preparation evidence, not calibrated rankings or placement probabilities.",
   "questions": [
     {
@@ -494,6 +494,677 @@
       ],
       "followUpCriteria": "Ask what observation falsified the first hypothesis when the answer is purely chronological.",
       "hint": "Focus on the evidence that narrowed the search, not only the final fix."
+    },
+    {
+      "id": "react_reconciliation_01",
+      "skill": "React",
+      "domain": "Frontend & TypeScript",
+      "difficulty": "foundation",
+      "prompt": "Explain how React's reconciliation algorithm uses keys when rendering dynamic lists. What bug or performance issue occurs when using array indices as keys during list item insertion or deletion?",
+      "expectedConcepts": [
+        "keys provide persistent identity across re-renders",
+        "diffing matches virtual DOM elements by key",
+        "index keys cause uncontrolled state bugs or unnecessary unmounting"
+      ],
+      "referenceAnswer": "Keys give elements a stable identity so React's reconciliation algorithm can identify which items changed, were added, or were removed. Using array indices breaks identity when items are prepended, inserted, or sorted, causing child component internal state to attach to the wrong data item and forcing unnecessary DOM re-creation.",
+      "commonMisconceptions": [
+        "Math.random() is a good replacement for array indices",
+        "keys are passed into the component as regular props"
+      ],
+      "maxPoints": 4,
+      "criteria": [
+        {
+          "id": "definition",
+          "label": "Explains element identity in reconciliation",
+          "maxPoints": 1,
+          "keywords": [
+            "identity",
+            "diffing",
+            "reconciliation",
+            "stable"
+          ]
+        },
+        {
+          "id": "bug",
+          "label": "Identifies index key state misplacement bug",
+          "maxPoints": 2,
+          "keywords": [
+            "state",
+            "uncontrolled",
+            "wrong item",
+            "reorder",
+            "insert",
+            "delete"
+          ]
+        },
+        {
+          "id": "keys",
+          "label": "Recommends unique stable identifiers",
+          "maxPoints": 1,
+          "keywords": [
+            "unique",
+            "id",
+            "database id",
+            "stable identifier"
+          ]
+        }
+      ],
+      "followUpCriteria": "Ask how keys affect unmounting vs reusing existing DOM nodes when items reorder.",
+      "hint": "Think about what happens to an uncontrolled input field if you prepend an item to the list."
+    },
+    {
+      "id": "typescript_generics_01",
+      "skill": "TypeScript",
+      "domain": "Frontend & TypeScript",
+      "difficulty": "intermediate",
+      "prompt": "How do TypeScript generics enforce type safety compared to using 'any'? Provide an example of a generic constraint using the 'extends' keyword.",
+      "expectedConcepts": [
+        "generics preserve type relationships between inputs and outputs",
+        "any disables compiler type checking entirely",
+        "extends constrains type parameters to specific structural shapes"
+      ],
+      "referenceAnswer": "Generics capture and enforce type relationships across arguments and return types without losing type information at compile time. In contrast, 'any' opts out of all type checking. Generic constraints such as <T extends { id: string }> ensure that whatever type is passed satisfies that specific structure while retaining all other properties.",
+      "commonMisconceptions": [
+        "generics add runtime overhead in JavaScript",
+        "extends in generics is identical to class inheritance"
+      ],
+      "maxPoints": 4,
+      "criteria": [
+        {
+          "id": "type_safety",
+          "label": "Explains type relationship preservation",
+          "maxPoints": 1,
+          "keywords": [
+            "capture",
+            "preserve",
+            "relationship",
+            "return type",
+            "compile time"
+          ]
+        },
+        {
+          "id": "any_flaw",
+          "label": "Contrasts with loss of safety in any",
+          "maxPoints": 1,
+          "keywords": [
+            "any",
+            "opt out",
+            "type checking",
+            "lost",
+            "unsound"
+          ]
+        },
+        {
+          "id": "constraints",
+          "label": "Explains structural constraints with extends",
+          "maxPoints": 2,
+          "keywords": [
+            "extends",
+            "constraint",
+            "property",
+            "structural",
+            "shape"
+          ]
+        }
+      ],
+      "followUpCriteria": "Ask how keyof constraints work when writing a type-safe property getter function.",
+      "hint": "Compare what happens when calling identity(5): with any you get any; with a generic you get number."
+    },
+    {
+      "id": "rest_vs_grpc_01",
+      "skill": "API Architecture",
+      "domain": "Backend & Systems",
+      "difficulty": "intermediate",
+      "prompt": "Compare REST APIs over JSON with gRPC over Protocol Buffers. In what high-throughput or latency-critical scenario would you prefer gRPC over REST?",
+      "expectedConcepts": [
+        "REST uses text JSON while gRPC uses binary Protocol Buffers",
+        "gRPC leverages HTTP/2 multiplexing, streaming, and strict contracts",
+        "gRPC is optimal for internal microservice communication with low latency"
+      ],
+      "referenceAnswer": "REST relies on human-readable JSON payloads over HTTP/1.1 or HTTP/2, which incurs serialization and parsing overhead. gRPC compiles strongly typed Protocol Buffers into compact binary frames over HTTP/2, supporting multiplexing, bidirectional streaming, and strict interface contracts. gRPC is preferred for internal inter-service communication with high throughput and stringent latency budgets.",
+      "commonMisconceptions": [
+        "gRPC works seamlessly in all standard web browsers without proxying",
+        "JSON serialization is faster than Protobuf binary encoding"
+      ],
+      "maxPoints": 4,
+      "criteria": [
+        {
+          "id": "protocol_diff",
+          "label": "Compares text JSON to binary Protobuf serialization",
+          "maxPoints": 1,
+          "keywords": [
+            "binary",
+            "json",
+            "protobuf",
+            "serialization",
+            "compact"
+          ]
+        },
+        {
+          "id": "serialization",
+          "label": "Identifies HTTP/2 multiplexing and streaming capabilities",
+          "maxPoints": 1,
+          "keywords": [
+            "http/2",
+            "multiplexing",
+            "streaming",
+            "head-of-line",
+            "contract"
+          ]
+        },
+        {
+          "id": "latency_scenario",
+          "label": "Articulates microservice or high-throughput use case",
+          "maxPoints": 2,
+          "keywords": [
+            "microservice",
+            "internal",
+            "latency",
+            "throughput",
+            "low overhead",
+            "inter-service"
+          ]
+        }
+      ],
+      "followUpCriteria": "Ask how schema evolution and backward compatibility are maintained in Protocol Buffers.",
+      "hint": "Consider network serialization size, parsing CPU costs, and transport multiplexing."
+    },
+    {
+      "id": "distributed_caching_01",
+      "skill": "Distributed Systems",
+      "domain": "Backend & Systems",
+      "difficulty": "intermediate",
+      "prompt": "Explain the cache-aside pattern. What is a 'cache stampede' (or thundering herd problem), and how do you protect against it when cached data expires?",
+      "expectedConcepts": [
+        "cache-aside queries cache first and falls back to database on miss",
+        "cache stampede occurs when concurrent requests overwhelm database on key expiry",
+        "mitigation uses distributed locks, probabilistic early expiration (XFetch), or background refresh"
+      ],
+      "referenceAnswer": "In cache-aside, the application code checks the cache first; on a miss, it fetches data from the primary datastore, writes it to the cache, and returns it. A cache stampede happens when a high-traffic key expires, causing hundreds of concurrent requests to simultaneously miss and overload the database. Solutions include distributed mutex locking, probabilistic early recomputation (XFetch), or background pre-warming.",
+      "commonMisconceptions": [
+        "caches automatically invalidate relational database data on updates",
+        "adding a longer TTL completely eliminates stampedes"
+      ],
+      "maxPoints": 4,
+      "criteria": [
+        {
+          "id": "pattern_definition",
+          "label": "Defines cache-aside read-through workflow",
+          "maxPoints": 1,
+          "keywords": [
+            "read",
+            "miss",
+            "database",
+            "write to cache",
+            "populate"
+          ]
+        },
+        {
+          "id": "stampede_problem",
+          "label": "Explains simultaneous database spike on key expiry",
+          "maxPoints": 1,
+          "keywords": [
+            "expire",
+            "concurrent",
+            "spike",
+            "overload",
+            "thundering herd",
+            "simultaneous"
+          ]
+        },
+        {
+          "id": "mitigation",
+          "label": "Proposes valid stampede defenses (locks, early refresh, mutex)",
+          "maxPoints": 2,
+          "keywords": [
+            "lock",
+            "mutex",
+            "early expiration",
+            "xfetch",
+            "pre-warm",
+            "background refresh",
+            "single-flight"
+          ]
+        }
+      ],
+      "followUpCriteria": "Ask how cache invalidation is handled when an existing record is updated in the database.",
+      "hint": "Consider what happens when 1,000 requests hit an expired key in the exact same millisecond."
+    },
+    {
+      "id": "acid_transactions_01",
+      "skill": "Databases",
+      "domain": "Backend & Systems",
+      "difficulty": "intermediate",
+      "prompt": "Define the Isolation guarantee in ACID database transactions. Explain what a dirty read is and which transaction isolation level prevents it.",
+      "expectedConcepts": [
+        "isolation ensures concurrent transactions do not interfere with each other",
+        "dirty read occurs when transaction reads uncommitted changes from another transaction",
+        "Read Committed (or higher) prevents dirty reads"
+      ],
+      "referenceAnswer": "Isolation ensures concurrent transaction execution produces state equivalent to sequential execution. A dirty read occurs when Transaction A reads modifications made by Transaction B before Transaction B commits; if Transaction B rolls back, Transaction A worked with invalid, uncommitted data. Read Committed, Repeatable Read, and Serializable isolation levels prevent dirty reads.",
+      "commonMisconceptions": [
+        "Read Committed prevents phantom reads and non-repeatable reads",
+        "ACID isolation implies zero locking overhead"
+      ],
+      "maxPoints": 4,
+      "criteria": [
+        {
+          "id": "isolation_def",
+          "label": "Defines concurrent transaction isolation",
+          "maxPoints": 1,
+          "keywords": [
+            "concurrent",
+            "interference",
+            "serializable",
+            "state",
+            "isolation"
+          ]
+        },
+        {
+          "id": "dirty_read",
+          "label": "Explains reading uncommitted data that may rollback",
+          "maxPoints": 1,
+          "keywords": [
+            "uncommitted",
+            "rollback",
+            "read uncommitted",
+            "temporary",
+            "aborted"
+          ]
+        },
+        {
+          "id": "isolation_level",
+          "label": "Identifies Read Committed or higher isolation levels",
+          "maxPoints": 2,
+          "keywords": [
+            "read committed",
+            "repeatable read",
+            "serializable",
+            "isolation level"
+          ]
+        }
+      ],
+      "followUpCriteria": "Ask what a non-repeatable read is and which isolation level resolves it.",
+      "hint": "Contrast Read Uncommitted with Read Committed."
+    },
+    {
+      "id": "binary_tree_traversal_01",
+      "skill": "Data Structures",
+      "domain": "Algorithms & Data Structures",
+      "difficulty": "foundation",
+      "prompt": "Compare Depth-First Search (DFS) and Breadth-First Search (BFS) for binary tree traversal. Analyze their worst-case auxiliary space complexity on unbalanced vs balanced trees.",
+      "expectedConcepts": [
+        "DFS explores branch depth using stack/recursion; BFS explores level by level using queue",
+        "DFS space is O(h): O(N) for skewed tree, O(log N) for balanced tree",
+        "BFS space is O(w): proportional to maximum width (up to N/2 for balanced complete tree)"
+      ],
+      "referenceAnswer": "DFS traverses down branches using a call stack or explicit stack, while BFS traverses level by level using a FIFO queue. DFS auxiliary space is bounded by tree height O(h), which is O(log N) for balanced trees but degenerates to O(N) for skewed linked-list trees. BFS auxiliary space is bounded by tree width O(w), which requires O(N/2) = O(N) memory at the leaf level of a balanced tree.",
+      "commonMisconceptions": [
+        "BFS always consumes less memory than DFS on wide trees",
+        "inorder DFS can be implemented without a stack or recursion"
+      ],
+      "maxPoints": 4,
+      "criteria": [
+        {
+          "id": "traversal_difference",
+          "label": "Distinguishes depth-based stack vs level-based queue traversal",
+          "maxPoints": 1,
+          "keywords": [
+            "stack",
+            "queue",
+            "level",
+            "depth",
+            "recursion",
+            "fifo"
+          ]
+        },
+        {
+          "id": "space_complexity",
+          "label": "Analyzes height O(h) vs width O(w) space complexity",
+          "maxPoints": 2,
+          "keywords": [
+            "height",
+            "width",
+            "log n",
+            "o(h)",
+            "o(w)",
+            "o(n)",
+            "space complexity"
+          ]
+        },
+        {
+          "id": "trade_offs",
+          "label": "Contrasts skewed trees with complete balanced trees",
+          "maxPoints": 1,
+          "keywords": [
+            "skewed",
+            "balanced",
+            "unbalanced",
+            "leaf level",
+            "worst case"
+          ]
+        }
+      ],
+      "followUpCriteria": "Ask when BFS is preferred over DFS for finding the shortest path in unweighted graphs.",
+      "hint": "Think about call stack depth for a skewed line versus queue size at the bottom layer of a full tree."
+    },
+    {
+      "id": "dp_vs_memoization_01",
+      "skill": "Algorithms",
+      "domain": "Algorithms & Data Structures",
+      "difficulty": "intermediate",
+      "prompt": "Explain the core principles of dynamic programming: optimal substructure and overlapping subproblems. Contrast top-down memoization with bottom-up tabulation.",
+      "expectedConcepts": [
+        "optimal substructure: optimal solution built from optimal sub-solutions",
+        "overlapping subproblems: same sub-problems solved repeatedly",
+        "top-down memoization caches recursive calls; bottom-up tabulation builds iteratively without recursion"
+      ],
+      "referenceAnswer": "Dynamic programming applies when a problem exhibits optimal substructure (the global optimum contains optima to subproblems) and overlapping subproblems (identical subproblems recur). Top-down memoization keeps natural recursion and caches results in a lookup table, saving effort for unvisited states but risking stack overflow. Bottom-up tabulation iteratively fills an array in topological order, eliminating recursion call overhead.",
+      "commonMisconceptions": [
+        "divide-and-conquer (like merge sort) solves overlapping subproblems",
+        "memoization is always faster than bottom-up tabulation"
+      ],
+      "maxPoints": 4,
+      "criteria": [
+        {
+          "id": "principles",
+          "label": "Defines optimal substructure and overlapping subproblems",
+          "maxPoints": 1,
+          "keywords": [
+            "optimal substructure",
+            "overlapping subproblems",
+            "sub-problem",
+            "repeated"
+          ]
+        },
+        {
+          "id": "memoization_vs_tabulation",
+          "label": "Contrasts recursive caching with iterative table building",
+          "maxPoints": 2,
+          "keywords": [
+            "top-down",
+            "bottom-up",
+            "memoization",
+            "tabulation",
+            "cache",
+            "iterative",
+            "table"
+          ]
+        },
+        {
+          "id": "recursion_overhead",
+          "label": "Analyzes stack depth and subproblem visitation trade-offs",
+          "maxPoints": 1,
+          "keywords": [
+            "stack",
+            "call stack",
+            "overhead",
+            "space",
+            "visited states"
+          ]
+        }
+      ],
+      "followUpCriteria": "Ask how space optimization can reduce an O(N) DP table to O(1) auxiliary variables.",
+      "hint": "Consider the difference between caching Fibonacci(n) recursively vs a for-loop from 1 to n."
+    },
+    {
+      "id": "docker_container_isolation_01",
+      "skill": "Containers",
+      "domain": "Cloud & DevOps",
+      "difficulty": "intermediate",
+      "prompt": "Explain how Linux namespaces and cgroups allow Docker to isolate processes on a shared kernel. How does container isolation differ fundamentally from hardware virtualization?",
+      "expectedConcepts": [
+        "namespaces isolate visibility (PID, NET, MNT, IPC, UTS, USER)",
+        "cgroups enforce resource quotas (CPU, memory, I/O)",
+        "containers share the host OS kernel; VMs run separate guest OS kernels on a hypervisor"
+      ],
+      "referenceAnswer": "Linux namespaces partition kernel resources so a container process has its own isolated view of process IDs, networking, mounts, and user IDs. Control groups (cgroups) limit and measure hardware resources (CPU, RAM, block I/O). Unlike hardware virtualization where a Type-1/2 hypervisor emulates virtual hardware to boot an entire guest OS kernel, containers share the host kernel, enabling near-instant startup and minimal overhead.",
+      "commonMisconceptions": [
+        "containers have their own isolated Linux kernel",
+        "container isolation is identical in security boundary to a hardware VM"
+      ],
+      "maxPoints": 4,
+      "criteria": [
+        {
+          "id": "namespaces_cgroups",
+          "label": "Explains namespaces for visibility and cgroups for quotas",
+          "maxPoints": 2,
+          "keywords": [
+            "namespaces",
+            "cgroups",
+            "control groups",
+            "isolation",
+            "quota",
+            "limit",
+            "pid",
+            "network"
+          ]
+        },
+        {
+          "id": "hypervisor_contrast",
+          "label": "Contrasts shared host kernel with hypervisor guest OS",
+          "maxPoints": 1,
+          "keywords": [
+            "kernel",
+            "shared kernel",
+            "hypervisor",
+            "guest os",
+            "virtual machine",
+            "hardware"
+          ]
+        },
+        {
+          "id": "kernel_sharing",
+          "label": "Articulates performance and security boundary implications",
+          "maxPoints": 1,
+          "keywords": [
+            "overhead",
+            "startup",
+            "security boundary",
+            "performance",
+            "lightweight"
+          ]
+        }
+      ],
+      "followUpCriteria": "Ask how root privileges inside a container map to host privileges using user namespaces.",
+      "hint": "Namespaces dictate what you can see; cgroups dictate how much you can use."
+    },
+    {
+      "id": "behavior_teamwork_01",
+      "skill": "Teamwork",
+      "domain": "Behavioral",
+      "difficulty": "intermediate",
+      "prompt": "Describe a technical disagreement in a team or coursework project. How did you resolve it, and what did you learn?",
+      "expectedConcepts": [
+        "Explains a concrete disagreement",
+        "Explains their own constructive action",
+        "Describes the outcome and lesson"
+      ],
+      "referenceAnswer": "Describe the situation, listen to the other view, compare or test alternatives, and explain the outcome and lesson.",
+      "commonMisconceptions": [],
+      "maxPoints": 3,
+      "criteria": [
+        {
+          "id": "situation",
+          "label": "Explains a concrete disagreement",
+          "maxPoints": 1,
+          "keywords": [
+            "disagreement",
+            "disagreed",
+            "conflict"
+          ]
+        },
+        {
+          "id": "action",
+          "label": "Explains their own constructive action",
+          "maxPoints": 1,
+          "keywords": [
+            "listened",
+            "compared",
+            "tested",
+            "discussed"
+          ]
+        },
+        {
+          "id": "reflection",
+          "label": "Describes the outcome and lesson",
+          "maxPoints": 1,
+          "keywords": [
+            "learned",
+            "lesson",
+            "outcome"
+          ]
+        }
+      ],
+      "followUpCriteria": "Request one concrete example or edge case within this rubric.",
+      "hint": "Explain your approach, a concrete example and how you would check the result."
+    },
+    {
+      "id": "backend_idempotency_03",
+      "skill": "API reliability",
+      "domain": "Backend & Systems",
+      "difficulty": "intermediate",
+      "prompt": "A client retries a create-order request after a timeout. How would you prevent duplicate orders while handling concurrent retries?",
+      "expectedConcepts": [
+        "Uses an idempotency identifier",
+        "Coordinates concurrent requests atomically",
+        "Reuses the original result safely"
+      ],
+      "referenceAnswer": "Use an idempotency key, an atomic transaction or unique constraint, and store the original result so concurrent retries return the same response.",
+      "commonMisconceptions": [],
+      "maxPoints": 3,
+      "criteria": [
+        {
+          "id": "identity",
+          "label": "Uses an idempotency identifier",
+          "maxPoints": 1,
+          "keywords": [
+            "idempotency",
+            "request key",
+            "unique key"
+          ]
+        },
+        {
+          "id": "atomicity",
+          "label": "Coordinates concurrent requests atomically",
+          "maxPoints": 1,
+          "keywords": [
+            "transaction",
+            "unique constraint",
+            "atomic"
+          ]
+        },
+        {
+          "id": "response",
+          "label": "Reuses the original result safely",
+          "maxPoints": 1,
+          "keywords": [
+            "same response",
+            "stored result",
+            "original result"
+          ]
+        }
+      ],
+      "followUpCriteria": "Request one concrete example or edge case within this rubric.",
+      "hint": "Explain your approach, a concrete example and how you would check the result."
+    },
+    {
+      "id": "backend_authorization_04",
+      "skill": "API security",
+      "domain": "Backend & Systems",
+      "difficulty": "intermediate",
+      "prompt": "A signed-in user changes an account ID in an API request. How do you prevent access to another user\u2019s data?",
+      "expectedConcepts": [
+        "Authenticates the caller",
+        "Checks object ownership or authorization",
+        "Verifies denied cross-user access"
+      ],
+      "referenceAnswer": "Authenticate the caller, authorize ownership for every requested object on the server, and test that cross-user requests are denied with no data disclosure.",
+      "commonMisconceptions": [],
+      "maxPoints": 3,
+      "criteria": [
+        {
+          "id": "identity",
+          "label": "Authenticates the caller",
+          "maxPoints": 1,
+          "keywords": [
+            "authenticate",
+            "session",
+            "token"
+          ]
+        },
+        {
+          "id": "access",
+          "label": "Checks object ownership or authorization",
+          "maxPoints": 1,
+          "keywords": [
+            "ownership",
+            "authorize",
+            "permission"
+          ]
+        },
+        {
+          "id": "tests",
+          "label": "Verifies denied cross-user access",
+          "maxPoints": 1,
+          "keywords": [
+            "test",
+            "deny",
+            "403"
+          ]
+        }
+      ],
+      "followUpCriteria": "Request one concrete example or edge case within this rubric.",
+      "hint": "Explain your approach, a concrete example and how you would check the result."
+    },
+    {
+      "id": "algorithms_testing_03",
+      "skill": "Testing",
+      "domain": "Algorithms & Data Structures",
+      "difficulty": "intermediate",
+      "prompt": "How would you test a function that finds duplicate values in a large list, and verify its time and memory costs?",
+      "expectedConcepts": [
+        "Covers edge cases",
+        "Checks expected outputs",
+        "Measures or explains resource growth"
+      ],
+      "referenceAnswer": "Test empty, single, all duplicate and unique inputs against expected outputs, then measure time and memory growth with representative larger lists.",
+      "commonMisconceptions": [],
+      "maxPoints": 3,
+      "criteria": [
+        {
+          "id": "cases",
+          "label": "Covers edge cases",
+          "maxPoints": 1,
+          "keywords": [
+            "empty",
+            "duplicate",
+            "single"
+          ]
+        },
+        {
+          "id": "correctness",
+          "label": "Checks expected outputs",
+          "maxPoints": 1,
+          "keywords": [
+            "expected",
+            "assert",
+            "reference"
+          ]
+        },
+        {
+          "id": "complexity",
+          "label": "Measures or explains resource growth",
+          "maxPoints": 1,
+          "keywords": [
+            "memory",
+            "time",
+            "complexity"
+          ]
+        }
+      ],
+      "followUpCriteria": "Request one concrete example or edge case within this rubric.",
+      "hint": "Explain your approach, a concrete example and how you would check the result."
     }
   ]
 }

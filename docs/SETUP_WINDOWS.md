@@ -2,9 +2,10 @@
 
 ## Prerequisites
 
-- Node.js 22 or newer.
+- Node.js 22.18 or newer.
+- Python with the packages in `ml/requirements-inference.txt` for numeric predictions. The audited machine used Python 3.14, scikit-learn 1.9.0, pandas 3.0.3 and joblib 1.5.3.
 - Ollama is **not required to start**. Local practice mode supports the complete journey with review-required rubric estimates.
-- On this laptop, Ollama and `qwen3:4b-instruct` are already installed and verified. Leave Ollama running; no reinstall or download is needed. Model weights are not stored in this repository.
+- Check `ollama list` on your machine. The October 2026 audit used the already installed `qwen3.5:9b`; the example configuration uses `qwen3:4b-instruct`. Set `.env` to your exact installed tag. Model weights are not stored in this repository.
 
 ## First run
 
@@ -13,10 +14,14 @@ From PowerShell in the repository root:
 ```powershell
 npm.cmd install --prefix server
 npm.cmd install --legacy-peer-deps --prefix frontend
+python -m venv .venv
+.\.venv\Scripts\python.exe -m pip install -r ml/requirements-inference.txt
 .\Start-PlacementIQ.cmd
 ```
 
 The launcher creates `.env` from the example only if it is missing, installs missing npm dependencies, starts both local services, and stops them on Ctrl+C. Double-clicking the wrapper works too. To check the launcher environment without starting services:
+
+It refuses occupied ports and does not kill the processes using them. `-CheckOnly` checks Node/npm and port configuration; it does not prove that Python, Ollama, or microphone capture works.
 
 ```powershell
 .\Start-PlacementIQ.cmd -CheckOnly
@@ -73,14 +78,17 @@ The later browser check was slower: 16 seconds for extraction, 24 seconds for qu
 
 Spoken interviewer output uses the browser's Web Speech synthesis and an available English OS/browser voice. The 3D particle-human face uses speech events for approximate mouth shapes, blinking, and state-based expressions. This is not a pretrained talking-head video model or phoneme-accurate lip-sync system. Speech boundaries and voice quality depend on browser/OS support.
 
-Microphone input uses Vosk locally in a browser Web Worker. Run `scripts/setup-local-voice.ps1` once to install the free English model (already installed on this laptop). Its verified archive is served by the app and excluded from Git. Audio is never sent to a speech service. Click **Microphone · answer by voice**, stop recording, edit the transcript, then submit. Recorded clips of up to 90 seconds / 12 MB are also supported. Aria stops before recording and replay stays disabled during capture. Permission/model errors preserve typed drafts. See `frontend/public/models/README.md` for the source and licence.
+Microphone input uses Vosk locally in a browser Web Worker. Run `scripts/setup-local-voice.ps1` to install the free English model if `frontend/public/models/vosk-small-en.tar.gz` is absent. The script resumes interrupted downloads and verifies the source archive checksum. Audio is never sent to a speech service. Click **Microphone · answer by voice**, stop recording, edit the transcript, then submit. Recorded clips of up to 90 seconds / 12 MB are also supported. Aria stops before recording and replay stays disabled during capture. Permission/model errors preserve typed drafts. See `frontend/public/models/README.md` for the source and licence.
+
+Typed answers do not have a speaking rate. The API computes optional timing diagnostics only when a finite recording duration is supplied; current browser submissions do not send that measurement. Older reports explicitly label timing that was estimated from text. Text clarity and filler matching are simple heuristics, not validated communication scores.
 
 ## Tests
 
 ```powershell
-npm.cmd test --prefix server
+npm.cmd run check
+npm.cmd run verify:readiness
+python ml/verify_inference.py
 npm.cmd run evaluate --prefix server
-npm.cmd run build --prefix frontend
 npm.cmd run verify:live --prefix server
 npm.cmd run evaluate:live --prefix server
 ```
@@ -94,3 +102,21 @@ Runtime data is in `server/data/runtime/`. The Profile page shows the interview 
 - **Scanned PDF:** OCR is not installed. Paste the résumé text or upload a PDF with selectable text/DOCX.
 - **GitHub unavailable/rate limited:** retry after the reported reset, optionally configure `GITHUB_TOKEN` on the backend, or continue without GitHub. No code is downloaded for execution.
 - **No voice:** use visible dialogue and typed input. Install/select a compatible English Windows voice if desired; speech support is separate from Ollama.
+
+## Browser regression check
+
+`scripts/verify-ui.cjs` requires Playwright and a compatible Chromium installation. Point `PLAYWRIGHT_MODULE` and `PLAYWRIGHT_CHROMIUM_PATH` to an existing installation, or install Playwright in your test environment. Start an isolated API with `PLACEMENTIQ_PORT=8878` and `PLACEMENTIQ_DATA_DIR=server/data/test-runtime/ui`, and a frontend on port 3001 with the same API port override. Then run `npm.cmd run verify:ui`. The check creates fictional baseline records and uses explicitly synthetic report fixtures. Never point it at a personal or production store. `PLACEMENTIQ_UI_TEST_URL` can override the frontend URL.
+
+After installing the speech model, `node scripts/verify-voice.cjs` checks actual local Vosk recognition in the browser worker using a synthetic WAV. It uses the same Playwright environment variables and Vite test server. Generate its fixture from Windows PowerShell:
+
+```powershell
+New-Item -ItemType Directory -Force server/data/test-runtime/voice-audit | Out-Null
+Add-Type -AssemblyName System.Speech
+$voiceTestSynth = New-Object System.Speech.Synthesis.SpeechSynthesizer
+$voiceTestSynth.SetOutputToWaveFile((Join-Path (Get-Location) 'server/data/test-runtime/voice-audit/fixture.wav'))
+$voiceTestSynth.Speak('Hello. This is a test of local speech recognition. Thank you.')
+$voiceTestSynth.Dispose()
+node scripts/verify-voice.cjs
+```
+
+This verifies the model/worker and a known generated recording. Test physical microphone permissions, recording controls, and recognition quality separately.

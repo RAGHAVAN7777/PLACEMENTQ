@@ -1,3 +1,4 @@
+import { UnifiedPlan } from '../readiness/UnifiedPages';
 import { useState, useMemo, useCallback } from 'react';
 import { useStore } from '../../services/store';
 import { FEATURE_DEFINITIONS } from '../../config';
@@ -8,9 +9,9 @@ import {
   ChevronDown, ChevronUp, ListChecks
 } from 'lucide-react';
 import './PlanPage.css';
-import { useInterviewWorkspace } from '../../services/InterviewWorkspace';
+import { useInterviewWorkspace, InterviewWorkspaceStatus } from '../../services/InterviewWorkspace';
 
-export default function PlanPage() {
+function LegacyPlanPage() {
   const { report } = useInterviewWorkspace();
   const hasTask = useStore((s) => s.hasTask);
   const latestAssessment = useStore((s) => s.getLatestAssessment());
@@ -303,3 +304,5 @@ export default function PlanPage() {
     </div>
   );
 }
+
+export default function PlanPage(){const {assessment,loading,error}=useInterviewWorkspace();if(loading||error)return <InterviewWorkspaceStatus/>;return assessment?<UnifiedPlan record={assessment}/>:<LegacyPlanPage/>;}

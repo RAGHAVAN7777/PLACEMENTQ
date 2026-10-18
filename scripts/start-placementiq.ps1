@@ -8,10 +8,11 @@ $serverDir = Join-Path $repoRoot 'server'
 $frontendDir = Join-Path $repoRoot 'frontend'
 
 if (-not (Get-Command node -ErrorAction SilentlyContinue)) {
-  throw 'Node.js 22+ is required. Install Node.js, then run this launcher again.'
+  throw 'Node.js 22.18+ is required. Install Node.js, then run this launcher again.'
 }
 $nodeMajor = [int]((& node --version) -replace '^v(\d+).*$', '$1')
-if ($nodeMajor -lt 22) { throw 'Node.js 22+ is required. Update Node.js, then run this launcher again.' }
+$nodeVersion = [version]((& node --version) -replace '^v', '')
+if ($nodeVersion -lt [version]'22.18.0') { throw 'Node.js 22.18+ is required. Update Node.js, then run this launcher again.' }
 if (-not (Get-Command npm.cmd -ErrorAction SilentlyContinue)) { throw 'npm.cmd was not found. Repair your Node.js installation.' }
 
 $environmentFile = Join-Path $repoRoot '.env'
@@ -36,6 +37,18 @@ if (-not $SkipInstall) {
   if (-not (Test-Path (Join-Path $frontendDir 'node_modules'))) { & npm.cmd install --legacy-peer-deps --prefix $frontendDir; if ($LASTEXITCODE -ne 0) { exit $LASTEXITCODE } }
 }
 
+function Assert-PortAvailable([int]$Port) {
+  $connections = Get-NetTCPConnection -LocalPort $Port -State Listen -ErrorAction SilentlyContinue
+  foreach ($conn in $connections) {
+    if ($conn.OwningProcess -and $conn.OwningProcess -ne $PID) {
+      throw "Port $Port is in use by process $($conn.OwningProcess). Stop the service you intended to replace, or choose another API port in .env. No process was stopped."
+    }
+  }
+}
+
+Assert-PortAvailable 3000
+Assert-PortAvailable $apiPort
+
 Write-Host 'PlacementIQ local services starting...' -ForegroundColor Cyan
 Write-Host 'Frontend: http://127.0.0.1:3000'
 Write-Host "API:      http://127.0.0.1:$apiPort"
@@ -55,6 +68,7 @@ $webJob = Start-Job -Name 'PlacementIQ-Web' -ScriptBlock {
 } -ArgumentList $frontendDir
 
 try {
+  $ErrorActionPreference = 'Continue'
   while (($apiJob.State -in @('NotStarted','Running')) -and ($webJob.State -in @('NotStarted','Running'))) {
     Receive-Job -Job $apiJob,$webJob
     Start-Sleep -Milliseconds 400

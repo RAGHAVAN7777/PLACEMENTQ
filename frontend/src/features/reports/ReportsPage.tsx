@@ -1,3 +1,5 @@
+import { useInterviewWorkspace } from '../../services/InterviewWorkspace';
+import IntegratedSummary from '../readiness/IntegratedSummary';
 import { useEffect, useState } from 'react';
 import { Link, useSearchParams } from 'react-router-dom';
 import { ArrowRight, ClipboardList, Download, GraduationCap, RefreshCw } from 'lucide-react';
@@ -8,6 +10,7 @@ import '../interview/InterviewPage.css';
 import './ReportsPage.css';
 
 export default function ReportsPage({ faculty = false }: { faculty?: boolean }) {
+  const {assessments,assessment:activeAssessment}=useInterviewWorkspace();
   const [reports, setReports] = useState<InterviewReport[]>([]);
   const [searchParams, setSearchParams] = useSearchParams();
   const selected = searchParams.get('report');
@@ -20,18 +23,18 @@ export default function ReportsPage({ faculty = false }: { faculty?: boolean }) 
     let active = true;
     setLoading(true);
     setError('');
-    interviewApi.reports().then(({ reports }) => {
+    (searchParams.get('assessment')&&activeAssessment?.demo&&activeAssessment.interview?interviewApi.report(activeAssessment.interview.reportId).then(x=>({reports:[x.report]})):interviewApi.reports()).then(({ reports }) => {
       if (active) setReports(reports);
     }).catch((err) => {
       if (active) setError(err instanceof Error ? err.message : 'Could not load interview reports.');
     }).finally(() => { if (active) setLoading(false); });
     return () => { active = false; };
-  }, [faculty, reload]);
+  }, [faculty, reload,activeAssessment?.id]);
 
   const current = reports.find((item) => item.id === selected) || (selected ? undefined : reports[0]);
   const exportReport = () => {
     if (!current) return;
-    const url = URL.createObjectURL(new Blob([JSON.stringify(current, null, 2)], { type: 'application/json' }));
+    const url = URL.createObjectURL(new Blob([JSON.stringify({assessment:assessments.find(x=>x.interview?.reportId===current.id)||null,report:current}, null, 2)], { type: 'application/json' }));
     const link = document.createElement('a');
     link.href = url;
     link.download = `placementiq-interview-${current.id}.json`;
@@ -44,7 +47,7 @@ export default function ReportsPage({ faculty = false }: { faculty?: boolean }) 
     {error && <div className="notice notice-error" role="alert"><span>{error} Start the local API and retry.</span><button className="btn btn-secondary btn-sm" onClick={() => setReload((value) => value + 1)}>Retry</button></div>}
     {!loading && !reports.length && !error ? <div className="empty-state report-empty-state">{faculty ? <GraduationCap size={28} /> : <ClipboardList size={28} />}<h3>No interview reports yet</h3><p>Complete the evidence interview to create a reviewable assessment.</p><Link to={ROUTES.assessment} className="btn btn-primary">Meet your interviewer</Link></div> : !loading && !error && <div className="reports-layout">
       <aside className="report-index" aria-label="Saved interviews">{reports.map((report) => <button key={report.id} onClick={() => setSearchParams({ report: report.id })} className={current?.id === report.id ? 'active' : ''} aria-pressed={current?.id === report.id}><span>{new Date(report.createdAt).toLocaleString(undefined, { dateStyle: 'medium', timeStyle: 'short' })}</span><strong>{report.selectedDomain}</strong><b>{report.assessment.score}</b></button>)}</aside>
-      {current ? <div className="report-document"><div className="report-document-actions"><span>Saved {new Date(current.createdAt).toLocaleString()}</span><button className="btn btn-secondary btn-sm" onClick={exportReport}><Download size={14} /> Export report</button></div><ReportView report={current} /></div> : <div className="notice notice-warning">This report is unavailable for this browser identity. Select a saved interview.</div>}
+      {current ? <div className="report-document"><div className="report-document-actions"><span>Saved {new Date(current.createdAt).toLocaleString()}</span><button className="btn btn-secondary btn-sm" onClick={exportReport}><Download size={14} /> Export report</button></div>{assessments.find(x=>x.interview?.reportId===current.id)&&<IntegratedSummary record={assessments.find(x=>x.interview?.reportId===current.id)!}/>}<ReportView report={current} /></div> : <div className="notice notice-warning">This report is unavailable for this browser identity. Select a saved interview.</div>}
     </div>}
   </div>;
 }

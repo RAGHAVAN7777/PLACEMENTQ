@@ -42,6 +42,10 @@ export function useLocalVoiceInput(value: string, onTranscript: (text: string) =
     const publish = (partial = '') => latest.current.onTranscript([initial, finalText, partial].filter(Boolean).join(' ').slice(0, 4000));
     try {
       if (!model.current) {
+        const check = await fetch('/models/vosk-small-en.tar.gz', { method: 'HEAD' }).catch(() => null);
+        if (!check || !check.ok || check.headers.get('content-type')?.includes('text/html')) {
+          throw new Error('Local speech model file is not installed. Run scripts/setup-local-voice.ps1, or type your answer.');
+        }
         const { Model: LocalModel } = await import('vosk-browser');
         const loaded = new LocalModel('/models/vosk-small-en.tar.gz', -1);
         await new Promise<void>((resolve, reject) => {

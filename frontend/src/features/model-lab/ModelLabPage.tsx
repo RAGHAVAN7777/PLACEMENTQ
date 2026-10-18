@@ -2,11 +2,25 @@ import { DATASET_META, PRELIMINARY_RESULTS, FEATURE_DEFINITIONS, ROUTES } from '
 import { Link } from 'react-router-dom';
 import {
   Info, AlertTriangle, Database, GitBranch, FlaskConical,
-  Shield, BarChart3, ArrowLeft, ArrowRight
+  Shield, BarChart3, ArrowLeft, ArrowRight, Sparkles
 } from 'lucide-react';
+import XAIWaterfallChart from '../assessment/XAIWaterfallChart';
 import './ModelLabPage.css';
 
+const MODEL_LAB_EXAMPLE = {
+  age: 21, gender: 'Male', branch: 'CSE', college_tier: 'Tier 2', cgpa: 7.8,
+  coding_skill_score: 72, mock_interview_score: 70, aptitude_score: 75,
+  logical_reasoning_score: 70, communication_skill_score: 75,
+  projects_count: 3, internships_count: 1, certifications_count: 2,
+  backlogs: 0, hackathons_participated: 1, github_repos: 4,
+  linkedin_connections: 200, attendance_percentage: 85,
+  extracurricular_score: 60, leadership_score: 60, volunteer_experience: 'No',
+  sleep_hours: 7, study_hours_per_day: 3,
+};
+
 export default function ModelLabPage() {
+  const { metrics, rocPoints, cutoffTuning } = PRELIMINARY_RESULTS.champion;
+  const rocPath = rocPoints.map((point, index) => `${index ? 'L' : 'M'} ${point.fpr * 100} ${(1 - point.tpr) * 100}`).join(' ');
   return (
     <div className="model-lab">
       {/* Navigation & Context Banner */}
@@ -27,7 +41,7 @@ export default function ModelLabPage() {
         <div className="model-lab-intro" style={{ marginTop: '16px' }}>
           <h1 style={{ fontSize: '1.5rem', fontWeight: 700, marginBottom: '6px' }}>Machine Learning Model Lab</h1>
           <p className="text-secondary">
-            This laboratory documents the empirical training benchmarks, confusion matrix error analysis, ROC curves, and decision cutoff tuning evaluated across 100,000 student records using 11 distinct algorithms.
+            This laboratory documents the empirical training benchmarks, confusion matrix error analysis, ROC curves, and decision cutoff tuning evaluated across 100,000 student records using 12 model configurations.
           </p>
         </div>
       </div>
@@ -89,7 +103,7 @@ export default function ModelLabPage() {
 
       {/* Feature Dictionary */}
       <section className="ml-section">
-        <h2 className="ml-section-title">Feature dictionary</h2>
+        <h2 className="ml-section-title">Illustrative workspace feature dictionary</h2><p className="text-secondary">The numeric predictor loads its complete required 23-field specification directly from the saved model. The workspace below uses a smaller set of product-defined preparation targets.</p>
         <div className="table-container">
           <table aria-label="Feature dictionary">
             <thead>
@@ -162,14 +176,14 @@ export default function ModelLabPage() {
             <span className="font-mono ml-step-num">2</span>
             <div>
               <strong>Encode categorical variables</strong>
-              <p className="text-secondary">One-hot or ordinal encode branch, college_tier, gender, volunteer_experience.</p>
+              <p className="text-secondary">Use the fitted LabelEncoder categories for branch, college_tier, gender, and volunteer_experience.</p>
             </div>
           </div>
           <div className="ml-preprocess-step">
             <span className="font-mono ml-step-num">3</span>
             <div>
               <strong>Scale numeric features</strong>
-              <p className="text-secondary">StandardScaler or MinMaxScaler for numeric columns.</p>
+              <p className="text-secondary">Use the fitted StandardScaler in the saved 31-feature order, including eight engineered features.</p>
             </div>
           </div>
           <div className="ml-preprocess-step">
@@ -270,15 +284,15 @@ export default function ModelLabPage() {
               </div>
             </div>
             <div className="ml-cm-rates">
-              <span><strong>Recall:</strong> 88.49%</span>
-              <span><strong>Precision:</strong> 85.24%</span>
-              <span><strong>Accuracy:</strong> 85.25%</span>
+              <span><strong>Recall:</strong> {metrics.recall.toFixed(2)}%</span>
+              <span><strong>Precision:</strong> {metrics.precision.toFixed(2)}%</span>
+              <span><strong>Accuracy:</strong> {metrics.accuracy.toFixed(2)}%</span>
             </div>
           </div>
 
           {/* Real ROC Curve Visualization */}
           <div className="ml-awaiting-card">
-            <h4>ROC Curve (AUC = 0.934)</h4>
+            <h4>ROC Curve (AUC = {metrics.roc_auc.toFixed(4)})</h4>
             <div className="ml-roc-container">
               <svg className="ml-roc-svg" viewBox="0 0 100 100">
                 {/* Background Grid */}
@@ -286,21 +300,21 @@ export default function ModelLabPage() {
                 <line x1="0" y1="0" x2="0" y2="100" stroke="#D8D5CC" strokeWidth="1" />
                 {/* Diagonal Reference */}
                 <line x1="0" y1="100" x2="100" y2="0" stroke="#C62828" strokeDasharray="3 3" strokeWidth="1" />
-                {/* Real ROC Curve (AUC 0.9341) */}
+                {/* Recorded ROC points */}
                 <path
-                  d="M 0 100 C 4 12, 18 2, 100 0"
+                  d={rocPath}
                   fill="none"
                   stroke="#244BDB"
                   strokeWidth="2.5"
                 />
               </svg>
-              <div className="ml-roc-stat font-mono">ROC-AUC: 0.9341</div>
+              <div className="ml-roc-stat font-mono">ROC-AUC: {metrics.roc_auc.toFixed(4)}</div>
             </div>
           </div>
 
           {/* Real Feature Importance Ranking */}
           <div className="ml-awaiting-card">
-            <h4>Top Feature Drivers</h4>
+            <h4>Exported feature importance</h4><p className="text-secondary">The exporter falls back to a tree model when the champion has no built-in importance. These values are not champion-specific or causal effects.</p>
             <div className="ml-fi-list">
               {PRELIMINARY_RESULTS.champion.topFeatures.slice(0, 5).map((f) => (
                 <div key={f.name} className="ml-fi-item">
@@ -324,19 +338,19 @@ export default function ModelLabPage() {
             <h4>Decision Cutoff Tuning</h4>
             <div style={{ display: 'flex', flexDirection: 'column', gap: '8px', padding: '12px', background: 'var(--color-canvas)', borderRadius: 'var(--radius-sm)' }}>
               <div style={{ display: 'flex', justifyContent: 'space-between', fontSize: '0.8125rem' }}>
-                <span><strong>Default (0.50):</strong></span>
-                <span className="font-mono">88.5% Recall (1,266 FN)</span>
+                <span><strong>Default ({cutoffTuning.defaultCutoff.threshold.toFixed(2)}):</strong></span>
+                <span className="font-mono">{cutoffTuning.defaultCutoff.recall.toFixed(2)}% Recall</span>
               </div>
               <div style={{ display: 'flex', justifyContent: 'space-between', fontSize: '0.8125rem' }}>
-                <span><strong>Best F1 (0.45):</strong></span>
-                <span className="font-mono">90.8% Recall (1,018 FN)</span>
+                <span><strong>Best F1 ({cutoffTuning.bestF1Cutoff.threshold.toFixed(2)}):</strong></span>
+                <span className="font-mono">{cutoffTuning.bestF1Cutoff.recall.toFixed(2)}% Recall</span>
               </div>
               <div style={{ display: 'flex', justifyContent: 'space-between', fontSize: '0.8125rem', color: 'var(--color-success)', fontWeight: 600 }}>
-                <span><strong>High-Recall (0.41):</strong></span>
-                <span className="font-mono">92.2% Recall (863 FN)</span>
+                <span><strong>High-Recall ({cutoffTuning.highRecallCutoff.threshold.toFixed(2)}):</strong></span>
+                <span className="font-mono">{cutoffTuning.highRecallCutoff.recall.toFixed(2)}% Recall</span>
               </div>
               <p style={{ fontSize: '0.75rem', color: 'var(--color-text-secondary)', marginTop: '4px', lineHeight: '1.4' }}>
-                On this test split, lowering the cutoff to 0.41 reclassifies 403 records from negative to positive. It does not establish that those students are qualified or that the policy causes better outcomes.
+                On this test split, lowering the cutoff to {cutoffTuning.highRecallCutoff.threshold.toFixed(2)} increases recall while reducing precision to {cutoffTuning.highRecallCutoff.precision.toFixed(2)}%. It does not establish that those students are qualified or that the policy causes better outcomes.
               </p>
             </div>
           </div>
@@ -344,6 +358,20 @@ export default function ModelLabPage() {
         <p className="text-secondary" style={{ fontSize: '0.8125rem', marginTop: 12 }}>
           These visualizations are backed by real evaluation metrics computed across the 20,000-student test split in our machine learning pipeline.
         </p>
+      </section>
+
+      {/* Explainable AI (XAI) Marginal Attribution Section */}
+      <section className="ml-section">
+        <h2 className="ml-section-title">
+          <Sparkles size={18} />
+          Explainable AI (XAI) Attribution Waterfall (Live Inspection)
+        </h2>
+        <p className="text-secondary" style={{ marginBottom: '16px' }}>
+          This fictional example compares predictions along an ordered path from a synthetic reference profile. The differences sum to the prediction but depend on feature order; they are not SHAP values or causal effects.
+        </p>
+        <XAIWaterfallChart
+          inputs={MODEL_LAB_EXAMPLE}
+        />
       </section>
 
       {/* Limitations */}
@@ -362,7 +390,7 @@ export default function ModelLabPage() {
 
           <ul className="ml-limitations-list">
             <li>
-              <strong>Empirical Machine Learning Models:</strong> The champion model (HistGradientBoosting) achieves 85.25% test accuracy and 0.9341 ROC-AUC, outperforming the 55.0% majority-class baseline by +30.25 percentage points.
+              <strong>Empirical Machine Learning Models:</strong> The champion model (HistGradientBoosting) achieves 85.66% test accuracy and 0.9363 ROC-AUC, outperforming the 55.0% majority-class baseline by +30.66 percentage points.
             </li>
             <li>
               <strong>Guidance over Gatekeeping:</strong> While the machine learning pipeline models placement likelihood, the interactive frontend readiness score provides formative feedback to help students address skill gaps rather than serving as a punitive screening filter.

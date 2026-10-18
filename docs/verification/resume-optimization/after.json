@@ -1,0 +1,105 @@
+{
+  "at": "2026-10-16T17:50:52.760Z",
+  "fixture": "Same fictional text as before.json; PDF and DOCX generated from it",
+  "rows": [
+    {
+      "format": "pasted",
+      "run": 0,
+      "totalMs": 18,
+      "parseMs": 1,
+      "extractionMs": 7,
+      "cacheHit": false,
+      "semanticRequested": false,
+      "llmCalls": 0,
+      "fields": true
+    },
+    {
+      "format": "pasted",
+      "run": 1,
+      "totalMs": 11,
+      "parseMs": 0,
+      "extractionMs": 2,
+      "cacheHit": true,
+      "semanticRequested": false,
+      "llmCalls": 0,
+      "fields": true
+    },
+    {
+      "format": "pasted",
+      "run": 2,
+      "totalMs": 8,
+      "parseMs": 0,
+      "extractionMs": 1,
+      "cacheHit": true,
+      "semanticRequested": false,
+      "llmCalls": 0,
+      "fields": true
+    },
+    {
+      "format": "pdf",
+      "run": 0,
+      "totalMs": 1215,
+      "parseMs": 1203,
+      "extractionMs": 1,
+      "cacheHit": false,
+      "semanticRequested": false,
+      "llmCalls": 0,
+      "fields": true
+    },
+    {
+      "format": "pdf",
+      "run": 1,
+      "totalMs": 19,
+      "parseMs": 0,
+      "extractionMs": 1,
+      "cacheHit": true,
+      "semanticRequested": false,
+      "llmCalls": 0,
+      "fields": true
+    },
+    {
+      "format": "pdf",
+      "run": 2,
+      "totalMs": 7,
+      "parseMs": 0,
+      "extractionMs": 1,
+      "cacheHit": true,
+      "semanticRequested": false,
+      "llmCalls": 0,
+      "fields": true
+    },
+    {
+      "format": "docx",
+      "run": 0,
+      "totalMs": 321,
+      "parseMs": 313,
+      "extractionMs": 0,
+      "cacheHit": false,
+      "semanticRequested": false,
+      "llmCalls": 0,
+      "fields": true
+    },
+    {
+      "format": "docx",
+      "run": 1,
+      "totalMs": 6,
+      "parseMs": 0,
+      "extractionMs": 0,
+      "cacheHit": true,
+      "semanticRequested": false,
+      "llmCalls": 0,
+      "fields": true
+    },
+    {
+      "format": "docx",
+      "run": 2,
+      "totalMs": 7,
+      "parseMs": 0,
+      "extractionMs": 1,
+      "cacheHit": true,
+      "semanticRequested": false,
+      "llmCalls": 0,
+      "fields": true
+    }
+  ]
+}

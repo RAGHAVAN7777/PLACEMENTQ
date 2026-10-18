@@ -1,0 +1,14 @@
+{
+  "name": "placementiq",
+  "private": true,
+  "version": "1.0.0",
+  "engines": { "node": ">=22.18.0" },
+  "scripts": {
+    "test": "npm run test --prefix server && npm run test --prefix frontend",
+    "build": "npm run build --prefix frontend",
+    "check": "npm test && npm run build",
+    "verify:readiness": "node server/src/verify-readiness.mjs",
+    "verify:live": "node server/src/verify-live.mjs",
+    "verify:ui": "node scripts/verify-ui.cjs"
+  }
+}

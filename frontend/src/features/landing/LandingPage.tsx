@@ -25,7 +25,7 @@ export default function LandingPage() {
 
   const handleExplore = async () => {
     await loadSampleProfile();
-    navigate(ROUTES.overview);
+    navigate(ROUTES.scenarios);
   };
 
   return (

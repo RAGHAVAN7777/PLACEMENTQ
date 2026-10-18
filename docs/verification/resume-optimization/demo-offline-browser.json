@@ -1,0 +1,16 @@
+{
+  "passed": true,
+  "at": "2026-10-17T17:34:52.324Z",
+  "checks": [
+    "Ollama endpoint intentionally unavailable",
+    "Paused automated progression",
+    "Auto-filled and edited current answer",
+    "Completed existing grading and real placement model",
+    "Rendered labelled fictional report",
+    "Restored normal session and unsaved resume draft",
+    "Unified demo dashboard and all workspace routes",
+    "Preparation task persists after reload",
+    "Real candidate review and missing baseline inputs gate interview startup"
+  ],
+  "errors": []
+}

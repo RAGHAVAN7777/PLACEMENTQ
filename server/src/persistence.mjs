@@ -3,8 +3,8 @@ import path from 'node:path';
 import { randomUUID } from 'node:crypto';
 import { config } from './config.mjs';
 
-const STORE_VERSION = 1;
-const EMPTY_STORE = { version: STORE_VERSION, sessions: {}, reports: {}, githubCache: {}, assessments: {} };
+const STORE_VERSION = 2;
+const EMPTY_STORE = { version: STORE_VERSION, sessions: {}, reports: {}, githubCache: {}, assessments: {}, candidates: {} };
 let state = structuredClone(EMPTY_STORE);
 let readyPromise;
 let writeQueue = Promise.resolve();
@@ -17,8 +17,16 @@ export async function initStore() {
     await fs.mkdir(config.dataDir, { recursive: true });
     try {
       const loaded = JSON.parse(await fs.readFile(storePath(), 'utf8'));
-      if (loaded.version === STORE_VERSION) {
-        state = { ...structuredClone(EMPTY_STORE), ...loaded };
+      if ([1,STORE_VERSION].includes(loaded.version)) {
+        state = { ...structuredClone(EMPTY_STORE), ...loaded, version:STORE_VERSION };
+        for(const item of Object.values(state.assessments)){
+          item.candidateId ||= item.ownerId;item.status ||= item.interview?'completed':'in-progress';
+          const report=state.reports[item.interview?.reportId];
+          if(report&&!item.tasks)item.tasks=(report.improvementTasks||[]).map(t=>({...t,completed:false}));
+        }
+        if(loaded.version===1)for(const item of Object.values(state.assessments).sort((a,b)=>b.createdAt.localeCompare(a.createdAt))){
+          if(!item.demo&&item.baseline&&!state.candidates[item.ownerId])state.candidates[item.ownerId]={id:item.ownerId,version:1,personal:{},baselineInputs:item.baseline.inputs,baselineSources:item.baseline.sources,preferences:{},updatedAt:item.createdAt};
+        }
       }
     } catch (error) {
       if (error.code !== 'ENOENT') {
@@ -35,9 +43,32 @@ async function persist() {
   await initStore();
   writeQueue = writeQueue.catch(() => undefined).then(async () => {
     const destination = storePath();
-    const temp = `${destination}.${process.pid}.tmp`;
+    const temp = `${destination}.${process.pid}.${randomUUID().slice(0, 8)}.tmp`;
     await fs.writeFile(temp, JSON.stringify(state, null, 2), { encoding: 'utf8', mode: 0o600 });
-    await fs.rename(temp, destination);
+    let replaced = false;
+    for (let attempt = 0; attempt < 5; attempt++) {
+      try {
+        await fs.rename(temp, destination);
+        replaced = true;
+        break;
+      } catch (err) {
+        if (err.code === 'EPERM' || err.code === 'EBUSY') {
+          await new Promise((resolve) => setTimeout(resolve, 25 * (attempt + 1)));
+        } else {
+          try { await fs.unlink(temp); } catch { /* ignore */ }
+          throw err;
+        }
+      }
+    }
+    if (!replaced) {
+      try {
+        await fs.copyFile(temp, destination);
+        await fs.unlink(temp).catch(() => {});
+      } catch (err) {
+        try { await fs.unlink(temp); } catch { /* ignore */ }
+        throw err;
+      }
+    }
   });
   return writeQueue;
 }
@@ -46,11 +77,11 @@ export function createId(prefix) {
   return `${prefix}_${randomUUID()}`;
 }
 
-export async function createSession(ownerId) {
+export async function createSession(ownerId, {unified=false}={}) {
   await initStore();
   const now = new Date().toISOString();
   const session = {
-    id: createId('session'), ownerId, createdAt: now, updatedAt: now,
+    id: createId('session'), ownerId, candidateId:ownerId, workflowVersion:unified?2:1, createdAt: now, updatedAt: now,
     status: 'resume', avatarState: 'awaiting', paused: false,
     profile: { skills: [], projects: [], education: [], experience: [], strengths: [] },
     resume: null, github: { skipped: false, repositories: [], evidence: [], inspectedFiles: [] },
@@ -146,4 +177,22 @@ export async function saveAssessment(item) {
   state.assessments[item.id] = structuredClone(item);
   await persist();
   return structuredClone(item);
+}
+
+export async function getCandidate(ownerId) {
+  await initStore();return structuredClone(state.candidates[ownerId]||{id:ownerId,version:0,personal:{},baselineInputs:{},preferences:{}});
+}
+export async function saveCandidate(ownerId, changes) {
+  await initStore();const current=await getCandidate(ownerId);
+  const next={...current,...structuredClone(changes),id:ownerId,version:current.version+1,updatedAt:new Date().toISOString()};
+  state.candidates[ownerId]=next;await persist();return structuredClone(next);
+}
+
+// Report, linked readiness result and completion marker share one persisted snapshot.
+export async function saveCompletedAssessment(report,assessment){
+ await initStore();const session=state.sessions[report.sessionId];
+ if(!session||session.ownerId!==report.ownerId||assessment.ownerId!==report.ownerId||assessment.sessionId!==session.id)throw new Error('Assessment ownership mismatch');
+ state.reports[report.id]=structuredClone(report);state.assessments[assessment.id]=structuredClone(assessment);
+ state.sessions[session.id]={...session,status:'completed',avatarState:'completed',reportId:report.id,assessmentId:assessment.id,updatedAt:new Date().toISOString()};
+ await persist();return structuredClone(assessment);
 }

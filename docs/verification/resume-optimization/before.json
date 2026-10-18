@@ -1,0 +1,60 @@
+{
+  "at": "2026-10-16T17:34:25.949Z",
+  "fixture": "Fictional plain-text resume",
+  "parsingMs": 0.7488999999999919,
+  "totalMs": 156400.0487,
+  "model": {
+    "requested": "qwen3.5:9b",
+    "used": "qwen3.5:9b",
+    "liveInference": true,
+    "lastStatus": {
+      "reachable": true,
+      "installed": true,
+      "ready": true,
+      "mode": "local-model",
+      "model": "qwen3.5:9b",
+      "endpoint": "http://localhost:11434",
+      "models": [
+        "qwen3.5:9b",
+        "gemma4:e4b",
+        "dolphin-mistral:7b",
+        "llama3.1:8b"
+      ],
+      "details": {
+        "capabilities": [
+          "completion",
+          "vision",
+          "tools",
+          "thinking"
+        ],
+        "family": "qwen35",
+        "parameterSize": "9.7B",
+        "quantization": "Q4_K_M"
+      },
+      "digest": "c97eb11d70b1acdc88af01eef566c1fe4f7fbe93eb1afc06871132f293ff425a",
+      "settings": {
+        "contextSize": 4096,
+        "temperature": 0.1,
+        "thinking": false,
+        "maxConcurrentInference": 1
+      },
+      "setup": {
+        "check": "ollama list",
+        "pull": "ollama pull qwen3.5:9b",
+        "start": "ollama serve"
+      },
+      "message": "Local model is ready."
+    }
+  },
+  "metrics": {
+    "profileExtraction": {
+      "wallMs": 154956,
+      "totalDurationNs": 34424280900,
+      "loadDurationNs": 28607500,
+      "evalDurationNs": 34048305000,
+      "evalCount": 343,
+      "promptEvalCount": 180,
+      "contextSize": 4096
+    }
+  }
+}

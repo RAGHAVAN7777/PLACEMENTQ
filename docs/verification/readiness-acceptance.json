@@ -1,6 +1,6 @@
 {
-  "runAt": "2026-10-05T01:50:09.283Z",
-  "note": "Fictional baseline inputs with actual saved-model inference. Matrix scenarios use real saved interview scores 100 and 88 with a visible test threshold of 90; production default remains 65. No live report marks are altered.",
+  "runAt": "2026-10-14T17:28:50.265Z",
+  "note": "Fictional baseline inputs with real saved-model inference. Interview scores 100 and 40 are synthetic integration fixtures, not live grading evidence. Test interview threshold is 90; production default remains 65.",
   "policy": {
     "version": "readiness-policy-1.0",
     "baselineThreshold": 50,
@@ -14,30 +14,30 @@
       "category": "Placement Ready",
       "baseline": 99.87450907568426,
       "interview": 100,
-      "sourceReport": "report_0793e12e-19de-4d15-a57e-c7b80e6d4005"
+      "sourceReport": "fixture_report_100"
     },
     {
       "category": "Profile Strong, Interview Preparation Required",
       "baseline": 99.87450907568426,
-      "interview": 88,
-      "sourceReport": "report_2aaaa595-1eeb-4f05-8107-e7c01889e60b"
+      "interview": 40,
+      "sourceReport": "fixture_report_40"
     },
     {
       "category": "Demonstrated Skill Strong, Profile Improvement Required",
       "baseline": 0.12857393866141406,
       "interview": 100,
-      "sourceReport": "report_0793e12e-19de-4d15-a57e-c7b80e6d4005"
+      "sourceReport": "fixture_report_100"
     },
     {
       "category": "Structured Readiness Development Required",
       "baseline": 0.12857393866141406,
-      "interview": 88,
-      "sourceReport": "report_2aaaa595-1eeb-4f05-8107-e7c01889e60b"
+      "interview": 40,
+      "sourceReport": "fixture_report_40"
     },
     "Missing interview remains pending",
     "Missing baseline remains pending",
     "Invalid, incomplete, unconfirmed and unknown-category inputs rejected",
-    "Real insufficient-evidence interview withheld from matrix",
+    "Synthetic insufficient-evidence interview withheld from matrix",
     "Saved result and original policy reload identically",
     "Second assessment preserves first; preparation persists",
     "Ownership and immutable baseline enforced"
@@ -107,7 +107,294 @@
         "sleep_hours": 7,
         "study_hours_per_day": 5
       },
-      "timestamp": "2026-10-05T01:50:24.984Z",
+      "explanation": {
+        "baseProbability": 92.16869553539802,
+        "finalProbability": 99.87450907568426,
+        "method": "ordered-reference-path-v1",
+        "score": 99.9,
+        "predictedClass": "Placed",
+        "attributions": [
+          {
+            "feature": "cgpa",
+            "label": "Cgpa",
+            "studentValue": 9,
+            "baselineValue": 7.5,
+            "contributionPct": 4.919522143751143,
+            "direction": "positive"
+          },
+          {
+            "feature": "internships_count",
+            "label": "Internships Count",
+            "studentValue": 4,
+            "baselineValue": 1,
+            "contributionPct": 2.3837655964574878,
+            "direction": "positive"
+          },
+          {
+            "feature": "projects_count",
+            "label": "Projects Count",
+            "studentValue": 6,
+            "baselineValue": 2,
+            "contributionPct": 0.20401825203477664,
+            "direction": "neutral"
+          },
+          {
+            "feature": "coding_skill_score",
+            "label": "Coding Skill Score",
+            "studentValue": 90,
+            "baselineValue": 65,
+            "contributionPct": 0.14733632331962454,
+            "direction": "neutral"
+          },
+          {
+            "feature": "certifications_count",
+            "label": "Certifications Count",
+            "studentValue": 3,
+            "baselineValue": 1,
+            "contributionPct": 0.01704914354977438,
+            "direction": "neutral"
+          },
+          {
+            "feature": "mock_interview_score",
+            "label": "Mock Interview Score",
+            "studentValue": 85,
+            "baselineValue": 65,
+            "contributionPct": 0.010545074321599568,
+            "direction": "neutral"
+          },
+          {
+            "feature": "attendance_percentage",
+            "label": "Attendance Percentage",
+            "studentValue": 95,
+            "baselineValue": 80,
+            "contributionPct": 0.008164422206613509,
+            "direction": "neutral"
+          },
+          {
+            "feature": "aptitude_score",
+            "label": "Aptitude Score",
+            "studentValue": 90,
+            "baselineValue": 65,
+            "contributionPct": 0.006466770444135683,
+            "direction": "neutral"
+          },
+          {
+            "feature": "communication_skill_score",
+            "label": "Communication Skill Score",
+            "studentValue": 85,
+            "baselineValue": 65,
+            "contributionPct": 0.004816227634685255,
+            "direction": "neutral"
+          },
+          {
+            "feature": "hackathons_participated",
+            "label": "Hackathons Participated",
+            "studentValue": 4,
+            "baselineValue": 1,
+            "contributionPct": 0.0031470739122574365,
+            "direction": "neutral"
+          },
+          {
+            "feature": "logical_reasoning_score",
+            "label": "Logical Reasoning Score",
+            "studentValue": 90,
+            "baselineValue": 65,
+            "contributionPct": 0.0025018531710330194,
+            "direction": "neutral"
+          },
+          {
+            "feature": "volunteer_experience",
+            "label": "Volunteer Experience",
+            "studentValue": "Yes",
+            "baselineValue": "No",
+            "contributionPct": -0.0021339003100750986,
+            "direction": "neutral"
+          },
+          {
+            "feature": "leadership_score",
+            "label": "Leadership Score",
+            "studentValue": 75,
+            "baselineValue": 60,
+            "contributionPct": 0.0012621036717841427,
+            "direction": "neutral"
+          },
+          {
+            "feature": "extracurricular_score",
+            "label": "Extracurricular Score",
+            "studentValue": 70,
+            "baselineValue": 60,
+            "contributionPct": -0.0008480660377285787,
+            "direction": "neutral"
+          },
+          {
+            "feature": "github_repos",
+            "label": "Github Repos",
+            "studentValue": 8,
+            "baselineValue": 3,
+            "contributionPct": 0.0002005221591327988,
+            "direction": "neutral"
+          },
+          {
+            "feature": "linkedin_connections",
+            "label": "Linkedin Connections",
+            "studentValue": 500,
+            "baselineValue": 250,
+            "contributionPct": 0,
+            "direction": "neutral"
+          },
+          {
+            "feature": "backlogs",
+            "label": "Backlogs",
+            "studentValue": 0,
+            "baselineValue": 0,
+            "contributionPct": 0,
+            "direction": "neutral"
+          },
+          {
+            "feature": "sleep_hours",
+            "label": "Sleep Hours",
+            "studentValue": 7,
+            "baselineValue": 7,
+            "contributionPct": 0,
+            "direction": "neutral"
+          },
+          {
+            "feature": "study_hours_per_day",
+            "label": "Study Hours Per Day",
+            "studentValue": 5,
+            "baselineValue": 3,
+            "contributionPct": 0,
+            "direction": "neutral"
+          }
+        ],
+        "topDrivers": [
+          {
+            "feature": "cgpa",
+            "label": "Cgpa",
+            "studentValue": 9,
+            "baselineValue": 7.5,
+            "contributionPct": 4.919522143751143,
+            "direction": "positive"
+          },
+          {
+            "feature": "internships_count",
+            "label": "Internships Count",
+            "studentValue": 4,
+            "baselineValue": 1,
+            "contributionPct": 2.3837655964574878,
+            "direction": "positive"
+          }
+        ],
+        "topDrags": [],
+        "waterfall": [
+          {
+            "step": "Synthetic reference profile",
+            "value": 92.16869553539802,
+            "delta": 0,
+            "type": "base"
+          },
+          {
+            "step": "Cgpa",
+            "delta": 4.919522143751143,
+            "type": "positive",
+            "studentValue": 9
+          },
+          {
+            "step": "Internships Count",
+            "delta": 2.3837655964574878,
+            "type": "positive",
+            "studentValue": 4
+          },
+          {
+            "step": "Projects Count",
+            "delta": 0.20401825203477664,
+            "type": "neutral",
+            "studentValue": 6
+          },
+          {
+            "step": "Certifications Count",
+            "delta": 0.01704914354977438,
+            "type": "neutral",
+            "studentValue": 3
+          },
+          {
+            "step": "Coding Skill Score",
+            "delta": 0.14733632331962454,
+            "type": "neutral",
+            "studentValue": 90
+          },
+          {
+            "step": "Aptitude Score",
+            "delta": 0.006466770444135683,
+            "type": "neutral",
+            "studentValue": 90
+          },
+          {
+            "step": "Communication Skill Score",
+            "delta": 0.004816227634685255,
+            "type": "neutral",
+            "studentValue": 85
+          },
+          {
+            "step": "Logical Reasoning Score",
+            "delta": 0.0025018531710330194,
+            "type": "neutral",
+            "studentValue": 90
+          },
+          {
+            "step": "Hackathons Participated",
+            "delta": 0.0031470739122574365,
+            "type": "neutral",
+            "studentValue": 4
+          },
+          {
+            "step": "Github Repos",
+            "delta": 0.0002005221591327988,
+            "type": "neutral",
+            "studentValue": 8
+          },
+          {
+            "step": "Mock Interview Score",
+            "delta": 0.010545074321599568,
+            "type": "neutral",
+            "studentValue": 85
+          },
+          {
+            "step": "Attendance Percentage",
+            "delta": 0.008164422206613509,
+            "type": "neutral",
+            "studentValue": 95
+          },
+          {
+            "step": "Extracurricular Score",
+            "delta": -0.0008480660377285787,
+            "type": "neutral",
+            "studentValue": 70
+          },
+          {
+            "step": "Leadership Score",
+            "delta": 0.0012621036717841427,
+            "type": "neutral",
+            "studentValue": 75
+          },
+          {
+            "step": "Volunteer Experience",
+            "delta": -0.0021339003100750986,
+            "type": "neutral",
+            "studentValue": "Yes"
+          },
+          {
+            "step": "Your Predicted Probability",
+            "value": 99.87450907568426,
+            "delta": 0,
+            "type": "total"
+          }
+        ],
+        "summaryText": "Largest positive model differences on this path: Cgpa, Internships Count. Contributions depend on feature order and a synthetic reference; they are not SHAP values or causal effects.",
+        "modelVersion": "3f3e1a00b1896ef2076df63a4dc1bf837fe5b5617d9eceed512dd46cc7f5cb40",
+        "modelName": "HistGradientBoostingClassifier"
+      },
+      "timestamp": "2026-10-14T17:29:23.930Z",
       "confirmed": true,
       "sources": {
         "age": {
@@ -268,7 +555,361 @@
         "sleep_hours": 7,
         "study_hours_per_day": 5
       },
-      "timestamp": "2026-10-05T01:50:27.005Z",
+      "explanation": {
+        "baseProbability": 92.16869553539802,
+        "finalProbability": 0.12857393866141406,
+        "method": "ordered-reference-path-v1",
+        "score": 0.1,
+        "predictedClass": "Not Placed",
+        "attributions": [
+          {
+            "feature": "cgpa",
+            "label": "Cgpa",
+            "studentValue": 5,
+            "baselineValue": 7.5,
+            "contributionPct": -36.691033238470915,
+            "direction": "negative"
+          },
+          {
+            "feature": "coding_skill_score",
+            "label": "Coding Skill Score",
+            "studentValue": 30,
+            "baselineValue": 65,
+            "contributionPct": -21.806696161832022,
+            "direction": "negative"
+          },
+          {
+            "feature": "internships_count",
+            "label": "Internships Count",
+            "studentValue": 0,
+            "baselineValue": 1,
+            "contributionPct": -16.825708759043824,
+            "direction": "negative"
+          },
+          {
+            "feature": "attendance_percentage",
+            "label": "Attendance Percentage",
+            "studentValue": 60,
+            "baselineValue": 80,
+            "contributionPct": -13.139356924615186,
+            "direction": "negative"
+          },
+          {
+            "feature": "mock_interview_score",
+            "label": "Mock Interview Score",
+            "studentValue": 30,
+            "baselineValue": 65,
+            "contributionPct": -11.396604739464378,
+            "direction": "negative"
+          },
+          {
+            "feature": "backlogs",
+            "label": "Backlogs",
+            "studentValue": 3,
+            "baselineValue": 0,
+            "contributionPct": -8.364296437531843,
+            "direction": "negative"
+          },
+          {
+            "feature": "certifications_count",
+            "label": "Certifications Count",
+            "studentValue": 3,
+            "baselineValue": 1,
+            "contributionPct": 7.5263921647928775,
+            "direction": "positive"
+          },
+          {
+            "feature": "communication_skill_score",
+            "label": "Communication Skill Score",
+            "studentValue": 85,
+            "baselineValue": 65,
+            "contributionPct": 7.056117291251238,
+            "direction": "positive"
+          },
+          {
+            "feature": "github_repos",
+            "label": "Github Repos",
+            "studentValue": 8,
+            "baselineValue": 3,
+            "contributionPct": 6.7759970363695405,
+            "direction": "positive"
+          },
+          {
+            "feature": "hackathons_participated",
+            "label": "Hackathons Participated",
+            "studentValue": 4,
+            "baselineValue": 1,
+            "contributionPct": 6.228259214212256,
+            "direction": "positive"
+          },
+          {
+            "feature": "projects_count",
+            "label": "Projects Count",
+            "studentValue": 1,
+            "baselineValue": 2,
+            "contributionPct": -5.145718911435821,
+            "direction": "negative"
+          },
+          {
+            "feature": "logical_reasoning_score",
+            "label": "Logical Reasoning Score",
+            "studentValue": 35,
+            "baselineValue": 65,
+            "contributionPct": -3.749324888669445,
+            "direction": "negative"
+          },
+          {
+            "feature": "aptitude_score",
+            "label": "Aptitude Score",
+            "studentValue": 35,
+            "baselineValue": 65,
+            "contributionPct": -1.8225801686270637,
+            "direction": "negative"
+          },
+          {
+            "feature": "linkedin_connections",
+            "label": "Linkedin Connections",
+            "studentValue": 500,
+            "baselineValue": 250,
+            "contributionPct": -0.6903827121244821,
+            "direction": "negative"
+          },
+          {
+            "feature": "leadership_score",
+            "label": "Leadership Score",
+            "studentValue": 75,
+            "baselineValue": 60,
+            "contributionPct": 0.0060486564203095705,
+            "direction": "neutral"
+          },
+          {
+            "feature": "study_hours_per_day",
+            "label": "Study Hours Per Day",
+            "studentValue": 5,
+            "baselineValue": 3,
+            "contributionPct": -0.004551089445137355,
+            "direction": "neutral"
+          },
+          {
+            "feature": "extracurricular_score",
+            "label": "Extracurricular Score",
+            "studentValue": 70,
+            "baselineValue": 60,
+            "contributionPct": 0.0025879921271123544,
+            "direction": "neutral"
+          },
+          {
+            "feature": "volunteer_experience",
+            "label": "Volunteer Experience",
+            "studentValue": "Yes",
+            "baselineValue": "No",
+            "contributionPct": 0.0007300793501820255,
+            "direction": "neutral"
+          },
+          {
+            "feature": "sleep_hours",
+            "label": "Sleep Hours",
+            "studentValue": 7,
+            "baselineValue": 7,
+            "contributionPct": 0,
+            "direction": "neutral"
+          }
+        ],
+        "topDrivers": [
+          {
+            "feature": "certifications_count",
+            "label": "Certifications Count",
+            "studentValue": 3,
+            "baselineValue": 1,
+            "contributionPct": 7.5263921647928775,
+            "direction": "positive"
+          },
+          {
+            "feature": "communication_skill_score",
+            "label": "Communication Skill Score",
+            "studentValue": 85,
+            "baselineValue": 65,
+            "contributionPct": 7.056117291251238,
+            "direction": "positive"
+          },
+          {
+            "feature": "github_repos",
+            "label": "Github Repos",
+            "studentValue": 8,
+            "baselineValue": 3,
+            "contributionPct": 6.7759970363695405,
+            "direction": "positive"
+          },
+          {
+            "feature": "hackathons_participated",
+            "label": "Hackathons Participated",
+            "studentValue": 4,
+            "baselineValue": 1,
+            "contributionPct": 6.228259214212256,
+            "direction": "positive"
+          }
+        ],
+        "topDrags": [
+          {
+            "feature": "cgpa",
+            "label": "Cgpa",
+            "studentValue": 5,
+            "baselineValue": 7.5,
+            "contributionPct": -36.691033238470915,
+            "direction": "negative"
+          },
+          {
+            "feature": "coding_skill_score",
+            "label": "Coding Skill Score",
+            "studentValue": 30,
+            "baselineValue": 65,
+            "contributionPct": -21.806696161832022,
+            "direction": "negative"
+          },
+          {
+            "feature": "internships_count",
+            "label": "Internships Count",
+            "studentValue": 0,
+            "baselineValue": 1,
+            "contributionPct": -16.825708759043824,
+            "direction": "negative"
+          },
+          {
+            "feature": "attendance_percentage",
+            "label": "Attendance Percentage",
+            "studentValue": 60,
+            "baselineValue": 80,
+            "contributionPct": -13.139356924615186,
+            "direction": "negative"
+          }
+        ],
+        "waterfall": [
+          {
+            "step": "Synthetic reference profile",
+            "value": 92.16869553539802,
+            "delta": 0,
+            "type": "base"
+          },
+          {
+            "step": "Cgpa",
+            "delta": -36.691033238470915,
+            "type": "negative",
+            "studentValue": 5
+          },
+          {
+            "step": "Internships Count",
+            "delta": -16.825708759043824,
+            "type": "negative",
+            "studentValue": 0
+          },
+          {
+            "step": "Projects Count",
+            "delta": -5.145718911435821,
+            "type": "negative",
+            "studentValue": 1
+          },
+          {
+            "step": "Certifications Count",
+            "delta": 7.5263921647928775,
+            "type": "positive",
+            "studentValue": 3
+          },
+          {
+            "step": "Coding Skill Score",
+            "delta": -21.806696161832022,
+            "type": "negative",
+            "studentValue": 30
+          },
+          {
+            "step": "Aptitude Score",
+            "delta": -1.8225801686270637,
+            "type": "negative",
+            "studentValue": 35
+          },
+          {
+            "step": "Communication Skill Score",
+            "delta": 7.056117291251238,
+            "type": "positive",
+            "studentValue": 85
+          },
+          {
+            "step": "Logical Reasoning Score",
+            "delta": -3.749324888669445,
+            "type": "negative",
+            "studentValue": 35
+          },
+          {
+            "step": "Hackathons Participated",
+            "delta": 6.228259214212256,
+            "type": "positive",
+            "studentValue": 4
+          },
+          {
+            "step": "Github Repos",
+            "delta": 6.7759970363695405,
+            "type": "positive",
+            "studentValue": 8
+          },
+          {
+            "step": "Linkedin Connections",
+            "delta": -0.6903827121244821,
+            "type": "negative",
+            "studentValue": 500
+          },
+          {
+            "step": "Mock Interview Score",
+            "delta": -11.396604739464378,
+            "type": "negative",
+            "studentValue": 30
+          },
+          {
+            "step": "Attendance Percentage",
+            "delta": -13.139356924615186,
+            "type": "negative",
+            "studentValue": 60
+          },
+          {
+            "step": "Backlogs",
+            "delta": -8.364296437531843,
+            "type": "negative",
+            "studentValue": 3
+          },
+          {
+            "step": "Extracurricular Score",
+            "delta": 0.0025879921271123544,
+            "type": "neutral",
+            "studentValue": 70
+          },
+          {
+            "step": "Leadership Score",
+            "delta": 0.0060486564203095705,
+            "type": "neutral",
+            "studentValue": 75
+          },
+          {
+            "step": "Volunteer Experience",
+            "delta": 0.0007300793501820255,
+            "type": "neutral",
+            "studentValue": "Yes"
+          },
+          {
+            "step": "Study Hours Per Day",
+            "delta": -0.004551089445137355,
+            "type": "neutral",
+            "studentValue": 5
+          },
+          {
+            "step": "Your Predicted Probability",
+            "value": 0.12857393866141406,
+            "delta": 0,
+            "type": "total"
+          }
+        ],
+        "summaryText": "Largest positive model differences on this path: Certifications Count, Communication Skill Score. Largest negative model differences on this path: Cgpa, Coding Skill Score. Contributions depend on feature order and a synthetic reference; they are not SHAP values or causal effects.",
+        "modelVersion": "3f3e1a00b1896ef2076df63a4dc1bf837fe5b5617d9eceed512dd46cc7f5cb40",
+        "modelName": "HistGradientBoostingClassifier"
+      },
+      "timestamp": "2026-10-14T17:29:40.217Z",
       "confirmed": true,
       "sources": {
         "age": {
@@ -367,5 +1008,5 @@
     }
   ],
   "passed": true,
-  "dataDir": "server/data/test-runtime/readiness-1791165009246"
+  "dataDir": "server/data/test-runtime/readiness-1791998930154"
 }

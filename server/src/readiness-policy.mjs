@@ -10,11 +10,11 @@ export function validatePolicy(policy) {
 }
 
 export const readinessPolicy = validatePolicy({
-  version: 'readiness-policy-1.0',
+  version: 'readiness-policy-2.0',
   baselineThreshold: Number(process.env.READINESS_BASELINE_THRESHOLD ?? 50),
   interviewThreshold: Number(process.env.READINESS_INTERVIEW_THRESHOLD ?? 65),
-  baselineWeight: Number(process.env.READINESS_BASELINE_WEIGHT ?? 0.5),
-  interviewWeight: Number(process.env.READINESS_INTERVIEW_WEIGHT ?? 0.5),
+  baselineWeight: Number(process.env.READINESS_BASELINE_WEIGHT ?? 0.4),
+  interviewWeight: Number(process.env.READINESS_INTERVIEW_WEIGHT ?? 0.6),
   weightStatus: 'Policy defaults pending faculty validation; not learned from the dataset',
 });
 
@@ -50,6 +50,6 @@ export function compareReadiness(baseline, report, policy) {
   return {
     status: 'complete', category, baselineHigh, interviewHigh, reviewNeeded,
     explanation: `Baseline ${baseline.score.toFixed(2)}/100 is ${baselineHigh ? 'at or above' : 'below'} ${policy.baselineThreshold}; interview ${assessment.score}/100 is ${interviewHigh ? 'at or above' : 'below'} ${policy.interviewThreshold}. ${reviewNeeded ? 'Some rubric marks need review; this interpretation is provisional.' : 'The category compares these two separate results.'} It is preparation guidance, not a hiring decision.`,
-    composite: { value: Number((policy.baselineWeight * baseline.score + policy.interviewWeight * assessment.score).toFixed(2)), baselineScore: baseline.score, interviewScore: assessment.score, baselineWeight: policy.baselineWeight, interviewWeight: policy.interviewWeight, label: 'Decision-support index; not a placement probability' }, action,
+    composite: { value: Number((policy.baselineWeight * baseline.score + policy.interviewWeight * assessment.score).toFixed(2)), baselineScore: baseline.score, interviewScore: assessment.score, baselineWeight: policy.baselineWeight, interviewWeight: policy.interviewWeight, label: 'Integrated Placement Readiness Score; decision support, not a calibrated placement probability' }, action,
   };
 }

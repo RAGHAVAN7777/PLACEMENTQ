@@ -1,0 +1,168 @@
+{
+  "at": "2026-10-16T17:50:23.323Z",
+  "fixture": "Intermediate fictional demo candidate",
+  "steps": [
+    {
+      "stage": "resume",
+      "ms": 16.154799999999994,
+      "metrics": {
+        "resumeProcessing": {
+          "parseMs": 2,
+          "extractionMs": 10,
+          "cacheHit": false,
+          "semanticRequested": false,
+          "llmCalls": 0
+        }
+      }
+    },
+    {
+      "stage": "planning",
+      "ms": 47508.0211,
+      "model": {
+        "requested": "qwen3.5:9b",
+        "used": "qwen3.5:9b",
+        "liveInference": true,
+        "lastStatus": {
+          "reachable": true,
+          "installed": true,
+          "ready": true,
+          "mode": "local-model",
+          "model": "qwen3.5:9b",
+          "endpoint": "http://localhost:11434",
+          "models": [
+            "qwen3.5:9b",
+            "gemma4:e4b",
+            "dolphin-mistral:7b",
+            "llama3.1:8b"
+          ],
+          "details": {
+            "capabilities": [
+              "completion",
+              "vision",
+              "tools",
+              "thinking"
+            ],
+            "family": "qwen35",
+            "parameterSize": "9.7B",
+            "quantization": "Q4_K_M"
+          },
+          "digest": "c97eb11d70b1acdc88af01eef566c1fe4f7fbe93eb1afc06871132f293ff425a",
+          "settings": {
+            "contextSize": 4096,
+            "temperature": 0.1,
+            "thinking": false,
+            "maxConcurrentInference": 1
+          },
+          "setup": {
+            "check": "ollama list",
+            "pull": "ollama pull qwen3.5:9b",
+            "start": "ollama serve"
+          },
+          "message": "Local model is ready."
+        }
+      }
+    },
+    {
+      "stage": "answer",
+      "bankId": "react_reconciliation_01",
+      "followUp": false,
+      "method": "prepared-demo-answer",
+      "grading": "ollama-rubric-estimate",
+      "ms": 26601.718999999997
+    },
+    {
+      "stage": "answer",
+      "bankId": "typescript_generics_01",
+      "followUp": false,
+      "method": "prepared-demo-answer",
+      "grading": "ollama-rubric-estimate",
+      "ms": 28280.372700000007
+    },
+    {
+      "stage": "answer",
+      "bankId": "project_decisions_01",
+      "followUp": false,
+      "method": "prepared-demo-answer",
+      "grading": "ollama-rubric-estimate",
+      "ms": 79989.838
+    },
+    {
+      "stage": "answer",
+      "bankId": "sql_joins_01",
+      "followUp": false,
+      "method": "prepared-demo-answer",
+      "grading": "ollama-rubric-estimate",
+      "ms": 29235.5539
+    },
+    {
+      "stage": "answer",
+      "bankId": "project_debugging_02",
+      "followUp": false,
+      "method": "prepared-demo-answer",
+      "grading": "ollama-rubric-estimate",
+      "ms": 36954.95300000001
+    },
+    {
+      "stage": "answer",
+      "bankId": "sql_index_02",
+      "followUp": false,
+      "method": "prepared-demo-answer",
+      "grading": "ollama-rubric-estimate",
+      "ms": 29698.59539999999
+    }
+  ],
+  "passed": true,
+  "result": {
+    "score": 100,
+    "followUps": 0,
+    "reportDemo": {
+      "level": "intermediate",
+      "name": "Rohan Sample",
+      "notice": "Fictional demonstration. Not a real candidate assessment.",
+      "resumeText": "Rohan Sample\nintermediate@example.test\nEducation\nB.Tech Computer Science, Fictional Institute of Technology\nCGPA: 8.1/10\nSkills\nPython, SQL, JavaScript, React, FastAPI\nProjects\nStudy Planner: Built a Python FastAPI and PostgreSQL task planner with a React interface. Compared local files with transactions for concurrent updates. Added unit tests for validation and fixed shared mutable state.\n\nAPI Test Suite: Created Python integration tests for request validation and error responses.\nExperience\nSoftware Intern at Fictional Labs: Implemented and tested REST endpoints for an internal task planner.\nCertifications\nPython Foundations certificate, Fictional Learning Academy\nAchievements\nParticipated in a campus hackathon with the Study Planner team."
+    },
+    "model": {
+      "requested": "qwen3.5:9b",
+      "used": "qwen3.5:9b",
+      "liveInference": true,
+      "lastStatus": {
+        "reachable": true,
+        "installed": true,
+        "ready": true,
+        "mode": "local-model",
+        "model": "qwen3.5:9b",
+        "endpoint": "http://localhost:11434",
+        "models": [
+          "qwen3.5:9b",
+          "gemma4:e4b",
+          "dolphin-mistral:7b",
+          "llama3.1:8b"
+        ],
+        "details": {
+          "capabilities": [
+            "completion",
+            "vision",
+            "tools",
+            "thinking"
+          ],
+          "family": "qwen35",
+          "parameterSize": "9.7B",
+          "quantization": "Q4_K_M"
+        },
+        "digest": "c97eb11d70b1acdc88af01eef566c1fe4f7fbe93eb1afc06871132f293ff425a",
+        "settings": {
+          "contextSize": 4096,
+          "temperature": 0.1,
+          "thinking": false,
+          "maxConcurrentInference": 1
+        },
+        "setup": {
+          "check": "ollama list",
+          "pull": "ollama pull qwen3.5:9b",
+          "start": "ollama serve"
+        },
+        "message": "Local model is ready."
+      }
+    }
+  }
+}

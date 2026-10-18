@@ -57,6 +57,7 @@ interface AppStore extends AppData {
 
   // Assessment
   submitAssessment: (profile: StudentProfile) => Promise<AssessmentSnapshot>;
+  recordBaselineAssessment: (profile: StudentProfile, id?: string) => Promise<AssessmentSnapshot>;
   getLatestAssessment: () => AssessmentSnapshot | undefined;
 
   // Sample profile
@@ -151,9 +152,30 @@ export const useStore = create<AppStore>((set, get) => {
       return snapshot;
     },
 
+    recordBaselineAssessment: async (profile, id) => {
+      const evaluation = await predictionService.evaluate(profile);
+      const snapshot: AssessmentSnapshot = {
+        id: id || generateId(),
+        timestamp: new Date().toISOString(),
+        profile,
+        evaluation,
+        label: 'Illustrative workspace score from confirmed baseline inputs',
+      };
+      set((state) => ({
+        assessments: [...state.assessments.filter((item) => item.id !== snapshot.id), snapshot],
+      }));
+      get()._persist();
+      return snapshot;
+    },
+
     getLatestAssessment: () => {
       const state = get();
-      return [...state.assessments].reverse().find((item) => !item.id.startsWith('sample-') && item.label !== 'Sample Profile');
+      const studentAssessment = [...state.assessments].reverse().find((item) => !item.id.startsWith('sample-') && item.label !== 'Sample Profile');
+      if (studentAssessment) return studentAssessment;
+      if (state.sampleProfileLoaded) {
+        return [...state.assessments].reverse().find((item) => item.label === 'Sample Profile' || item.id.startsWith('sample-'));
+      }
+      return undefined;
     },
 
     // ── Sample Profile ────────────────────────────────────────────────────

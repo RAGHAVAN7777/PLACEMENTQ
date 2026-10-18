@@ -6,6 +6,7 @@ import { promisify } from 'node:util';
 process.env.PLACEMENTIQ_DATA_DIR = 'server/data/test-runtime/workflow';
 process.env.OLLAMA_BASE_URL = 'http://127.0.0.1:9';
 process.env.OLLAMA_MAX_RETRIES = '0';
+process.env.OLLAMA_MODEL = 'qwen3:4b-instruct';
 
 const { createApiServer } = await import('../src/server.mjs');
 const { getSession, listReports, resetStoreForTests } = await import('../src/persistence.mjs');
@@ -31,7 +32,7 @@ async function withApi(run) {
 }
 
 async function prepare(call, base) {
-  const created = await call('/sessions', 'POST', {});
+  const created = await call('/demo/sessions', 'POST', {level:'beginner'});
   const id = created.body.session.id;
   let result = await call(`/sessions/${id}/resume`, 'POST', { pastedText: 'B.Tech student at a university. Built a Python placement classifier using machine learning. Used SQL to inspect project records.' });
   assert.equal(result.status, 200);
@@ -65,7 +66,7 @@ test('complete HTTP practice journey, pause/resume, protected rubrics, restart p
     let completed;
     while (session.status === 'interview') {
       const question = session.questions[session.questionIndex];
-      const answer = bank.questions.find((item) => item.id === question.bankId).referenceAnswer;
+      const answer = (bank.questions.find((item) => item.id === question.bankId) || (await import('../src/demo.mjs')).demoBehaviorQuestion).referenceAnswer;
       completed = await call(`/sessions/${id}/answer`, 'POST', { questionId: question.id, answer });
       assert.equal(completed.status, 200);
       session = completed.body.session;
@@ -213,8 +214,11 @@ test('failed or invalid live inference never advances a session with fabricated 
     return new Response(JSON.stringify({ response: modelOutput }));
   };
   try {
-    await assert.rejects(ingestResume(session.id, owner, { text: 'Built a Python project in my university course.', fileName: 'fixture.txt' }), (error) => error.code === 'local_inference_failed');
-    assert.equal((await getSession(session.id, owner)).status, 'resume');
+    await updateSession(session.id, owner, item => ({...item,model:{...item.model,used:'qwen3:4b-instruct',liveInference:true}}));
+    const extracted=await ingestResume(session.id, owner, { text: 'Built a Python project in my university course.', fileName: 'fixture.txt' }, {semantic:false});
+    assert.equal(extracted.status, 'profile-review');
+    assert.equal(extracted.model.liveInference, true);
+    assert.equal(extracted.inferenceMetrics.resumeProcessing.llmCalls, 0);
     await updateSession(session.id, owner, (item) => ({ ...item, status: 'interview', questions: [{ ...bank.questions[0], bankId: bank.questions[0].id }], questionIndex: 0 }));
     modelOutput = '{"criteria":[]}';
     await assert.rejects(answerQuestion(session.id, owner, { answer: 'A list can change in place while a string cannot.' }), (error) => error.code === 'invalid_model_grade');
@@ -233,9 +237,11 @@ test('invalid model evidence retries once and never turns formatting errors into
   const originalFetch = globalThis.fetch;
   let calls = 0;
   let repairValid = false;
-  globalThis.fetch = async (url) => {
+  globalThis.fetch = async (url, init) => {
     if (url.endsWith('/api/tags')) return new Response(JSON.stringify({ models: [{ name: 'qwen3:4b-instruct' }] }));
     if (url.endsWith('/api/show')) return new Response(JSON.stringify({ capabilities: ['completion'] }));
+    const body=JSON.parse(init.body);
+    if(body.maxOutputTokens===220 || body.options?.num_predict===220){const q=JSON.parse(body.prompt).questions[0];return new Response(JSON.stringify({response:JSON.stringify({questions:[{bankId:q.bankId,prompt:'How would you handle missing task files safely in your Python project?'}]})}));}
     calls += 1;
     const valid = repairValid && calls % 2 === 0;
     const output = { criteria: question.criteria.map((criterion) => ({ criterionId: criterion.id, points: criterion.maxPoints, evidenceExcerpt: valid ? answer : 'A fabricated quote not present in the response.', explanation: 'Fixture only' })), missingConcepts: [], explanation: 'Fixture only', uncertainty: 'low', reviewNeeded: false, nextAction: 'advance', followUpQuestion: '', acknowledgement: 'Recorded' };
@@ -266,7 +272,7 @@ test('merging grounded model extraction with lexical discovery does not duplicat
   assert.equal(mergeProfile(primary, prefixed).projects.length, 1);
 });
 
-test('a live session cannot silently switch to practice questions when Ollama disconnects', async () => {
+test('question generation falls back visibly while live grading remains required', async () => {
   const { createSession, updateSession } = await import('../src/persistence.mjs');
   const { startInterview } = await import('../src/coordinator.mjs');
   const session = await createSession(owner);
@@ -274,10 +280,11 @@ test('a live session cannot silently switch to practice questions when Ollama di
   const originalFetch = globalThis.fetch;
   globalThis.fetch = async () => { throw new Error('Connection refused'); };
   try {
-    await assert.rejects(startInterview(session.id, owner, 'Python'), (error) => error.code === 'local_inference_failed');
+    await startInterview(session.id, owner, 'Python');
     const saved = await getSession(session.id, owner);
-    assert.equal(saved.status, 'domain-selection');
-    assert.equal(saved.questions.length, 0);
+    assert.equal(saved.status, 'interview');
+    assert.equal(saved.questions[0].generationMethod, 'curated-fallback');
+    assert.equal(saved.model.liveInference, true);
   } finally { globalThis.fetch = originalFetch; }
 });
 

@@ -1,3 +1,4 @@
+import CandidateProfile from './CandidateProfile';
 import { useState, useCallback, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import { useStore } from '../../services/store';
@@ -54,7 +55,7 @@ export default function ProfilePage() {
   }, [clearAllData]);
 
   return (
-    <div className="profile-page">
+    <div className="profile-page"><CandidateProfile/>
       {/* Display name */}
       <section className="card">
         <div className="card-header">
@@ -86,7 +87,7 @@ export default function ProfilePage() {
           <h3 className="card-title"><MessageSquare size={16} style={{ marginRight: 8 }} />Interview assessments</h3>
           <Link className="profile-report-link" to={ROUTES.interviewReports}>View all <ArrowUpRight size={14} /></Link>
         </div>
-        <p className="form-hint">Your demonstrated interview performance is recorded separately from the numeric placement prediction.</p>
+        <p className="form-hint">Your interview and baseline snapshots are linked in the integrated readiness assessment.</p>
         {reportsLoading ? <p className="profile-record-status" role="status">Loading interview records…</p> : reportsError ? <div className="notice notice-warning profile-record-status" role="alert"><span>{reportsError} Start the local API to load saved interviews.</span><button className="btn btn-secondary btn-sm" onClick={() => setReload((value) => value + 1)}>Retry</button></div> : reports.length ? <div className="profile-interview-records">{reports.slice(0, 3).map((report) => <Link key={report.id} className="profile-interview-record" to={`${ROUTES.interviewReports}?report=${encodeURIComponent(report.id)}`}><div><strong>{report.selectedDomain}</strong><span>{new Date(report.createdAt).toLocaleDateString(undefined, { dateStyle: 'medium' })} · {report.questions.length} questions</span></div><b>{report.assessment.score}<small>/100</small></b><ArrowUpRight size={15} /></Link>)}</div> : <div className="profile-record-status"><p>No interview assessment yet. Your first completed interview will appear here.</p><Link className="btn btn-primary btn-sm" to={ROUTES.assessment}>Tell Your Success <ArrowUpRight size={14} /></Link></div>}
       </section>
 

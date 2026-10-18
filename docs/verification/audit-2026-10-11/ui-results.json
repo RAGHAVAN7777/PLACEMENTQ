@@ -1,0 +1,9 @@
+{
+  "passed": true,
+  "checks": [
+    "Model Lab loads the actual model explanation for its complete fictional profile.",
+    "All baseline form steps submit real model inputs and render a saved readiness result.",
+    "Model scenarios use percentage units and reject out-of-range targets; mobile screenshot saved."
+  ],
+  "errors": []
+}
